@@ -10,6 +10,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import java.util.List;
 import java.util.Random;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.time.Duration;
 
 public class FirstTestClass {
@@ -77,7 +78,7 @@ public class FirstTestClass {
 			driver.switchTo().frame("mainFrame");
 			driver.switchTo().frame("frame_cteo");
 			// Se selecciona el frame de los cursos (::LISTADO CURSOS es un frame)
-			driver.switchTo().frame(1);
+			driver.switchTo().frame("mainFrame");
 			System.out.println("	Se revisan los cursos de teoria");
 			// Se obtienen todos los cursos
 			List<WebElement> listadoTeoria = driver.findElements(By.cssSelector("tr"));
@@ -117,7 +118,7 @@ public class FirstTestClass {
 			driver.switchTo().frame("mainFrame");
 			driver.switchTo().frame("frame_clab");
 			// Se selecciona el frame de los cursos (::LISTADO LABORATORIOS es un frame)
-			driver.switchTo().frame(1);
+			driver.switchTo().frame("mainFrame");
 			System.out.println("	Se revisan los cursos de laboratorio");
 			// Se obtienen todos los cursos
 			List<WebElement> listadoLaboratorio = driver.findElements(By.cssSelector("tr"));
@@ -157,7 +158,7 @@ public class FirstTestClass {
 			driver.switchTo().frame("mainFrame");
 			driver.switchTo().frame("frame_ceje");
 			// Se selecciona el frame de los cursos (::LISTADO EJERCICIOS es un frame)
-			driver.switchTo().frame(1);
+			driver.switchTo().frame("mainFrame");
 			System.out.println("	Se revisan los cursos de ejercicio");
 			// Se obtienen todos los cursos
 			List<WebElement> listadoEjercicio = driver.findElements(By.cssSelector("tr"));
@@ -206,7 +207,7 @@ public class FirstTestClass {
 					driver.switchTo().alert().accept();
 				}
 				// Tiempo para guardar la asignatura postulada
-				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
+				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
 				i = 1;
 			} else {
 				// No se puede postular a la asignatura
@@ -235,9 +236,10 @@ public class FirstTestClass {
 		// Seleccionar carrera
 		driver.findElement(By.linkText("1368 - INGENIERIA CIVIL OBRAS CIVILES")).click();
 
-		int CANTIDADASIGNATURAS = 6;
-		int contadorAsignaturas = 0;
+		int CANTIDADASIGNATURASLIMITE = 6;
 
+		// Se busca cuantas asignaturas lleva solicitadas y postuladas
+		int contadorAsignaturas = 0;
 		// Seleccionar proceso de enviar solicitudes
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
 		driver.findElement(By.linkText("Solicitud Inscripción")).click();
@@ -247,7 +249,6 @@ public class FirstTestClass {
 		// Se obtienen todas las asignaturas
 		String[] listadoSolicitudesEnviadas = driver.findElements(By.cssSelector(".table > tbody")).get(0).getText().strip().split("\n");
 		contadorAsignaturas += listadoSolicitudesEnviadas.length;
-
 		// Seleccionar proceso de enviar solicitudes
 		driver.switchTo().defaultContent();
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
@@ -264,205 +265,191 @@ public class FirstTestClass {
 			listadoAsignaturasPostuladasAux.add(linea.getText().replace("\n", " ").strip());
 		}
 		contadorAsignaturas += listadoAsignaturasPostuladasAux.size();
-
-		// Se dan 3 vueltas para probar inscribir las asignaturas
-		for( int i = 1; i <= 3; i++ ){
-			// Seleccionar frame del listado de cursos
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame("mainFrame");
-			driver.switchTo().frame("derecho");
-			// Se obtienen todas las asignaturas
-			List<WebElement> listadoAsignaturas = driver.findElements(By.cssSelector("tr"));
-			// Se almacenan todas las asignaturas
-			ArrayList<String> listadoAsignaturasAux = new ArrayList<String>();
-			for (WebElement e : listadoAsignaturas) {
-				// Se ignora el encabezado de la lista
-				if( e.getText().split(" ")[2].compareTo("N") != 0  ){
-					String[] asignatura = e.getText().split(" ");
-					String tmp = "";
-					for( int j = 1; j < asignatura.length - 1 ; j++ ) {
-						tmp += " " + asignatura[j];
-					}
-					listadoAsignaturasAux.add(tmp.strip());
-				}
-			}
-			// Se crea una lista para almacenar las asignaturas que no se pudieron inscribir
-			ArrayList<Integer> asignaturasAOmitir = new ArrayList<Integer>();
-			// Se revisan todos los cursos
-			int k = 0;
-			while( k == 0) {
-				System.out.println("While con vuelta " + i );
+		int i = 0;
+		while ( (i == 0) && ( contadorAsignaturas < CANTIDADASIGNATURASLIMITE ) ){
+			// Se dan 3 vueltas para probar inscribir las asignaturas
+			for( int j = 1; j <= 3; j++ ){
+				System.out.println("Vuelta " + j );
 				// Seleccionar frame del listado de cursos
 				driver.switchTo().defaultContent();
 				driver.switchTo().frame("mainFrame");
 				driver.switchTo().frame("derecho");
-				Boolean existeTeoria = false;
-				Boolean existeLaboratorio = false;
-				Boolean existeEjercicio = false;
-				Boolean seleccionoTeoria = false;
-				Boolean seleccionoLaboratorio = false;
-				Boolean seleccionoEjercicio = false;
-				// Se crea el random para seleccionar una asignatura al azar
-				Random rand = new Random();
-				int rand_int1 = rand.nextInt(listadoAsignaturasAux.size());
-				// Se revisa cuantas asignaturas se omitieron
-				int asignaturasOmitidas = 0;
-				// Mientras el while este en la lista de omitidos y no se alcance el limite, se busca otro
-				while( (asignaturasAOmitir.contains(rand_int1)) && (asignaturasOmitidas <= listadoAsignaturasAux.size() ) ){
-					rand_int1 = rand.nextInt(listadoAsignaturasAux.size());
-					System.out.println("Nuevo random: " + rand_int1 );
-					asignaturasOmitidas++;
+				// Se obtienen todas las asignaturas
+				String[] listadoAsignaturas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2)")).get(0).getText().strip().split("\n");
+				// Se almacenan todas las asignaturas
+				ArrayList<String> listadoAsignaturasAux = new ArrayList<String>();
+				
+				ArrayList<ArrayList<String>> listadoCodigoNombre = new ArrayList<ArrayList<String>>();
+
+				for (String linea : listadoAsignaturas) {
+					String codigo = linea.split(" ")[0];
+					String nombreAsignatura = linea.substring(codigo.length(), linea.length()).strip();
+					listadoCodigoNombre.add(new ArrayList<String>(Arrays.asList(codigo, nombreAsignatura)));
+
+					String[] asignatura = linea.split(" ");
+					String tmp = "";
+					for( int k = 1; k < asignatura.length - 1 ; k++ ) {
+						tmp += " " + asignatura[k];
+					}
+					listadoAsignaturasAux.add(tmp.strip());
 				}
-				// Si se revisaron todas las asignaturas en una vuelta, sale de la vuelta
-				if( asignaturasOmitidas > listadoAsignaturasAux.size() ){
-					System.out.println("No hay mas opciones, siguiente vuelta");
-					k = 1;
-				} else {
-					// Se selecciona una asignatura
-					driver.findElement(By.linkText(listadoAsignaturasAux.get(rand_int1))).click();
-					System.out.println("\n	Asignatura: " + listadoAsignaturasAux.get(rand_int1));
-					// Se sale del frame, y se entra al frame de los cursos de teoria.
+
+				// Se crea una lista para almacenar las asignaturas que no se pudieron inscribir
+				ArrayList<Integer> codigosAsignaturasAOmitir = new ArrayList<Integer>();
+				// Se revisan todos los cursos
+				int l = 0;
+				while( l == 0) {
+					// Seleccionar frame del listado de cursos
 					driver.switchTo().defaultContent();
 					driver.switchTo().frame("mainFrame");
-					driver.switchTo().frame("frame_cteo");
-					// Se selecciona el frame de los cursos (::LISTADO CURSOS es un frame)
-					driver.switchTo().frame(1);
-					System.out.println("		Se revisan los cursos de teoria");
-					// Se obtienen todos los cursos
-					List<WebElement> listadoTeoria = driver.findElements(By.cssSelector("tr"));
-					// Se almacenan todas las secciones
-					ArrayList<String> listadoTeoriaAux = new ArrayList<String>();
-					for (WebElement e : listadoTeoria) {
-						String tmp = e.getText().replace("\n", " ");
-						if( tmp.equals("No hay coordinaciones definidas.") ){
-							// No hay cursos de teoria
-							System.out.println("			No hay cursos de teoria");
-						} else {
-							listadoTeoriaAux.add(tmp);
-							existeTeoria = true;
-						}
+					driver.switchTo().frame("derecho");
+					Boolean existeTeoria = false;
+					Boolean existeLaboratorio = false;
+					Boolean existeEjercicio = false;
+					Boolean seleccionoTeoria = false;
+					Boolean seleccionoLaboratorio = false;
+					Boolean seleccionoEjercicio = false;
+					// Se crea el random para seleccionar una asignatura al azar
+					Random rand = new Random();
+					int rand_int1 = rand.nextInt(listadoAsignaturasAux.size());
+					// Se revisa cuantas asignaturas se omitieron
+					int asignaturasOmitidas = 0;
+					// Mientras el while este en la lista de omitidos y no se alcance el limite, se busca otro
+					while( (codigosAsignaturasAOmitir.contains(rand_int1)) && (asignaturasOmitidas <= listadoAsignaturasAux.size() ) ){
+						rand_int1 = rand.nextInt(listadoAsignaturasAux.size());
+						asignaturasOmitidas++;
 					}
-					// Se prueba seleccionar una seccion de teoria
-					for ( int j = 0; j < listadoTeoriaAux.size(); j++ ) {
-						String seccion = listadoTeoriaAux.get(j).replace("\n", " "	).strip();
-						String[] seccionAux = seccion.split(" ");
-						int cupos = Integer.parseInt(seccionAux[seccionAux.length - 1]);
-						System.out.println("			Seccion " + (j+1) + " | " + seccion);
-						System.out.println("			Seccion " + (j+1) + " | Cupos: " + cupos);
-						// Se revisa si existe cupo
-						if( cupos > 0 ){
-							// Si hay cupos, se selecciona
-							driver.findElement(By.cssSelector(".row-curso:nth-child("+(j+1)+") > td:nth-child(1)")).click();
-							seleccionoTeoria = true;
-							System.out.println("			Seccion " + (j+1) + " | Seleccionada");
-							break;
-						} else {
-							// Si no hay cupos, se selecciona el siguiente curso
-							System.out.println("			Seccion " + (j+1) + " | Sin cupos");
-						}
-					}
-					// Se sale del frame, y se entra al frame de los cursos de laboratorio.
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame("mainFrame");
-					driver.switchTo().frame("frame_clab");
-					// Se selecciona el frame de los cursos (::LISTADO LABORATORIOS es un frame)
-					driver.switchTo().frame(1);
-					System.out.println("		Se revisan los cursos de laboratorio");
-					// Se obtienen todos los cursos
-					List<WebElement> listadoLaboratorio = driver.findElements(By.cssSelector("tr"));
-					// Se almacenan todas las secciones
-					ArrayList<String> listadoLaboratorioAux = new ArrayList<String>();
-					for (WebElement e : listadoLaboratorio) {
-						String tmp = e.getText().replace("\n", " ");
-						if( tmp.equals("No hay coordinaciones de laboratorio definidas.") ){
-							// No hay cursos de laboratorio
-							System.out.println("		No hay cursos de laboratorio");
-						} else {
-							listadoLaboratorioAux.add(tmp);
-							existeLaboratorio = true;
-						}
-					}
-					// Se prueba seleccionar una seccion de laboratorio
-					for ( int j = 0; j < listadoLaboratorioAux.size(); j++ ) {
-						String seccion = listadoLaboratorioAux.get(j).replace("\n", " "	).strip();
-						String[] seccionAux = seccion.split(" ");
-						int cupos = Integer.parseInt(seccionAux[seccionAux.length - 1]);
-						System.out.println("			Seccion " + (j+1) + " | " + seccion);
-						System.out.println("			Seccion " + (j+1) + " | Cupos: " + cupos);
-						// Se revisa si existe cupo
-						if( cupos > 0 ){
-							// Si hay cupos, se selecciona
-							driver.findElement(By.cssSelector(".row-laboratorio:nth-child("+(j+1)+") > td:nth-child(1)")).click();
-							seleccionoLaboratorio = true;
-							System.out.println("			Seccion " + (j+1) + " | Seleccionada");
-							break;
-						} else {
-							// Si no hay cupos, se selecciona el siguiente curso
-							System.out.println("			Seccion " + (j+1) + " | Sin cupos");
-						}
-					}
-					// Se sale del frame, y se entra al frame de los cursos de ejercicio.
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame("mainFrame");
-					driver.switchTo().frame("frame_ceje");
-					// Se selecciona el frame de los cursos (::LISTADO EJERCICIOS es un frame)
-					driver.switchTo().frame(1);
-					System.out.println("		Se revisan los cursos de ejercicio");
-					// Se obtienen todos los cursos
-					List<WebElement> listadoEjercicio = driver.findElements(By.cssSelector("tr"));
-					// Se almacenan todas las secciones
-					ArrayList<String> listadoEjercicioAux = new ArrayList<String>();
-					for (WebElement e : listadoEjercicio) {
-						String tmp = e.getText().replace("\n", " ");
-						if( tmp.equals("No hay coordinaciones de ejercicios definidas.") ){
-							// No hay cursos de ejercicios
-							System.out.println("			No hay cursos de ejercicios");
-						} else {
-							listadoEjercicioAux.add(tmp);
-							existeEjercicio = true;
-						}
-					}
-					// Se prueba seleccionar una seccion de ejercicio
-					for ( int j = 0; j < listadoEjercicioAux.size(); j++ ) {
-						String seccion = listadoEjercicioAux.get(j).replace("\n", " "	).strip();
-						String[] seccionAux = seccion.split(" ");
-						int cupos = Integer.parseInt(seccionAux[seccionAux.length - 1]);
-						System.out.println("			Seccion " + (j+1) + " | " + seccion);
-						System.out.println("			Seccion " + (j+1) + " | Cupos: " + cupos);
-						// Se revisa si existe cupo
-						if( cupos > 0 ){
-							// Si hay cupos, se selecciona
-							driver.findElement(By.cssSelector(".row-ejercicio:nth-child("+(j+1)+") > td:nth-child(1)")).click();
-							seleccionoEjercicio = true;
-							System.out.println("			Seccion " + (j+1) + " | Seleccionada");
-							break;
-						} else {
-							// Si no hay cupos, se selecciona el siguiente curso
-							System.out.println("			Seccion " + (j+1) + " | Sin cupos");
-						}
-					}
-					// Se revisa que exista al menos un curso
-					if( (existeTeoria && seleccionoTeoria) || (existeLaboratorio && seleccionoLaboratorio) || (existeEjercicio && seleccionoEjercicio) ) {
-						// Se puede postular a la asignatura
-						System.out.println("		Asignatura inscrita: " + listadoAsignaturasAux.get(rand_int1) );
-						// Se sale del frame, y se entra al frame deonde esta el boton de postular
+					// Si se revisaron todas las asignaturas en una vuelta, sale de la vuelta
+					if( asignaturasOmitidas > listadoAsignaturasAux.size() ){
+						l = 1;
+					} else {
+						// Se selecciona una asignatura
 						driver.switchTo().defaultContent();
 						driver.switchTo().frame("mainFrame");
-						driver.switchTo().frame(5);
-						// Se postula a la asignatura
-						driver.findElement(By.id("btn_postular")).click();
-						if (driver.switchTo().alert().getText().compareTo("¿Está segur@ que desea inscribir la(s) coordinación(es) seleccionada(s)?") == 0 ) {
-							driver.switchTo().alert().accept();
+						driver.switchTo().frame("derecho");
+						driver.findElement(By.linkText(listadoAsignaturasAux.get(rand_int1))).click();
+						System.out.println("\n	Asignatura: " + listadoAsignaturasAux.get(rand_int1));
+
+						// Se sale del frame, y se entra al frame de los cursos de teoria.
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame("mainFrame");
+						driver.switchTo().frame("frame_cteo");
+						// Se selecciona el frame de los cursos (::LISTADO CURSOS es un frame)
+						driver.switchTo().frame("mainFrame");
+						System.out.println("		Se revisan los cursos de teoria");
+						// Se obtienen todos los cursos
+						List<WebElement> listadoTeoria = driver.findElements(By.cssSelector("tr"));
+						// Se obtiene la primera linea despues de buscar tr
+						String primeraLinea = listadoTeoria.get(0).getText().strip();
+						// Si la primera linea dice que no hay coordinaciones, se avisa
+						if( !primeraLinea.equals("No hay coordinaciones definidas.") ){
+							// Existen coordinaciones
+							existeTeoria = true;
+							// Se crea un random para seleccionar una seccion de teoria al azar
+							int rand_int2 = rand.nextInt((listadoTeoria.size() - 1) + 1) + 1;
+							// Se selecciona una seccion
+							driver.findElement(By.cssSelector(".row-curso:nth-child("+(rand_int2)+") > td:nth-child(1)")).click();
+							seleccionoTeoria = true;
+							System.out.println("			Si hay cursos de teoria");
+						} else {
+							// No hay cursos de teoria
+							System.out.println("			No hay cursos de teoria");
 						}
-						// Tiempo para guardar la asignatura postulada
-						driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
-						asignaturasAOmitir.add(rand_int1);
-					} else {
-						asignaturasAOmitir.add(rand_int1);
-						System.out.println("		Asignatura no es posible inscribir");
+
+						// Se sale del frame, y se entra al frame de los cursos de laboratorio.
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame("mainFrame");
+						driver.switchTo().frame("frame_clab");
+						// Se selecciona el frame de los cursos (::LISTADO LABORATORIOS es un frame)
+						driver.switchTo().frame("mainFrame");
+						System.out.println("		Se revisan los cursos de laboratorio");
+						// Se obtienen todos los cursos
+						List<WebElement> listadoLaboratorio = driver.findElements(By.cssSelector("tr"));
+						// Se almacenan todas las secciones
+						ArrayList<String> listadoLaboratorioAux = new ArrayList<String>();
+						for (WebElement e : listadoLaboratorio) {
+							String tmp = e.getText().replace("\n", " ");
+							if( tmp.equals("No hay coordinaciones de laboratorio definidas.") ){
+								// No hay cursos de laboratorio
+								System.out.println("			No hay cursos de laboratorio");
+							} else {
+								listadoLaboratorioAux.add(tmp);
+								existeLaboratorio = true;
+							}
+						}
+						// Se prueba seleccionar una seccion de laboratorio
+						for ( int k = 0; k < listadoLaboratorioAux.size(); k++ ) {
+							String seccion = listadoLaboratorioAux.get(k).replace("\n", " "	).strip();
+							String[] seccionAux = seccion.split(" ");
+							int cupos = Integer.parseInt(seccionAux[seccionAux.length - 1]);
+							System.out.println("			Seccion " + (k+1) + " | " + seccion);
+							System.out.println("			Seccion " + (k+1) + " | Cupos: " + cupos);
+							// Se revisa si existe cupo
+							if( cupos > 0 ){
+								// Si hay cupos, se selecciona
+								driver.findElement(By.cssSelector("tr.row-laboratorio:nth-child("+(k+1)+") > td:nth-child(1) > div:nth-child(1) > input:nth-child(1)")).click();
+								seleccionoEjercicio = true;
+								System.out.println("			Seccion " + (k+1) + " | Seleccionada");
+								break;
+							} else {
+								// Si no hay cupos, se selecciona el siguiente curso
+								System.out.println("			Seccion " + (k+1) + " | Sin cupos");
+							}
+						}
+
+						// Se sale del frame, y se entra al frame de los cursos de ejercicio.
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame("mainFrame");
+						driver.switchTo().frame("frame_ceje");
+						// Se selecciona el frame de los cursos (::LISTADO EJERCICIOS es un frame)
+						driver.switchTo().frame("mainFrame");
+						System.out.println("		Se revisan los cursos de ejercicio");
+						// Se obtienen todos los cursos
+						List<WebElement> listadoEjercicio = driver.findElements(By.cssSelector("tr"));
+						// Se almacenan todas las secciones
+						ArrayList<String> listadoEjercicioAux = new ArrayList<String>();
+						for (WebElement e : listadoEjercicio) {
+							String tmp = e.getText().replace("\n", " ");
+							if( tmp.equals("No hay coordinaciones de ejercicios definidas.") ){
+								// No hay cursos de ejercicios
+								System.out.println("			No hay cursos de ejercicios");
+							} else {
+								listadoEjercicioAux.add(tmp);
+								existeEjercicio = true;
+								// Se crea un random para seleccionar una seccion de ejercicio al azar
+								int rand_int2 = rand.nextInt(listadoEjercicio.size());
+								// Se selecciona una seccion
+								driver.findElement(By.cssSelector(".row-curso:nth-child("+(rand_int2)+") > td:nth-child(1)")).click();
+								seleccionoEjercicio = true;
+							}
+						}
+
+						// Se revisa que exista al menos un curso y se haya podido seleccionar
+						if( (existeTeoria && seleccionoTeoria) || (existeLaboratorio && seleccionoLaboratorio) || (existeEjercicio && seleccionoEjercicio) ) {
+							// Se puede postula a la asignatura
+							driver.switchTo().defaultContent();
+							driver.switchTo().frame("mainFrame");
+							driver.switchTo().frame(5);
+							// Se postula a la asignatura
+							driver.findElement(By.id("btn_postular")).click();
+							if (driver.switchTo().alert().getText().compareTo("¿Está segur@ que desea inscribir la(s) coordinación(es) seleccionada(s)?") == 0 ) {
+								driver.switchTo().alert().accept();
+								System.out.println("		Asignatura inscrita: " + listadoAsignaturasAux.get(rand_int1) );
+								contadorAsignaturas++;
+							} else {
+								System.out.println("No coincide el mensaje al inscribir la asignatura");
+							}
+							// Tiempo para guardar la asignatura postulada
+							driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+						} else {
+							System.out.println("		No es posible inscribir la asignatura");
+						}
+						// Se guarda el random para saber que esta asignatura no se debe repetir
+						codigosAsignaturasAOmitir.add(rand_int1);
 					}
 				}
 			}
+			i = 1;
 		}
 	}
 
@@ -587,7 +574,7 @@ public class FirstTestClass {
 			driver.switchTo().frame("mainFrame");
 			driver.switchTo().frame("frame_cteo");
 			// Se selecciona el frame de los cursos (:: COORDINACIONES CURSOS es un frame)
-			driver.switchTo().frame(1);
+			driver.switchTo().frame("mainFrame");
 			// Se obtienen todos los cursos
 			List<WebElement> listadoTeoria = driver.findElements(By.cssSelector("tr"));
 			// Se almacenan todas las secciones
@@ -609,7 +596,7 @@ public class FirstTestClass {
 			driver.switchTo().frame("mainFrame");
 			driver.switchTo().frame("frame_clab");
 			// Se selecciona el frame de los cursos (::LISTADO LABORATORIOS es un frame)
-			driver.switchTo().frame(1);
+			driver.switchTo().frame("mainFrame");
 			// Se obtienen todos los cursos
 			List<WebElement> listadoEjercicio = driver.findElements(By.cssSelector("tr"));
 			// Se almacenan todas las secciones
@@ -632,7 +619,7 @@ public class FirstTestClass {
 			driver.switchTo().frame("mainFrame");
 			driver.switchTo().frame("frame_ceje");
 			// Se selecciona el frame de los cursos (::LISTADO EJERCICIOS es un frame)
-			driver.switchTo().frame(1);
+			driver.switchTo().frame("mainFrame");
 			// Se obtienen todos los cursos
 			List<WebElement> listadoLaboratorio = driver.findElements(By.cssSelector("tr"));
 			// Se almacenan todas las secciones
@@ -667,7 +654,7 @@ public class FirstTestClass {
 					driver.switchTo().alert().accept();
 				}
 				// Tiempo para guardar la asignatura postulada
-				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
+				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
 				i = 1;
 			} else {
 				// No se puede postular a la asignatura
