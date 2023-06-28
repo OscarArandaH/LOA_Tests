@@ -276,26 +276,18 @@ public class FirstTestClass {
 				driver.switchTo().frame("derecho");
 				// Se obtienen todas las asignaturas
 				String[] listadoAsignaturas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2)")).get(0).getText().strip().split("\n");
-				// Se almacenan todas las asignaturas
-				ArrayList<String> listadoAsignaturasAux = new ArrayList<String>();
-				
+				// Se crea una lista para almacenar todas las asignaturas de forma [codigo, nombre]
 				ArrayList<ArrayList<String>> listadoCodigoNombre = new ArrayList<ArrayList<String>>();
-
+				// Se almacenan las listas
 				for (String linea : listadoAsignaturas) {
 					String codigo = linea.split(" ")[0];
-					String nombreAsignatura = linea.substring(codigo.length(), linea.length()).strip();
+					String nombreAsignatura = linea.substring(codigo.length(), linea.length() - 1 ).strip();
 					listadoCodigoNombre.add(new ArrayList<String>(Arrays.asList(codigo, nombreAsignatura)));
-
-					String[] asignatura = linea.split(" ");
-					String tmp = "";
-					for( int k = 1; k < asignatura.length - 1 ; k++ ) {
-						tmp += " " + asignatura[k];
-					}
-					listadoAsignaturasAux.add(tmp.strip());
 				}
 
 				// Se crea una lista para almacenar las asignaturas que no se pudieron inscribir
 				ArrayList<Integer> codigosAsignaturasAOmitir = new ArrayList<Integer>();
+
 				// Se revisan todos los cursos
 				int l = 0;
 				while( l == 0) {
@@ -311,24 +303,25 @@ public class FirstTestClass {
 					Boolean seleccionoEjercicio = false;
 					// Se crea el random para seleccionar una asignatura al azar
 					Random rand = new Random();
-					int rand_int1 = rand.nextInt(listadoAsignaturasAux.size());
+					int rand_int1 = rand.nextInt(listadoCodigoNombre.size());
 					// Se revisa cuantas asignaturas se omitieron
 					int asignaturasOmitidas = 0;
 					// Mientras el while este en la lista de omitidos y no se alcance el limite, se busca otro
-					while( (codigosAsignaturasAOmitir.contains(rand_int1)) && (asignaturasOmitidas <= listadoAsignaturasAux.size() ) ){
-						rand_int1 = rand.nextInt(listadoAsignaturasAux.size());
+					while( (codigosAsignaturasAOmitir.contains(rand_int1)) && (asignaturasOmitidas <= listadoCodigoNombre.size() ) ){
+						rand_int1 = rand.nextInt(listadoCodigoNombre.size());
 						asignaturasOmitidas++;
 					}
 					// Si se revisaron todas las asignaturas en una vuelta, sale de la vuelta
-					if( asignaturasOmitidas > listadoAsignaturasAux.size() ){
+					if( asignaturasOmitidas > listadoCodigoNombre.size() ){
 						l = 1;
 					} else {
 						// Se selecciona una asignatura
 						driver.switchTo().defaultContent();
 						driver.switchTo().frame("mainFrame");
 						driver.switchTo().frame("derecho");
-						driver.findElement(By.linkText(listadoAsignaturasAux.get(rand_int1))).click();
-						System.out.println("\n	Asignatura: " + listadoAsignaturasAux.get(rand_int1));
+						// Se hace click en la asignatura
+						driver.findElement(By.linkText(listadoCodigoNombre.get(rand_int1).get(1))).click();
+						System.out.println("\n	Asignatura: " + listadoCodigoNombre.get(rand_int1).get(1));
 
 						// Se sale del frame, y se entra al frame de los cursos de teoria.
 						driver.switchTo().defaultContent();
@@ -434,7 +427,7 @@ public class FirstTestClass {
 							driver.findElement(By.id("btn_postular")).click();
 							if (driver.switchTo().alert().getText().compareTo("¿Está segur@ que desea inscribir la(s) coordinación(es) seleccionada(s)?") == 0 ) {
 								driver.switchTo().alert().accept();
-								System.out.println("		Asignatura inscrita: " + listadoAsignaturasAux.get(rand_int1) );
+								System.out.println("		Asignatura inscrita: " + listadoCodigoNombre.get(rand_int1) );
 								contadorAsignaturas++;
 							} else {
 								System.out.println("No coincide el mensaje al inscribir la asignatura");
@@ -480,7 +473,7 @@ public class FirstTestClass {
 		driver.switchTo().frame("mainFrame");
 		driver.switchTo().frame(5);
 		// Se obtienen todas las asignaturas postuladas
-		List<WebElement> listadoAsignaturasPostuladas = driver.findElements(By.className("nivel"));
+		List<WebElement> listadoAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2)"));
 		// Se almacenan todas las asignaturas postuladas
 		ArrayList<String> listadoAsignaturasPostuladasAux = new ArrayList<String>();
 		for (WebElement linea : listadoAsignaturasPostuladas) {
@@ -501,9 +494,75 @@ public class FirstTestClass {
 			String codigo = listadoAsignaturasPostuladasAux.get(rand_int2).split(" ")[0].split("-")[0];
 			//Se ingresa el codigo de la asignatura
 			driver.switchTo().defaultContent();
+			// Tiempo para esperar que se abra la alerta
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
 			driver.switchTo().alert().sendKeys(codigo);
 			// Se acepta el mensaje de desinscripcion
 			driver.switchTo().alert().accept();
+		}
+	}
+
+	@Test
+	public void Desinscribir_Todo() {
+		// Se configura el driver para firefox
+		System.setProperty("webdriver.gecko.driver", "D:\\1. Descargas Internet\\Selenium\\geckodriver-v0.33.0-win64\\geckodriver.exe");
+		// Se crea el driver para navegar en la pagina web
+		WebDriver driver = new FirefoxDriver();
+		// Se abre la pagina
+		driver.get("https://loa.usach.cl/intranetfing/index.jsp");
+		driver.manage().window().maximize();
+		// Ingreso al LOA
+		driver.findElement(By.id("rutaux")).click();
+		driver.findElement(By.id("rutaux")).sendKeys("145010330");
+		driver.findElement(By.cssSelector(".cover-container")).click();
+		driver.findElement(By.id("clave")).click();
+		driver.findElement(By.id("clave")).sendKeys("Cbh1450");
+		driver.findElement(By.cssSelector(".cover-container")).click();
+		driver.findElement(By.cssSelector(".btn-lg")).click();
+		// Seleccionar carrera
+		driver.findElement(By.linkText("1368 - INGENIERIA CIVIL OBRAS CIVILES")).click();
+		// Seleccionar proceso de Inscripcion
+		driver.findElement(By.id("navbar-dropdown-procesos")).click();
+		driver.findElement(By.linkText("Postulación 1/2023")).click();
+		// Se entra al frame con las asignaturas postuladas
+		driver.switchTo().defaultContent();
+		driver.switchTo().frame("mainFrame");
+		driver.switchTo().frame(5);
+		// Se obtienen todas las asignaturas postuladas
+		List<WebElement> listadoAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2)"));
+		// Se almacenan todas las asignaturas postuladas
+		ArrayList<String> listadoAsignaturasPostuladasAux = new ArrayList<String>();
+		for (WebElement linea : listadoAsignaturasPostuladas) {
+			listadoAsignaturasPostuladasAux.add(linea.getText().replace("\n", " ").strip());
+		}
+		if( listadoAsignaturasPostuladasAux.size() <= 0 ) {
+			// Se avisa que no hay asignaturas postuladas
+			System.out.println("No existen asignaturas postuladas\n");
+		} else {
+			int cantidadAsignaturasPostuladas = listadoAsignaturasPostuladasAux.size();
+			while( cantidadAsignaturasPostuladas > 0 ){
+				// Se obtienen todas las asignaturas postuladas
+				listadoAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2)"));
+				// Se almacenan todas las asignaturas postuladas
+				listadoAsignaturasPostuladasAux = new ArrayList<String>();
+				for (WebElement linea : listadoAsignaturasPostuladas) {
+					listadoAsignaturasPostuladasAux.add(linea.getText().replace("\n", " ").strip());
+				}cantidadAsignaturasPostuladas = listadoAsignaturasPostuladasAux.size();
+
+				
+				driver.findElement(By.cssSelector("tr.nivel:nth-child(1) > td:nth-child(7)")).click();
+				driver.switchTo().alert().accept();
+				// Se obtiene el codigo de la asignatura
+				String codigo = listadoAsignaturasPostuladasAux.get(0).split(" ")[0].split("-")[0];
+				//Se ingresa el codigo de la asignatura
+				driver.switchTo().defaultContent();
+				// Tiempo para esperar que se abra la alerta
+				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+				driver.switchTo().alert().sendKeys(codigo);
+				// Se acepta el mensaje de desinscripcion
+				driver.switchTo().alert().accept();
+				cantidadAsignaturasPostuladas--;
+			}
 		}
 	}
 
