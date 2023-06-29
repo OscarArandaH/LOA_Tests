@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.time.Duration;
 
-public class FirstTestClass {
+public class RA {
 	@Test
 	public void Inscribir() {
 		// Se configura el driver para firefox
@@ -23,7 +23,7 @@ public class FirstTestClass {
 		// Se abre la pagina
 		driver.get("https://loa.usach.cl/intranetfing/index.jsp");
 		driver.manage().window().maximize();
-		// Ingreso al LOA
+		// Login
 		driver.findElement(By.id("rutaux")).click();
 		driver.findElement(By.id("rutaux")).sendKeys("145010330");
 		driver.findElement(By.cssSelector(".cover-container")).click();
@@ -225,7 +225,7 @@ public class FirstTestClass {
 		// Se abre la pagina
 		driver.get("https://loa.usach.cl/intranetfing/index.jsp");
 		driver.manage().window().maximize();
-		// Ingreso al LOA
+		// Login
 		driver.findElement(By.id("rutaux")).click();
 		driver.findElement(By.id("rutaux")).sendKeys("145010330");
 		driver.findElement(By.cssSelector(".cover-container")).click();
@@ -265,6 +265,11 @@ public class FirstTestClass {
 			listadoAsignaturasPostuladasAux.add(linea.getText().replace("\n", " ").strip());
 		}
 		contadorAsignaturas += listadoAsignaturasPostuladasAux.size();
+
+
+
+
+
 		int i = 0;
 		while ( (i == 0) && ( contadorAsignaturas < CANTIDADASIGNATURASLIMITE ) ){
 			// Se dan 3 vueltas para probar inscribir las asignaturas
@@ -287,6 +292,10 @@ public class FirstTestClass {
 
 				// Se crea una lista para almacenar las asignaturas que no se pudieron inscribir
 				ArrayList<Integer> codigosAsignaturasAOmitir = new ArrayList<Integer>();
+				System.out.println("Lista codigos a omitir ");
+				for( int codigo : codigosAsignaturasAOmitir ){
+					System.out.println("Codigo: " + codigo );
+				}
 
 				// Se revisan todos los cursos
 				int l = 0;
@@ -307,7 +316,7 @@ public class FirstTestClass {
 					// Se revisa cuantas asignaturas se omitieron
 					int asignaturasOmitidas = 0;
 					// Mientras el while este en la lista de omitidos y no se alcance el limite, se busca otro
-					while( (codigosAsignaturasAOmitir.contains(rand_int1)) && (asignaturasOmitidas <= listadoCodigoNombre.size() ) ){
+					while( (codigosAsignaturasAOmitir.contains(Integer.parseInt(listadoCodigoNombre.get(rand_int1).get(0)))) && (asignaturasOmitidas <= listadoCodigoNombre.size() ) ){
 						rand_int1 = rand.nextInt(listadoCodigoNombre.size());
 						asignaturasOmitidas++;
 					}
@@ -321,7 +330,7 @@ public class FirstTestClass {
 						driver.switchTo().frame("derecho");
 						// Se hace click en la asignatura
 						driver.findElement(By.linkText(listadoCodigoNombre.get(rand_int1).get(1))).click();
-						System.out.println("\n	Asignatura: " + listadoCodigoNombre.get(rand_int1).get(1));
+						System.out.println("\n	Asignatura: " + listadoCodigoNombre.get(rand_int1).get(0));
 
 						// Se sale del frame, y se entra al frame de los cursos de teoria.
 						driver.switchTo().defaultContent();
@@ -438,7 +447,8 @@ public class FirstTestClass {
 							System.out.println("		No es posible inscribir la asignatura");
 						}
 						// Se guarda el random para saber que esta asignatura no se debe repetir
-						codigosAsignaturasAOmitir.add(rand_int1);
+						int codigo = Integer.parseInt(listadoCodigoNombre.get(rand_int1).get(0));
+						codigosAsignaturasAOmitir.add(codigo);
 					}
 				}
 			}
@@ -447,7 +457,7 @@ public class FirstTestClass {
 	}
 
 	@Test
-	public void Desinscribir() {
+	public void Desinscribir_Random() {
 		// Se configura el driver para firefox
 		System.setProperty("webdriver.gecko.driver", "D:\\1. Descargas Internet\\Selenium\\geckodriver-v0.33.0-win64\\geckodriver.exe");
 		// Se crea el driver para navegar en la pagina web
@@ -455,7 +465,7 @@ public class FirstTestClass {
 		// Se abre la pagina
 		driver.get("https://loa.usach.cl/intranetfing/index.jsp");
 		driver.manage().window().maximize();
-		// Ingreso al LOA
+		// Login
 		driver.findElement(By.id("rutaux")).click();
 		driver.findElement(By.id("rutaux")).sendKeys("145010330");
 		driver.findElement(By.cssSelector(".cover-container")).click();
@@ -511,7 +521,7 @@ public class FirstTestClass {
 		// Se abre la pagina
 		driver.get("https://loa.usach.cl/intranetfing/index.jsp");
 		driver.manage().window().maximize();
-		// Ingreso al LOA
+		// Login
 		driver.findElement(By.id("rutaux")).click();
 		driver.findElement(By.id("rutaux")).sendKeys("145010330");
 		driver.findElement(By.cssSelector(".cover-container")).click();
@@ -528,41 +538,50 @@ public class FirstTestClass {
 		driver.switchTo().defaultContent();
 		driver.switchTo().frame("mainFrame");
 		driver.switchTo().frame(5);
-		// Se obtienen todas las asignaturas postuladas
-		List<WebElement> listadoAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2)"));
-		// Se almacenan todas las asignaturas postuladas
-		ArrayList<String> listadoAsignaturasPostuladasAux = new ArrayList<String>();
-		for (WebElement linea : listadoAsignaturasPostuladas) {
-			listadoAsignaturasPostuladasAux.add(linea.getText().replace("\n", " ").strip());
-		}
-		if( listadoAsignaturasPostuladasAux.size() <= 0 ) {
-			// Se avisa que no hay asignaturas postuladas
-			System.out.println("No existen asignaturas postuladas\n");
-		} else {
-			int cantidadAsignaturasPostuladas = listadoAsignaturasPostuladasAux.size();
-			while( cantidadAsignaturasPostuladas > 0 ){
-				// Se obtienen todas las asignaturas postuladas
-				listadoAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2)"));
-				// Se almacenan todas las asignaturas postuladas
-				listadoAsignaturasPostuladasAux = new ArrayList<String>();
-				for (WebElement linea : listadoAsignaturasPostuladas) {
-					listadoAsignaturasPostuladasAux.add(linea.getText().replace("\n", " ").strip());
-				}cantidadAsignaturasPostuladas = listadoAsignaturasPostuladasAux.size();
-
+		List<WebElement> accionesAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(7)"));
+		List<WebElement> codigosAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(1)"));
+		
+		int i = 0;
+		while( i == 0){
+			int cantidadBotones = accionesAsignaturasPostuladas.size();
+			int j = 0;
+			while( j < cantidadBotones ){
 				
-				driver.findElement(By.cssSelector("tr.nivel:nth-child(1) > td:nth-child(7)")).click();
-				driver.switchTo().alert().accept();
-				// Se obtiene el codigo de la asignatura
-				String codigo = listadoAsignaturasPostuladasAux.get(0).split(" ")[0].split("-")[0];
-				//Se ingresa el codigo de la asignatura
-				driver.switchTo().defaultContent();
-				// Tiempo para esperar que se abra la alerta
-				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-				driver.switchTo().alert().sendKeys(codigo);
-				// Se acepta el mensaje de desinscripcion
-				driver.switchTo().alert().accept();
-				cantidadAsignaturasPostuladas--;
+				if( accionesAsignaturasPostuladas.get(j).getText().equals("DESINSCRIBIR") ){
+					// Se crea el JavascriptExecutor para hacer scroll
+					JavascriptExecutor js = (JavascriptExecutor) driver;
+					// Se obtiene la posicion del boton
+					Point location = accionesAsignaturasPostuladas.get(j).getLocation();
+					// Se hace scroll hacia el boton
+					js.executeScript("window.scrollBy(0,"+location.getY()+")");
+					String codigo = codigosAsignaturasPostuladas.get(j).getText().split("-")[0].strip();
+					// Se selecciona la solicitud
+					accionesAsignaturasPostuladas.get(j).click();
+					// Se acepa el mensaje de desinscripcion
+					driver.switchTo().alert().accept();
+					//Se ingresa el codigo de la asignatura
+					driver.switchTo().defaultContent();
+					// Tiempo para esperar que se abra la alerta
+					driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+					driver.switchTo().alert().sendKeys(codigo);
+					// Se acepta el mensaje de desinscripcion
+					driver.switchTo().alert().accept();
+					// Se entra al frame con las asignaturas postuladas
+					driver.switchTo().defaultContent();
+					driver.findElement(By.id("navbar-dropdown-procesos")).click();
+					driver.findElement(By.linkText("Postulación 1/2023")).click();
+					driver.switchTo().defaultContent();
+					driver.switchTo().frame("mainFrame");
+					driver.switchTo().frame(5);
+					// Se buscan la cantidad de asignaturas restantes
+					accionesAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(7)"));
+					codigosAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(1)"));
+					cantidadBotones = accionesAsignaturasPostuladas.size();
+				} else {
+					j++;
+				}
 			}
+			i = 1;
 		}
 	}
 
@@ -575,7 +594,7 @@ public class FirstTestClass {
 		// Se abre la pagina
 		driver.get("https://loa.usach.cl/intranetfing/index.jsp");
 		driver.manage().window().maximize();
-		// Ingreso al LOA
+		// Login
 		driver.findElement(By.id("rutaux")).click();
 		driver.findElement(By.id("rutaux")).sendKeys("145010330");
 		driver.findElement(By.cssSelector(".cover-container")).click();
@@ -735,7 +754,7 @@ public class FirstTestClass {
 		// Se abre la pagina
 		driver.get("https://loa.usach.cl/intranetfing/index.jsp");
 		driver.manage().window().maximize();
-		// Ingreso al LOA
+		// Login
 		driver.findElement(By.id("rutaux")).click();
 		driver.findElement(By.id("rutaux")).sendKeys("145010330");
 		driver.findElement(By.cssSelector(".cover-container")).click();
@@ -784,7 +803,7 @@ public class FirstTestClass {
 		// Se abre la pagina
 		driver.get("https://loa.usach.cl/intranetfing/index.jsp");
 		driver.manage().window().maximize();
-		// Ingreso al LOA
+		// Login
 		driver.findElement(By.id("rutaux")).click();
 		driver.findElement(By.id("rutaux")).sendKeys("145010330");
 		driver.findElement(By.cssSelector(".cover-container")).click();
