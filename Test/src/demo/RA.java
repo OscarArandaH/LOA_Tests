@@ -1,5 +1,6 @@
 package demo;
 
+
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
@@ -13,29 +14,29 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.time.Duration;
 
-public class RA {
+public class RA extends RA_Vars {
 	@Test
-	public void Inscribir() {
+	public void Inscribir_Postulaciones_Random() {
 		// Se configura el driver para firefox
-		System.setProperty("webdriver.gecko.driver", "D:\\1. Descargas Internet\\Selenium\\geckodriver-v0.33.0-win64\\geckodriver.exe");
+		System.setProperty("webdriver.gecko.driver", RA_Vars.driverPath);
 		// Se crea el driver para navegar en la pagina web
 		WebDriver driver = new FirefoxDriver();
 		// Se abre la pagina
-		driver.get("https://loa.usach.cl/intranetfing/index.jsp");
+		driver.get(RA_Vars.url);
 		driver.manage().window().maximize();
 		// Login
 		driver.findElement(By.id("rutaux")).click();
-		driver.findElement(By.id("rutaux")).sendKeys("145010330");
+		driver.findElement(By.id("rutaux")).sendKeys(RA_Vars.userRUT);
 		driver.findElement(By.cssSelector(".cover-container")).click();
 		driver.findElement(By.id("clave")).click();
-		driver.findElement(By.id("clave")).sendKeys("Cbh1450");
+		driver.findElement(By.id("clave")).sendKeys(RA_Vars.userPass);
 		driver.findElement(By.cssSelector(".cover-container")).click();
 		driver.findElement(By.cssSelector(".btn-lg")).click();
 		// Seleccionar carrera
 		driver.findElement(By.linkText("1368 - INGENIERIA CIVIL OBRAS CIVILES")).click();
 		// Seleccionar proceso de Inscripcion
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
-		driver.findElement(By.linkText("Postulación 1/2023")).click();
+		driver.findElement(By.linkText(RA_Vars.postulacionText)).click();
 		// Seleccionar frame del listado de cursos
 		driver.switchTo().frame("mainFrame");
 		driver.switchTo().frame("derecho");
@@ -86,7 +87,7 @@ public class RA {
 			ArrayList<String> listadoTeoriaAux = new ArrayList<String>();
 			for (WebElement e : listadoTeoria) {
 				String tmp = e.getText().replace("\n", " ");
-				if( tmp.equals("No hay coordinaciones definidas.") ){
+				if( tmp.equals(RA_Vars.sinCoordinacionInscribirTeoriaText) ){
 					// No hay cursos de teoria
 					System.out.println("		No hay cursos de teoria");
 				} else {
@@ -126,7 +127,7 @@ public class RA {
 			ArrayList<String> listadoLaboratorioAux = new ArrayList<String>();
 			for (WebElement e : listadoLaboratorio) {
 				String tmp = e.getText().replace("\n", " ");
-				if( tmp.equals("No hay coordinaciones de laboratorio definidas.") ){
+				if( tmp.equals(RA_Vars.sinCoordinacionInscribirLabText) ){
 					// No hay cursos de laboratorio
 					System.out.println("		No hay cursos de laboratorio");
 				} else {
@@ -166,7 +167,7 @@ public class RA {
 			ArrayList<String> listadoEjercicioAux = new ArrayList<String>();
 			for (WebElement e : listadoEjercicio) {
 				String tmp = e.getText().replace("\n", " ");
-				if( tmp.equals("No hay coordinaciones de ejercicios definidas.") ){
+				if( tmp.equals(RA_Vars.sinCoordinacionInscribirEjeText) ){
 					// No hay cursos de ejercicios
 					System.out.println("		No hay cursos de ejercicios");
 				} else {
@@ -203,7 +204,7 @@ public class RA {
 				driver.switchTo().frame(5);
 				// Se postula a la asignatura
 				driver.findElement(By.id("btn_postular")).click();
-				if (driver.switchTo().alert().getText().compareTo("¿Está segur@ que desea inscribir la(s) coordinación(es) seleccionada(s)?") == 0 ) {
+				if (driver.switchTo().alert().getText().compareTo(RA_Vars.alertaInscribirText) == 0 ) {
 					driver.switchTo().alert().accept();
 				}
 				// Tiempo para guardar la asignatura postulada
@@ -217,20 +218,20 @@ public class RA {
 	}
 
 	@Test
-	public void Inscribir_Postulaciones() {
+	public void Inscribir_Postulaciones_Limite() {
 		// Se configura el driver para firefox
-		System.setProperty("webdriver.gecko.driver", "D:\\1. Descargas Internet\\Selenium\\geckodriver-v0.33.0-win64\\geckodriver.exe");
+		System.setProperty("webdriver.gecko.driver", RA_Vars.driverPath);
 		// Se crea el driver para navegar en la pagina web
 		WebDriver driver = new FirefoxDriver();
 		// Se abre la pagina
-		driver.get("https://loa.usach.cl/intranetfing/index.jsp");
+		driver.get(RA_Vars.url);
 		driver.manage().window().maximize();
 		// Login
 		driver.findElement(By.id("rutaux")).click();
-		driver.findElement(By.id("rutaux")).sendKeys("145010330");
+		driver.findElement(By.id("rutaux")).sendKeys(RA_Vars.userRUT);
 		driver.findElement(By.cssSelector(".cover-container")).click();
 		driver.findElement(By.id("clave")).click();
-		driver.findElement(By.id("clave")).sendKeys("Cbh1450");
+		driver.findElement(By.id("clave")).sendKeys(RA_Vars.userPass);
 		driver.findElement(By.cssSelector(".cover-container")).click();
 		driver.findElement(By.cssSelector(".btn-lg")).click();
 		// Seleccionar carrera
@@ -242,7 +243,7 @@ public class RA {
 		int contadorAsignaturas = 0;
 		// Seleccionar proceso de enviar solicitudes
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
-		driver.findElement(By.linkText("Solicitud Inscripción")).click();
+		driver.findElement(By.linkText(RA_Vars.solicitudText)).click();
 		// Seleccionar frame del listado de cursos
 		driver.switchTo().frame("mainFrame");
 		driver.switchTo().frame(5);
@@ -252,7 +253,7 @@ public class RA {
 		// Seleccionar proceso de enviar solicitudes
 		driver.switchTo().defaultContent();
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
-		driver.findElement(By.linkText("Postulación 1/2023")).click();
+		driver.findElement(By.linkText(RA_Vars.postulacionText)).click();
 		// Seleccionar el frame con las postulaciones
 		driver.switchTo().defaultContent();
 		driver.switchTo().frame("mainFrame");
@@ -344,7 +345,7 @@ public class RA {
 						// Se obtiene la primera linea despues de buscar tr
 						String primeraLinea = listadoTeoria.get(0).getText().strip();
 						// Si la primera linea dice que no hay coordinaciones, se avisa
-						if( !primeraLinea.equals("No hay coordinaciones definidas.") ){
+						if( !primeraLinea.equals(RA_Vars.sinCoordinacionInscribirTeoriaText) ){
 							// Existen coordinaciones
 							existeTeoria = true;
 							// Se crea un random para seleccionar una seccion de teoria al azar
@@ -371,7 +372,7 @@ public class RA {
 						ArrayList<String> listadoLaboratorioAux = new ArrayList<String>();
 						for (WebElement e : listadoLaboratorio) {
 							String tmp = e.getText().replace("\n", " ");
-							if( tmp.equals("No hay coordinaciones de laboratorio definidas.") ){
+							if( tmp.equals(RA_Vars.sinCoordinacionInscribirLabText) ){
 								// No hay cursos de laboratorio
 								System.out.println("			No hay cursos de laboratorio");
 							} else {
@@ -412,7 +413,7 @@ public class RA {
 						ArrayList<String> listadoEjercicioAux = new ArrayList<String>();
 						for (WebElement e : listadoEjercicio) {
 							String tmp = e.getText().replace("\n", " ");
-							if( tmp.equals("No hay coordinaciones de ejercicios definidas.") ){
+							if( tmp.equals(RA_Vars.sinCoordinacionInscribirEjeText) ){
 								// No hay cursos de ejercicios
 								System.out.println("			No hay cursos de ejercicios");
 							} else {
@@ -434,7 +435,7 @@ public class RA {
 							driver.switchTo().frame(5);
 							// Se postula a la asignatura
 							driver.findElement(By.id("btn_postular")).click();
-							if (driver.switchTo().alert().getText().compareTo("¿Está segur@ que desea inscribir la(s) coordinación(es) seleccionada(s)?") == 0 ) {
+							if (driver.switchTo().alert().getText().compareTo(RA_Vars.alertaInscribirText) == 0 ) {
 								driver.switchTo().alert().accept();
 								System.out.println("		Asignatura inscrita: " + listadoCodigoNombre.get(rand_int1) );
 								contadorAsignaturas++;
@@ -459,25 +460,25 @@ public class RA {
 	@Test
 	public void Inscribir_Solicitud_Random() {
 		// Se configura el driver para firefox
-		System.setProperty("webdriver.gecko.driver", "D:\\1. Descargas Internet\\Selenium\\geckodriver-v0.33.0-win64\\geckodriver.exe");
+		System.setProperty("webdriver.gecko.driver", RA_Vars.driverPath);
 		// Se crea el driver para navegar en la pagina web
 		WebDriver driver = new FirefoxDriver();
 		// Se abre la pagina
-		driver.get("https://loa.usach.cl/intranetfing/index.jsp");
+		driver.get(RA_Vars.url);
 		driver.manage().window().maximize();
 		// Login
 		driver.findElement(By.id("rutaux")).click();
-		driver.findElement(By.id("rutaux")).sendKeys("145010330");
+		driver.findElement(By.id("rutaux")).sendKeys(RA_Vars.userRUT);
 		driver.findElement(By.cssSelector(".cover-container")).click();
 		driver.findElement(By.id("clave")).click();
-		driver.findElement(By.id("clave")).sendKeys("Cbh1450");
+		driver.findElement(By.id("clave")).sendKeys(RA_Vars.userPass);
 		driver.findElement(By.cssSelector(".cover-container")).click();
 		driver.findElement(By.cssSelector(".btn-lg")).click();
 		// Seleccionar carrera
 		driver.findElement(By.linkText("1368 - INGENIERIA CIVIL OBRAS CIVILES")).click();
 		// Seleccionar proceso de enviar solicitudes
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
-		driver.findElement(By.linkText("Solicitud Inscripción")).click();
+		driver.findElement(By.linkText(RA_Vars.solicitudText)).click();
 		// Seleccionar frame del listado de cursos
 		driver.switchTo().defaultContent();
 		driver.switchTo().frame("mainFrame");
@@ -518,6 +519,7 @@ public class RA {
 			// Se hace click en la asignatura
 			driver.findElement(By.linkText(listadoAsignaturasAux.get(rand_int1))).click();
 			System.out.println("	Se revisan los cursos de teoria");
+
 			// Se sale del frame, y se entra al frame de los cursos de teoria.
 			driver.switchTo().defaultContent();
 			driver.switchTo().frame("mainFrame");
@@ -530,7 +532,7 @@ public class RA {
 			ArrayList<String> listadoTeoriaAux = new ArrayList<String>();
 			for (WebElement e : listadoTeoria) {
 				String tmp = e.getText().replace("\n", " ");
-				if( tmp.equals("No hay coordinaciones de teoría definidas.") ){
+				if( tmp.equals(RA_Vars.sinCoordinacionSolicitudTeoriaText) ){
 					// No hay cursos de teoria
 				} else {
 					listadoTeoriaAux.add(tmp);
@@ -539,6 +541,7 @@ public class RA {
 					seleccionoTeoria = true;
 				}
 			}
+
 			System.out.println("	Se revisan los cursos de laboratorio");
 			// Se sale del frame, y se entra al frame de los cursos de laboratorio.
 			driver.switchTo().defaultContent();
@@ -553,7 +556,7 @@ public class RA {
 			for (WebElement e : listadoEjercicio) {
 				String tmp = e.getText().replace("\n", " ");
 				// Los frames de laboratorio y ejercicio estan al revez, por lo que se esta revisando el frame de ejercicio
-				if( tmp.equals("No hay coordinaciones de ejercicio definidas.") ){
+				if( tmp.equals(RA_Vars.sinCoordinacionSolicitudEjeText) ){
 					// No hay cursos de laboratorio
 				} else {
 					listadoEjercicioAux.add(tmp);
@@ -562,6 +565,7 @@ public class RA {
 					seleccionoLaboratorio = true;
 				}
 			}
+
 			System.out.println("	Se revisan los cursos de ejercicio");
 			// Se sale del frame, y se entra al frame de los cursos de ejercicio.
 			driver.switchTo().defaultContent();
@@ -576,7 +580,7 @@ public class RA {
 			for (WebElement e : listadoLaboratorio) {
 				String tmp = e.getText().replace("\n", " ");
 				// Los frames de laboratorio y ejercicio estan al revez, por lo que se esta revisando el frame de ejercicio
-				if( tmp.equals("No hay coordinaciones definidas.") ){
+				if( tmp.equals(RA_Vars.sinCoordinacionSolicitudLabText) ){
 					// No hay cursos de ejercicios
 				} else {
 					listadoLaboratorioAux.add(tmp);
@@ -599,7 +603,7 @@ public class RA {
 				driver.findElement(By.id("motivo")).sendKeys("Motivo Test");
 				// Se postula a la asignatura
 				driver.findElement(By.id("btn_solicitar")).click();
-				if (driver.switchTo().alert().getText().compareTo("¿Está segur@ que desea solicitar la inscripción de la(s) coordinación(es) seleccionada(s)?") == 0 ) {
+				if (driver.switchTo().alert().getText().compareTo(RA_Vars.alertSolicitudConfirmText) == 0 ) {
 					driver.switchTo().alert().accept();
 				}
 				// Tiempo para guardar la asignatura postulada
@@ -618,25 +622,25 @@ public class RA {
 	@Test
 	public void Desinscribir_Postulacion_Random() {
 		// Se configura el driver para firefox
-		System.setProperty("webdriver.gecko.driver", "D:\\1. Descargas Internet\\Selenium\\geckodriver-v0.33.0-win64\\geckodriver.exe");
+		System.setProperty("webdriver.gecko.driver", RA_Vars.driverPath);
 		// Se crea el driver para navegar en la pagina web
 		WebDriver driver = new FirefoxDriver();
 		// Se abre la pagina
-		driver.get("https://loa.usach.cl/intranetfing/index.jsp");
+		driver.get(RA_Vars.url);
 		driver.manage().window().maximize();
 		// Login
 		driver.findElement(By.id("rutaux")).click();
-		driver.findElement(By.id("rutaux")).sendKeys("145010330");
+		driver.findElement(By.id("rutaux")).sendKeys(RA_Vars.userRUT);
 		driver.findElement(By.cssSelector(".cover-container")).click();
 		driver.findElement(By.id("clave")).click();
-		driver.findElement(By.id("clave")).sendKeys("Cbh1450");
+		driver.findElement(By.id("clave")).sendKeys(RA_Vars.userPass);
 		driver.findElement(By.cssSelector(".cover-container")).click();
 		driver.findElement(By.cssSelector(".btn-lg")).click();
 		// Seleccionar carrera
 		driver.findElement(By.linkText("1368 - INGENIERIA CIVIL OBRAS CIVILES")).click();
 		// Seleccionar proceso de Inscripcion
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
-		driver.findElement(By.linkText("Postulación 1/2023")).click();
+		driver.findElement(By.linkText(RA_Vars.postulacionText)).click();
 		// Se entra al frame con las asignaturas postuladas
 		driver.switchTo().defaultContent();
 		driver.switchTo().frame("mainFrame");
@@ -646,7 +650,7 @@ public class RA {
 		List<WebElement> codigosAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(1)"));
 		int postulacionesNoDesinscribibles = 0;
 		for( int i = 0; i < accionesAsignaturasPostuladas.size() ; i++ ){
-			if( !accionesAsignaturasPostuladas.get(i).getText().equals("DESINSCRIBIR") ){
+			if( !accionesAsignaturasPostuladas.get(i).getText().equals(RA_Vars.btnPostulacionDESINSCRIBIRText) ){
 				postulacionesNoDesinscribibles++;
 			}
 		}
@@ -666,7 +670,7 @@ public class RA {
 				}
 				int j = 0;
 				while( j < cantidadBotones ){
-					if( accionesAsignaturasPostuladas.get(j).getText().equals("DESINSCRIBIR") ){
+					if( accionesAsignaturasPostuladas.get(j).getText().equals(RA_Vars.btnPostulacionDESINSCRIBIRText) ){
 						// Se crea el JavascriptExecutor para hacer scroll
 						JavascriptExecutor js = (JavascriptExecutor) driver;
 						// Se obtiene la posicion del boton
@@ -688,7 +692,7 @@ public class RA {
 						// Se entra al frame con las asignaturas postuladas
 						driver.switchTo().defaultContent();
 						driver.findElement(By.id("navbar-dropdown-procesos")).click();
-						driver.findElement(By.linkText("Postulación 1/2023")).click();
+						driver.findElement(By.linkText(RA_Vars.postulacionText)).click();
 						driver.switchTo().defaultContent();
 						driver.switchTo().frame("mainFrame");
 						driver.switchTo().frame(5);
@@ -709,25 +713,25 @@ public class RA {
 	@Test
 	public void Desinscribir_Postulacion_Todo() {
 		// Se configura el driver para firefox
-		System.setProperty("webdriver.gecko.driver", "D:\\1. Descargas Internet\\Selenium\\geckodriver-v0.33.0-win64\\geckodriver.exe");
+		System.setProperty("webdriver.gecko.driver", RA_Vars.driverPath);
 		// Se crea el driver para navegar en la pagina web
 		WebDriver driver = new FirefoxDriver();
 		// Se abre la pagina
-		driver.get("https://loa.usach.cl/intranetfing/index.jsp");
+		driver.get(RA_Vars.url);
 		driver.manage().window().maximize();
 		// Login
 		driver.findElement(By.id("rutaux")).click();
-		driver.findElement(By.id("rutaux")).sendKeys("145010330");
+		driver.findElement(By.id("rutaux")).sendKeys(RA_Vars.userRUT);
 		driver.findElement(By.cssSelector(".cover-container")).click();
 		driver.findElement(By.id("clave")).click();
-		driver.findElement(By.id("clave")).sendKeys("Cbh1450");
+		driver.findElement(By.id("clave")).sendKeys(RA_Vars.userPass);
 		driver.findElement(By.cssSelector(".cover-container")).click();
 		driver.findElement(By.cssSelector(".btn-lg")).click();
 		// Seleccionar carrera
 		driver.findElement(By.linkText("1368 - INGENIERIA CIVIL OBRAS CIVILES")).click();
 		// Seleccionar proceso de Inscripcion
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
-		driver.findElement(By.linkText("Postulación 1/2023")).click();
+		driver.findElement(By.linkText(RA_Vars.postulacionText)).click();
 		// Se entra al frame con las asignaturas postuladas
 		driver.switchTo().defaultContent();
 		driver.switchTo().frame("mainFrame");
@@ -740,7 +744,7 @@ public class RA {
 			int cantidadBotones = accionesAsignaturasPostuladas.size();
 			int j = 0;
 			while( j < cantidadBotones ){
-				if( accionesAsignaturasPostuladas.get(j).getText().equals("DESINSCRIBIR") ){
+				if( accionesAsignaturasPostuladas.get(j).getText().equals(RA_Vars.btnPostulacionDESINSCRIBIRText) ){
 					// Se crea el JavascriptExecutor para hacer scroll
 					JavascriptExecutor js = (JavascriptExecutor) driver;
 					// Se obtiene la posicion del boton
@@ -762,7 +766,7 @@ public class RA {
 					// Se entra al frame con las asignaturas postuladas
 					driver.switchTo().defaultContent();
 					driver.findElement(By.id("navbar-dropdown-procesos")).click();
-					driver.findElement(By.linkText("Postulación 1/2023")).click();
+					driver.findElement(By.linkText(RA_Vars.postulacionText)).click();
 					driver.switchTo().defaultContent();
 					driver.switchTo().frame("mainFrame");
 					driver.switchTo().frame(5);
@@ -781,25 +785,25 @@ public class RA {
 	@Test
 	public void Eliminar_Solicitud_Random() {
 		// Se configura el driver para firefox
-		System.setProperty("webdriver.gecko.driver", "D:\\1. Descargas Internet\\Selenium\\geckodriver-v0.33.0-win64\\geckodriver.exe");
+		System.setProperty("webdriver.gecko.driver", RA_Vars.driverPath);
 		// Se crea el driver para navegar en la pagina web
 		WebDriver driver = new FirefoxDriver();
 		// Se abre la pagina
-		driver.get("https://loa.usach.cl/intranetfing/index.jsp");
+		driver.get(RA_Vars.url);
 		driver.manage().window().maximize();
 		// Login
 		driver.findElement(By.id("rutaux")).click();
-		driver.findElement(By.id("rutaux")).sendKeys("145010330");
+		driver.findElement(By.id("rutaux")).sendKeys(RA_Vars.userRUT);
 		driver.findElement(By.cssSelector(".cover-container")).click();
 		driver.findElement(By.id("clave")).click();
-		driver.findElement(By.id("clave")).sendKeys("Cbh1450");
+		driver.findElement(By.id("clave")).sendKeys(RA_Vars.userPass);
 		driver.findElement(By.cssSelector(".cover-container")).click();
 		driver.findElement(By.cssSelector(".btn-lg")).click();
 		// Seleccionar carrera
 		driver.findElement(By.linkText("1368 - INGENIERIA CIVIL OBRAS CIVILES")).click();
 		// Seleccionar proceso de enviar solicitudes
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
-		driver.findElement(By.linkText("Solicitud Inscripción")).click();
+		driver.findElement(By.linkText(RA_Vars.solicitudText)).click();
 		// Seleccionar frame del listado de cursos
 		driver.switchTo().defaultContent();
 		driver.switchTo().frame("mainFrame");
@@ -809,7 +813,7 @@ public class RA {
 		// Se obtienen los ids de las solicitudes eliminables
 		ArrayList<Integer> listadoSolicitudesEliminables = new ArrayList<Integer>();
 		for( int i = 0; i < listadoSolicitudesEnviadas.size(); i++ ) {
-			if( listadoSolicitudesEnviadas.get(i).getText().equals("ELIMINAR") ){
+			if( listadoSolicitudesEnviadas.get(i).getText().equals(RA_Vars.btnPostulacionELIMINARText) ){
 				listadoSolicitudesEliminables.add(i);
 			}
 		}
@@ -830,25 +834,25 @@ public class RA {
 	@Test
 	public void Eliminar_Solicitud_Todo() {
 		// Se configura el driver para firefox
-		System.setProperty("webdriver.gecko.driver", "D:\\1. Descargas Internet\\Selenium\\geckodriver-v0.33.0-win64\\geckodriver.exe");
+		System.setProperty("webdriver.gecko.driver", RA_Vars.driverPath);
 		// Se crea el driver para navegar en la pagina web
 		WebDriver driver = new FirefoxDriver();
 		// Se abre la pagina
-		driver.get("https://loa.usach.cl/intranetfing/index.jsp");
+		driver.get(RA_Vars.url);
 		driver.manage().window().maximize();
 		// Login
 		driver.findElement(By.id("rutaux")).click();
-		driver.findElement(By.id("rutaux")).sendKeys("145010330");
+		driver.findElement(By.id("rutaux")).sendKeys(RA_Vars.userRUT);
 		driver.findElement(By.cssSelector(".cover-container")).click();
 		driver.findElement(By.id("clave")).click();
-		driver.findElement(By.id("clave")).sendKeys("Cbh1450");
+		driver.findElement(By.id("clave")).sendKeys(RA_Vars.userPass);
 		driver.findElement(By.cssSelector(".cover-container")).click();
 		driver.findElement(By.cssSelector(".btn-lg")).click();
 		// Seleccionar carrera
 		driver.findElement(By.linkText("1368 - INGENIERIA CIVIL OBRAS CIVILES")).click();
 		// Seleccionar proceso de enviar solicitudes
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
-		driver.findElement(By.linkText("Solicitud Inscripción")).click();
+		driver.findElement(By.linkText(RA_Vars.solicitudText)).click();
 		// Seleccionar frame del listado de cursos
 		driver.switchTo().defaultContent();
 		driver.switchTo().frame("mainFrame");
@@ -861,7 +865,7 @@ public class RA {
 			int cantidadBotones = listadoSolicitudesEnviadas.size();
 			int j = 0;
 			while( j < cantidadBotones ){
-				if( listadoSolicitudesEnviadas.get(j).getText().equals("ELIMINAR") ){
+				if( listadoSolicitudesEnviadas.get(j).getText().equals(RA_Vars.btnPostulacionELIMINARText) ){
 					// Se crea el JavascriptExecutor para hacer scroll
 					JavascriptExecutor js = (JavascriptExecutor) driver;
 					// Se obtiene la posicion del boton
@@ -875,7 +879,7 @@ public class RA {
 					// Se entra al frame con las asignaturas postuladas
 					driver.switchTo().defaultContent();
 					driver.findElement(By.id("navbar-dropdown-procesos")).click();
-					driver.findElement(By.linkText("Solicitud Inscripción")).click();
+					driver.findElement(By.linkText(RA_Vars.solicitudText)).click();
 					driver.switchTo().defaultContent();
 					driver.switchTo().frame("mainFrame");
 					driver.switchTo().frame(5);
@@ -893,25 +897,25 @@ public class RA {
 	@Test
 	public void Revisar_Solicitud_Random() {
 		// Se configura el driver para firefox
-		System.setProperty("webdriver.gecko.driver", "D:\\1. Descargas Internet\\Selenium\\geckodriver-v0.33.0-win64\\geckodriver.exe");
+		System.setProperty("webdriver.gecko.driver", RA_Vars.driverPath);
 		// Se crea el driver para navegar en la pagina web
 		WebDriver driver = new FirefoxDriver();
 		// Se abre la pagina
-		driver.get("https://loa.usach.cl/intranetfing/index.jsp");
+		driver.get(RA_Vars.url);
 		driver.manage().window().maximize();
 		// Login
 		driver.findElement(By.id("rutaux")).click();
-		driver.findElement(By.id("rutaux")).sendKeys("145010330");
+		driver.findElement(By.id("rutaux")).sendKeys(RA_Vars.userRUT);
 		driver.findElement(By.cssSelector(".cover-container")).click();
 		driver.findElement(By.id("clave")).click();
-		driver.findElement(By.id("clave")).sendKeys("Cbh1450");
+		driver.findElement(By.id("clave")).sendKeys(RA_Vars.userPass);
 		driver.findElement(By.cssSelector(".cover-container")).click();
 		driver.findElement(By.cssSelector(".btn-lg")).click();
 		// Seleccionar carrera
 		driver.findElement(By.linkText("1368 - INGENIERIA CIVIL OBRAS CIVILES")).click();
 		// Seleccionar proceso de enviar solicitudes
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
-		driver.findElement(By.linkText("Solicitud Inscripción")).click();
+		driver.findElement(By.linkText(RA_Vars.solicitudText)).click();
 		// Seleccionar frame del listado de cursos
 		driver.switchTo().frame("mainFrame");
 		driver.switchTo().frame(5);
@@ -920,7 +924,7 @@ public class RA {
 		// Se obtienen los ids de las solicitudes revisables
 		ArrayList<Integer> listadoSolicitudesRevisables = new ArrayList<Integer>();
 		for( int i = 0; i < listadoSolicitudesEnviadas.size(); i++ ) {
-			if( listadoSolicitudesEnviadas.get(i).getText().equals("RESPUESTA") ){
+			if( listadoSolicitudesEnviadas.get(i).getText().equals(RA_Vars.btnSolicitudRESPUESTAText) ){
 				listadoSolicitudesRevisables.add(i);
 			}
 		}
@@ -957,31 +961,31 @@ public class RA {
 		}
 		driver.switchTo().defaultContent();
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
-		driver.findElement(By.linkText("Solicitud Inscripción")).click();
+		driver.findElement(By.linkText(RA_Vars.solicitudText)).click();
 	}
 
 	@Test
 	public void Revisar_Solicitud_Todo() {
 		// Se configura el driver para firefox
-		System.setProperty("webdriver.gecko.driver", "D:\\1. Descargas Internet\\Selenium\\geckodriver-v0.33.0-win64\\geckodriver.exe");
+		System.setProperty("webdriver.gecko.driver", RA_Vars.driverPath);
 		// Se crea el driver para navegar en la pagina web
 		WebDriver driver = new FirefoxDriver();
 		// Se abre la pagina
-		driver.get("https://loa.usach.cl/intranetfing/index.jsp");
+		driver.get(RA_Vars.url);
 		driver.manage().window().maximize();
 		// Login
 		driver.findElement(By.id("rutaux")).click();
-		driver.findElement(By.id("rutaux")).sendKeys("145010330");
+		driver.findElement(By.id("rutaux")).sendKeys(RA_Vars.userRUT);
 		driver.findElement(By.cssSelector(".cover-container")).click();
 		driver.findElement(By.id("clave")).click();
-		driver.findElement(By.id("clave")).sendKeys("Cbh1450");
+		driver.findElement(By.id("clave")).sendKeys(RA_Vars.userPass);
 		driver.findElement(By.cssSelector(".cover-container")).click();
 		driver.findElement(By.cssSelector(".btn-lg")).click();
 		// Seleccionar carrera
 		driver.findElement(By.linkText("1368 - INGENIERIA CIVIL OBRAS CIVILES")).click();
 		// Seleccionar proceso de enviar solicitudes
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
-		driver.findElement(By.linkText("Solicitud Inscripción")).click();
+		driver.findElement(By.linkText(RA_Vars.solicitudText)).click();
 		// Seleccionar frame del listado de cursos
 		driver.switchTo().defaultContent();
 		driver.switchTo().frame("mainFrame");
@@ -992,7 +996,7 @@ public class RA {
 		// Se obtienen los ids de las solicitudes revisables
 		ArrayList<Integer> listadoSolicitudesRevisables = new ArrayList<Integer>();
 		for( int i = 0; i < listadoSolicitudesEnviadas.size(); i++ ) {
-			if( listadoSolicitudesEnviadas.get(i).getText().equals("RESPUESTA") ){
+			if( listadoSolicitudesEnviadas.get(i).getText().equals(RA_Vars.btnSolicitudRESPUESTAText) ){
 				listadoSolicitudesRevisables.add(i);
 			}
 		}
@@ -1001,7 +1005,7 @@ public class RA {
 		for( int solicitud : listadoSolicitudesRevisables ){
 			driver.switchTo().defaultContent();
 			driver.findElement(By.id("navbar-dropdown-procesos")).click();
-			driver.findElement(By.linkText("Solicitud Inscripción")).click();
+			driver.findElement(By.linkText(RA_Vars.solicitudText)).click();
 			driver.switchTo().frame("mainFrame");
 			driver.switchTo().frame(5);
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
