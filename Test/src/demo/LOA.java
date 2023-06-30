@@ -457,165 +457,7 @@ public class LOA {
 	}
 
 	@Test
-	public void Desinscribir_Random() {
-		// Se configura el driver para firefox
-		System.setProperty("webdriver.gecko.driver", "D:\\1. Descargas Internet\\Selenium\\geckodriver-v0.33.0-win64\\geckodriver.exe");
-		// Se crea el driver para navegar en la pagina web
-		WebDriver driver = new FirefoxDriver();
-		// Se abre la pagina
-		driver.get("https://loa.usach.cl/intranetfing/index.jsp");
-		driver.manage().window().maximize();
-		// Login
-		driver.findElement(By.id("rutaux")).click();
-		driver.findElement(By.id("rutaux")).sendKeys("145010330");
-		driver.findElement(By.cssSelector(".cover-container")).click();
-		driver.findElement(By.id("clave")).click();
-		driver.findElement(By.id("clave")).sendKeys("Cbh1450");
-		driver.findElement(By.cssSelector(".cover-container")).click();
-		driver.findElement(By.cssSelector(".btn-lg")).click();
-		// Seleccionar carrera
-		driver.findElement(By.linkText("1368 - INGENIERIA CIVIL OBRAS CIVILES")).click();
-		// Seleccionar proceso de Inscripcion
-		driver.findElement(By.id("navbar-dropdown-procesos")).click();
-		driver.findElement(By.linkText("Postulación 1/2023")).click();
-		// Se entra al frame con las asignaturas postuladas
-		driver.switchTo().defaultContent();
-		driver.switchTo().frame("mainFrame");
-		driver.switchTo().frame(5);
-		// Se buscan la cantidad de asignaturas postuladas
-		List<WebElement> accionesAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(7)"));
-		List<WebElement> codigosAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(1)"));
-		int postulacionesNoDesinscribibles = 0;
-		for( int i = 0; i < accionesAsignaturasPostuladas.size() ; i++ ){
-			if( !accionesAsignaturasPostuladas.get(i).getText().equals("DESINSCRIBIR") ){
-				postulacionesNoDesinscribibles++;
-			}
-		}
-		ArrayList<Integer> randomOmitidos = new ArrayList<Integer>();
-		int i = 0;
-		while( i == 0){
-			int cantidadBotones = accionesAsignaturasPostuladas.size();
-			// Se crea el random para seleccionar una asignatura al azar
-			Random rand = new Random();
-			int rand_int = rand.nextInt(cantidadBotones);
-			while( (randomOmitidos.contains(rand_int)) && (randomOmitidos.size() < postulacionesNoDesinscribibles ) ){
-				rand_int = rand.nextInt(cantidadBotones);
-			}
-			int j = 0;
-			while( j < cantidadBotones ){
-				if( accionesAsignaturasPostuladas.get(j).getText().equals("DESINSCRIBIR") ){
-					// Se crea el JavascriptExecutor para hacer scroll
-					JavascriptExecutor js = (JavascriptExecutor) driver;
-					// Se obtiene la posicion del boton
-					Point location = accionesAsignaturasPostuladas.get(j).getLocation();
-					// Se hace scroll hacia el boton
-					js.executeScript("window.scrollBy(0,"+location.getY()+")");
-					String codigo = codigosAsignaturasPostuladas.get(j).getText().split("-")[0].strip();
-					// Se selecciona la solicitud
-					accionesAsignaturasPostuladas.get(j).click();
-					// Se acepa el mensaje de desinscripcion
-					driver.switchTo().alert().accept();
-					//Se ingresa el codigo de la asignatura
-					driver.switchTo().defaultContent();
-					// Tiempo para esperar que se abra la alerta
-					driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-					driver.switchTo().alert().sendKeys(codigo);
-					// Se acepta el mensaje de desinscripcion
-					driver.switchTo().alert().accept();
-					// Se entra al frame con las asignaturas postuladas
-					driver.switchTo().defaultContent();
-					driver.findElement(By.id("navbar-dropdown-procesos")).click();
-					driver.findElement(By.linkText("Postulación 1/2023")).click();
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame("mainFrame");
-					driver.switchTo().frame(5);
-					// Se buscan la cantidad de asignaturas restantes
-					accionesAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(7)"));
-					codigosAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(1)"));
-					cantidadBotones = accionesAsignaturasPostuladas.size();
-					j = cantidadBotones;
-					i = 1;
-				} else {
-					j++;
-				}
-			}
-		}
-	}
-
-	@Test
-	public void Desinscribir_Todo() {
-		// Se configura el driver para firefox
-		System.setProperty("webdriver.gecko.driver", "D:\\1. Descargas Internet\\Selenium\\geckodriver-v0.33.0-win64\\geckodriver.exe");
-		// Se crea el driver para navegar en la pagina web
-		WebDriver driver = new FirefoxDriver();
-		// Se abre la pagina
-		driver.get("https://loa.usach.cl/intranetfing/index.jsp");
-		driver.manage().window().maximize();
-		// Login
-		driver.findElement(By.id("rutaux")).click();
-		driver.findElement(By.id("rutaux")).sendKeys("145010330");
-		driver.findElement(By.cssSelector(".cover-container")).click();
-		driver.findElement(By.id("clave")).click();
-		driver.findElement(By.id("clave")).sendKeys("Cbh1450");
-		driver.findElement(By.cssSelector(".cover-container")).click();
-		driver.findElement(By.cssSelector(".btn-lg")).click();
-		// Seleccionar carrera
-		driver.findElement(By.linkText("1368 - INGENIERIA CIVIL OBRAS CIVILES")).click();
-		// Seleccionar proceso de Inscripcion
-		driver.findElement(By.id("navbar-dropdown-procesos")).click();
-		driver.findElement(By.linkText("Postulación 1/2023")).click();
-		// Se entra al frame con las asignaturas postuladas
-		driver.switchTo().defaultContent();
-		driver.switchTo().frame("mainFrame");
-		driver.switchTo().frame(5);
-		// Se buscan la cantidad de asignaturas postuladas
-		List<WebElement> accionesAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(7)"));
-		List<WebElement> codigosAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(1)"));
-		int i = 0;
-		while( i == 0){
-			int cantidadBotones = accionesAsignaturasPostuladas.size();
-			int j = 0;
-			while( j < cantidadBotones ){
-				if( accionesAsignaturasPostuladas.get(j).getText().equals("DESINSCRIBIR") ){
-					// Se crea el JavascriptExecutor para hacer scroll
-					JavascriptExecutor js = (JavascriptExecutor) driver;
-					// Se obtiene la posicion del boton
-					Point location = accionesAsignaturasPostuladas.get(j).getLocation();
-					// Se hace scroll hacia el boton
-					js.executeScript("window.scrollBy(0,"+location.getY()+")");
-					String codigo = codigosAsignaturasPostuladas.get(j).getText().split("-")[0].strip();
-					// Se selecciona la solicitud
-					accionesAsignaturasPostuladas.get(j).click();
-					// Se acepa el mensaje de desinscripcion
-					driver.switchTo().alert().accept();
-					//Se ingresa el codigo de la asignatura
-					driver.switchTo().defaultContent();
-					// Tiempo para esperar que se abra la alerta
-					driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-					driver.switchTo().alert().sendKeys(codigo);
-					// Se acepta el mensaje de desinscripcion
-					driver.switchTo().alert().accept();
-					// Se entra al frame con las asignaturas postuladas
-					driver.switchTo().defaultContent();
-					driver.findElement(By.id("navbar-dropdown-procesos")).click();
-					driver.findElement(By.linkText("Postulación 1/2023")).click();
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame("mainFrame");
-					driver.switchTo().frame(5);
-					// Se buscan la cantidad de asignaturas restantes
-					accionesAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(7)"));
-					codigosAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(1)"));
-					cantidadBotones = accionesAsignaturasPostuladas.size();
-				} else {
-					j++;
-				}
-			}
-			i = 1;
-		}
-	}
-
-	@Test
-	public void Mandar_Solicitud() {
+	public void Inscribir_Solicitud_Random() {
 		// Se configura el driver para firefox
 		System.setProperty("webdriver.gecko.driver", "D:\\1. Descargas Internet\\Selenium\\geckodriver-v0.33.0-win64\\geckodriver.exe");
 		// Se crea el driver para navegar en la pagina web
@@ -769,13 +611,12 @@ public class LOA {
 				driver.switchTo().defaultContent();
 				driver.switchTo().frame("mainFrame");
 				driver.switchTo().frame("derecho");
-				
 			}
 		}
 	}
 
 	@Test
-	public void Eliminar_Solicitud() {
+	public void Desinscribir_Postulacion_Random() {
 		// Se configura el driver para firefox
 		System.setProperty("webdriver.gecko.driver", "D:\\1. Descargas Internet\\Selenium\\geckodriver-v0.33.0-win64\\geckodriver.exe");
 		// Se crea el driver para navegar en la pagina web
@@ -793,38 +634,80 @@ public class LOA {
 		driver.findElement(By.cssSelector(".btn-lg")).click();
 		// Seleccionar carrera
 		driver.findElement(By.linkText("1368 - INGENIERIA CIVIL OBRAS CIVILES")).click();
-		// Seleccionar proceso de enviar solicitudes
+		// Seleccionar proceso de Inscripcion
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
-		driver.findElement(By.linkText("Solicitud Inscripción")).click();
-		// Seleccionar frame del listado de cursos
+		driver.findElement(By.linkText("Postulación 1/2023")).click();
+		// Se entra al frame con las asignaturas postuladas
+		driver.switchTo().defaultContent();
 		driver.switchTo().frame("mainFrame");
 		driver.switchTo().frame(5);
-		// Se obtienen todas las asignaturas
-		String[] listadoSolicitudesEnviadas = driver.findElements(By.cssSelector(".table > tbody")).get(0).getText().strip().split("\n");
-		// Se revisa que existan asignaturas
-		if( listadoSolicitudesEnviadas.length < 0 ) {
-			System.out.println("No existen solicitudes enviadas\n");
+		// Se buscan la cantidad de asignaturas postuladas
+		List<WebElement> accionesAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(7)"));
+		List<WebElement> codigosAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(1)"));
+		int postulacionesNoDesinscribibles = 0;
+		for( int i = 0; i < accionesAsignaturasPostuladas.size() ; i++ ){
+			if( !accionesAsignaturasPostuladas.get(i).getText().equals("DESINSCRIBIR") ){
+				postulacionesNoDesinscribibles++;
+			}
+		}
+		if( postulacionesNoDesinscribibles == accionesAsignaturasPostuladas.size() ){
+			System.out.println("No hay asignaturas para desinscribir");
 		} else {
-			// Se crea el random para seleccionar una asignatura al azar
-			Random rand3 = new Random();
-			int rand_int3 = rand3.nextInt(listadoSolicitudesEnviadas.length);
-			// Se revisa la accion que se puede realizar con la solicitud
-			String lineaSolicitud = driver.findElement(By.cssSelector(".table > tbody:nth-child(2) > tr:nth-child("+(rand_int3+1)+")")).getText().split("\n")[0];
-			String[] accionSolicitud = lineaSolicitud.split(" ");
-			String botonSolicitud = accionSolicitud[accionSolicitud.length-1];
-			// Se revisa la accion que se puede realizar con la solicitud
-			if ( botonSolicitud.matches("ELIMINAR") ) {
-				// Se selecciona la solicitud
-				driver.findElement(By.cssSelector(".table > tbody:nth-child(2) > tr:nth-child("+(rand_int3+1)+") > td:nth-child(7)")).click();
-				driver.switchTo().alert().accept();
-			} else {
-				System.out.println("No hay solicitudes para eliminar\n");
+			// Se crea un arraylist para guardar los randoms ya utilizados (para no repetirlos
+			ArrayList<Integer> randomOmitidos = new ArrayList<Integer>();
+			int i = 0;
+			while( i == 0){
+				int cantidadBotones = accionesAsignaturasPostuladas.size();
+				// Se crea el random para seleccionar una asignatura al azar
+				Random rand = new Random();
+				int rand_int = rand.nextInt(cantidadBotones);
+				while( (randomOmitidos.contains(rand_int)) && (randomOmitidos.size() < postulacionesNoDesinscribibles ) ){
+					rand_int = rand.nextInt(cantidadBotones);
+				}
+				int j = 0;
+				while( j < cantidadBotones ){
+					if( accionesAsignaturasPostuladas.get(j).getText().equals("DESINSCRIBIR") ){
+						// Se crea el JavascriptExecutor para hacer scroll
+						JavascriptExecutor js = (JavascriptExecutor) driver;
+						// Se obtiene la posicion del boton
+						Point location = accionesAsignaturasPostuladas.get(j).getLocation();
+						// Se hace scroll hacia el boton
+						js.executeScript("window.scrollBy(0,"+location.getY()+")");
+						String codigo = codigosAsignaturasPostuladas.get(j).getText().split("-")[0].strip();
+						// Se selecciona la solicitud
+						accionesAsignaturasPostuladas.get(j).click();
+						// Se acepa el mensaje de desinscripcion
+						driver.switchTo().alert().accept();
+						//Se ingresa el codigo de la asignatura
+						driver.switchTo().defaultContent();
+						// Tiempo para esperar que se abra la alerta
+						driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+						driver.switchTo().alert().sendKeys(codigo);
+						// Se acepta el mensaje de desinscripcion
+						driver.switchTo().alert().accept();
+						// Se entra al frame con las asignaturas postuladas
+						driver.switchTo().defaultContent();
+						driver.findElement(By.id("navbar-dropdown-procesos")).click();
+						driver.findElement(By.linkText("Postulación 1/2023")).click();
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame("mainFrame");
+						driver.switchTo().frame(5);
+						// Se buscan la cantidad de asignaturas restantes
+						accionesAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(7)"));
+						codigosAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(1)"));
+						cantidadBotones = accionesAsignaturasPostuladas.size();
+						j = cantidadBotones;
+						i = 1;
+					} else {
+						j++;
+					}
+				}
 			}
 		}
 	}
 
 	@Test
-	public void Revisar_Solicitudes() {
+	public void Desinscribir_Postulacion_Todo() {
 		// Se configura el driver para firefox
 		System.setProperty("webdriver.gecko.driver", "D:\\1. Descargas Internet\\Selenium\\geckodriver-v0.33.0-win64\\geckodriver.exe");
 		// Se crea el driver para navegar en la pagina web
@@ -842,53 +725,313 @@ public class LOA {
 		driver.findElement(By.cssSelector(".btn-lg")).click();
 		// Seleccionar carrera
 		driver.findElement(By.linkText("1368 - INGENIERIA CIVIL OBRAS CIVILES")).click();
-		// Seleccionar proceso de enviar solicitudes
+		// Seleccionar proceso de Inscripcion
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
-		driver.findElement(By.linkText("Solicitud Inscripción")).click();
-		// Seleccionar frame del listado de cursos
+		driver.findElement(By.linkText("Postulación 1/2023")).click();
+		// Se entra al frame con las asignaturas postuladas
+		driver.switchTo().defaultContent();
 		driver.switchTo().frame("mainFrame");
 		driver.switchTo().frame(5);
-		// Se obtienen todas las asignaturas
-		String[] listadoSolicitudesEnviadas = driver.findElements(By.cssSelector(".table > tbody")).get(0).getText().strip().split("\n");
-		// Se revisa que existan asignaturas
-		if( listadoSolicitudesEnviadas.length < 0 ) {
-			System.out.println("No existen solicitudes enviadas\n");
-		} else {
-			for( int i = 1; i < listadoSolicitudesEnviadas.length + 1 ; i++ ){
-				if( i > 1 ){
+		// Se buscan la cantidad de asignaturas postuladas
+		List<WebElement> accionesAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(7)"));
+		List<WebElement> codigosAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(1)"));
+		int i = 0;
+		while( i == 0){
+			int cantidadBotones = accionesAsignaturasPostuladas.size();
+			int j = 0;
+			while( j < cantidadBotones ){
+				if( accionesAsignaturasPostuladas.get(j).getText().equals("DESINSCRIBIR") ){
+					// Se crea el JavascriptExecutor para hacer scroll
+					JavascriptExecutor js = (JavascriptExecutor) driver;
+					// Se obtiene la posicion del boton
+					Point location = accionesAsignaturasPostuladas.get(j).getLocation();
+					// Se hace scroll hacia el boton
+					js.executeScript("window.scrollBy(0,"+location.getY()+")");
+					String codigo = codigosAsignaturasPostuladas.get(j).getText().split("-")[0].strip();
+					// Se selecciona la solicitud
+					accionesAsignaturasPostuladas.get(j).click();
+					// Se acepa el mensaje de desinscripcion
+					driver.switchTo().alert().accept();
+					//Se ingresa el codigo de la asignatura
+					driver.switchTo().defaultContent();
+					// Tiempo para esperar que se abra la alerta
+					driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+					driver.switchTo().alert().sendKeys(codigo);
+					// Se acepta el mensaje de desinscripcion
+					driver.switchTo().alert().accept();
+					// Se entra al frame con las asignaturas postuladas
+					driver.switchTo().defaultContent();
+					driver.findElement(By.id("navbar-dropdown-procesos")).click();
+					driver.findElement(By.linkText("Postulación 1/2023")).click();
+					driver.switchTo().defaultContent();
 					driver.switchTo().frame("mainFrame");
 					driver.switchTo().frame(5);
+					// Se buscan la cantidad de asignaturas restantes
+					accionesAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(7)"));
+					codigosAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(1)"));
+					cantidadBotones = accionesAsignaturasPostuladas.size();
+				} else {
+					j++;
 				}
-				// Se revisa la accion que se puede realizar con la solicitud
-				String botonSolicitud = driver.findElement(By.cssSelector(".table > tbody:nth-child(2) > tr:nth-child("+i+") > td:nth-child(7) > a:nth-child(1)")).getText().split("\n")[0];
-				// Se revisa la accion que se puede realizar con la solicitud
-				if ( !botonSolicitud.matches("ELIMINAR") ) {
+			}
+			i = 1;
+		}
+	}
+
+	@Test
+	public void Eliminar_Solicitud_Random() {
+		// Se configura el driver para firefox
+		System.setProperty("webdriver.gecko.driver", "D:\\1. Descargas Internet\\Selenium\\geckodriver-v0.33.0-win64\\geckodriver.exe");
+		// Se crea el driver para navegar en la pagina web
+		WebDriver driver = new FirefoxDriver();
+		// Se abre la pagina
+		driver.get("https://loa.usach.cl/intranetfing/index.jsp");
+		driver.manage().window().maximize();
+		// Login
+		driver.findElement(By.id("rutaux")).click();
+		driver.findElement(By.id("rutaux")).sendKeys("145010330");
+		driver.findElement(By.cssSelector(".cover-container")).click();
+		driver.findElement(By.id("clave")).click();
+		driver.findElement(By.id("clave")).sendKeys("Cbh1450");
+		driver.findElement(By.cssSelector(".cover-container")).click();
+		driver.findElement(By.cssSelector(".btn-lg")).click();
+		// Seleccionar carrera
+		driver.findElement(By.linkText("1368 - INGENIERIA CIVIL OBRAS CIVILES")).click();
+		// Seleccionar proceso de enviar solicitudes
+		driver.findElement(By.id("navbar-dropdown-procesos")).click();
+		driver.findElement(By.linkText("Solicitud Inscripción")).click();
+		// Seleccionar frame del listado de cursos
+		driver.switchTo().defaultContent();
+		driver.switchTo().frame("mainFrame");
+		driver.switchTo().frame(5);
+		// Se obtienen todas las asignaturas
+		List<WebElement> listadoSolicitudesEnviadas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(7)"));
+		// Se obtienen los ids de las solicitudes eliminables
+		ArrayList<Integer> listadoSolicitudesEliminables = new ArrayList<Integer>();
+		for( int i = 0; i < listadoSolicitudesEnviadas.size(); i++ ) {
+			if( listadoSolicitudesEnviadas.get(i).getText().equals("ELIMINAR") ){
+				listadoSolicitudesEliminables.add(i);
+			}
+		}
+		// Se crea un random para seleccionar una solicitud eliminable al azar
+		Random rand = new Random();
+		int rand_int = listadoSolicitudesEliminables.get(rand.nextInt(listadoSolicitudesEliminables.size()));
+		// Se crea el JavascriptExecutor para hacer scroll
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		// Se obtiene la posicion del boton
+		Point location = listadoSolicitudesEnviadas.get(rand_int).getLocation();
+		// Se hace scroll hacia el boton
+		js.executeScript("window.scrollBy(0,"+location.getY()+")");
+		// Se elimina la solicitud
+		listadoSolicitudesEnviadas.get(rand_int).click();
+		driver.switchTo().alert().accept();
+	}
+
+	@Test
+	public void Eliminar_Solicitud_Todo() {
+		// Se configura el driver para firefox
+		System.setProperty("webdriver.gecko.driver", "D:\\1. Descargas Internet\\Selenium\\geckodriver-v0.33.0-win64\\geckodriver.exe");
+		// Se crea el driver para navegar en la pagina web
+		WebDriver driver = new FirefoxDriver();
+		// Se abre la pagina
+		driver.get("https://loa.usach.cl/intranetfing/index.jsp");
+		driver.manage().window().maximize();
+		// Login
+		driver.findElement(By.id("rutaux")).click();
+		driver.findElement(By.id("rutaux")).sendKeys("145010330");
+		driver.findElement(By.cssSelector(".cover-container")).click();
+		driver.findElement(By.id("clave")).click();
+		driver.findElement(By.id("clave")).sendKeys("Cbh1450");
+		driver.findElement(By.cssSelector(".cover-container")).click();
+		driver.findElement(By.cssSelector(".btn-lg")).click();
+		// Seleccionar carrera
+		driver.findElement(By.linkText("1368 - INGENIERIA CIVIL OBRAS CIVILES")).click();
+		// Seleccionar proceso de enviar solicitudes
+		driver.findElement(By.id("navbar-dropdown-procesos")).click();
+		driver.findElement(By.linkText("Solicitud Inscripción")).click();
+		// Seleccionar frame del listado de cursos
+		driver.switchTo().defaultContent();
+		driver.switchTo().frame("mainFrame");
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+		driver.switchTo().frame(5);
+		// Se obtienen todas las postulaciones
+		List<WebElement> listadoSolicitudesEnviadas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(7)"));
+		int i = 0;
+		while( i == 0){
+			int cantidadBotones = listadoSolicitudesEnviadas.size();
+			int j = 0;
+			while( j < cantidadBotones ){
+				if( listadoSolicitudesEnviadas.get(j).getText().equals("ELIMINAR") ){
+					// Se crea el JavascriptExecutor para hacer scroll
+					JavascriptExecutor js = (JavascriptExecutor) driver;
+					// Se obtiene la posicion del boton
+					Point location = listadoSolicitudesEnviadas.get(j).getLocation();
+					// Se hace scroll hacia el boton
+					js.executeScript("window.scrollBy(0,"+location.getY()+")");
 					// Se selecciona la solicitud
-					driver.findElement(By.cssSelector(".table > tbody:nth-child(2) > tr:nth-child("+i+") > td:nth-child(7) > a:nth-child(1)")).click();
-					// Tiempo para que se abra la ventana emergente
-					driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-					// Se obtiene la respuesta de la solicitud
-					String respuesta = driver.findElement(By.cssSelector(".blockUI.blockMsg.blockPage")).getText();
-					if( respuesta.equals("") ){
-						respuesta = driver.findElement(By.id("motivo_rechazo_"+(i-1))).getText();
-					}
-					String[] lineaEstadoSolicitud = respuesta.split("\n")[1].split(" ");
-					String estadoSolicitud = lineaEstadoSolicitud[lineaEstadoSolicitud.length-1];
-					// Se imprime la respuesta
-					if( estadoSolicitud.equals("RECHAZADA") ) {
-						System.out.println("\nSolicitud rechazada");
-						System.out.println( respuesta.split("\n")[2]);
-						System.out.println( respuesta.split("\n")[3]);
-					}
-					// Se imprime la respuesta
-					if( estadoSolicitud.equals("ACEPTADA") ) {
-						System.out.println("\nSolicitud aceptada");
-						System.out.println( respuesta.split("\n")[2]);
-					}
+					listadoSolicitudesEnviadas.get(j).click();
+					// Se acepa el mensaje de desinscripcion
+					driver.switchTo().alert().accept();
+					// Se entra al frame con las asignaturas postuladas
 					driver.switchTo().defaultContent();
 					driver.findElement(By.id("navbar-dropdown-procesos")).click();
 					driver.findElement(By.linkText("Solicitud Inscripción")).click();
+					driver.switchTo().defaultContent();
+					driver.switchTo().frame("mainFrame");
+					driver.switchTo().frame(5);
+					// Se buscan la cantidad de asignaturas restantes
+					listadoSolicitudesEnviadas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(7)"));
+					cantidadBotones = listadoSolicitudesEnviadas.size();
+				} else {
+					j++;
 				}
+			}
+			i = 1;
+		}
+	}
+
+	@Test
+	public void Revisar_Solicitud_Random() {
+		// Se configura el driver para firefox
+		System.setProperty("webdriver.gecko.driver", "D:\\1. Descargas Internet\\Selenium\\geckodriver-v0.33.0-win64\\geckodriver.exe");
+		// Se crea el driver para navegar en la pagina web
+		WebDriver driver = new FirefoxDriver();
+		// Se abre la pagina
+		driver.get("https://loa.usach.cl/intranetfing/index.jsp");
+		driver.manage().window().maximize();
+		// Login
+		driver.findElement(By.id("rutaux")).click();
+		driver.findElement(By.id("rutaux")).sendKeys("145010330");
+		driver.findElement(By.cssSelector(".cover-container")).click();
+		driver.findElement(By.id("clave")).click();
+		driver.findElement(By.id("clave")).sendKeys("Cbh1450");
+		driver.findElement(By.cssSelector(".cover-container")).click();
+		driver.findElement(By.cssSelector(".btn-lg")).click();
+		// Seleccionar carrera
+		driver.findElement(By.linkText("1368 - INGENIERIA CIVIL OBRAS CIVILES")).click();
+		// Seleccionar proceso de enviar solicitudes
+		driver.findElement(By.id("navbar-dropdown-procesos")).click();
+		driver.findElement(By.linkText("Solicitud Inscripción")).click();
+		// Seleccionar frame del listado de cursos
+		driver.switchTo().frame("mainFrame");
+		driver.switchTo().frame(5);
+		// Se obtienen todas las asignaturas
+		List<WebElement> listadoSolicitudesEnviadas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(7)"));
+		// Se obtienen los ids de las solicitudes revisables
+		ArrayList<Integer> listadoSolicitudesRevisables = new ArrayList<Integer>();
+		for( int i = 0; i < listadoSolicitudesEnviadas.size(); i++ ) {
+			if( listadoSolicitudesEnviadas.get(i).getText().equals("RESPUESTA") ){
+				listadoSolicitudesRevisables.add(i);
+			}
+		}
+		// Se crea un random para seleccionar una solicitud revisable al azar
+		Random rand = new Random();
+		int rand_int = listadoSolicitudesRevisables.get(rand.nextInt(listadoSolicitudesRevisables.size()));
+		// Se crea el JavascriptExecutor para hacer scroll
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		// Se obtiene la posicion del boton
+		Point location = listadoSolicitudesEnviadas.get(rand_int).getLocation();
+		// Se hace scroll hacia el boton
+		js.executeScript("window.scrollBy(0,"+location.getY()+")");
+		// Se abre la solicitud
+		listadoSolicitudesEnviadas.get(rand_int).click();
+		// Tiempo para que se abra la ventana emergente
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+		// Se obtiene la respuesta de la solicitud
+		String respuesta = driver.findElement(By.cssSelector(".blockUI.blockMsg.blockPage")).getText();
+		if( respuesta.equals("") ){
+			respuesta = driver.findElement(By.id("motivo_rechazo_"+rand_int)).getText();
+		}
+		String[] lineaEstadoSolicitud = respuesta.split("\n")[1].split(" ");
+		String estadoSolicitud = lineaEstadoSolicitud[lineaEstadoSolicitud.length-1];
+		// Se imprime la respuesta
+		if( estadoSolicitud.equals("RECHAZADA") ) {
+			System.out.println("\nSolicitud rechazada");
+			System.out.println( respuesta.split("\n")[2]);
+			System.out.println( respuesta.split("\n")[3]);
+		}
+		// Se imprime la respuesta
+		if( estadoSolicitud.equals("ACEPTADA") ) {
+			System.out.println("\nSolicitud aceptada");
+			System.out.println( respuesta.split("\n")[2]);
+		}
+		driver.switchTo().defaultContent();
+		driver.findElement(By.id("navbar-dropdown-procesos")).click();
+		driver.findElement(By.linkText("Solicitud Inscripción")).click();
+	}
+
+	@Test
+	public void Revisar_Solicitud_Todo() {
+		// Se configura el driver para firefox
+		System.setProperty("webdriver.gecko.driver", "D:\\1. Descargas Internet\\Selenium\\geckodriver-v0.33.0-win64\\geckodriver.exe");
+		// Se crea el driver para navegar en la pagina web
+		WebDriver driver = new FirefoxDriver();
+		// Se abre la pagina
+		driver.get("https://loa.usach.cl/intranetfing/index.jsp");
+		driver.manage().window().maximize();
+		// Login
+		driver.findElement(By.id("rutaux")).click();
+		driver.findElement(By.id("rutaux")).sendKeys("145010330");
+		driver.findElement(By.cssSelector(".cover-container")).click();
+		driver.findElement(By.id("clave")).click();
+		driver.findElement(By.id("clave")).sendKeys("Cbh1450");
+		driver.findElement(By.cssSelector(".cover-container")).click();
+		driver.findElement(By.cssSelector(".btn-lg")).click();
+		// Seleccionar carrera
+		driver.findElement(By.linkText("1368 - INGENIERIA CIVIL OBRAS CIVILES")).click();
+		// Seleccionar proceso de enviar solicitudes
+		driver.findElement(By.id("navbar-dropdown-procesos")).click();
+		driver.findElement(By.linkText("Solicitud Inscripción")).click();
+		// Seleccionar frame del listado de cursos
+		driver.switchTo().defaultContent();
+		driver.switchTo().frame("mainFrame");
+		driver.switchTo().frame(5);
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+		// Se obtienen todas las asignaturas
+		List<WebElement> listadoSolicitudesEnviadas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(7)"));
+		// Se obtienen los ids de las solicitudes revisables
+		ArrayList<Integer> listadoSolicitudesRevisables = new ArrayList<Integer>();
+		for( int i = 0; i < listadoSolicitudesEnviadas.size(); i++ ) {
+			if( listadoSolicitudesEnviadas.get(i).getText().equals("RESPUESTA") ){
+				listadoSolicitudesRevisables.add(i);
+			}
+		}
+		// Se crea el JavascriptExecutor para hacer scroll
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		for( int solicitud : listadoSolicitudesRevisables ){
+			driver.switchTo().defaultContent();
+			driver.findElement(By.id("navbar-dropdown-procesos")).click();
+			driver.findElement(By.linkText("Solicitud Inscripción")).click();
+			driver.switchTo().frame("mainFrame");
+			driver.switchTo().frame(5);
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+			// Se obtienen todas las asignaturas
+			List<WebElement> listadoSolicitudesEnviadasAux = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(7)"));
+			// Se obtiene la posicion del boton
+			Point location = listadoSolicitudesEnviadasAux.get(solicitud).getLocation();
+			// Se hace scroll hacia el boton
+			js.executeScript("window.scrollBy(0,"+location.getY()+")");
+			// Se abre la solicitud
+			listadoSolicitudesEnviadasAux.get(solicitud).click();
+			// Tiempo para que se abra la ventana emergente
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+			// Se obtiene la respuesta de la solicitud
+			String respuesta = driver.findElement(By.cssSelector(".blockUI.blockMsg.blockPage")).getText();
+			if( respuesta.equals("") ){
+				respuesta = driver.findElement(By.id("motivo_rechazo_"+solicitud)).getText();
+			}
+			String[] lineaEstadoSolicitud = respuesta.split("\n")[1].split(" ");
+			String estadoSolicitud = lineaEstadoSolicitud[lineaEstadoSolicitud.length-1];
+			// Se imprime la respuesta
+			if( estadoSolicitud.equals("RECHAZADA") ) {
+				System.out.println("\nSolicitud rechazada");
+				System.out.println( respuesta.split("\n")[2]);
+				System.out.println( respuesta.split("\n")[3]);
+			}
+			// Se imprime la respuesta
+			if( estadoSolicitud.equals("ACEPTADA") ) {
+				System.out.println("\nSolicitud aceptada");
+				System.out.println( respuesta.split("\n")[2]);
 			}
 		}
 	}
