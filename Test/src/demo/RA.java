@@ -1,6 +1,5 @@
 package demo;
 
-
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
@@ -16,7 +15,7 @@ import java.time.Duration;
 
 public class RA extends RA_Vars {
 	@Test
-	public void Inscribir_Postulaciones_Random() {
+	public void Postulaciones_Inscribir_Random() {
 		// Se configura el driver para firefox
 		System.setProperty("webdriver.gecko.driver", RA_Vars.driverPath);
 		// Se crea el driver para navegar en la pagina web
@@ -218,7 +217,7 @@ public class RA extends RA_Vars {
 	}
 
 	@Test
-	public void Inscribir_Postulaciones_Limite() {
+	public void Postulaciones_Inscribir_Limite() {
 		// Se configura el driver para firefox
 		System.setProperty("webdriver.gecko.driver", RA_Vars.driverPath);
 		// Se crea el driver para navegar en la pagina web
@@ -266,41 +265,31 @@ public class RA extends RA_Vars {
 			listadoAsignaturasPostuladasAux.add(linea.getText().replace("\n", " ").strip());
 		}
 		contadorAsignaturas += listadoAsignaturasPostuladasAux.size();
-
-
-
-
-
 		int i = 0;
-		while ( (i == 0) && ( contadorAsignaturas < CANTIDADASIGNATURASLIMITE ) ){
+		while ( i == 0  ){
 			// Se dan 3 vueltas para probar inscribir las asignaturas
 			for( int j = 1; j <= 3; j++ ){
 				System.out.println("Vuelta " + j );
 				// Seleccionar frame del listado de cursos
 				driver.switchTo().defaultContent();
+				driver.findElement(By.id("navbar-dropdown-procesos")).click();
+				driver.findElement(By.linkText(RA_Vars.postulacionText)).click();
+				driver.switchTo().defaultContent();
 				driver.switchTo().frame("mainFrame");
 				driver.switchTo().frame("derecho");
 				// Se obtienen todas las asignaturas
-				String[] listadoAsignaturas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2)")).get(0).getText().strip().split("\n");
-				// Se crea una lista para almacenar todas las asignaturas de forma [codigo, nombre]
-				ArrayList<ArrayList<String>> listadoCodigoNombre = new ArrayList<ArrayList<String>>();
-				// Se almacenan las listas
-				for (String linea : listadoAsignaturas) {
-					String codigo = linea.split(" ")[0];
-					String nombreAsignatura = linea.substring(codigo.length(), linea.length() - 1 ).strip();
-					listadoCodigoNombre.add(new ArrayList<String>(Arrays.asList(codigo, nombreAsignatura)));
+				List<WebElement> listadoAsignaturas2 = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr"));
+				ArrayList<ArrayList<String>> listadoCodigoNombre2 = new ArrayList<ArrayList<String>>();
+				for (WebElement linea : listadoAsignaturas2) {
+					String codigo = linea.getText().split(" ")[0];
+					String nombreAsignatura = linea.getText().substring( codigo.length(), linea.getText().length() - 1 ).strip();
+					listadoCodigoNombre2.add(new ArrayList<String>(Arrays.asList(codigo, nombreAsignatura)));
 				}
-
 				// Se crea una lista para almacenar las asignaturas que no se pudieron inscribir
-				ArrayList<Integer> codigosAsignaturasAOmitir = new ArrayList<Integer>();
-				System.out.println("Lista codigos a omitir ");
-				for( int codigo : codigosAsignaturasAOmitir ){
-					System.out.println("Codigo: " + codigo );
-				}
-
+				ArrayList<Integer> codigosAsignaturasAOmitir2 = new ArrayList<Integer>();
 				// Se revisan todos los cursos
 				int l = 0;
-				while( l == 0) {
+				while( (l == 0) && (contadorAsignaturas < CANTIDADASIGNATURASLIMITE) ) {
 					// Seleccionar frame del listado de cursos
 					driver.switchTo().defaultContent();
 					driver.switchTo().frame("mainFrame");
@@ -313,26 +302,28 @@ public class RA extends RA_Vars {
 					Boolean seleccionoEjercicio = false;
 					// Se crea el random para seleccionar una asignatura al azar
 					Random rand = new Random();
-					int rand_int1 = rand.nextInt(listadoCodigoNombre.size());
+					int rand_int1 = rand.nextInt(listadoCodigoNombre2.size());
 					// Se revisa cuantas asignaturas se omitieron
 					int asignaturasOmitidas = 0;
 					// Mientras el while este en la lista de omitidos y no se alcance el limite, se busca otro
-					while( (codigosAsignaturasAOmitir.contains(Integer.parseInt(listadoCodigoNombre.get(rand_int1).get(0)))) && (asignaturasOmitidas <= listadoCodigoNombre.size() ) ){
-						rand_int1 = rand.nextInt(listadoCodigoNombre.size());
+					while( (codigosAsignaturasAOmitir2.contains(Integer.parseInt(listadoCodigoNombre2.get(rand_int1).get(0)))) && (asignaturasOmitidas <= listadoCodigoNombre2.size() ) ){
+						rand_int1 = rand.nextInt(listadoCodigoNombre2.size());
 						asignaturasOmitidas++;
 					}
 					// Si se revisaron todas las asignaturas en una vuelta, sale de la vuelta
-					if( asignaturasOmitidas > listadoCodigoNombre.size() ){
+					if( asignaturasOmitidas > listadoCodigoNombre2.size() ){
 						l = 1;
 					} else {
 						// Se selecciona una asignatura
 						driver.switchTo().defaultContent();
+						driver.findElement(By.id("navbar-dropdown-procesos")).click();
+						driver.findElement(By.linkText(RA_Vars.postulacionText)).click();
+						driver.switchTo().defaultContent();
 						driver.switchTo().frame("mainFrame");
 						driver.switchTo().frame("derecho");
 						// Se hace click en la asignatura
-						driver.findElement(By.linkText(listadoCodigoNombre.get(rand_int1).get(1))).click();
-						System.out.println("\n	Asignatura: " + listadoCodigoNombre.get(rand_int1).get(0));
-
+						driver.findElement(By.linkText(listadoCodigoNombre2.get(rand_int1).get(1))).click();
+						System.out.println("\n	Asignatura: " + listadoCodigoNombre2.get(rand_int1).get(0) + " - " +  listadoCodigoNombre2.get(rand_int1).get(1) );
 						// Se sale del frame, y se entra al frame de los cursos de teoria.
 						driver.switchTo().defaultContent();
 						driver.switchTo().frame("mainFrame");
@@ -358,7 +349,6 @@ public class RA extends RA_Vars {
 							// No hay cursos de teoria
 							System.out.println("			No hay cursos de teoria");
 						}
-
 						// Se sale del frame, y se entra al frame de los cursos de laboratorio.
 						driver.switchTo().defaultContent();
 						driver.switchTo().frame("mainFrame");
@@ -399,7 +389,6 @@ public class RA extends RA_Vars {
 								System.out.println("			Seccion " + (k+1) + " | Sin cupos");
 							}
 						}
-
 						// Se sale del frame, y se entra al frame de los cursos de ejercicio.
 						driver.switchTo().defaultContent();
 						driver.switchTo().frame("mainFrame");
@@ -426,7 +415,6 @@ public class RA extends RA_Vars {
 								seleccionoEjercicio = true;
 							}
 						}
-
 						// Se revisa que exista al menos un curso y se haya podido seleccionar
 						if( (existeTeoria && seleccionoTeoria) || (existeLaboratorio && seleccionoLaboratorio) || (existeEjercicio && seleccionoEjercicio) ) {
 							// Se puede postula a la asignatura
@@ -437,20 +425,200 @@ public class RA extends RA_Vars {
 							driver.findElement(By.id("btn_postular")).click();
 							if (driver.switchTo().alert().getText().compareTo(RA_Vars.alertaInscribirText) == 0 ) {
 								driver.switchTo().alert().accept();
-								System.out.println("		Asignatura inscrita: " + listadoCodigoNombre.get(rand_int1) );
-								contadorAsignaturas++;
+								driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+								// Se revisa el mensaje
+								driver.switchTo().defaultContent();
+								driver.switchTo().frame("mainFrame");
+								driver.switchTo().frame(5);
+								List<WebElement> mensajes = driver.findElements(By.cssSelector(".col-12 > div"));
+								for (WebElement mensaje : mensajes){
+									driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+									// Se revisa si el mensaje corresponde a asignatura inscrita
+									if( mensaje.getText().compareTo(RA_Vars.postulacionStatusInscritaText + Integer.parseInt(listadoCodigoNombre2.get(rand_int1).get(0)) + " (" + RA_Vars.proceso + ")." ) == 0 ) {
+										System.out.println("		Asignatura inscrita");
+										// Se guarda la asignatura inscrita
+										contadorAsignaturas++;
+									} else {
+										System.out.println("		Asignatura no inscrita");
+									}
+								}
 							} else {
 								System.out.println("No coincide el mensaje al inscribir la asignatura");
 							}
 							// Tiempo para guardar la asignatura postulada
-							driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+							driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 						} else {
 							System.out.println("		No es posible inscribir la asignatura");
 						}
 						// Se guarda el random para saber que esta asignatura no se debe repetir
-						int codigo = Integer.parseInt(listadoCodigoNombre.get(rand_int1).get(0));
-						codigosAsignaturasAOmitir.add(codigo);
+						int codigo = Integer.parseInt(listadoCodigoNombre2.get(rand_int1).get(0));
+						codigosAsignaturasAOmitir2.add(codigo);
 					}
+				}
+			}
+			i = 1;
+			System.out.println("	Se inscribieron " + contadorAsignaturas + " asignaturas");
+			System.out.println("Se llego al limite de asignaturas a inscribir");
+		}
+	}
+
+	@Test
+	public void Postulaciones_Desinscribir_Random() {
+		// Se configura el driver para firefox
+		System.setProperty("webdriver.gecko.driver", RA_Vars.driverPath);
+		// Se crea el driver para navegar en la pagina web
+		WebDriver driver = new FirefoxDriver();
+		// Se abre la pagina
+		driver.get(RA_Vars.url);
+		driver.manage().window().maximize();
+		// Login
+		driver.findElement(By.id("rutaux")).click();
+		driver.findElement(By.id("rutaux")).sendKeys(RA_Vars.userRUT);
+		driver.findElement(By.cssSelector(".cover-container")).click();
+		driver.findElement(By.id("clave")).click();
+		driver.findElement(By.id("clave")).sendKeys(RA_Vars.userPass);
+		driver.findElement(By.cssSelector(".cover-container")).click();
+		driver.findElement(By.cssSelector(".btn-lg")).click();
+		// Seleccionar carrera
+		driver.findElement(By.linkText("1368 - INGENIERIA CIVIL OBRAS CIVILES")).click();
+		// Seleccionar proceso de Inscripcion
+		driver.findElement(By.id("navbar-dropdown-procesos")).click();
+		driver.findElement(By.linkText(RA_Vars.postulacionText)).click();
+		// Se entra al frame con las asignaturas postuladas
+		driver.switchTo().defaultContent();
+		driver.switchTo().frame("mainFrame");
+		driver.switchTo().frame(5);
+		// Se buscan la cantidad de asignaturas postuladas
+		List<WebElement> accionesAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(7)"));
+		List<WebElement> codigosAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(1)"));
+		int postulacionesNoDesinscribibles = 0;
+		for( int i = 0; i < accionesAsignaturasPostuladas.size() ; i++ ){
+			if( !accionesAsignaturasPostuladas.get(i).getText().equals(RA_Vars.btnPostulacionDESINSCRIBIRText) ){
+				postulacionesNoDesinscribibles++;
+			}
+		}
+		if( postulacionesNoDesinscribibles == accionesAsignaturasPostuladas.size() ){
+			System.out.println("No hay asignaturas para desinscribir");
+		} else {
+			// Se crea un arraylist para guardar los randoms ya utilizados (para no repetirlos
+			ArrayList<Integer> randomOmitidos = new ArrayList<Integer>();
+			int i = 0;
+			while( i == 0){
+				int cantidadBotones = accionesAsignaturasPostuladas.size();
+				// Se crea el random para seleccionar una asignatura al azar
+				Random rand = new Random();
+				int rand_int = rand.nextInt(cantidadBotones);
+				while( (randomOmitidos.contains(rand_int)) && (randomOmitidos.size() < postulacionesNoDesinscribibles ) ){
+					rand_int = rand.nextInt(cantidadBotones);
+				}
+				int j = 0;
+				while( j < cantidadBotones ){
+					if( accionesAsignaturasPostuladas.get(j).getText().equals(RA_Vars.btnPostulacionDESINSCRIBIRText) ){
+						// Se crea el JavascriptExecutor para hacer scroll
+						JavascriptExecutor js = (JavascriptExecutor) driver;
+						// Se obtiene la posicion del boton
+						Point location = accionesAsignaturasPostuladas.get(j).getLocation();
+						// Se hace scroll hacia el boton
+						js.executeScript("window.scrollBy(0,"+location.getY()+")");
+						String codigo = codigosAsignaturasPostuladas.get(j).getText().split("-")[0].strip();
+						// Se selecciona la solicitud
+						accionesAsignaturasPostuladas.get(j).click();
+						// Se acepa el mensaje de desinscripcion
+						driver.switchTo().alert().accept();
+						//Se ingresa el codigo de la asignatura
+						driver.switchTo().defaultContent();
+						// Tiempo para esperar que se abra la alerta
+						driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+						driver.switchTo().alert().sendKeys(codigo);
+						// Se acepta el mensaje de desinscripcion
+						driver.switchTo().alert().accept();
+						// Se entra al frame con las asignaturas postuladas
+						driver.switchTo().defaultContent();
+						driver.findElement(By.id("navbar-dropdown-procesos")).click();
+						driver.findElement(By.linkText(RA_Vars.postulacionText)).click();
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame("mainFrame");
+						driver.switchTo().frame(5);
+						// Se buscan la cantidad de asignaturas restantes
+						accionesAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(7)"));
+						codigosAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(1)"));
+						cantidadBotones = accionesAsignaturasPostuladas.size();
+						j = cantidadBotones;
+						i = 1;
+					} else {
+						j++;
+					}
+				}
+			}
+		}
+	}
+
+	@Test
+	public void Postulaciones_Desinscribir_Todo() {
+		// Se configura el driver para firefox
+		System.setProperty("webdriver.gecko.driver", RA_Vars.driverPath);
+		// Se crea el driver para navegar en la pagina web
+		WebDriver driver = new FirefoxDriver();
+		// Se abre la pagina
+		driver.get(RA_Vars.url);
+		driver.manage().window().maximize();
+		// Login
+		driver.findElement(By.id("rutaux")).click();
+		driver.findElement(By.id("rutaux")).sendKeys(RA_Vars.userRUT);
+		driver.findElement(By.cssSelector(".cover-container")).click();
+		driver.findElement(By.id("clave")).click();
+		driver.findElement(By.id("clave")).sendKeys(RA_Vars.userPass);
+		driver.findElement(By.cssSelector(".cover-container")).click();
+		driver.findElement(By.cssSelector(".btn-lg")).click();
+		// Seleccionar carrera
+		driver.findElement(By.linkText("1368 - INGENIERIA CIVIL OBRAS CIVILES")).click();
+		// Seleccionar proceso de Inscripcion
+		driver.findElement(By.id("navbar-dropdown-procesos")).click();
+		driver.findElement(By.linkText(RA_Vars.postulacionText)).click();
+		// Se entra al frame con las asignaturas postuladas
+		driver.switchTo().defaultContent();
+		driver.switchTo().frame("mainFrame");
+		driver.switchTo().frame(5);
+		// Se buscan la cantidad de asignaturas postuladas
+		List<WebElement> accionesAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(7)"));
+		List<WebElement> codigosAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(1)"));
+		int i = 0;
+		while( i == 0){
+			int cantidadBotones = accionesAsignaturasPostuladas.size();
+			int j = 0;
+			while( j < cantidadBotones ){
+				if( accionesAsignaturasPostuladas.get(j).getText().equals(RA_Vars.btnPostulacionDESINSCRIBIRText) ){
+					// Se crea el JavascriptExecutor para hacer scroll
+					JavascriptExecutor js = (JavascriptExecutor) driver;
+					// Se obtiene la posicion del boton
+					Point location = accionesAsignaturasPostuladas.get(j).getLocation();
+					// Se hace scroll hacia el boton
+					js.executeScript("window.scrollBy(0,"+location.getY()+")");
+					String codigo = codigosAsignaturasPostuladas.get(j).getText().split("-")[0].strip();
+					// Se selecciona la solicitud
+					accionesAsignaturasPostuladas.get(j).click();
+					// Se acepa el mensaje de desinscripcion
+					driver.switchTo().alert().accept();
+					//Se ingresa el codigo de la asignatura
+					driver.switchTo().defaultContent();
+					// Tiempo para esperar que se abra la alerta
+					driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+					driver.switchTo().alert().sendKeys(codigo);
+					// Se acepta el mensaje de desinscripcion
+					driver.switchTo().alert().accept();
+					// Se entra al frame con las asignaturas postuladas
+					driver.switchTo().defaultContent();
+					driver.findElement(By.id("navbar-dropdown-procesos")).click();
+					driver.findElement(By.linkText(RA_Vars.postulacionText)).click();
+					driver.switchTo().defaultContent();
+					driver.switchTo().frame("mainFrame");
+					driver.switchTo().frame(5);
+					// Se buscan la cantidad de asignaturas restantes
+					accionesAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(7)"));
+					codigosAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(1)"));
+					cantidadBotones = accionesAsignaturasPostuladas.size();
+				} else {
+					j++;
 				}
 			}
 			i = 1;
@@ -458,7 +626,7 @@ public class RA extends RA_Vars {
 	}
 
 	@Test
-	public void Inscribir_Solicitud_Random() {
+	public void Solicitudes_Inscribir_Random() {
 		// Se configura el driver para firefox
 		System.setProperty("webdriver.gecko.driver", RA_Vars.driverPath);
 		// Se crea el driver para navegar en la pagina web
@@ -620,170 +788,7 @@ public class RA extends RA_Vars {
 	}
 
 	@Test
-	public void Desinscribir_Postulacion_Random() {
-		// Se configura el driver para firefox
-		System.setProperty("webdriver.gecko.driver", RA_Vars.driverPath);
-		// Se crea el driver para navegar en la pagina web
-		WebDriver driver = new FirefoxDriver();
-		// Se abre la pagina
-		driver.get(RA_Vars.url);
-		driver.manage().window().maximize();
-		// Login
-		driver.findElement(By.id("rutaux")).click();
-		driver.findElement(By.id("rutaux")).sendKeys(RA_Vars.userRUT);
-		driver.findElement(By.cssSelector(".cover-container")).click();
-		driver.findElement(By.id("clave")).click();
-		driver.findElement(By.id("clave")).sendKeys(RA_Vars.userPass);
-		driver.findElement(By.cssSelector(".cover-container")).click();
-		driver.findElement(By.cssSelector(".btn-lg")).click();
-		// Seleccionar carrera
-		driver.findElement(By.linkText("1368 - INGENIERIA CIVIL OBRAS CIVILES")).click();
-		// Seleccionar proceso de Inscripcion
-		driver.findElement(By.id("navbar-dropdown-procesos")).click();
-		driver.findElement(By.linkText(RA_Vars.postulacionText)).click();
-		// Se entra al frame con las asignaturas postuladas
-		driver.switchTo().defaultContent();
-		driver.switchTo().frame("mainFrame");
-		driver.switchTo().frame(5);
-		// Se buscan la cantidad de asignaturas postuladas
-		List<WebElement> accionesAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(7)"));
-		List<WebElement> codigosAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(1)"));
-		int postulacionesNoDesinscribibles = 0;
-		for( int i = 0; i < accionesAsignaturasPostuladas.size() ; i++ ){
-			if( !accionesAsignaturasPostuladas.get(i).getText().equals(RA_Vars.btnPostulacionDESINSCRIBIRText) ){
-				postulacionesNoDesinscribibles++;
-			}
-		}
-		if( postulacionesNoDesinscribibles == accionesAsignaturasPostuladas.size() ){
-			System.out.println("No hay asignaturas para desinscribir");
-		} else {
-			// Se crea un arraylist para guardar los randoms ya utilizados (para no repetirlos
-			ArrayList<Integer> randomOmitidos = new ArrayList<Integer>();
-			int i = 0;
-			while( i == 0){
-				int cantidadBotones = accionesAsignaturasPostuladas.size();
-				// Se crea el random para seleccionar una asignatura al azar
-				Random rand = new Random();
-				int rand_int = rand.nextInt(cantidadBotones);
-				while( (randomOmitidos.contains(rand_int)) && (randomOmitidos.size() < postulacionesNoDesinscribibles ) ){
-					rand_int = rand.nextInt(cantidadBotones);
-				}
-				int j = 0;
-				while( j < cantidadBotones ){
-					if( accionesAsignaturasPostuladas.get(j).getText().equals(RA_Vars.btnPostulacionDESINSCRIBIRText) ){
-						// Se crea el JavascriptExecutor para hacer scroll
-						JavascriptExecutor js = (JavascriptExecutor) driver;
-						// Se obtiene la posicion del boton
-						Point location = accionesAsignaturasPostuladas.get(j).getLocation();
-						// Se hace scroll hacia el boton
-						js.executeScript("window.scrollBy(0,"+location.getY()+")");
-						String codigo = codigosAsignaturasPostuladas.get(j).getText().split("-")[0].strip();
-						// Se selecciona la solicitud
-						accionesAsignaturasPostuladas.get(j).click();
-						// Se acepa el mensaje de desinscripcion
-						driver.switchTo().alert().accept();
-						//Se ingresa el codigo de la asignatura
-						driver.switchTo().defaultContent();
-						// Tiempo para esperar que se abra la alerta
-						driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-						driver.switchTo().alert().sendKeys(codigo);
-						// Se acepta el mensaje de desinscripcion
-						driver.switchTo().alert().accept();
-						// Se entra al frame con las asignaturas postuladas
-						driver.switchTo().defaultContent();
-						driver.findElement(By.id("navbar-dropdown-procesos")).click();
-						driver.findElement(By.linkText(RA_Vars.postulacionText)).click();
-						driver.switchTo().defaultContent();
-						driver.switchTo().frame("mainFrame");
-						driver.switchTo().frame(5);
-						// Se buscan la cantidad de asignaturas restantes
-						accionesAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(7)"));
-						codigosAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(1)"));
-						cantidadBotones = accionesAsignaturasPostuladas.size();
-						j = cantidadBotones;
-						i = 1;
-					} else {
-						j++;
-					}
-				}
-			}
-		}
-	}
-
-	@Test
-	public void Desinscribir_Postulacion_Todo() {
-		// Se configura el driver para firefox
-		System.setProperty("webdriver.gecko.driver", RA_Vars.driverPath);
-		// Se crea el driver para navegar en la pagina web
-		WebDriver driver = new FirefoxDriver();
-		// Se abre la pagina
-		driver.get(RA_Vars.url);
-		driver.manage().window().maximize();
-		// Login
-		driver.findElement(By.id("rutaux")).click();
-		driver.findElement(By.id("rutaux")).sendKeys(RA_Vars.userRUT);
-		driver.findElement(By.cssSelector(".cover-container")).click();
-		driver.findElement(By.id("clave")).click();
-		driver.findElement(By.id("clave")).sendKeys(RA_Vars.userPass);
-		driver.findElement(By.cssSelector(".cover-container")).click();
-		driver.findElement(By.cssSelector(".btn-lg")).click();
-		// Seleccionar carrera
-		driver.findElement(By.linkText("1368 - INGENIERIA CIVIL OBRAS CIVILES")).click();
-		// Seleccionar proceso de Inscripcion
-		driver.findElement(By.id("navbar-dropdown-procesos")).click();
-		driver.findElement(By.linkText(RA_Vars.postulacionText)).click();
-		// Se entra al frame con las asignaturas postuladas
-		driver.switchTo().defaultContent();
-		driver.switchTo().frame("mainFrame");
-		driver.switchTo().frame(5);
-		// Se buscan la cantidad de asignaturas postuladas
-		List<WebElement> accionesAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(7)"));
-		List<WebElement> codigosAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(1)"));
-		int i = 0;
-		while( i == 0){
-			int cantidadBotones = accionesAsignaturasPostuladas.size();
-			int j = 0;
-			while( j < cantidadBotones ){
-				if( accionesAsignaturasPostuladas.get(j).getText().equals(RA_Vars.btnPostulacionDESINSCRIBIRText) ){
-					// Se crea el JavascriptExecutor para hacer scroll
-					JavascriptExecutor js = (JavascriptExecutor) driver;
-					// Se obtiene la posicion del boton
-					Point location = accionesAsignaturasPostuladas.get(j).getLocation();
-					// Se hace scroll hacia el boton
-					js.executeScript("window.scrollBy(0,"+location.getY()+")");
-					String codigo = codigosAsignaturasPostuladas.get(j).getText().split("-")[0].strip();
-					// Se selecciona la solicitud
-					accionesAsignaturasPostuladas.get(j).click();
-					// Se acepa el mensaje de desinscripcion
-					driver.switchTo().alert().accept();
-					//Se ingresa el codigo de la asignatura
-					driver.switchTo().defaultContent();
-					// Tiempo para esperar que se abra la alerta
-					driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-					driver.switchTo().alert().sendKeys(codigo);
-					// Se acepta el mensaje de desinscripcion
-					driver.switchTo().alert().accept();
-					// Se entra al frame con las asignaturas postuladas
-					driver.switchTo().defaultContent();
-					driver.findElement(By.id("navbar-dropdown-procesos")).click();
-					driver.findElement(By.linkText(RA_Vars.postulacionText)).click();
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame("mainFrame");
-					driver.switchTo().frame(5);
-					// Se buscan la cantidad de asignaturas restantes
-					accionesAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(7)"));
-					codigosAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(1)"));
-					cantidadBotones = accionesAsignaturasPostuladas.size();
-				} else {
-					j++;
-				}
-			}
-			i = 1;
-		}
-	}
-
-	@Test
-	public void Eliminar_Solicitud_Random() {
+	public void Solicitudes_Eliminar_Random() {
 		// Se configura el driver para firefox
 		System.setProperty("webdriver.gecko.driver", RA_Vars.driverPath);
 		// Se crea el driver para navegar en la pagina web
@@ -832,7 +837,7 @@ public class RA extends RA_Vars {
 	}
 
 	@Test
-	public void Eliminar_Solicitud_Todo() {
+	public void Solicitudes_Eliminar_Todo() {
 		// Se configura el driver para firefox
 		System.setProperty("webdriver.gecko.driver", RA_Vars.driverPath);
 		// Se crea el driver para navegar en la pagina web
@@ -895,7 +900,7 @@ public class RA extends RA_Vars {
 	}
 
 	@Test
-	public void Revisar_Solicitud_Random() {
+	public void Solicitudes_Revisar_Random() {
 		// Se configura el driver para firefox
 		System.setProperty("webdriver.gecko.driver", RA_Vars.driverPath);
 		// Se crea el driver para navegar en la pagina web
@@ -917,6 +922,7 @@ public class RA extends RA_Vars {
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
 		driver.findElement(By.linkText(RA_Vars.solicitudText)).click();
 		// Seleccionar frame del listado de cursos
+		driver.switchTo().defaultContent();
 		driver.switchTo().frame("mainFrame");
 		driver.switchTo().frame(5);
 		// Se obtienen todas las asignaturas
@@ -965,7 +971,7 @@ public class RA extends RA_Vars {
 	}
 
 	@Test
-	public void Revisar_Solicitud_Todo() {
+	public void Solicitudes_Revisar_Todo() {
 		// Se configura el driver para firefox
 		System.setProperty("webdriver.gecko.driver", RA_Vars.driverPath);
 		// Se crea el driver para navegar en la pagina web
@@ -1038,5 +1044,8 @@ public class RA extends RA_Vars {
 				System.out.println( respuesta.split("\n")[2]);
 			}
 		}
+		driver.switchTo().defaultContent();
+		driver.findElement(By.id("navbar-dropdown-procesos")).click();
+		driver.findElement(By.linkText(RA_Vars.solicitudText)).click();
 	}
 }

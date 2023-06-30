@@ -7,8 +7,10 @@ public class RA_Vars {
   
   public static final String userRUT = "145010330";
   public static final String userPass = "Cbh1450";
+
+  public static final String proceso = "1/2023";
   
-  public static final String postulacionText = "Postulación 1/2023";
+  public static final String postulacionText = "Postulación " + proceso;
   public static final String solicitudText = "Solicitud Inscripción";
 
   public static final String sinCoordinacionInscribirTeoriaText = "No hay coordinaciones definidas.";
@@ -27,4 +29,6 @@ public class RA_Vars {
   public static final String btnPostulacionELIMINARText = "ELIMINAR";
 
   public static final String btnSolicitudRESPUESTAText = "RESPUESTA";
+
+  public static final String postulacionStatusInscritaText = "Ha postulado correctamente la(s) coordinación(es) seleccionada(s) para la asignatura ";
 }
