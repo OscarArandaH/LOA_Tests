@@ -29,6 +29,7 @@ public class RA_Vars {
   public static final String btnPostulacionELIMINARText = "ELIMINAR";
 
   public static final String btnSolicitudRESPUESTAText = "RESPUESTA";
+  public static final String btnSolicitudELIMINARText = "ELIMINAR";
 
   public static final String postulacionStatusInscritaText = "Ha postulado correctamente la(s) coordinación(es) seleccionada(s) para la asignatura ";
 }
