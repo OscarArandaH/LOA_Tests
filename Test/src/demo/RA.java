@@ -16,9 +16,10 @@ import java.util.concurrent.TimeUnit;
 public class RA extends RA_Vars {
 	@Test
 	public void Postulaciones_Inscribir_Random() {
-		System.out.println("Se inicia el test Postulaciones_Inscribir_Random");
+		System.out.println("\nSe inicia el test Postulaciones_Inscribir_Random");
 		// Se configura el driver para firefox
 		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, RA_Vars.driverPath);
+		System.setProperty(GeckoDriverService.GECKO_DRIVER_LOG_PROPERTY, RA_Vars.logPath);
 		// Se crea el driver para navegar en la pagina web
 		WebDriver driver = new FirefoxDriver();
 		// Se abre la pagina
@@ -42,7 +43,7 @@ public class RA extends RA_Vars {
 			driver.findElement(By.linkText(RA_Vars.postulacionText)).click();
 		} catch (Exception e) {
 			System.out.println("No se encuentra el proceso de postulacion");
-			System.out.println("\nSe finaliza el test Postulaciones_Inscribir_Random");
+			System.out.println("Se finaliza el test Postulaciones_Inscribir_Random");
 			return;
 		}
 		try {
@@ -52,7 +53,7 @@ public class RA extends RA_Vars {
 			driver.switchTo().defaultContent();
 		} catch (Exception e2) {
 			System.out.println("El proceso se encuentra cerrado");
-			System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+			System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random");
 			return;
 		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -242,14 +243,15 @@ public class RA extends RA_Vars {
 				}
 			}
 		}
-		System.out.println("\nSe finaliza el test Postulaciones_Inscribir_Random");
+		System.out.println("Se finaliza el test Postulaciones_Inscribir_Random");
 	}
 
 	@Test
 	public void Postulaciones_Desinscribir_Random() {
-		System.out.println("Se inicia el test Postulaciones_Desinscribir_Random");
+		System.out.println("\nSe inicia el test Postulaciones_Desinscribir_Random");
 		// Se configura el driver para firefox
 		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, RA_Vars.driverPath);
+		System.setProperty(GeckoDriverService.GECKO_DRIVER_LOG_PROPERTY, RA_Vars.logPath);
 		// Se crea el driver para navegar en la pagina web
 		WebDriver driver = new FirefoxDriver();
 		// Se abre la pagina
@@ -273,7 +275,7 @@ public class RA extends RA_Vars {
 			driver.findElement(By.linkText(RA_Vars.postulacionText)).click();
 		} catch (Exception e) {
 			System.out.println("No se encuentra el proceso de postulacion");
-			System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+			System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random");
 			return;
 		}
 		try {
@@ -283,7 +285,7 @@ public class RA extends RA_Vars {
 			driver.switchTo().defaultContent();
 		} catch (Exception e2) {
 			System.out.println("El proceso se encuentra cerrado");
-			System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+			System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random");
 			return;
 		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -347,7 +349,7 @@ public class RA extends RA_Vars {
 							driver.findElement(By.linkText(RA_Vars.postulacionText)).click();
 						} catch (Exception e) {
 							System.out.println("No se encuentra el proceso de postulacion");
-							System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+							System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random");
 							return;
 						}
 						try {
@@ -357,7 +359,7 @@ public class RA extends RA_Vars {
 							driver.switchTo().defaultContent();
 						} catch (Exception e2) {
 							System.out.println("El proceso se encuentra cerrado");
-							System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+							System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random");
 							return;
 						}
 						try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -378,14 +380,15 @@ public class RA extends RA_Vars {
 				}
 			}
 		}
-		System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+		System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random");
 	}
 
 	@Test
 	public void Postulaciones_Inscribir_Limite() {
-		System.out.println("Se inicia el test Postulaciones_Inscribir_Limite");
+		System.out.println("\nSe inicia el test Postulaciones_Inscribir_Limite");
 		// Se configura el driver para firefox
 		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, RA_Vars.driverPath);
+		System.setProperty(GeckoDriverService.GECKO_DRIVER_LOG_PROPERTY, RA_Vars.logPath);
 		// Se crea el driver para navegar en la pagina web
 		WebDriver driver = new FirefoxDriver();
 		// Se abre la pagina
@@ -430,7 +433,7 @@ public class RA extends RA_Vars {
 			driver.switchTo().defaultContent();
 		} catch (Exception e2) {
 			System.out.println("El proceso se encuentra cerrado");
-			System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+			System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random");
 			return;
 		}
 		// Seleccionar proceso de enviar solicitudes
@@ -440,7 +443,7 @@ public class RA extends RA_Vars {
 			driver.findElement(By.linkText(RA_Vars.postulacionText)).click();
 		} catch (Exception e) {
 			System.out.println("No se encuentra el proceso de postulacion");
-			System.out.println("\nSe finaliza el test Postulaciones_Inscribir_Limite");
+			System.out.println("Se finaliza el test Postulaciones_Inscribir_Limite");
 			return;
 		}
 		try {
@@ -450,7 +453,7 @@ public class RA extends RA_Vars {
 			driver.switchTo().defaultContent();
 		} catch (Exception e2) {
 			System.out.println("El proceso se encuentra cerrado");
-			System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+			System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random");
 			return;
 		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -479,7 +482,7 @@ public class RA extends RA_Vars {
 					driver.findElement(By.linkText(RA_Vars.postulacionText)).click();
 				} catch (Exception e) {
 					System.out.println("No se encuentra el proceso de postulacion");
-					System.out.println("\nSe finaliza el test Postulaciones_Inscribir_Limite");
+					System.out.println("Se finaliza el test Postulaciones_Inscribir_Limite");
 					return;
 				}
 				try {
@@ -489,7 +492,7 @@ public class RA extends RA_Vars {
 					driver.switchTo().defaultContent();
 				} catch (Exception e2) {
 					System.out.println("El proceso se encuentra cerrado");
-					System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+					System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random");
 					return;
 				}
 				try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -558,7 +561,7 @@ public class RA extends RA_Vars {
 									driver.findElement(By.linkText(RA_Vars.postulacionText)).click();
 								} catch (Exception e) {
 									System.out.println("No se encuentra el proceso de postulacion");
-									System.out.println("\nSe finaliza el test Postulaciones_Inscribir_Limite");
+									System.out.println("Se finaliza el test Postulaciones_Inscribir_Limite");
 									return;
 								}
 								try {
@@ -568,7 +571,7 @@ public class RA extends RA_Vars {
 									driver.switchTo().defaultContent();
 								} catch (Exception e2) {
 									System.out.println("El proceso se encuentra cerrado");
-									System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+									System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random");
 									return;
 								}
 								try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -742,14 +745,15 @@ public class RA extends RA_Vars {
 			System.out.println("	Se inscribieron " + contadorAsignaturas + " asignaturas");
 			System.out.println("Se llego al limite de asignaturas a inscribir");
 		}
-		System.out.println("\nSe finaliza el test Postulaciones_Inscribir_Limite");
+		System.out.println("Se finaliza el test Postulaciones_Inscribir_Limite");
 	}
 
 	@Test
 	public void Postulaciones_Desinscribir_Todo() {
-		System.out.println("Se inicia el test Postulaciones_Desinscribir_Todo");
+		System.out.println("\nSe inicia el test Postulaciones_Desinscribir_Todo");
 		// Se configura el driver para firefox
 		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, RA_Vars.driverPath);
+		System.setProperty(GeckoDriverService.GECKO_DRIVER_LOG_PROPERTY, RA_Vars.logPath);
 		// Se crea el driver para navegar en la pagina web
 		WebDriver driver = new FirefoxDriver();
 		// Se abre la pagina
@@ -773,7 +777,7 @@ public class RA extends RA_Vars {
 			driver.findElement(By.linkText(RA_Vars.postulacionText)).click();
 		} catch (Exception e) {
 			System.out.println("No se encuentra el proceso de postulacion");
-			System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Todo");
+			System.out.println("Se finaliza el test Postulaciones_Desinscribir_Todo");
 			return;
 		}
 		try {
@@ -783,7 +787,7 @@ public class RA extends RA_Vars {
 			driver.switchTo().defaultContent();
 		} catch (Exception e2) {
 			System.out.println("El proceso se encuentra cerrado");
-			System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+			System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random");
 			return;
 		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -836,7 +840,7 @@ public class RA extends RA_Vars {
 							driver.findElement(By.linkText(RA_Vars.postulacionText)).click();
 						} catch (Exception e) {
 							System.out.println("No se encuentra el proceso de postulacion");
-							System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Todo");
+							System.out.println("Se finaliza el test Postulaciones_Desinscribir_Todo");
 							return;
 						}
 						try {
@@ -846,7 +850,7 @@ public class RA extends RA_Vars {
 							driver.switchTo().defaultContent();
 						} catch (Exception e2) {
 							System.out.println("El proceso se encuentra cerrado");
-							System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+							System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random");
 							return;
 						}
 						try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -868,14 +872,15 @@ public class RA extends RA_Vars {
 		} else {
 			System.out.println("No hay asignaturas para desinscribir");
 		}
-		System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Todo");
+		System.out.println("Se finaliza el test Postulaciones_Desinscribir_Todo");
 	}
 
 	@Test
 	public void Solicitudes_Inscribir_Random() {
-		System.out.println("Se inicia el test Solicitudes_Inscribir_Random");
+		System.out.println("\nSe inicia el test Solicitudes_Inscribir_Random");
 		// Se configura el driver para firefox
 		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, RA_Vars.driverPath);
+		System.setProperty(GeckoDriverService.GECKO_DRIVER_LOG_PROPERTY, RA_Vars.logPath);
 		// Se crea el driver para navegar en la pagina web
 		WebDriver driver = new FirefoxDriver();
 		// Se abre la pagina
@@ -899,7 +904,7 @@ public class RA extends RA_Vars {
 			driver.findElement(By.linkText(RA_Vars.solicitudText)).click();
 		} catch (Exception e) {
 			System.out.println("No se encuentra el proceso de solicitudes de inscripción");
-			System.out.println("\nSe finaliza el test Solicitudes_Inscribir_Random");
+			System.out.println("Se finaliza el test Solicitudes_Inscribir_Random");
 			return;
 		}
 		try {
@@ -909,7 +914,7 @@ public class RA extends RA_Vars {
 			driver.switchTo().defaultContent();
 		} catch (Exception e2) {
 			System.out.println("El proceso se encuentra cerrado");
-			System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+			System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random");
 			return;
 		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -1088,14 +1093,15 @@ public class RA extends RA_Vars {
 				}
 			}
 		}
-		System.out.println("\nSe finaliza el test Solicitudes_Inscribir_Random");
+		System.out.println("Se finaliza el test Solicitudes_Inscribir_Random");
 	}
 
 	@Test
 	public void Solicitudes_Revisar_Random() {
-		System.out.println("Se inicia el test Solicitudes_Revisar_Random");
+		System.out.println("\nSe inicia el test Solicitudes_Revisar_Random");
 		// Se configura el driver para firefox
 		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, RA_Vars.driverPath);
+		System.setProperty(GeckoDriverService.GECKO_DRIVER_LOG_PROPERTY, RA_Vars.logPath);
 		// Se crea el driver para navegar en la pagina web
 		WebDriver driver = new FirefoxDriver();
 		// Se abre la pagina
@@ -1119,7 +1125,7 @@ public class RA extends RA_Vars {
 			driver.findElement(By.linkText(RA_Vars.solicitudText)).click();
 		} catch (Exception e) {
 			System.out.println("No se encuentra el proceso de solicitudes de inscripción");
-			System.out.println("\nSe finaliza el test Solicitudes_Revisar_Random");
+			System.out.println("Se finaliza el test Solicitudes_Revisar_Random");
 			return;
 		}
 		try {
@@ -1129,7 +1135,7 @@ public class RA extends RA_Vars {
 			driver.switchTo().defaultContent();
 		} catch (Exception e2) {
 			System.out.println("El proceso se encuentra cerrado");
-			System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+			System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random");
 			return;
 		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -1187,7 +1193,7 @@ public class RA extends RA_Vars {
 				driver.findElement(By.linkText(RA_Vars.solicitudText)).click();
 			} catch (Exception e) {
 				System.out.println("No se encuentra el proceso de solicitudes de inscripción");
-				System.out.println("\nSe finaliza el test Solicitudes_Revisar_Random");
+				System.out.println("Se finaliza el test Solicitudes_Revisar_Random");
 				return;
 			}
 			try {
@@ -1197,19 +1203,20 @@ public class RA extends RA_Vars {
 				driver.switchTo().defaultContent();
 			} catch (Exception e2) {
 				System.out.println("El proceso se encuentra cerrado");
-				System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+				System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random");
 				return;
 			}
 			try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
-			System.out.println("\nSe finaliza el test Solicitudes_Revisar_Random");
+			System.out.println("Se finaliza el test Solicitudes_Revisar_Random");
 		}
 	}
 
 	@Test
 	public void Solicitudes_Eliminar_Random() {
-		System.out.println("Se inicia el test Solicitudes_Eliminar_Random");
+		System.out.println("\nSe inicia el test Solicitudes_Eliminar_Random");
 		// Se configura el driver para firefox
 		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, RA_Vars.driverPath);
+		System.setProperty(GeckoDriverService.GECKO_DRIVER_LOG_PROPERTY, RA_Vars.logPath);
 		// Se crea el driver para navegar en la pagina web
 		WebDriver driver = new FirefoxDriver();
 		// Se abre la pagina
@@ -1233,7 +1240,7 @@ public class RA extends RA_Vars {
 			driver.findElement(By.linkText(RA_Vars.solicitudText)).click();
 		} catch (Exception e) {
 			System.out.println("No se encuentra el proceso de solicitudes de inscripción");
-			System.out.println("\nSe finaliza el test Solicitudes_Eliminar_Random");
+			System.out.println("Se finaliza el test Solicitudes_Eliminar_Random");
 			return;
 		}
 		try {
@@ -1243,7 +1250,7 @@ public class RA extends RA_Vars {
 			driver.switchTo().defaultContent();
 		} catch (Exception e2) {
 			System.out.println("El proceso se encuentra cerrado");
-			System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+			System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random");
 			return;
 		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -1278,14 +1285,15 @@ public class RA extends RA_Vars {
 		} else {
 			System.out.println("No hay solicitudes eliminables");
 		}
-		System.out.println("\nSe finaliza el test Solicitudes_Eliminar_Random");
+		System.out.println("Se finaliza el test Solicitudes_Eliminar_Random");
 	}
 
 	@Test
 	public void Solicitudes_Inscribir_Limite() {
-		System.out.println("Se inicia el test Postulaciones_Inscribir_Limite");
+		System.out.println("\nSe inicia el test Postulaciones_Inscribir_Limite");
 		// Se configura el driver para firefox
 		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, RA_Vars.driverPath);
+		System.setProperty(GeckoDriverService.GECKO_DRIVER_LOG_PROPERTY, RA_Vars.logPath);
 		// Se crea el driver para navegar en la pagina web
 		WebDriver driver = new FirefoxDriver();
 		// Se abre la pagina
@@ -1342,7 +1350,7 @@ public class RA extends RA_Vars {
 			driver.switchTo().defaultContent();
 		} catch (Exception e2) {
 			System.out.println("El proceso se encuentra cerrado");
-			System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+			System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random");
 			return;
 		}
 		// Seleccionar proceso de enviar solicitudes
@@ -1352,7 +1360,7 @@ public class RA extends RA_Vars {
 			driver.findElement(By.linkText(RA_Vars.solicitudText)).click();
 		} catch (Exception e) {
 			System.out.println("No se encuentra el proceso de solicitudes de inscripción");
-			System.out.println("\nSe finaliza el test Solicitudes_Inscribir_Limite");
+			System.out.println("Se finaliza el test Solicitudes_Inscribir_Limite");
 			return;
 		}
 		try {
@@ -1362,7 +1370,7 @@ public class RA extends RA_Vars {
 			driver.switchTo().defaultContent();
 		} catch (Exception e2) {
 			System.out.println("El proceso se encuentra cerrado");
-			System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+			System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random");
 			return;
 		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -1386,7 +1394,7 @@ public class RA extends RA_Vars {
 					driver.findElement(By.linkText(RA_Vars.solicitudText)).click();
 				} catch (Exception e) {
 					System.out.println("No se encuentra el proceso de solicitudes de inscripción");
-					System.out.println("\nSe finaliza el test Solicitudes_Inscribir_Limite");
+					System.out.println("Se finaliza el test Solicitudes_Inscribir_Limite");
 					return;
 				}
 				try {
@@ -1396,7 +1404,7 @@ public class RA extends RA_Vars {
 					driver.switchTo().defaultContent();
 				} catch (Exception e2) {
 					System.out.println("El proceso se encuentra cerrado");
-					System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+					System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random");
 					return;
 				}
 				try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -1465,7 +1473,7 @@ public class RA extends RA_Vars {
 									driver.findElement(By.linkText(RA_Vars.solicitudText)).click();
 								} catch (Exception e) {
 									System.out.println("No se encuentra el proceso de solicitudes de inscripción");
-									System.out.println("\nSe finaliza el test Solicitudes_Inscribir_Limite");
+									System.out.println("Se finaliza el test Solicitudes_Inscribir_Limite");
 									return;
 								}
 								try {
@@ -1475,7 +1483,7 @@ public class RA extends RA_Vars {
 									driver.switchTo().defaultContent();
 								} catch (Exception e2) {
 									System.out.println("El proceso se encuentra cerrado");
-									System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+									System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random");
 									return;
 								}
 								try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -1627,14 +1635,15 @@ public class RA extends RA_Vars {
 			System.out.println("	Se inscribieron " + contadorAsignaturas + " asignaturas");
 			System.out.println("Se llego al limite de asignaturas a inscribir");
 		}
-		System.out.println("\nSe finaliza el test Postulaciones_Inscribir_Limite");
+		System.out.println("Se finaliza el test Postulaciones_Inscribir_Limite");
 	}
 
 	@Test
 	public void Solicitudes_Revisar_Todo() {
-		System.out.println("Se inicia el test Solicitudes_Revisar_Random");
+		System.out.println("\nSe inicia el test Solicitudes_Revisar_Random");
 		// Se configura el driver para firefox
 		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, RA_Vars.driverPath);
+		System.setProperty(GeckoDriverService.GECKO_DRIVER_LOG_PROPERTY, RA_Vars.logPath);
 		// Se crea el driver para navegar en la pagina web
 		WebDriver driver = new FirefoxDriver();
 		// Se abre la pagina
@@ -1658,7 +1667,7 @@ public class RA extends RA_Vars {
 			driver.findElement(By.linkText(RA_Vars.solicitudText)).click();
 		} catch (Exception e) {
 			System.out.println("No se encuentra el proceso de solicitudes de inscripción");
-			System.out.println("\nSe finaliza el test Solicitudes_Revisar_Todo");
+			System.out.println("Se finaliza el test Solicitudes_Revisar_Todo");
 			return;
 		}
 		try {
@@ -1668,7 +1677,7 @@ public class RA extends RA_Vars {
 			driver.switchTo().defaultContent();
 		} catch (Exception e2) {
 			System.out.println("El proceso se encuentra cerrado");
-			System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+			System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random");
 			return;
 		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -1698,7 +1707,7 @@ public class RA extends RA_Vars {
 					driver.findElement(By.linkText(RA_Vars.solicitudText)).click();
 				} catch (Exception e) {
 					System.out.println("No se encuentra el proceso de solicitudes de inscripción");
-					System.out.println("\nSe finaliza el test Solicitudes_Revisar_Todo");
+					System.out.println("Se finaliza el test Solicitudes_Revisar_Todo");
 					return;
 				}
 				try {
@@ -1708,7 +1717,7 @@ public class RA extends RA_Vars {
 					driver.switchTo().defaultContent();
 				} catch (Exception e2) {
 					System.out.println("El proceso se encuentra cerrado");
-					System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+					System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random");
 					return;
 				}
 				try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -1752,7 +1761,7 @@ public class RA extends RA_Vars {
 					driver.findElement(By.linkText(RA_Vars.solicitudText)).click();
 				} catch (Exception e) {
 					System.out.println("No se encuentra el proceso de solicitudes de inscripción");
-					System.out.println("\nSe finaliza el test Solicitudes_Revisar_Todo");
+					System.out.println("Se finaliza el test Solicitudes_Revisar_Todo");
 					return;
 				}
 				try {
@@ -1762,7 +1771,7 @@ public class RA extends RA_Vars {
 					driver.switchTo().defaultContent();
 				} catch (Exception e2) {
 					System.out.println("El proceso se encuentra cerrado");
-					System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+					System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random");
 					return;
 				}
 				try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -1774,7 +1783,7 @@ public class RA extends RA_Vars {
 			driver.findElement(By.linkText(RA_Vars.solicitudText)).click();
 		} catch (Exception e) {
 			System.out.println("No se encuentra el proceso de solicitudes de inscripción");
-			System.out.println("\nSe finaliza el test Solicitudes_Revisar_Todo");
+			System.out.println("Se finaliza el test Solicitudes_Revisar_Todo");
 			return;
 		}
 		try {
@@ -1784,18 +1793,19 @@ public class RA extends RA_Vars {
 			driver.switchTo().defaultContent();
 		} catch (Exception e2) {
 			System.out.println("El proceso se encuentra cerrado");
-			System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+			System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random");
 			return;
 		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
-		System.out.println("\nSe finaliza el test Solicitudes_Revisar_Todo");
+		System.out.println("Se finaliza el test Solicitudes_Revisar_Todo");
 	}
 
 	@Test
 	public void Solicitudes_Eliminar_Todo() {
-		System.out.println("Se inicia el test Solicitudes_Eliminar_Todo");
+		System.out.println("\nSe inicia el test Solicitudes_Eliminar_Todo");
 		// Se configura el driver para firefox
 		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, RA_Vars.driverPath);
+		System.setProperty(GeckoDriverService.GECKO_DRIVER_LOG_PROPERTY, RA_Vars.logPath);
 		// Se crea el driver para navegar en la pagina web
 		WebDriver driver = new FirefoxDriver();
 		// Se abre la pagina
@@ -1819,7 +1829,7 @@ public class RA extends RA_Vars {
 			driver.findElement(By.linkText(RA_Vars.solicitudText)).click();
 		} catch (Exception e) {
 			System.out.println("No se encuentra el proceso de solicitudes de inscripción");
-			System.out.println("\nSe finaliza el test Solicitudes_Eliminar_Todo");
+			System.out.println("Se finaliza el test Solicitudes_Eliminar_Todo");
 			return;
 		}
 		try {
@@ -1829,7 +1839,7 @@ public class RA extends RA_Vars {
 			driver.switchTo().defaultContent();
 		} catch (Exception e2) {
 			System.out.println("El proceso se encuentra cerrado");
-			System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+			System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random");
 			return;
 		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -1872,7 +1882,7 @@ public class RA extends RA_Vars {
 							driver.findElement(By.linkText(RA_Vars.solicitudText)).click();
 						} catch (Exception e) {
 							System.out.println("No se encuentra el proceso de solicitudes de inscripción");
-							System.out.println("\nSe finaliza el test Solicitudes_Eliminar_Todo");
+							System.out.println("Se finaliza el test Solicitudes_Eliminar_Todo");
 							return;
 						}
 						try {
@@ -1882,7 +1892,7 @@ public class RA extends RA_Vars {
 							driver.switchTo().defaultContent();
 						} catch (Exception e2) {
 							System.out.println("El proceso se encuentra cerrado");
-							System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+							System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random");
 							return;
 						}
 						try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -1902,14 +1912,15 @@ public class RA extends RA_Vars {
 		} else {
 			System.out.println("No hay solicitudes eliminables");
 		}
-		System.out.println("\nSe finaliza el test Solicitudes_Eliminar_Todo");
+		System.out.println("Se finaliza el test Solicitudes_Eliminar_Todo");
 	}
 
 	@Test
 	public void Inscripciones_Inscribir_Random() {
-		System.out.println("Se inicia el test Inscripciones_Inscribir_Random");
+		System.out.println("\nSe inicia el test Inscripciones_Inscribir_Random");
 		// Se configura el driver para firefox
 		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, RA_Vars.driverPath);
+		System.setProperty(GeckoDriverService.GECKO_DRIVER_LOG_PROPERTY, RA_Vars.logPath);
 		// Se crea el driver para navegar en la pagina web
 		WebDriver driver = new FirefoxDriver();
 		// Se abre la pagina
@@ -1933,7 +1944,7 @@ public class RA extends RA_Vars {
 			driver.findElement(By.linkText(RA_Vars.inscripcionText)).click();
 		} catch (Exception e) {
 			System.out.println("No se encuentra el proceso de postulacion");
-			System.out.println("\nSe finaliza el test Postulaciones_Inscribir_Random");
+			System.out.println("Se finaliza el test Postulaciones_Inscribir_Random");
 			return;
 		}
 		try {
@@ -1943,7 +1954,7 @@ public class RA extends RA_Vars {
 			driver.switchTo().defaultContent();
 		} catch (Exception e2) {
 			System.out.println("El proceso se encuentra cerrado");
-			System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+			System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random");
 			return;
 		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -2157,14 +2168,15 @@ public class RA extends RA_Vars {
 				}
 			}
 		}
-		System.out.println("\nSe finaliza el test Inscripciones_Inscribir_Random");
+		System.out.println("Se finaliza el test Inscripciones_Inscribir_Random");
 	}
 
 	@Test
 	public void Inscripciones_Desinscribir_Random() {
-		System.out.println("Se inicia el test Inscripciones_Desinscribir_Random");
+		System.out.println("\nSe inicia el test Inscripciones_Desinscribir_Random");
 		// Se configura el driver para firefox
 		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, RA_Vars.driverPath);
+		System.setProperty(GeckoDriverService.GECKO_DRIVER_LOG_PROPERTY, RA_Vars.logPath);
 		// Se crea el driver para navegar en la pagina web
 		WebDriver driver = new FirefoxDriver();
 		// Se abre la pagina
@@ -2188,7 +2200,7 @@ public class RA extends RA_Vars {
 			driver.findElement(By.linkText(RA_Vars.inscripcionText)).click();
 		} catch (Exception e) {
 			System.out.println("No se encuentra el proceso de postulacion");
-			System.out.println("\nSe finaliza el test Postulaciones_Inscribir_Random");
+			System.out.println("Se finaliza el test Postulaciones_Inscribir_Random");
 			return;
 		}
 		try {
@@ -2198,7 +2210,7 @@ public class RA extends RA_Vars {
 			driver.switchTo().defaultContent();
 		} catch (Exception e2) {
 			System.out.println("El proceso se encuentra cerrado");
-			System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+			System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random");
 			return;
 		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -2262,7 +2274,7 @@ public class RA extends RA_Vars {
 							driver.findElement(By.linkText(RA_Vars.inscripcionText)).click();
 						} catch (Exception e) {
 							System.out.println("No se encuentra el proceso de postulacion");
-							System.out.println("\nSe finaliza el test Postulaciones_Inscribir_Random");
+							System.out.println("Se finaliza el test Postulaciones_Inscribir_Random");
 							return;
 						}
 						try {
@@ -2272,7 +2284,7 @@ public class RA extends RA_Vars {
 							driver.switchTo().defaultContent();
 						} catch (Exception e2) {
 							System.out.println("El proceso se encuentra cerrado");
-							System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+							System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random");
 							return;
 						}
 						try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -2293,14 +2305,15 @@ public class RA extends RA_Vars {
 				}
 			}
 		}
-		System.out.println("\nSe finaliza el test Inscripciones_Desinscribir_Random");
+		System.out.println("Se finaliza el test Inscripciones_Desinscribir_Random");
 	}
 
 	@Test
 	public void Inscripciones_Inscribir_Limite() {
-		System.out.println("Se inicia el test Inscripciones_Inscribir_Limite");
+		System.out.println("\nSe inicia el test Inscripciones_Inscribir_Limite");
 		// Se configura el driver para firefox
 		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, RA_Vars.driverPath);
+		System.setProperty(GeckoDriverService.GECKO_DRIVER_LOG_PROPERTY, RA_Vars.logPath);
 		// Se crea el driver para navegar en la pagina web
 		WebDriver driver = new FirefoxDriver();
 		// Se abre la pagina
@@ -2346,7 +2359,7 @@ public class RA extends RA_Vars {
 			driver.switchTo().defaultContent();
 		} catch (Exception e2) {
 			System.out.println("El proceso se encuentra cerrado");
-			System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+			System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random");
 			return;
 		}
 		// Seleccionar proceso de enviar inscripciones
@@ -2356,7 +2369,7 @@ public class RA extends RA_Vars {
 			driver.findElement(By.linkText(RA_Vars.inscripcionText)).click();
 		} catch (Exception e) {
 			System.out.println("No se encuentra el proceso de postulacion");
-			System.out.println("\nSe finaliza el test Postulaciones_Inscribir_Random");
+			System.out.println("Se finaliza el test Postulaciones_Inscribir_Random");
 			return;
 		}
 		try {
@@ -2366,7 +2379,7 @@ public class RA extends RA_Vars {
 			driver.switchTo().defaultContent();
 		} catch (Exception e2) {
 			System.out.println("El proceso se encuentra cerrado");
-			System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+			System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random");
 			return;
 		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -2395,7 +2408,7 @@ public class RA extends RA_Vars {
 					driver.findElement(By.linkText(RA_Vars.inscripcionText)).click();
 				} catch (Exception e) {
 					System.out.println("No se encuentra el proceso de postulacion");
-					System.out.println("\nSe finaliza el test Postulaciones_Inscribir_Random");
+					System.out.println("Se finaliza el test Postulaciones_Inscribir_Random");
 					return;
 				}
 				try {
@@ -2405,7 +2418,7 @@ public class RA extends RA_Vars {
 					driver.switchTo().defaultContent();
 				} catch (Exception e2) {
 					System.out.println("El proceso se encuentra cerrado");
-					System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+					System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random");
 					return;
 				}
 				try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -2474,7 +2487,7 @@ public class RA extends RA_Vars {
 									driver.findElement(By.linkText(RA_Vars.inscripcionText)).click();
 								} catch (Exception e) {
 									System.out.println("No se encuentra el proceso de postulacion");
-									System.out.println("\nSe finaliza el test Postulaciones_Inscribir_Random");
+									System.out.println("Se finaliza el test Postulaciones_Inscribir_Random");
 									return;
 								}
 								try {
@@ -2484,7 +2497,7 @@ public class RA extends RA_Vars {
 									driver.switchTo().defaultContent();
 								} catch (Exception e2) {
 									System.out.println("El proceso se encuentra cerrado");
-									System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+									System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random");
 									return;
 								}
 								try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -2687,14 +2700,15 @@ public class RA extends RA_Vars {
 			System.out.println("	Se inscribieron " + contadorAsignaturas + " asignaturas");
 			System.out.println("Se llego al limite de asignaturas a inscribir");
 		}
-		System.out.println("\nSe finaliza el test Inscripciones_Inscribir_Limite");
+		System.out.println("Se finaliza el test Inscripciones_Inscribir_Limite");
 	}
 
 	@Test
 	public void Inscripciones_Desinscribir_Todo() {
-		System.out.println("Se inicia el test Inscripciones_Desinscribir_Todo");
+		System.out.println("\nSe inicia el test Inscripciones_Desinscribir_Todo");
 		// Se configura el driver para firefox
 		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, RA_Vars.driverPath);
+		System.setProperty(GeckoDriverService.GECKO_DRIVER_LOG_PROPERTY, RA_Vars.logPath);
 		// Se crea el driver para navegar en la pagina web
 		WebDriver driver = new FirefoxDriver();
 		// Se abre la pagina
@@ -2718,7 +2732,7 @@ public class RA extends RA_Vars {
 			driver.findElement(By.linkText(RA_Vars.inscripcionText)).click();
 		} catch (Exception e) {
 			System.out.println("No se encuentra el proceso de postulacion");
-			System.out.println("\nSe finaliza el test Postulaciones_Inscribir_Random");
+			System.out.println("Se finaliza el test Postulaciones_Inscribir_Random");
 			return;
 		}
 		try {
@@ -2728,7 +2742,7 @@ public class RA extends RA_Vars {
 			driver.switchTo().defaultContent();
 		} catch (Exception e2) {
 			System.out.println("El proceso se encuentra cerrado");
-			System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+			System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random");
 			return;
 		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -2781,7 +2795,7 @@ public class RA extends RA_Vars {
 							driver.findElement(By.linkText(RA_Vars.inscripcionText)).click();
 						} catch (Exception e) {
 							System.out.println("No se encuentra el proceso de postulacion");
-							System.out.println("\nSe finaliza el test Postulaciones_Inscribir_Random");
+							System.out.println("Se finaliza el test Postulaciones_Inscribir_Random");
 							return;
 						}
 						try {
@@ -2791,7 +2805,7 @@ public class RA extends RA_Vars {
 							driver.switchTo().defaultContent();
 						} catch (Exception e2) {
 							System.out.println("El proceso se encuentra cerrado");
-							System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+							System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random");
 							return;
 						}
 						try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -2813,6 +2827,6 @@ public class RA extends RA_Vars {
 		} else {
 			System.out.println("No hay asignaturas para desinscribir");
 		}
-		System.out.println("\nSe finaliza el test Inscripciones_Desinscribir_Todo");
+		System.out.println("Se finaliza el test Inscripciones_Desinscribir_Todo");
 	}
 }
