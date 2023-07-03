@@ -1378,7 +1378,7 @@ public class LOA extends LOA_Vars {
 				listadoSolicitudesRevisables.add(i);
 			}
 		}
-		if( listadoSolicitudesRevisables.size() < 0 ) {
+		if( listadoSolicitudesRevisables.size() <= 0 ) {
 			System.out.println("No hay solicitudes revisables");
 		} else {
 			// Se crea un random para seleccionar una solicitud revisable al azar
@@ -1460,51 +1460,55 @@ public class LOA extends LOA_Vars {
 				listadoSolicitudesRevisables.add(i);
 			}
 		}
-		// Se crea el JavascriptExecutor para hacer scroll
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		for( int solicitud : listadoSolicitudesRevisables ){
-			driver.switchTo().defaultContent();
-			driver.findElement(By.id("navbar-dropdown-procesos")).click();
-			driver.findElement(By.linkText(LOA_Vars.solicitudText)).click();
-			try { TimeUnit.MILLISECONDS.sleep(123); } catch (InterruptedException e) { e.printStackTrace(); }
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame("mainFrame");
-			driver.switchTo().frame(5);
-			try { TimeUnit.MILLISECONDS.sleep(123); } catch (InterruptedException e) { e.printStackTrace(); }
-			// Se obtienen todas las asignaturas
-			List<WebElement> listadoSolicitudesEnviadasAux = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(7)"));
-			try { TimeUnit.MILLISECONDS.sleep(123); } catch (InterruptedException e) { e.printStackTrace(); }
-			// Se obtiene la posicion del boton
-			Point location = listadoSolicitudesEnviadasAux.get(solicitud).getLocation();
-			// Se hace scroll hacia el boton
-			js.executeScript("window.scrollBy(0,"+location.getY()+")");
-			// Se abre la solicitud
-			try { TimeUnit.MILLISECONDS.sleep(123); } catch (InterruptedException e) { e.printStackTrace(); }
-			listadoSolicitudesEnviadasAux.get(solicitud).click();
-			// Tiempo para que se abra la ventana emergente
-			try { TimeUnit.MILLISECONDS.sleep(123); } catch (InterruptedException e) { e.printStackTrace(); }
-			// Se obtienen las lineas de respuesta
-			List<WebElement> lineasRespuesta = driver.findElements(By.cssSelector("#motivo_rechazo_"+solicitud+" > table:nth-child(1) > tbody > tr"));
-			try { TimeUnit.MILLISECONDS.sleep(123); } catch (InterruptedException e) { e.printStackTrace(); }
-			// Se obtiene el codigo y nombre de la asignatura de la solicitud
-			System.out.println("Solicitud:");
-			String codigoAsignaturaSolicitudRevisada = lineasRespuesta.get(0).getText().strip().split(" ")[0];
-			String estadoSolictudRevisada = lineasRespuesta.get(0).getText().strip().split(" ")[ lineasRespuesta.get(0).getText().strip().split(" ").length - 1 ];
-			String nombreAsignaturaSolicitudRevisada = lineasRespuesta.get(0).getText().substring(codigoAsignaturaSolicitudRevisada.length(), lineasRespuesta.get(0).getText().strip().length() - estadoSolictudRevisada.length() - 1).strip();
-			System.out.println("	----------------------------------------");
-			System.out.println("	Seccion:    " + codigoAsignaturaSolicitudRevisada);
-			System.out.println("	Asignatura: " + nombreAsignaturaSolicitudRevisada);
-			System.out.println("	Estado:     " + estadoSolictudRevisada);
-			System.out.println("	----------------------------------------");
-			String[] lineaRespuestasStrings = lineasRespuesta.get(1).getText().strip().split("\n");
-			for( int i = 0; i < lineaRespuestasStrings.length - 1; i++ ) {
-				System.out.println("		" + lineaRespuestasStrings[i].strip());
+		if( listadoSolicitudesRevisables.size() <= 0 ){
+			System.out.println("No hay solicitudes revisables");
+		} else {
+			// Se crea el JavascriptExecutor para hacer scroll
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			for( int solicitud : listadoSolicitudesRevisables ){
+				driver.switchTo().defaultContent();
+				driver.findElement(By.id("navbar-dropdown-procesos")).click();
+				driver.findElement(By.linkText(LOA_Vars.solicitudText)).click();
+				try { TimeUnit.MILLISECONDS.sleep(123); } catch (InterruptedException e) { e.printStackTrace(); }
+				driver.switchTo().defaultContent();
+				driver.switchTo().frame("mainFrame");
+				driver.switchTo().frame(5);
+				try { TimeUnit.MILLISECONDS.sleep(123); } catch (InterruptedException e) { e.printStackTrace(); }
+				// Se obtienen todas las asignaturas
+				List<WebElement> listadoSolicitudesEnviadasAux = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(7)"));
+				try { TimeUnit.MILLISECONDS.sleep(123); } catch (InterruptedException e) { e.printStackTrace(); }
+				// Se obtiene la posicion del boton
+				Point location = listadoSolicitudesEnviadasAux.get(solicitud).getLocation();
+				// Se hace scroll hacia el boton
+				js.executeScript("window.scrollBy(0,"+location.getY()+")");
+				// Se abre la solicitud
+				try { TimeUnit.MILLISECONDS.sleep(123); } catch (InterruptedException e) { e.printStackTrace(); }
+				listadoSolicitudesEnviadasAux.get(solicitud).click();
+				// Tiempo para que se abra la ventana emergente
+				try { TimeUnit.MILLISECONDS.sleep(123); } catch (InterruptedException e) { e.printStackTrace(); }
+				// Se obtienen las lineas de respuesta
+				List<WebElement> lineasRespuesta = driver.findElements(By.cssSelector("#motivo_rechazo_"+solicitud+" > table:nth-child(1) > tbody > tr"));
+				try { TimeUnit.MILLISECONDS.sleep(123); } catch (InterruptedException e) { e.printStackTrace(); }
+				// Se obtiene el codigo y nombre de la asignatura de la solicitud
+				System.out.println("Solicitud:");
+				String codigoAsignaturaSolicitudRevisada = lineasRespuesta.get(0).getText().strip().split(" ")[0];
+				String estadoSolictudRevisada = lineasRespuesta.get(0).getText().strip().split(" ")[ lineasRespuesta.get(0).getText().strip().split(" ").length - 1 ];
+				String nombreAsignaturaSolicitudRevisada = lineasRespuesta.get(0).getText().substring(codigoAsignaturaSolicitudRevisada.length(), lineasRespuesta.get(0).getText().strip().length() - estadoSolictudRevisada.length() - 1).strip();
+				System.out.println("	----------------------------------------");
+				System.out.println("	Seccion:    " + codigoAsignaturaSolicitudRevisada);
+				System.out.println("	Asignatura: " + nombreAsignaturaSolicitudRevisada);
+				System.out.println("	Estado:     " + estadoSolictudRevisada);
+				System.out.println("	----------------------------------------");
+				String[] lineaRespuestasStrings = lineasRespuesta.get(1).getText().strip().split("\n");
+				for( int i = 0; i < lineaRespuestasStrings.length - 1; i++ ) {
+					System.out.println("		" + lineaRespuestasStrings[i].strip());
+				}
+				System.out.println("	----------------------------------------");
+				driver.switchTo().defaultContent();
+				driver.findElement(By.id("navbar-dropdown-procesos")).click();
+				driver.findElement(By.linkText(LOA_Vars.solicitudText)).click();
+				try { TimeUnit.MILLISECONDS.sleep(123); } catch (InterruptedException e) { e.printStackTrace(); }
 			}
-			System.out.println("	----------------------------------------");
-			driver.switchTo().defaultContent();
-			driver.findElement(By.id("navbar-dropdown-procesos")).click();
-			driver.findElement(By.linkText(LOA_Vars.solicitudText)).click();
-			try { TimeUnit.MILLISECONDS.sleep(123); } catch (InterruptedException e) { e.printStackTrace(); }
 		}
 		driver.switchTo().defaultContent();
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
