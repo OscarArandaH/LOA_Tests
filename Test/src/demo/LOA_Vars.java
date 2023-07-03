@@ -11,6 +11,7 @@ public class LOA_Vars {
   public static final String proceso = "1/2023";
   
   public static final String postulacionText = "Postulación " + proceso;
+  public static final String inscripcionText = "Inscripción " + proceso;
   public static final String solicitudText = "Solicitud Inscripción";
 
   public static final String sinCoordinacionInscribirTeoriaText = "No hay coordinaciones definidas.";
