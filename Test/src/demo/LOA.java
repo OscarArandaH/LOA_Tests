@@ -45,6 +45,16 @@ public class LOA extends LOA_Vars {
 			System.out.println("\nSe finaliza el test Postulaciones_Inscribir_Random");
 			return;
 		}
+		try {
+			driver.switchTo().defaultContent();
+			driver.switchTo().frame("mainFrame");
+			driver.switchTo().frame("derecho");
+			driver.switchTo().defaultContent();
+		} catch (Exception e2) {
+			System.out.println("El proceso se encuentra cerrado");
+			System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+			return;
+		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 		// Seleccionar frame del listado de cursos
 		driver.switchTo().frame("mainFrame");
@@ -266,6 +276,16 @@ public class LOA extends LOA_Vars {
 			System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
 			return;
 		}
+		try {
+			driver.switchTo().defaultContent();
+			driver.switchTo().frame("mainFrame");
+			driver.switchTo().frame("derecho");
+			driver.switchTo().defaultContent();
+		} catch (Exception e2) {
+			System.out.println("El proceso se encuentra cerrado");
+			System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+			return;
+		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 		// Se entra al frame con las asignaturas postuladas
 		driver.switchTo().defaultContent();
@@ -327,6 +347,16 @@ public class LOA extends LOA_Vars {
 							driver.findElement(By.linkText(LOA_Vars.postulacionText)).click();
 						} catch (Exception e) {
 							System.out.println("No se encuentra el proceso de postulacion");
+							System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+							return;
+						}
+						try {
+							driver.switchTo().defaultContent();
+							driver.switchTo().frame("mainFrame");
+							driver.switchTo().frame("derecho");
+							driver.switchTo().defaultContent();
+						} catch (Exception e2) {
+							System.out.println("El proceso se encuentra cerrado");
 							System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
 							return;
 						}
@@ -393,6 +423,16 @@ public class LOA extends LOA_Vars {
 		} catch (Exception e) {
 			System.out.println("No se encuentra el proceso de solicitudes");
 		}
+		try {
+			driver.switchTo().defaultContent();
+			driver.switchTo().frame("mainFrame");
+			driver.switchTo().frame("derecho");
+			driver.switchTo().defaultContent();
+		} catch (Exception e2) {
+			System.out.println("El proceso se encuentra cerrado");
+			System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+			return;
+		}
 		// Seleccionar proceso de enviar solicitudes
 		driver.switchTo().defaultContent();
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
@@ -401,6 +441,16 @@ public class LOA extends LOA_Vars {
 		} catch (Exception e) {
 			System.out.println("No se encuentra el proceso de postulacion");
 			System.out.println("\nSe finaliza el test Postulaciones_Inscribir_Limite");
+			return;
+		}
+		try {
+			driver.switchTo().defaultContent();
+			driver.switchTo().frame("mainFrame");
+			driver.switchTo().frame("derecho");
+			driver.switchTo().defaultContent();
+		} catch (Exception e2) {
+			System.out.println("El proceso se encuentra cerrado");
+			System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
 			return;
 		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -430,6 +480,16 @@ public class LOA extends LOA_Vars {
 				} catch (Exception e) {
 					System.out.println("No se encuentra el proceso de postulacion");
 					System.out.println("\nSe finaliza el test Postulaciones_Inscribir_Limite");
+					return;
+				}
+				try {
+					driver.switchTo().defaultContent();
+					driver.switchTo().frame("mainFrame");
+					driver.switchTo().frame("derecho");
+					driver.switchTo().defaultContent();
+				} catch (Exception e2) {
+					System.out.println("El proceso se encuentra cerrado");
+					System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
 					return;
 				}
 				try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -499,6 +559,16 @@ public class LOA extends LOA_Vars {
 								} catch (Exception e) {
 									System.out.println("No se encuentra el proceso de postulacion");
 									System.out.println("\nSe finaliza el test Postulaciones_Inscribir_Limite");
+									return;
+								}
+								try {
+									driver.switchTo().defaultContent();
+									driver.switchTo().frame("mainFrame");
+									driver.switchTo().frame("derecho");
+									driver.switchTo().defaultContent();
+								} catch (Exception e2) {
+									System.out.println("El proceso se encuentra cerrado");
+									System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
 									return;
 								}
 								try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -706,6 +776,16 @@ public class LOA extends LOA_Vars {
 			System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Todo");
 			return;
 		}
+		try {
+			driver.switchTo().defaultContent();
+			driver.switchTo().frame("mainFrame");
+			driver.switchTo().frame("derecho");
+			driver.switchTo().defaultContent();
+		} catch (Exception e2) {
+			System.out.println("El proceso se encuentra cerrado");
+			System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+			return;
+		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 		// Se entra al frame con las asignaturas postuladas
 		driver.switchTo().defaultContent();
@@ -759,6 +839,16 @@ public class LOA extends LOA_Vars {
 							System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Todo");
 							return;
 						}
+						try {
+							driver.switchTo().defaultContent();
+							driver.switchTo().frame("mainFrame");
+							driver.switchTo().frame("derecho");
+							driver.switchTo().defaultContent();
+						} catch (Exception e2) {
+							System.out.println("El proceso se encuentra cerrado");
+							System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+							return;
+						}
 						try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 						driver.switchTo().defaultContent();
 						driver.switchTo().frame("mainFrame");
@@ -810,6 +900,16 @@ public class LOA extends LOA_Vars {
 		} catch (Exception e) {
 			System.out.println("No se encuentra el proceso de solicitudes de inscripción");
 			System.out.println("\nSe finaliza el test Solicitudes_Inscribir_Random");
+			return;
+		}
+		try {
+			driver.switchTo().defaultContent();
+			driver.switchTo().frame("mainFrame");
+			driver.switchTo().frame("derecho");
+			driver.switchTo().defaultContent();
+		} catch (Exception e2) {
+			System.out.println("El proceso se encuentra cerrado");
+			System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
 			return;
 		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -1022,6 +1122,16 @@ public class LOA extends LOA_Vars {
 			System.out.println("\nSe finaliza el test Solicitudes_Revisar_Random");
 			return;
 		}
+		try {
+			driver.switchTo().defaultContent();
+			driver.switchTo().frame("mainFrame");
+			driver.switchTo().frame("derecho");
+			driver.switchTo().defaultContent();
+		} catch (Exception e2) {
+			System.out.println("El proceso se encuentra cerrado");
+			System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+			return;
+		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 		// Seleccionar frame del listado de cursos
 		driver.switchTo().defaultContent();
@@ -1080,6 +1190,16 @@ public class LOA extends LOA_Vars {
 				System.out.println("\nSe finaliza el test Solicitudes_Revisar_Random");
 				return;
 			}
+			try {
+				driver.switchTo().defaultContent();
+				driver.switchTo().frame("mainFrame");
+				driver.switchTo().frame("derecho");
+				driver.switchTo().defaultContent();
+			} catch (Exception e2) {
+				System.out.println("El proceso se encuentra cerrado");
+				System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+				return;
+			}
 			try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 			System.out.println("\nSe finaliza el test Solicitudes_Revisar_Random");
 		}
@@ -1114,6 +1234,16 @@ public class LOA extends LOA_Vars {
 		} catch (Exception e) {
 			System.out.println("No se encuentra el proceso de solicitudes de inscripción");
 			System.out.println("\nSe finaliza el test Solicitudes_Eliminar_Random");
+			return;
+		}
+		try {
+			driver.switchTo().defaultContent();
+			driver.switchTo().frame("mainFrame");
+			driver.switchTo().frame("derecho");
+			driver.switchTo().defaultContent();
+		} catch (Exception e2) {
+			System.out.println("El proceso se encuentra cerrado");
+			System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
 			return;
 		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -1205,6 +1335,16 @@ public class LOA extends LOA_Vars {
 		} catch (Exception e) {
 			System.out.println("No se encuentra el proceso de postulacion");
 		}
+		try {
+			driver.switchTo().defaultContent();
+			driver.switchTo().frame("mainFrame");
+			driver.switchTo().frame("derecho");
+			driver.switchTo().defaultContent();
+		} catch (Exception e2) {
+			System.out.println("El proceso se encuentra cerrado");
+			System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+			return;
+		}
 		// Seleccionar proceso de enviar solicitudes
 		driver.switchTo().defaultContent();
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
@@ -1213,6 +1353,16 @@ public class LOA extends LOA_Vars {
 		} catch (Exception e) {
 			System.out.println("No se encuentra el proceso de solicitudes de inscripción");
 			System.out.println("\nSe finaliza el test Solicitudes_Inscribir_Limite");
+			return;
+		}
+		try {
+			driver.switchTo().defaultContent();
+			driver.switchTo().frame("mainFrame");
+			driver.switchTo().frame("derecho");
+			driver.switchTo().defaultContent();
+		} catch (Exception e2) {
+			System.out.println("El proceso se encuentra cerrado");
+			System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
 			return;
 		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -1237,6 +1387,16 @@ public class LOA extends LOA_Vars {
 				} catch (Exception e) {
 					System.out.println("No se encuentra el proceso de solicitudes de inscripción");
 					System.out.println("\nSe finaliza el test Solicitudes_Inscribir_Limite");
+					return;
+				}
+				try {
+					driver.switchTo().defaultContent();
+					driver.switchTo().frame("mainFrame");
+					driver.switchTo().frame("derecho");
+					driver.switchTo().defaultContent();
+				} catch (Exception e2) {
+					System.out.println("El proceso se encuentra cerrado");
+					System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
 					return;
 				}
 				try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -1306,6 +1466,16 @@ public class LOA extends LOA_Vars {
 								} catch (Exception e) {
 									System.out.println("No se encuentra el proceso de solicitudes de inscripción");
 									System.out.println("\nSe finaliza el test Solicitudes_Inscribir_Limite");
+									return;
+								}
+								try {
+									driver.switchTo().defaultContent();
+									driver.switchTo().frame("mainFrame");
+									driver.switchTo().frame("derecho");
+									driver.switchTo().defaultContent();
+								} catch (Exception e2) {
+									System.out.println("El proceso se encuentra cerrado");
+									System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
 									return;
 								}
 								try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -1491,6 +1661,16 @@ public class LOA extends LOA_Vars {
 			System.out.println("\nSe finaliza el test Solicitudes_Revisar_Todo");
 			return;
 		}
+		try {
+			driver.switchTo().defaultContent();
+			driver.switchTo().frame("mainFrame");
+			driver.switchTo().frame("derecho");
+			driver.switchTo().defaultContent();
+		} catch (Exception e2) {
+			System.out.println("El proceso se encuentra cerrado");
+			System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+			return;
+		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 		// Seleccionar frame del listado de cursos
 		driver.switchTo().defaultContent();
@@ -1519,6 +1699,16 @@ public class LOA extends LOA_Vars {
 				} catch (Exception e) {
 					System.out.println("No se encuentra el proceso de solicitudes de inscripción");
 					System.out.println("\nSe finaliza el test Solicitudes_Revisar_Todo");
+					return;
+				}
+				try {
+					driver.switchTo().defaultContent();
+					driver.switchTo().frame("mainFrame");
+					driver.switchTo().frame("derecho");
+					driver.switchTo().defaultContent();
+				} catch (Exception e2) {
+					System.out.println("El proceso se encuentra cerrado");
+					System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
 					return;
 				}
 				try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -1565,6 +1755,16 @@ public class LOA extends LOA_Vars {
 					System.out.println("\nSe finaliza el test Solicitudes_Revisar_Todo");
 					return;
 				}
+				try {
+					driver.switchTo().defaultContent();
+					driver.switchTo().frame("mainFrame");
+					driver.switchTo().frame("derecho");
+					driver.switchTo().defaultContent();
+				} catch (Exception e2) {
+					System.out.println("El proceso se encuentra cerrado");
+					System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+					return;
+				}
 				try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 			}
 		}
@@ -1575,6 +1775,16 @@ public class LOA extends LOA_Vars {
 		} catch (Exception e) {
 			System.out.println("No se encuentra el proceso de solicitudes de inscripción");
 			System.out.println("\nSe finaliza el test Solicitudes_Revisar_Todo");
+			return;
+		}
+		try {
+			driver.switchTo().defaultContent();
+			driver.switchTo().frame("mainFrame");
+			driver.switchTo().frame("derecho");
+			driver.switchTo().defaultContent();
+		} catch (Exception e2) {
+			System.out.println("El proceso se encuentra cerrado");
+			System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
 			return;
 		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -1610,6 +1820,16 @@ public class LOA extends LOA_Vars {
 		} catch (Exception e) {
 			System.out.println("No se encuentra el proceso de solicitudes de inscripción");
 			System.out.println("\nSe finaliza el test Solicitudes_Eliminar_Todo");
+			return;
+		}
+		try {
+			driver.switchTo().defaultContent();
+			driver.switchTo().frame("mainFrame");
+			driver.switchTo().frame("derecho");
+			driver.switchTo().defaultContent();
+		} catch (Exception e2) {
+			System.out.println("El proceso se encuentra cerrado");
+			System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
 			return;
 		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -1653,6 +1873,16 @@ public class LOA extends LOA_Vars {
 						} catch (Exception e) {
 							System.out.println("No se encuentra el proceso de solicitudes de inscripción");
 							System.out.println("\nSe finaliza el test Solicitudes_Eliminar_Todo");
+							return;
+						}
+						try {
+							driver.switchTo().defaultContent();
+							driver.switchTo().frame("mainFrame");
+							driver.switchTo().frame("derecho");
+							driver.switchTo().defaultContent();
+						} catch (Exception e2) {
+							System.out.println("El proceso se encuentra cerrado");
+							System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
 							return;
 						}
 						try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -1704,6 +1934,16 @@ public class LOA extends LOA_Vars {
 		} catch (Exception e) {
 			System.out.println("No se encuentra el proceso de postulacion");
 			System.out.println("\nSe finaliza el test Postulaciones_Inscribir_Random");
+			return;
+		}
+		try {
+			driver.switchTo().defaultContent();
+			driver.switchTo().frame("mainFrame");
+			driver.switchTo().frame("derecho");
+			driver.switchTo().defaultContent();
+		} catch (Exception e2) {
+			System.out.println("El proceso se encuentra cerrado");
+			System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
 			return;
 		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -1951,6 +2191,16 @@ public class LOA extends LOA_Vars {
 			System.out.println("\nSe finaliza el test Postulaciones_Inscribir_Random");
 			return;
 		}
+		try {
+			driver.switchTo().defaultContent();
+			driver.switchTo().frame("mainFrame");
+			driver.switchTo().frame("derecho");
+			driver.switchTo().defaultContent();
+		} catch (Exception e2) {
+			System.out.println("El proceso se encuentra cerrado");
+			System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+			return;
+		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 		// Se entra al frame con las asignaturas inscritas
 		driver.switchTo().defaultContent();
@@ -2015,6 +2265,16 @@ public class LOA extends LOA_Vars {
 							System.out.println("\nSe finaliza el test Postulaciones_Inscribir_Random");
 							return;
 						}
+						try {
+							driver.switchTo().defaultContent();
+							driver.switchTo().frame("mainFrame");
+							driver.switchTo().frame("derecho");
+							driver.switchTo().defaultContent();
+						} catch (Exception e2) {
+							System.out.println("El proceso se encuentra cerrado");
+							System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+							return;
+						}
 						try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 						driver.switchTo().defaultContent();
 						driver.switchTo().frame("mainFrame");
@@ -2076,9 +2336,18 @@ public class LOA extends LOA_Vars {
 			String[] listadoSolicitudesEnviadas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(1)")).get(0).getText().strip().split("\n");
 			try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 			contadorAsignaturas += listadoSolicitudesEnviadas.length;
-			System.out.println("Contador Asignaturas con solicitudes: "+contadorAsignaturas);
 		} catch (Exception e) {
 			System.out.println("No se encuentra el proceso de solicitudes de inscripción");
+		}
+		try {
+			driver.switchTo().defaultContent();
+			driver.switchTo().frame("mainFrame");
+			driver.switchTo().frame("derecho");
+			driver.switchTo().defaultContent();
+		} catch (Exception e2) {
+			System.out.println("El proceso se encuentra cerrado");
+			System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+			return;
 		}
 		// Seleccionar proceso de enviar inscripciones
 		driver.switchTo().defaultContent();
@@ -2088,6 +2357,16 @@ public class LOA extends LOA_Vars {
 		} catch (Exception e) {
 			System.out.println("No se encuentra el proceso de postulacion");
 			System.out.println("\nSe finaliza el test Postulaciones_Inscribir_Random");
+			return;
+		}
+		try {
+			driver.switchTo().defaultContent();
+			driver.switchTo().frame("mainFrame");
+			driver.switchTo().frame("derecho");
+			driver.switchTo().defaultContent();
+		} catch (Exception e2) {
+			System.out.println("El proceso se encuentra cerrado");
+			System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
 			return;
 		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -2104,8 +2383,6 @@ public class LOA extends LOA_Vars {
 			listadoAsignaturasInscritasAux.add(linea.getText().replace("\n", " ").strip());
 		}
 		contadorAsignaturas += listadoAsignaturasInscritasAux.size();
-		System.out.println("Contador Asignaturas con inscripciones: "+contadorAsignaturas);
-
 		int i = 0;
 		while ( i == 0 ){
 			// Se dan 3 vueltas para probar inscribir las asignaturas
@@ -2119,6 +2396,16 @@ public class LOA extends LOA_Vars {
 				} catch (Exception e) {
 					System.out.println("No se encuentra el proceso de postulacion");
 					System.out.println("\nSe finaliza el test Postulaciones_Inscribir_Random");
+					return;
+				}
+				try {
+					driver.switchTo().defaultContent();
+					driver.switchTo().frame("mainFrame");
+					driver.switchTo().frame("derecho");
+					driver.switchTo().defaultContent();
+				} catch (Exception e2) {
+					System.out.println("El proceso se encuentra cerrado");
+					System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
 					return;
 				}
 				try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -2188,6 +2475,16 @@ public class LOA extends LOA_Vars {
 								} catch (Exception e) {
 									System.out.println("No se encuentra el proceso de postulacion");
 									System.out.println("\nSe finaliza el test Postulaciones_Inscribir_Random");
+									return;
+								}
+								try {
+									driver.switchTo().defaultContent();
+									driver.switchTo().frame("mainFrame");
+									driver.switchTo().frame("derecho");
+									driver.switchTo().defaultContent();
+								} catch (Exception e2) {
+									System.out.println("El proceso se encuentra cerrado");
+									System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
 									return;
 								}
 								try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -2424,6 +2721,16 @@ public class LOA extends LOA_Vars {
 			System.out.println("\nSe finaliza el test Postulaciones_Inscribir_Random");
 			return;
 		}
+		try {
+			driver.switchTo().defaultContent();
+			driver.switchTo().frame("mainFrame");
+			driver.switchTo().frame("derecho");
+			driver.switchTo().defaultContent();
+		} catch (Exception e2) {
+			System.out.println("El proceso se encuentra cerrado");
+			System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+			return;
+		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 		// Se entra al frame con las asignaturas postuladas
 		driver.switchTo().defaultContent();
@@ -2475,6 +2782,16 @@ public class LOA extends LOA_Vars {
 						} catch (Exception e) {
 							System.out.println("No se encuentra el proceso de postulacion");
 							System.out.println("\nSe finaliza el test Postulaciones_Inscribir_Random");
+							return;
+						}
+						try {
+							driver.switchTo().defaultContent();
+							driver.switchTo().frame("mainFrame");
+							driver.switchTo().frame("derecho");
+							driver.switchTo().defaultContent();
+						} catch (Exception e2) {
+							System.out.println("El proceso se encuentra cerrado");
+							System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
 							return;
 						}
 						try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
