@@ -28,13 +28,13 @@ public class RA extends RA_Vars {
 		driver.findElement(By.id("rutaux")).click();
 		driver.findElement(By.id("rutaux")).sendKeys(RA_Vars.userRUT);
 		driver.findElement(By.cssSelector(".cover-container")).click();
+		driver.findElement(By.id("rutest")).click();
+		driver.findElement(By.id("rutest")).sendKeys(RA_Vars.userRUTAlt);
+		driver.findElement(By.cssSelector(".cover-container")).click();
 		driver.findElement(By.id("clave")).click();
 		driver.findElement(By.id("clave")).sendKeys(RA_Vars.userPass);
 		driver.findElement(By.cssSelector(".cover-container")).click();
 		driver.findElement(By.cssSelector(".btn-lg")).click();
-		try { TimeUnit.MILLISECONDS.sleep(123); } catch (InterruptedException e) { e.printStackTrace(); }
-		// Seleccionar carrera
-		driver.findElement(By.linkText("1368 - INGENIERIA CIVIL OBRAS CIVILES")).click();
 		try { TimeUnit.MILLISECONDS.sleep(123); } catch (InterruptedException e) { e.printStackTrace(); }
 		// Seleccionar proceso de Inscripcion
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
@@ -237,13 +237,13 @@ public class RA extends RA_Vars {
 		driver.findElement(By.id("rutaux")).click();
 		driver.findElement(By.id("rutaux")).sendKeys(RA_Vars.userRUT);
 		driver.findElement(By.cssSelector(".cover-container")).click();
+		driver.findElement(By.id("rutest")).click();
+		driver.findElement(By.id("rutest")).sendKeys(RA_Vars.userRUTAlt);
+		driver.findElement(By.cssSelector(".cover-container")).click();
 		driver.findElement(By.id("clave")).click();
 		driver.findElement(By.id("clave")).sendKeys(RA_Vars.userPass);
 		driver.findElement(By.cssSelector(".cover-container")).click();
 		driver.findElement(By.cssSelector(".btn-lg")).click();
-		try { TimeUnit.MILLISECONDS.sleep(123); } catch (InterruptedException e) { e.printStackTrace(); }
-		// Seleccionar carrera
-		driver.findElement(By.linkText("1368 - INGENIERIA CIVIL OBRAS CIVILES")).click();
 		try { TimeUnit.MILLISECONDS.sleep(123); } catch (InterruptedException e) { e.printStackTrace(); }
 
 																	int CANTIDADASIGNATURASLIMITE = 6;
@@ -520,13 +520,13 @@ public class RA extends RA_Vars {
 		driver.findElement(By.id("rutaux")).click();
 		driver.findElement(By.id("rutaux")).sendKeys(RA_Vars.userRUT);
 		driver.findElement(By.cssSelector(".cover-container")).click();
+		driver.findElement(By.id("rutest")).click();
+		driver.findElement(By.id("rutest")).sendKeys(RA_Vars.userRUTAlt);
+		driver.findElement(By.cssSelector(".cover-container")).click();
 		driver.findElement(By.id("clave")).click();
 		driver.findElement(By.id("clave")).sendKeys(RA_Vars.userPass);
 		driver.findElement(By.cssSelector(".cover-container")).click();
 		driver.findElement(By.cssSelector(".btn-lg")).click();
-		try { TimeUnit.MILLISECONDS.sleep(123); } catch (InterruptedException e) { e.printStackTrace(); }
-		// Seleccionar carrera
-		driver.findElement(By.linkText("1368 - INGENIERIA CIVIL OBRAS CIVILES")).click();
 		try { TimeUnit.MILLISECONDS.sleep(123); } catch (InterruptedException e) { e.printStackTrace(); }
 		// Seleccionar proceso de Inscripcion
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
@@ -624,13 +624,13 @@ public class RA extends RA_Vars {
 		driver.findElement(By.id("rutaux")).click();
 		driver.findElement(By.id("rutaux")).sendKeys(RA_Vars.userRUT);
 		driver.findElement(By.cssSelector(".cover-container")).click();
+		driver.findElement(By.id("rutest")).click();
+		driver.findElement(By.id("rutest")).sendKeys(RA_Vars.userRUTAlt);
+		driver.findElement(By.cssSelector(".cover-container")).click();
 		driver.findElement(By.id("clave")).click();
 		driver.findElement(By.id("clave")).sendKeys(RA_Vars.userPass);
 		driver.findElement(By.cssSelector(".cover-container")).click();
 		driver.findElement(By.cssSelector(".btn-lg")).click();
-		try { TimeUnit.MILLISECONDS.sleep(123); } catch (InterruptedException e) { e.printStackTrace(); }
-		// Seleccionar carrera
-		driver.findElement(By.linkText("1368 - INGENIERIA CIVIL OBRAS CIVILES")).click();
 		try { TimeUnit.MILLISECONDS.sleep(123); } catch (InterruptedException e) { e.printStackTrace(); }
 		// Seleccionar proceso de Inscripcion
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
@@ -718,13 +718,13 @@ public class RA extends RA_Vars {
 		driver.findElement(By.id("rutaux")).click();
 		driver.findElement(By.id("rutaux")).sendKeys(RA_Vars.userRUT);
 		driver.findElement(By.cssSelector(".cover-container")).click();
+		driver.findElement(By.id("rutest")).click();
+		driver.findElement(By.id("rutest")).sendKeys(RA_Vars.userRUTAlt);
+		driver.findElement(By.cssSelector(".cover-container")).click();
 		driver.findElement(By.id("clave")).click();
 		driver.findElement(By.id("clave")).sendKeys(RA_Vars.userPass);
 		driver.findElement(By.cssSelector(".cover-container")).click();
 		driver.findElement(By.cssSelector(".btn-lg")).click();
-		try { TimeUnit.MILLISECONDS.sleep(123); } catch (InterruptedException e) { e.printStackTrace(); }
-		// Seleccionar carrera
-		driver.findElement(By.linkText("1368 - INGENIERIA CIVIL OBRAS CIVILES")).click();
 		try { TimeUnit.MILLISECONDS.sleep(123); } catch (InterruptedException e) { e.printStackTrace(); }
 		// Seleccionar proceso de enviar solicitudes
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
@@ -916,13 +916,13 @@ public class RA extends RA_Vars {
 		driver.findElement(By.id("rutaux")).click();
 		driver.findElement(By.id("rutaux")).sendKeys(RA_Vars.userRUT);
 		driver.findElement(By.cssSelector(".cover-container")).click();
+		driver.findElement(By.id("rutest")).click();
+		driver.findElement(By.id("rutest")).sendKeys(RA_Vars.userRUTAlt);
+		driver.findElement(By.cssSelector(".cover-container")).click();
 		driver.findElement(By.id("clave")).click();
 		driver.findElement(By.id("clave")).sendKeys(RA_Vars.userPass);
 		driver.findElement(By.cssSelector(".cover-container")).click();
 		driver.findElement(By.cssSelector(".btn-lg")).click();
-		try { TimeUnit.MILLISECONDS.sleep(123); } catch (InterruptedException e) { e.printStackTrace(); }
-		// Seleccionar carrera
-		driver.findElement(By.linkText("1368 - INGENIERIA CIVIL OBRAS CIVILES")).click();
 		try { TimeUnit.MILLISECONDS.sleep(123); } catch (InterruptedException e) { e.printStackTrace(); }
 
 																	int CANTIDADASIGNATURASLIMITE = 8;
@@ -1184,13 +1184,13 @@ public class RA extends RA_Vars {
 		driver.findElement(By.id("rutaux")).click();
 		driver.findElement(By.id("rutaux")).sendKeys(RA_Vars.userRUT);
 		driver.findElement(By.cssSelector(".cover-container")).click();
+		driver.findElement(By.id("rutest")).click();
+		driver.findElement(By.id("rutest")).sendKeys(RA_Vars.userRUTAlt);
+		driver.findElement(By.cssSelector(".cover-container")).click();
 		driver.findElement(By.id("clave")).click();
 		driver.findElement(By.id("clave")).sendKeys(RA_Vars.userPass);
 		driver.findElement(By.cssSelector(".cover-container")).click();
 		driver.findElement(By.cssSelector(".btn-lg")).click();
-		try { TimeUnit.MILLISECONDS.sleep(123); } catch (InterruptedException e) { e.printStackTrace(); }
-		// Seleccionar carrera
-		driver.findElement(By.linkText("1368 - INGENIERIA CIVIL OBRAS CIVILES")).click();
 		try { TimeUnit.MILLISECONDS.sleep(123); } catch (InterruptedException e) { e.printStackTrace(); }
 		// Seleccionar proceso de enviar solicitudes
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
@@ -1244,13 +1244,13 @@ public class RA extends RA_Vars {
 		driver.findElement(By.id("rutaux")).click();
 		driver.findElement(By.id("rutaux")).sendKeys(RA_Vars.userRUT);
 		driver.findElement(By.cssSelector(".cover-container")).click();
+		driver.findElement(By.id("rutest")).click();
+		driver.findElement(By.id("rutest")).sendKeys(RA_Vars.userRUTAlt);
+		driver.findElement(By.cssSelector(".cover-container")).click();
 		driver.findElement(By.id("clave")).click();
 		driver.findElement(By.id("clave")).sendKeys(RA_Vars.userPass);
 		driver.findElement(By.cssSelector(".cover-container")).click();
 		driver.findElement(By.cssSelector(".btn-lg")).click();
-		try { TimeUnit.MILLISECONDS.sleep(123); } catch (InterruptedException e) { e.printStackTrace(); }
-		// Seleccionar carrera
-		driver.findElement(By.linkText("1368 - INGENIERIA CIVIL OBRAS CIVILES")).click();
 		try { TimeUnit.MILLISECONDS.sleep(123); } catch (InterruptedException e) { e.printStackTrace(); }
 		// Seleccionar proceso de enviar solicitudes
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
@@ -1326,13 +1326,13 @@ public class RA extends RA_Vars {
 		driver.findElement(By.id("rutaux")).click();
 		driver.findElement(By.id("rutaux")).sendKeys(RA_Vars.userRUT);
 		driver.findElement(By.cssSelector(".cover-container")).click();
+		driver.findElement(By.id("rutest")).click();
+		driver.findElement(By.id("rutest")).sendKeys(RA_Vars.userRUTAlt);
+		driver.findElement(By.cssSelector(".cover-container")).click();
 		driver.findElement(By.id("clave")).click();
 		driver.findElement(By.id("clave")).sendKeys(RA_Vars.userPass);
 		driver.findElement(By.cssSelector(".cover-container")).click();
 		driver.findElement(By.cssSelector(".btn-lg")).click();
-		try { TimeUnit.MILLISECONDS.sleep(123); } catch (InterruptedException e) { e.printStackTrace(); }
-		// Seleccionar carrera
-		driver.findElement(By.linkText("1368 - INGENIERIA CIVIL OBRAS CIVILES")).click();
 		try { TimeUnit.MILLISECONDS.sleep(123); } catch (InterruptedException e) { e.printStackTrace(); }
 		// Seleccionar proceso de enviar solicitudes
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
@@ -1404,13 +1404,13 @@ public class RA extends RA_Vars {
 		driver.findElement(By.id("rutaux")).click();
 		driver.findElement(By.id("rutaux")).sendKeys(RA_Vars.userRUT);
 		driver.findElement(By.cssSelector(".cover-container")).click();
+		driver.findElement(By.id("rutest")).click();
+		driver.findElement(By.id("rutest")).sendKeys(RA_Vars.userRUTAlt);
+		driver.findElement(By.cssSelector(".cover-container")).click();
 		driver.findElement(By.id("clave")).click();
 		driver.findElement(By.id("clave")).sendKeys(RA_Vars.userPass);
 		driver.findElement(By.cssSelector(".cover-container")).click();
 		driver.findElement(By.cssSelector(".btn-lg")).click();
-		try { TimeUnit.MILLISECONDS.sleep(123); } catch (InterruptedException e) { e.printStackTrace(); }
-		// Seleccionar carrera
-		driver.findElement(By.linkText("1368 - INGENIERIA CIVIL OBRAS CIVILES")).click();
 		try { TimeUnit.MILLISECONDS.sleep(123); } catch (InterruptedException e) { e.printStackTrace(); }
 		// Seleccionar proceso de enviar solicitudes
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
