@@ -72,152 +72,158 @@ public class RA extends RA_Vars {
 			Boolean seleccionoTeoria = false;
 			Boolean seleccionoLaboratorio = false;
 			Boolean seleccionoEjercicio = false;
-			// Se crea el random para seleccionar una asignatura al azar
-			Random rand = new Random();
-			int rand_int1 = rand.nextInt(listadoAsignaturasAux.size());
-			// Se busca una asignatura
-			WebElement asignatura = driver.findElement(By.linkText(listadoAsignaturasAux.get(rand_int1)));
-			// Se crea el JavascriptExecutor para hacer scroll
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			// Se obtiene la posicion del boton
-			Point location = asignatura.getLocation();
-			// Se hace scroll hacia el boton
-			js.executeScript("window.scrollBy(0,"+location.getY()+")");
-			// Se selecciona una asignatura
-			asignatura.click();
-			System.out.println("\n	Asignatura: " + listadoAsignaturasAux.get(rand_int1));
-			try { TimeUnit.MILLISECONDS.sleep(323); } catch (InterruptedException e) { e.printStackTrace(); }
-			// Se sale del frame, y se entra al frame de los cursos de teoria.
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame("mainFrame");
-			driver.switchTo().frame("frame_cteo");
-			// Se selecciona el frame de los cursos (::LISTADO CURSOS es un frame)
-			driver.switchTo().frame("mainFrame");
-			System.out.println("	Se revisan los cursos de teoria");
-			// Se obtienen todos los cursos
-			List<WebElement> listadoTeoria = driver.findElements(By.cssSelector("tr"));
-			try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
-			// Se almacenan todas las secciones
-			ArrayList<String> listadoTeoriaAux = new ArrayList<String>();
-			for (WebElement e : listadoTeoria) {
-				String tmp = e.getText().replace("\n", " ");
-				if( tmp.equals(RA_Vars.sinCoordinacionInscribirTeoriaText) ){
-					// No hay cursos de teoria
-					System.out.println("		No hay cursos de teoria");
-				} else {
-					// Existen coordinaciones
-					existeTeoria = true;
-					// Se crea un random para seleccionar una seccion de teoria al azar
-					int rand_int2 = rand.nextInt((listadoTeoria.size() - 1) + 1) + 1;
-					// Se obtiene la seccion
-					WebElement seccionElement = driver.findElement(By.cssSelector(".row-curso:nth-child("+(rand_int2)+") > td:nth-child(1)"));
-					// Se hace scroll hacia el boton
-					js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
-					// Se selecciona la seccion
-					seccionElement.click();
-					seleccionoTeoria = true;
-					System.out.println("		Si hay cursos de teoria");
-					listadoTeoriaAux.add(tmp);
-				}
-			}
-			// Se sale del frame, y se entra al frame de los cursos de laboratorio.
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame("mainFrame");
-			driver.switchTo().frame("frame_clab");
-			// Se selecciona el frame de los cursos (::LISTADO LABORATORIOS es un frame)
-			driver.switchTo().frame("mainFrame");
-			System.out.println("	Se revisan los cursos de laboratorio");
-			// Se obtienen todos los cursos
-			List<WebElement> listadoLaboratorio = driver.findElements(By.cssSelector("tr"));
-			try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
-			// Se almacenan todas las secciones
-			ArrayList<String> listadoLaboratorioAux = new ArrayList<String>();
-			for (WebElement e : listadoLaboratorio) {
-				String tmp = e.getText().replace("\n", " ");
-				if( tmp.equals(RA_Vars.sinCoordinacionInscribirLabText) ){
-					// No hay cursos de laboratorio
-					System.out.println("		No hay cursos de laboratorio");
-				} else {
-					listadoLaboratorioAux.add(tmp);
-					existeLaboratorio = true;
-				}
-			}
-			// Se prueba seleccionar una seccion de laboratorio
-			for ( int j = 0; j < listadoLaboratorioAux.size(); j++ ) {
-				String seccion = listadoLaboratorioAux.get(j).replace("\n", " "	).strip();
-				String[] seccionAux = seccion.split(" ");
-				int cupos = Integer.parseInt(seccionAux[seccionAux.length - 1]);
-				System.out.println("		Seccion " + (j+1) + " | " + seccion);
-				System.out.println("		Seccion " + (j+1) + " | Cupos: " + cupos);
-				// Se revisa si existe cupo
-				if( cupos > 0 ){
-					// Si hay cupos, se hace scroll y luego se selecciona
-					WebElement seccionElement = driver.findElement(By.cssSelector(".row-laboratorio:nth-child("+(j+1)+") > td:nth-child(1)"));
-					// Se hace scroll hacia el boton
-					js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
-					// Se selecciona la seccion
-					seccionElement.click();
-					seleccionoLaboratorio = true;
-					System.out.println("		Seccion " + (j+1) + " | Seleccionada");
-					break;
-				} else {
-					// Si no hay cupos, se selecciona el siguiente curso
-					System.out.println("		Seccion " + (j+1) + " | Sin cupos");
-				}
-			}
-			// Se sale del frame, y se entra al frame de los cursos de ejercicio.
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame("mainFrame");
-			driver.switchTo().frame("frame_ceje");
-			// Se selecciona el frame de los cursos (::LISTADO EJERCICIOS es un frame)
-			driver.switchTo().frame("mainFrame");
-			System.out.println("	Se revisan los cursos de ejercicio");
-			// Se obtienen todos los cursos
-			List<WebElement> listadoEjercicio = driver.findElements(By.cssSelector("tr"));
-			try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
-			// Se almacenan todas las secciones
-			ArrayList<String> listadoEjercicioAux = new ArrayList<String>();
-			for (WebElement e : listadoEjercicio) {
-				String tmp = e.getText().replace("\n", " ");
-				if( tmp.equals(RA_Vars.sinCoordinacionInscribirEjeText) ){
-					// No hay cursos de ejercicios
-					System.out.println("		No hay cursos de ejercicios");
-				} else {
-					// Existen coordinaciones
-					existeEjercicio = true;
-					// Se crea un random para seleccionar una seccion de teoria al azar
-					int rand_int2 = rand.nextInt((listadoEjercicio.size() - 1) + 1) + 1;
-					// Se obtiene la seccion
-					WebElement seccionElement = driver.findElement(By.cssSelector(".row-ejercicio:nth-child("+(rand_int2)+") > td:nth-child(1)"));
-					// Se hace scroll hacia el boton
-					js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
-					// Se selecciona la seccion
-					seccionElement.click();
-					seleccionoEjercicio = true;
-					System.out.println("			Si hay cursos de teoria");
-					listadoEjercicioAux.add(tmp);
-				}
-			}
-			// Se revisa que exista al menos un curso
-			if( (existeTeoria && seleccionoTeoria) || (existeLaboratorio && seleccionoLaboratorio) || (existeEjercicio && seleccionoEjercicio) ) {
-				// Se puede postular a la asignatura
-				System.out.println("	Se puede postular a la asignatura");
-				// Se sale del frame, y se entra al frame deonde esta el boton de postular
-				driver.switchTo().defaultContent();
-				driver.switchTo().frame("mainFrame");
-				driver.switchTo().frame(5);
-				// Se postula a la asignatura
-				driver.findElement(By.id("btn_postular")).click();
-				try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
-				if (driver.switchTo().alert().getText().compareTo(RA_Vars.alertaInscribirText) == 0 ) {
-					driver.switchTo().alert().accept();
-				}
-				// Tiempo para guardar la asignatura postulada
-				try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+			// Se revisa que existan asignaturas
+			if( listadoAsignaturasAux.size() == 0 ) {
+				System.out.println("No hay mas asignaturas");
 				i = 1;
 			} else {
-				// No se puede postular a la asignatura
-				System.out.println("	No se puede postular a la asignatura");
+				// Se crea el random para seleccionar una asignatura al azar
+				Random rand = new Random();
+				int rand_int1 = rand.nextInt(listadoAsignaturasAux.size());
+				// Se busca una asignatura
+				WebElement asignatura = driver.findElement(By.linkText(listadoAsignaturasAux.get(rand_int1)));
+				// Se crea el JavascriptExecutor para hacer scroll
+				JavascriptExecutor js = (JavascriptExecutor) driver;
+				// Se obtiene la posicion del boton
+				Point location = asignatura.getLocation();
+				// Se hace scroll hacia el boton
+				js.executeScript("window.scrollBy(0,"+location.getY()+")");
+				// Se selecciona una asignatura
+				asignatura.click();
+				System.out.println("\n	Asignatura: " + listadoAsignaturasAux.get(rand_int1));
+				try { TimeUnit.MILLISECONDS.sleep(323); } catch (InterruptedException e) { e.printStackTrace(); }
+				// Se sale del frame, y se entra al frame de los cursos de teoria.
+				driver.switchTo().defaultContent();
+				driver.switchTo().frame("mainFrame");
+				driver.switchTo().frame("frame_cteo");
+				// Se selecciona el frame de los cursos (::LISTADO CURSOS es un frame)
+				driver.switchTo().frame("mainFrame");
+				System.out.println("	Se revisan los cursos de teoria");
+				// Se obtienen todos los cursos
+				List<WebElement> listadoTeoria = driver.findElements(By.cssSelector("tr"));
+				try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+				// Se almacenan todas las secciones
+				ArrayList<String> listadoTeoriaAux = new ArrayList<String>();
+				for (WebElement e : listadoTeoria) {
+					String tmp = e.getText().replace("\n", " ");
+					if( tmp.equals(RA_Vars.sinCoordinacionInscribirTeoriaText) ){
+						// No hay cursos de teoria
+						System.out.println("		No hay cursos de teoria");
+					} else {
+						// Existen coordinaciones
+						existeTeoria = true;
+						// Se crea un random para seleccionar una seccion de teoria al azar
+						int rand_int2 = rand.nextInt((listadoTeoria.size() - 1) + 1) + 1;
+						// Se obtiene la seccion
+						WebElement seccionElement = driver.findElement(By.cssSelector(".row-curso:nth-child("+(rand_int2)+") > td:nth-child(1)"));
+						// Se hace scroll hacia el boton
+						js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
+						// Se selecciona la seccion
+						seccionElement.click();
+						seleccionoTeoria = true;
+						System.out.println("		Si hay cursos de teoria");
+						listadoTeoriaAux.add(tmp);
+					}
+				}
+				// Se sale del frame, y se entra al frame de los cursos de laboratorio.
+				driver.switchTo().defaultContent();
+				driver.switchTo().frame("mainFrame");
+				driver.switchTo().frame("frame_clab");
+				// Se selecciona el frame de los cursos (::LISTADO LABORATORIOS es un frame)
+				driver.switchTo().frame("mainFrame");
+				System.out.println("	Se revisan los cursos de laboratorio");
+				// Se obtienen todos los cursos
+				List<WebElement> listadoLaboratorio = driver.findElements(By.cssSelector("tr"));
+				try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+				// Se almacenan todas las secciones
+				ArrayList<String> listadoLaboratorioAux = new ArrayList<String>();
+				for (WebElement e : listadoLaboratorio) {
+					String tmp = e.getText().replace("\n", " ");
+					if( tmp.equals(RA_Vars.sinCoordinacionInscribirLabText) ){
+						// No hay cursos de laboratorio
+						System.out.println("		No hay cursos de laboratorio");
+					} else {
+						listadoLaboratorioAux.add(tmp);
+						existeLaboratorio = true;
+					}
+				}
+				// Se prueba seleccionar una seccion de laboratorio
+				for ( int j = 0; j < listadoLaboratorioAux.size(); j++ ) {
+					String seccion = listadoLaboratorioAux.get(j).replace("\n", " "	).strip();
+					String[] seccionAux = seccion.split(" ");
+					int cupos = Integer.parseInt(seccionAux[seccionAux.length - 1]);
+					System.out.println("		Seccion " + (j+1) + " | " + seccion);
+					System.out.println("		Seccion " + (j+1) + " | Cupos: " + cupos);
+					// Se revisa si existe cupo
+					if( cupos > 0 ){
+						// Si hay cupos, se hace scroll y luego se selecciona
+						WebElement seccionElement = driver.findElement(By.cssSelector(".row-laboratorio:nth-child("+(j+1)+") > td:nth-child(1)"));
+						// Se hace scroll hacia el boton
+						js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
+						// Se selecciona la seccion
+						seccionElement.click();
+						seleccionoLaboratorio = true;
+						System.out.println("		Seccion " + (j+1) + " | Seleccionada");
+						break;
+					} else {
+						// Si no hay cupos, se selecciona el siguiente curso
+						System.out.println("		Seccion " + (j+1) + " | Sin cupos");
+					}
+				}
+				// Se sale del frame, y se entra al frame de los cursos de ejercicio.
+				driver.switchTo().defaultContent();
+				driver.switchTo().frame("mainFrame");
+				driver.switchTo().frame("frame_ceje");
+				// Se selecciona el frame de los cursos (::LISTADO EJERCICIOS es un frame)
+				driver.switchTo().frame("mainFrame");
+				System.out.println("	Se revisan los cursos de ejercicio");
+				// Se obtienen todos los cursos
+				List<WebElement> listadoEjercicio = driver.findElements(By.cssSelector("tr"));
+				try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+				// Se almacenan todas las secciones
+				ArrayList<String> listadoEjercicioAux = new ArrayList<String>();
+				for (WebElement e : listadoEjercicio) {
+					String tmp = e.getText().replace("\n", " ");
+					if( tmp.equals(RA_Vars.sinCoordinacionInscribirEjeText) ){
+						// No hay cursos de ejercicios
+						System.out.println("		No hay cursos de ejercicios");
+					} else {
+						// Existen coordinaciones
+						existeEjercicio = true;
+						// Se crea un random para seleccionar una seccion de teoria al azar
+						int rand_int2 = rand.nextInt((listadoEjercicio.size() - 1) + 1) + 1;
+						// Se obtiene la seccion
+						WebElement seccionElement = driver.findElement(By.cssSelector(".row-ejercicio:nth-child("+(rand_int2)+") > td:nth-child(1)"));
+						// Se hace scroll hacia el boton
+						js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
+						// Se selecciona la seccion
+						seccionElement.click();
+						seleccionoEjercicio = true;
+						System.out.println("			Si hay cursos de teoria");
+						listadoEjercicioAux.add(tmp);
+					}
+				}
+				// Se revisa que exista al menos un curso
+				if( (existeTeoria && seleccionoTeoria) || (existeLaboratorio && seleccionoLaboratorio) || (existeEjercicio && seleccionoEjercicio) ) {
+					// Se puede postular a la asignatura
+					System.out.println("	Se puede postular a la asignatura");
+					// Se sale del frame, y se entra al frame deonde esta el boton de postular
+					driver.switchTo().defaultContent();
+					driver.switchTo().frame("mainFrame");
+					driver.switchTo().frame(5);
+					// Se postula a la asignatura
+					driver.findElement(By.id("btn_postular")).click();
+					try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+					if (driver.switchTo().alert().getText().compareTo(RA_Vars.alertaInscribirText) == 0 ) {
+						driver.switchTo().alert().accept();
+					}
+					// Tiempo para guardar la asignatura postulada
+					try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+					i = 1;
+				} else {
+					// No se puede postular a la asignatura
+					System.out.println("	No se puede postular a la asignatura");
+				}
 			}
 		}
 		System.out.println("\nSe finaliza el test Postulaciones_Inscribir_Random");
@@ -328,187 +334,194 @@ public class RA extends RA_Vars {
 						Boolean seleccionoTeoria = false;
 						Boolean seleccionoLaboratorio = false;
 						Boolean seleccionoEjercicio = false;
-						// Se crea el random para seleccionar una asignatura al azar
-						Random rand = new Random();
-						int rand_int1 = rand.nextInt(listadoCodigoNombre2.size());
-						// Se revisa cuantas asignaturas se omitieron
-						int asignaturasOmitidas = 0;
-						// Mientras el while este en la lista de omitidos y no se alcance el limite, se busca otro
-						while( (codigosAsignaturasAOmitir2.contains(Integer.parseInt(listadoCodigoNombre2.get(rand_int1).get(0)))) && (asignaturasOmitidas <= listadoCodigoNombre2.size() ) ){
-							rand_int1 = rand.nextInt(listadoCodigoNombre2.size());
-							asignaturasOmitidas++;
-						}
-						// Si se revisaron todas las asignaturas en una vuelta, sale de la vuelta
-						if( asignaturasOmitidas > listadoCodigoNombre2.size() ){
-							l = 1;
+						// Se revisa que existan asignaturas
+						if( listadoCodigoNombre2.size() == 0 ) {
+							System.out.println("No hay mas asignaturas");
+							i = 1;
 						} else {
-							// Se selecciona una asignatura
-							driver.switchTo().defaultContent();
-							driver.findElement(By.cssSelector("li.dropdown:nth-child(3) > a:nth-child(1)")).click();
-							driver.findElement(By.linkText(RA_Vars.postulacionText)).click();
-							try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
-							driver.switchTo().defaultContent();
-							driver.switchTo().frame("mainFrame");
-							driver.switchTo().frame("derecho");
-							// Se busca una asignatura
-							WebElement asignatura = driver.findElement(By.linkText(listadoCodigoNombre2.get(rand_int1).get(1)));
-							// Se crea el JavascriptExecutor para hacer scroll
-							JavascriptExecutor js = (JavascriptExecutor) driver;
-							// Se obtiene la posicion del boton
-							Point location = asignatura.getLocation();
-							// Se hace scroll hacia el boton
-							js.executeScript("window.scrollBy(0,"+location.getY()+")");
-							// Se hace click en la asignatura
-							asignatura.click();
-							System.out.println("\n	Asignatura: " + listadoCodigoNombre2.get(rand_int1).get(0) + " - " +  listadoCodigoNombre2.get(rand_int1).get(1) );
-							try { TimeUnit.MILLISECONDS.sleep(323); } catch (InterruptedException e) { e.printStackTrace(); }
-							// Se sale del frame, y se entra al frame de los cursos de teoria.
-							driver.switchTo().defaultContent();
-							driver.switchTo().frame("mainFrame");
-							driver.switchTo().frame("frame_cteo");
-							// Se selecciona el frame de los cursos (::LISTADO CURSOS es un frame)
-							driver.switchTo().frame("mainFrame");
-							System.out.println("		Se revisan los cursos de teoria");
-							// Se obtienen todos los cursos
-							List<WebElement> listadoTeoria = driver.findElements(By.cssSelector("tr"));
-							try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
-							// Se obtiene la primera linea despues de buscar tr
-							String primeraLinea = listadoTeoria.get(0).getText().strip();
-							// Si la primera linea dice que no hay coordinaciones, se avisa
-							if( !primeraLinea.equals(RA_Vars.sinCoordinacionInscribirTeoriaText) ){
-								// Existen coordinaciones
-								existeTeoria = true;
-								// Se crea un random para seleccionar una seccion de teoria al azar
-								int rand_int2 = rand.nextInt((listadoTeoria.size() - 1) + 1) + 1;
-								// Se obtiene la seccion
-								WebElement seccionElement = driver.findElement(By.cssSelector(".row-curso:nth-child("+(rand_int2)+") > td:nth-child(1)"));
-								// Se hace scroll hacia el boton
-								js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
-								// Se selecciona la seccion
-								seccionElement.click();
-								seleccionoTeoria = true;
-								System.out.println("			Si hay cursos de teoria");
+							// Se crea el random para seleccionar una asignatura al azar
+							Random rand = new Random();
+							int rand_int1 = rand.nextInt(listadoCodigoNombre2.size());
+							// Se revisa cuantas asignaturas se omitieron
+							int asignaturasOmitidas = 0;
+							// Mientras el while este en la lista de omitidos y no se alcance el limite, se busca otro
+							while( (codigosAsignaturasAOmitir2.contains(Integer.parseInt(listadoCodigoNombre2.get(rand_int1).get(0)))) && (asignaturasOmitidas <= listadoCodigoNombre2.size() ) ){
+								rand_int1 = rand.nextInt(listadoCodigoNombre2.size());
+								asignaturasOmitidas++;
+							}
+							// Si se revisaron todas las asignaturas en una vuelta, sale de la vuelta
+							if( asignaturasOmitidas > listadoCodigoNombre2.size() ){
+								l = 1;
 							} else {
-								// No hay cursos de teoria
-								System.out.println("			No hay cursos de teoria");
-							}
-							// Se sale del frame, y se entra al frame de los cursos de laboratorio.
-							driver.switchTo().defaultContent();
-							driver.switchTo().frame("mainFrame");
-							driver.switchTo().frame("frame_clab");
-							// Se selecciona el frame de los cursos (::LISTADO LABORATORIOS es un frame)
-							driver.switchTo().frame("mainFrame");
-							System.out.println("		Se revisan los cursos de laboratorio");
-							// Se obtienen todos los cursos
-							List<WebElement> listadoLaboratorio = driver.findElements(By.cssSelector("tr"));
-							try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
-							// Se almacenan todas las secciones
-							ArrayList<String> listadoLaboratorioAux = new ArrayList<String>();
-							for (WebElement e : listadoLaboratorio) {
-								String tmp = e.getText().replace("\n", " ");
-								if( tmp.equals(RA_Vars.sinCoordinacionInscribirLabText) ){
-									// No hay cursos de laboratorio
-									System.out.println("			No hay cursos de laboratorio");
-								} else {
-									listadoLaboratorioAux.add(tmp);
-									existeLaboratorio = true;
-								}
-							}
-							// Se prueba seleccionar una seccion de laboratorio
-							for ( int k = 0; k < listadoLaboratorioAux.size(); k++ ) {
-								String seccion = listadoLaboratorioAux.get(k).replace("\n", " "	).strip();
-								String[] seccionAux = seccion.split(" ");
-								int cupos = Integer.parseInt(seccionAux[seccionAux.length - 1]);
-								System.out.println("			Seccion " + (k+1) + " | " + seccion);
-								System.out.println("			Seccion " + (k+1) + " | Cupos: " + cupos);
-								// Se revisa si existe cupo
-								if( cupos > 0 ){
-									// Si hay cupos, se hace scroll y luego se selecciona
-									WebElement seccionElement = driver.findElement(By.cssSelector("tr.row-laboratorio:nth-child("+(k+1)+") > td:nth-child(1) > div:nth-child(1) > input:nth-child(1)"));
-									// Se hace scroll hacia el boton
-									js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
-									// Se selecciona la seccion
-									seccionElement.click();
-									seleccionoLaboratorio = true;
-									System.out.println("			Seccion " + (k+1) + " | Seleccionada");
-									break;
-								} else {
-									// Si no hay cupos, se selecciona el siguiente curso
-									System.out.println("			Seccion " + (k+1) + " | Sin cupos");
-								}
-							}
-							// Se sale del frame, y se entra al frame de los cursos de ejercicio.
-							driver.switchTo().defaultContent();
-							driver.switchTo().frame("mainFrame");
-							driver.switchTo().frame("frame_ceje");
-							// Se selecciona el frame de los cursos (::LISTADO EJERCICIOS es un frame)
-							driver.switchTo().frame("mainFrame");
-							System.out.println("		Se revisan los cursos de ejercicio");
-							// Se obtienen todos los cursos
-							List<WebElement> listadoEjercicio = driver.findElements(By.cssSelector("tr"));
-							try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
-							// Se almacenan todas las secciones
-							ArrayList<String> listadoEjercicioAux = new ArrayList<String>();
-							for (WebElement e : listadoEjercicio) {
-								String tmp = e.getText().replace("\n", " ");
-								if( tmp.equals(RA_Vars.sinCoordinacionInscribirEjeText) ){
-									// No hay cursos de ejercicios
-									System.out.println("			No hay cursos de ejercicios");
-								} else {
-									listadoEjercicioAux.add(tmp);
-									existeEjercicio = true;
-									// Se crea un random para seleccionar una seccion de ejercicio al azar
-									int rand_int2 = rand.nextInt(listadoEjercicio.size());
-									// Se obtiene la seccion
-									WebElement seccionElement = driver.findElement(By.cssSelector(".row-ejercicio:nth-child("+(rand_int2+1)+") > td:nth-child(1)"));
-									// Se hace scroll hacia el boton
-									js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
-									// Se selecciona la seccion
-									seccionElement.click();
-									seleccionoEjercicio = true;
-								}
-							}
-							// Se revisa que exista al menos un curso y se haya podido seleccionar
-							if( (existeTeoria && seleccionoTeoria) || (existeLaboratorio && seleccionoLaboratorio) || (existeEjercicio && seleccionoEjercicio) ) {
-								// Se puede postula a la asignatura
+								// Se selecciona una asignatura
+								driver.switchTo().defaultContent();
+								driver.findElement(By.cssSelector("li.dropdown:nth-child(3) > a:nth-child(1)")).click();
+								driver.findElement(By.linkText(RA_Vars.postulacionText)).click();
+								try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 								driver.switchTo().defaultContent();
 								driver.switchTo().frame("mainFrame");
-								driver.switchTo().frame(5);
-								// Se postula a la asignatura
-								driver.findElement(By.id("btn_postular")).click();
+								driver.switchTo().frame("derecho");
+								// Se busca una asignatura
+								WebElement asignatura = driver.findElement(By.linkText(listadoCodigoNombre2.get(rand_int1).get(1)));
+								// Se crea el JavascriptExecutor para hacer scroll
+								JavascriptExecutor js = (JavascriptExecutor) driver;
+								// Se obtiene la posicion del boton
+								Point location = asignatura.getLocation();
+								// Se hace scroll hacia el boton
+								js.executeScript("window.scrollBy(0,"+location.getY()+")");
+								// Se hace click en la asignatura
+								asignatura.click();
+								System.out.println("\n	Asignatura: " + listadoCodigoNombre2.get(rand_int1).get(0) + " - " +  listadoCodigoNombre2.get(rand_int1).get(1) );
+								try { TimeUnit.MILLISECONDS.sleep(323); } catch (InterruptedException e) { e.printStackTrace(); }
+								// Se sale del frame, y se entra al frame de los cursos de teoria.
+								driver.switchTo().defaultContent();
+								driver.switchTo().frame("mainFrame");
+								driver.switchTo().frame("frame_cteo");
+								// Se selecciona el frame de los cursos (::LISTADO CURSOS es un frame)
+								driver.switchTo().frame("mainFrame");
+								System.out.println("		Se revisan los cursos de teoria");
+								// Se obtienen todos los cursos
+								List<WebElement> listadoTeoria = driver.findElements(By.cssSelector("tr"));
 								try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
-								if (driver.switchTo().alert().getText().compareTo(RA_Vars.alertaInscribirText) == 0 ) {
-									driver.switchTo().alert().accept();
-									try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+								// Se obtiene la primera linea despues de buscar tr
+								String primeraLinea = listadoTeoria.get(0).getText().strip();
+								// Si la primera linea dice que no hay coordinaciones, se avisa
+								if( !primeraLinea.equals(RA_Vars.sinCoordinacionInscribirTeoriaText) ){
+									// Existen coordinaciones
+									existeTeoria = true;
+									// Se crea un random para seleccionar una seccion de teoria al azar
+									int rand_int2 = rand.nextInt((listadoTeoria.size() - 1) + 1) + 1;
+									// Se obtiene la seccion
+									WebElement seccionElement = driver.findElement(By.cssSelector(".row-curso:nth-child("+(rand_int2)+") > td:nth-child(1)"));
+									// Se hace scroll hacia el boton
+									js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
+									// Se selecciona la seccion
+									seccionElement.click();
+									seleccionoTeoria = true;
+									System.out.println("			Si hay cursos de teoria");
+								} else {
+									// No hay cursos de teoria
+									System.out.println("			No hay cursos de teoria");
+								}
+								// Se sale del frame, y se entra al frame de los cursos de laboratorio.
+								driver.switchTo().defaultContent();
+								driver.switchTo().frame("mainFrame");
+								driver.switchTo().frame("frame_clab");
+								// Se selecciona el frame de los cursos (::LISTADO LABORATORIOS es un frame)
+								driver.switchTo().frame("mainFrame");
+								System.out.println("		Se revisan los cursos de laboratorio");
+								// Se obtienen todos los cursos
+								List<WebElement> listadoLaboratorio = driver.findElements(By.cssSelector("tr"));
+								try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+								// Se almacenan todas las secciones
+								ArrayList<String> listadoLaboratorioAux = new ArrayList<String>();
+								for (WebElement e : listadoLaboratorio) {
+									String tmp = e.getText().replace("\n", " ");
+									if( tmp.equals(RA_Vars.sinCoordinacionInscribirLabText) ){
+										// No hay cursos de laboratorio
+										System.out.println("			No hay cursos de laboratorio");
+									} else {
+										listadoLaboratorioAux.add(tmp);
+										existeLaboratorio = true;
+									}
+								}
+								// Se prueba seleccionar una seccion de laboratorio
+								for ( int k = 0; k < listadoLaboratorioAux.size(); k++ ) {
+									String seccion = listadoLaboratorioAux.get(k).replace("\n", " "	).strip();
+									String[] seccionAux = seccion.split(" ");
+									int cupos = Integer.parseInt(seccionAux[seccionAux.length - 1]);
+									System.out.println("			Seccion " + (k+1) + " | " + seccion);
+									System.out.println("			Seccion " + (k+1) + " | Cupos: " + cupos);
+									// Se revisa si existe cupo
+									if( cupos > 0 ){
+										// Si hay cupos, se hace scroll y luego se selecciona
+										WebElement seccionElement = driver.findElement(By.cssSelector("tr.row-laboratorio:nth-child("+(k+1)+") > td:nth-child(1) > div:nth-child(1) > input:nth-child(1)"));
+										// Se hace scroll hacia el boton
+										js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
+										// Se selecciona la seccion
+										seccionElement.click();
+										seleccionoLaboratorio = true;
+										System.out.println("			Seccion " + (k+1) + " | Seleccionada");
+										break;
+									} else {
+										// Si no hay cupos, se selecciona el siguiente curso
+										System.out.println("			Seccion " + (k+1) + " | Sin cupos");
+									}
+								}
+								// Se sale del frame, y se entra al frame de los cursos de ejercicio.
+								driver.switchTo().defaultContent();
+								driver.switchTo().frame("mainFrame");
+								driver.switchTo().frame("frame_ceje");
+								// Se selecciona el frame de los cursos (::LISTADO EJERCICIOS es un frame)
+								driver.switchTo().frame("mainFrame");
+								System.out.println("		Se revisan los cursos de ejercicio");
+								// Se obtienen todos los cursos
+								List<WebElement> listadoEjercicio = driver.findElements(By.cssSelector("tr"));
+								try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+								// Se almacenan todas las secciones
+								ArrayList<String> listadoEjercicioAux = new ArrayList<String>();
+								for (WebElement e : listadoEjercicio) {
+									String tmp = e.getText().replace("\n", " ");
+									if( tmp.equals(RA_Vars.sinCoordinacionInscribirEjeText) ){
+										// No hay cursos de ejercicios
+										System.out.println("			No hay cursos de ejercicios");
+									} else {
+										listadoEjercicioAux.add(tmp);
+										existeEjercicio = true;
+										// Se crea un random para seleccionar una seccion de ejercicio al azar
+										int rand_int2 = rand.nextInt(listadoEjercicio.size());
+										// Se obtiene la seccion
+										WebElement seccionElement = driver.findElement(By.cssSelector(".row-ejercicio:nth-child("+(rand_int2+1)+") > td:nth-child(1)"));
+										// Se hace scroll hacia el boton
+										js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
+										// Se selecciona la seccion
+										seccionElement.click();
+										seleccionoEjercicio = true;
+									}
+								}
+								// Se revisa que exista al menos un curso y se haya podido seleccionar
+								if( (existeTeoria && seleccionoTeoria) || (existeLaboratorio && seleccionoLaboratorio) || (existeEjercicio && seleccionoEjercicio) ) {
+									// Se puede postula a la asignatura
 									driver.switchTo().defaultContent();
 									driver.switchTo().frame("mainFrame");
 									driver.switchTo().frame(5);
-									// Se revisa el mensaje
-									List<WebElement> mensajes = driver.findElements(By.cssSelector(".col-12 > div"));
+									// Se postula a la asignatura
+									driver.findElement(By.id("btn_postular")).click();
 									try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
-									for (WebElement mensaje : mensajes){
+									if (driver.switchTo().alert().getText().compareTo(RA_Vars.alertaInscribirText) == 0 ) {
+										driver.switchTo().alert().accept();
 										try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
-										// Se revisa si el mensaje corresponde a asignatura inscrita
-										if( mensaje.getText().compareTo(RA_Vars.postulacionStatusInscritaText + Integer.parseInt(listadoCodigoNombre2.get(rand_int1).get(0)) + " (" + RA_Vars.proceso + ")." ) == 0 ) {
-											System.out.println("		Asignatura inscrita");
-											// Se guarda la asignatura inscrita
-											contadorAsignaturas++;
-										} else {
-											System.out.println("		Asignatura no inscrita");
+										driver.switchTo().defaultContent();
+										driver.switchTo().frame("mainFrame");
+										driver.switchTo().frame(5);
+										// Se revisa el mensaje
+										List<WebElement> mensajes = driver.findElements(By.cssSelector(".col-12 > div"));
+										try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+										for (WebElement mensaje : mensajes){
+											try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+											// Se revisa si el mensaje corresponde a asignatura inscrita
+											if( mensaje.getText().compareTo(RA_Vars.postulacionStatusInscritaText + Integer.parseInt(listadoCodigoNombre2.get(rand_int1).get(0)) + " (" + RA_Vars.proceso + ")." ) == 0 ) {
+												System.out.println("		Asignatura inscrita");
+												// Se guarda la asignatura inscrita
+												contadorAsignaturas++;
+											} else {
+												System.out.println("		Asignatura no inscrita");
+											}
 										}
+									} else {
+										System.out.println("No coincide el mensaje al inscribir la asignatura");
 									}
+									// Tiempo para guardar la asignatura postulada
+									try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 								} else {
-									System.out.println("No coincide el mensaje al inscribir la asignatura");
+									System.out.println("		No es posible inscribir la asignatura");
 								}
-								// Tiempo para guardar la asignatura postulada
-								try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
-							} else {
-								System.out.println("		No es posible inscribir la asignatura");
+								// Se guarda el random para saber que esta asignatura no se debe repetir
+								int codigo = Integer.parseInt(listadoCodigoNombre2.get(rand_int1).get(0));
+								codigosAsignaturasAOmitir2.add(codigo);
 							}
-							// Se guarda el random para saber que esta asignatura no se debe repetir
-							int codigo = Integer.parseInt(listadoCodigoNombre2.get(rand_int1).get(0));
-							codigosAsignaturasAOmitir2.add(codigo);
 						}
+						
 					}
 				}
 			}
@@ -768,149 +781,156 @@ public class RA extends RA_Vars {
 			Boolean seleccionoTeoria = false;
 			Boolean seleccionoLaboratorio = false;
 			Boolean seleccionoEjercicio = false;
-			// Se crea el random para seleccionar una asignatura al azar
-			Random rand = new Random();
-			int rand_int1 = rand.nextInt(listadoAsignaturasAux.size());
-			// Se crea el JavascriptExecutor para hacer scroll
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			// Se selecciona una asignatura
-			WebElement asignatura = driver.findElement(By.linkText(listadoAsignaturasAux.get(rand_int1)));
-			try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
-			// Se obtiene la posicion de la asignatura seleciconada
-			Point location = asignatura.getLocation();
-			// Se hace scroll hacia la asignatura
-			js.executeScript("window.scrollBy(0,"+location.getY()+")");
-			// Se hace click en la asignatura
-			asignatura.click();
-			System.out.println("\nAsignatura: " + asignatura.getText());
-			try { TimeUnit.MILLISECONDS.sleep(323); } catch (InterruptedException e) { e.printStackTrace(); }
-			System.out.println("	Se revisan los cursos de teoria");
-			// Se sale del frame, y se entra al frame de los cursos de teoria.
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame("mainFrame");
-			driver.switchTo().frame("frame_cteo");
-			// Se selecciona el frame de los cursos (:: COORDINACIONES CURSOS es un frame)
-			driver.switchTo().frame("mainFrame");
-			// Se obtienen todos los cursos
-			List<WebElement> listadoTeoria = driver.findElements(By.cssSelector("tr"));
-			try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
-			// Se almacenan todas las secciones
-			ArrayList<String> listadoTeoriaAux = new ArrayList<String>();
-			for (WebElement e : listadoTeoria) {
-				String tmp = e.getText().replace("\n", " ");
-				if( tmp.equals(RA_Vars.sinCoordinacionSolicitudTeoriaText) ){
-					// No hay cursos de teoria
-					System.out.println("			No hay cursos de teoria");
-				} else {
-					// Existen coordinaciones
-					existeTeoria = true;
-					// Se crea un random para seleccionar una seccion de teoria al azar
-					int rand_int2 = rand.nextInt((listadoTeoria.size() - 1) + 1) + 1;
-					// Se obtiene la seccion
-					WebElement seccionElement = driver.findElement(By.cssSelector(".row-curso:nth-child("+(rand_int2)+") > td:nth-child(1)"));
-					// Se hace scroll hacia el boton
-					js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
-					// Se selecciona la seccion
-					seccionElement.click();
-					seleccionoTeoria = true;
-					System.out.println("			Si hay cursos de teoria");
-					listadoTeoriaAux.add(tmp);
-				}
-			}
-			System.out.println("	Se revisan los cursos de laboratorio");
-			// Se sale del frame, y se entra al frame de los cursos de laboratorio.
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame("mainFrame");
-			driver.switchTo().frame("frame_clab");
-			// Se selecciona el frame de los cursos (::LISTADO LABORATORIOS es un frame)
-			driver.switchTo().frame("mainFrame");
-			// Se obtienen todos los cursos
-			List<WebElement> listadoEjercicio = driver.findElements(By.cssSelector("tr"));
-			try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
-			// Se almacenan todas las secciones
-			ArrayList<String> listadoEjercicioAux = new ArrayList<String>();
-			for (WebElement e : listadoEjercicio) {
-				String tmp = e.getText().replace("\n", " ");
-				// Los frames de laboratorio y ejercicio estan al revez, por lo que se esta revisando el frame de ejercicio
-				if( tmp.equals(RA_Vars.sinCoordinacionSolicitudEjeText) ){
-					// No hay cursos de laboratorio
-				} else {
-					// Existen coordinaciones
-					existeEjercicio = true;
-					// Se crea un random para seleccionar una seccion de teoria al azar
-					int rand_int2 = rand.nextInt((listadoEjercicio.size() - 1) + 1) + 1;
-					// Se obtiene la seccion
-					WebElement seccionElement = driver.findElement(By.cssSelector(".row-ejercicio:nth-child("+(rand_int2)+") > td:nth-child(1)"));
-					// Se hace scroll hacia el boton
-					js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
-					// Se selecciona la seccion
-					seccionElement.click();
-					seleccionoEjercicio = true;
-					System.out.println("			Si hay cursos de teoria");
-					listadoEjercicioAux.add(tmp);
-				}
-			}
-			System.out.println("	Se revisan los cursos de ejercicio");
-			// Se sale del frame, y se entra al frame de los cursos de ejercicio.
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame("mainFrame");
-			driver.switchTo().frame("frame_ceje");
-			// Se selecciona el frame de los cursos (::LISTADO EJERCICIOS es un frame)
-			driver.switchTo().frame("mainFrame");
-			// Se obtienen todos los cursos
-			List<WebElement> listadoLaboratorio = driver.findElements(By.cssSelector("tr"));
-			try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
-			// Se almacenan todas las secciones
-			ArrayList<String> listadoLaboratorioAux = new ArrayList<String>();
-			for (WebElement e : listadoLaboratorio) {
-				String tmp = e.getText().replace("\n", " ");
-				// Los frames de laboratorio y ejercicio estan al revez, por lo que se esta revisando el frame de ejercicio
-				if( tmp.equals(RA_Vars.sinCoordinacionSolicitudLabText) ){
-					// No hay cursos de ejercicios
-				} else {
-					// Existen coordinaciones
-					existeLaboratorio = true;
-					// Se crea un random para seleccionar una seccion de teoria al azar
-					int rand_int2 = rand.nextInt((listadoLaboratorio.size() - 1) + 1) + 1;
-					// Se obtiene la seccion
-					WebElement seccionElement = driver.findElement(By.cssSelector(".row-laboratorio:nth-child("+(rand_int2)+") > td:nth-child(1)"));
-					// Se hace scroll hacia el boton
-					js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
-					// Se selecciona la seccion
-					seccionElement.click();
-					seleccionoLaboratorio = true;
-					System.out.println("			Si hay cursos de teoria");
-					listadoLaboratorioAux.add(tmp);
-				}
-			}
-			System.out.println("	Se revisa que se haya seleccionado al menos un curso");
-			// Se revisa que exista al menos un curso
-			if( (existeTeoria && seleccionoTeoria) || (existeLaboratorio && seleccionoLaboratorio) || (existeEjercicio && seleccionoEjercicio) ) {
-				// Se puede postular a la asignatura
-				System.out.println("	Se puede postular a la asignatura");
-				// Se sale del frame, y se entra al frame deonde esta el boton de postular
-				driver.switchTo().defaultContent();
-				driver.switchTo().frame("mainFrame");
-				driver.switchTo().frame("frame_solicitudes");
-				// Se ingresa el motivo de la postulacion
-				driver.findElement(By.id("motivo")).click();
-				driver.findElement(By.id("motivo")).sendKeys("Motivo Test");
-				// Se postula a la asignatura
-				driver.findElement(By.id("btn_solicitar")).click();
-				try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
-				if (driver.switchTo().alert().getText().compareTo(RA_Vars.alertaSolicitudConfirmText) == 0 ) {
-					driver.switchTo().alert().accept();
-				}
-				// Tiempo para guardar la asignatura postulada
-				try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+			// Se revisa que existan asignaturas
+			if( listadoAsignaturasAux.size() == 0 ) {
+				System.out.println("No hay mas asignaturas");
 				i = 1;
 			} else {
-				// No se puede postular a la asignatura
-				System.out.println("	No se puede postular a la asignatura");
+				// Se crea el random para seleccionar una asignatura al azar
+				Random rand = new Random();
+				int rand_int1 = rand.nextInt(listadoAsignaturasAux.size());
+				// Se crea el JavascriptExecutor para hacer scroll
+				JavascriptExecutor js = (JavascriptExecutor) driver;
+				// Se selecciona una asignatura
+				WebElement asignatura = driver.findElement(By.linkText(listadoAsignaturasAux.get(rand_int1)));
+				try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+				// Se obtiene la posicion de la asignatura seleciconada
+				Point location = asignatura.getLocation();
+				// Se hace scroll hacia la asignatura
+				js.executeScript("window.scrollBy(0,"+location.getY()+")");
+				// Se hace click en la asignatura
+				asignatura.click();
+				System.out.println("\nAsignatura: " + asignatura.getText());
+				try { TimeUnit.MILLISECONDS.sleep(323); } catch (InterruptedException e) { e.printStackTrace(); }
+				System.out.println("	Se revisan los cursos de teoria");
+				// Se sale del frame, y se entra al frame de los cursos de teoria.
 				driver.switchTo().defaultContent();
 				driver.switchTo().frame("mainFrame");
-				driver.switchTo().frame("derecho");
+				driver.switchTo().frame("frame_cteo");
+				// Se selecciona el frame de los cursos (:: COORDINACIONES CURSOS es un frame)
+				driver.switchTo().frame("mainFrame");
+				// Se obtienen todos los cursos
+				List<WebElement> listadoTeoria = driver.findElements(By.cssSelector("tr"));
+				try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+				// Se almacenan todas las secciones
+				ArrayList<String> listadoTeoriaAux = new ArrayList<String>();
+				for (WebElement e : listadoTeoria) {
+					String tmp = e.getText().replace("\n", " ");
+					if( tmp.equals(RA_Vars.sinCoordinacionSolicitudTeoriaText) ){
+						// No hay cursos de teoria
+						System.out.println("			No hay cursos de teoria");
+					} else {
+						// Existen coordinaciones
+						existeTeoria = true;
+						// Se crea un random para seleccionar una seccion de teoria al azar
+						int rand_int2 = rand.nextInt((listadoTeoria.size() - 1) + 1) + 1;
+						// Se obtiene la seccion
+						WebElement seccionElement = driver.findElement(By.cssSelector(".row-curso:nth-child("+(rand_int2)+") > td:nth-child(1)"));
+						// Se hace scroll hacia el boton
+						js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
+						// Se selecciona la seccion
+						seccionElement.click();
+						seleccionoTeoria = true;
+						System.out.println("			Si hay cursos de teoria");
+						listadoTeoriaAux.add(tmp);
+					}
+				}
+				System.out.println("	Se revisan los cursos de laboratorio");
+				// Se sale del frame, y se entra al frame de los cursos de laboratorio.
+				driver.switchTo().defaultContent();
+				driver.switchTo().frame("mainFrame");
+				driver.switchTo().frame("frame_clab");
+				// Se selecciona el frame de los cursos (::LISTADO LABORATORIOS es un frame)
+				driver.switchTo().frame("mainFrame");
+				// Se obtienen todos los cursos
+				List<WebElement> listadoEjercicio = driver.findElements(By.cssSelector("tr"));
+				try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+				// Se almacenan todas las secciones
+				ArrayList<String> listadoEjercicioAux = new ArrayList<String>();
+				for (WebElement e : listadoEjercicio) {
+					String tmp = e.getText().replace("\n", " ");
+					// Los frames de laboratorio y ejercicio estan al revez, por lo que se esta revisando el frame de ejercicio
+					if( tmp.equals(RA_Vars.sinCoordinacionSolicitudEjeText) ){
+						// No hay cursos de laboratorio
+					} else {
+						// Existen coordinaciones
+						existeEjercicio = true;
+						// Se crea un random para seleccionar una seccion de teoria al azar
+						int rand_int2 = rand.nextInt((listadoEjercicio.size() - 1) + 1) + 1;
+						// Se obtiene la seccion
+						WebElement seccionElement = driver.findElement(By.cssSelector(".row-ejercicio:nth-child("+(rand_int2)+") > td:nth-child(1)"));
+						// Se hace scroll hacia el boton
+						js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
+						// Se selecciona la seccion
+						seccionElement.click();
+						seleccionoEjercicio = true;
+						System.out.println("			Si hay cursos de teoria");
+						listadoEjercicioAux.add(tmp);
+					}
+				}
+				System.out.println("	Se revisan los cursos de ejercicio");
+				// Se sale del frame, y se entra al frame de los cursos de ejercicio.
+				driver.switchTo().defaultContent();
+				driver.switchTo().frame("mainFrame");
+				driver.switchTo().frame("frame_ceje");
+				// Se selecciona el frame de los cursos (::LISTADO EJERCICIOS es un frame)
+				driver.switchTo().frame("mainFrame");
+				// Se obtienen todos los cursos
+				List<WebElement> listadoLaboratorio = driver.findElements(By.cssSelector("tr"));
+				try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+				// Se almacenan todas las secciones
+				ArrayList<String> listadoLaboratorioAux = new ArrayList<String>();
+				for (WebElement e : listadoLaboratorio) {
+					String tmp = e.getText().replace("\n", " ");
+					// Los frames de laboratorio y ejercicio estan al revez, por lo que se esta revisando el frame de ejercicio
+					if( tmp.equals(RA_Vars.sinCoordinacionSolicitudLabText) ){
+						// No hay cursos de ejercicios
+					} else {
+						// Existen coordinaciones
+						existeLaboratorio = true;
+						// Se crea un random para seleccionar una seccion de teoria al azar
+						int rand_int2 = rand.nextInt((listadoLaboratorio.size() - 1) + 1) + 1;
+						// Se obtiene la seccion
+						WebElement seccionElement = driver.findElement(By.cssSelector(".row-laboratorio:nth-child("+(rand_int2)+") > td:nth-child(1)"));
+						// Se hace scroll hacia el boton
+						js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
+						// Se selecciona la seccion
+						seccionElement.click();
+						seleccionoLaboratorio = true;
+						System.out.println("			Si hay cursos de teoria");
+						listadoLaboratorioAux.add(tmp);
+					}
+				}
+				System.out.println("	Se revisa que se haya seleccionado al menos un curso");
+				// Se revisa que exista al menos un curso
+				if( (existeTeoria && seleccionoTeoria) || (existeLaboratorio && seleccionoLaboratorio) || (existeEjercicio && seleccionoEjercicio) ) {
+					// Se puede postular a la asignatura
+					System.out.println("	Se puede postular a la asignatura");
+					// Se sale del frame, y se entra al frame deonde esta el boton de postular
+					driver.switchTo().defaultContent();
+					driver.switchTo().frame("mainFrame");
+					driver.switchTo().frame("frame_solicitudes");
+					// Se ingresa el motivo de la postulacion
+					driver.findElement(By.id("motivo")).click();
+					driver.findElement(By.id("motivo")).sendKeys("Motivo Test");
+					// Se postula a la asignatura
+					driver.findElement(By.id("btn_solicitar")).click();
+					try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+					if (driver.switchTo().alert().getText().compareTo(RA_Vars.alertaSolicitudConfirmText) == 0 ) {
+						driver.switchTo().alert().accept();
+					}
+					// Tiempo para guardar la asignatura postulada
+					try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+					i = 1;
+				} else {
+					// No se puede postular a la asignatura
+					System.out.println("	No se puede postular a la asignatura");
+					driver.switchTo().defaultContent();
+					driver.switchTo().frame("mainFrame");
+					driver.switchTo().frame("derecho");
+				}
 			}
+			
 		}
 		System.out.println("\nSe finaliza el test Solicitudes_Inscribir_Random");
 	}
@@ -1028,164 +1048,170 @@ public class RA extends RA_Vars {
 						Boolean seleccionoTeoria = false;
 						Boolean seleccionoLaboratorio = false;
 						Boolean seleccionoEjercicio = false;
-						// Se crea el random para seleccionar una asignatura al azar
-						Random rand = new Random();
-						int rand_int1 = rand.nextInt(listadoCodigoNombre.size());
-						// Se revisa cuantas asignaturas se omitieron
-						int asignaturasOmitidas = 0;
-						// Mientras el while este en la lista de omitidos y no se alcance el limite, se busca otro
-						while( (codigosAsignaturasAOmitir.contains(Integer.parseInt(listadoCodigoNombre.get(rand_int1).get(0)))) && (asignaturasOmitidas <= listadoCodigoNombre.size() ) ){
-							rand_int1 = rand.nextInt(listadoCodigoNombre.size());
-							asignaturasOmitidas++;
-						}
-						// Si se revisaron todas las asignaturas en una vuelta, sale de la vuelta
-						if( asignaturasOmitidas > listadoCodigoNombre.size() ){
-							l = 1;
+						// Se revisa que existan asignaturas
+						if( listadoCodigoNombre.size() == 0 ) {
+							System.out.println("No hay mas asignaturas");
+							i = 1;
 						} else {
-							// Se selecciona una asignatura
-							driver.switchTo().defaultContent();
-							driver.findElement(By.cssSelector("li.dropdown:nth-child(3) > a:nth-child(1)")).click();
-							driver.findElement(By.linkText(RA_Vars.solicitudText)).click();
-							try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
-							driver.switchTo().defaultContent();
-							driver.switchTo().frame("mainFrame");
-							driver.switchTo().frame("derecho");
-							// Se busca la asignatura
-							WebElement asignatura = driver.findElement(By.cssSelector("tr.bold7:nth-child("+(rand_int1+1)+") > td:nth-child(2) > a:nth-child(1)"));
-							// Se crea el JavascriptExecutor para hacer scroll
-							JavascriptExecutor js = (JavascriptExecutor) driver;
-							// Se obtiene la posicion del boton
-							Point location = asignatura.getLocation();
-							// Se hace scroll hacia el boton
-							js.executeScript("window.scrollBy(0,"+location.getY()+")");
-							// Se hace click en la asignatura
-							asignatura.click();
-							System.out.println("\n	Asignatura: " + driver.findElement(By.cssSelector("tr.bold7:nth-child("+(rand_int1+1)+") > td:nth-child(2) > a:nth-child(1)")).getText() );
-							try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
-							// Se sale del frame, y se entra al frame de los cursos de teoria.
-							driver.switchTo().defaultContent();
-							driver.switchTo().frame("mainFrame");
-							driver.switchTo().frame("frame_cteo");
-							// Se selecciona el frame de los cursos (::LISTADO CURSOS es un frame)
-							driver.switchTo().frame("mainFrame");
-							System.out.println("		Se revisan los cursos de teoria");
-							try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
-							// Se obtienen todos los cursos
-							List<WebElement> listadoTeoria = driver.findElements(By.cssSelector("tr"));
-							try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
-							// Se obtiene la primera linea despues de buscar tr
-							String primeraLineaTeoria = listadoTeoria.get(0).getText().strip();
-							// Si la primera linea dice que no hay coordinaciones, se avisa
-							if( !primeraLineaTeoria.equals(RA_Vars.sinCoordinacionSolicitudTeoriaText) ){
-								// Existen coordinaciones
-								existeTeoria = true;
-								// Se crea un random para seleccionar una seccion de teoria al azar
-								int rand_int2 = rand.nextInt((listadoTeoria.size() - 1) + 1) + 1;
-								// Se obtiene la seccion
-								WebElement seccionElement = driver.findElement(By.cssSelector(".row-curso:nth-child("+(rand_int2)+") > td:nth-child(1)"));
-								// Se hace scroll hacia el boton
-								js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
-								// Se selecciona la seccion
-								seccionElement.click();
-								seleccionoTeoria = true;
-								System.out.println("			Si hay cursos de teoria");
-							} else {
-								// No hay cursos de teoria
-								System.out.println("			No hay cursos de teoria");
+							// Se crea el random para seleccionar una asignatura al azar
+							Random rand = new Random();
+							int rand_int1 = rand.nextInt(listadoCodigoNombre.size());
+							// Se revisa cuantas asignaturas se omitieron
+							int asignaturasOmitidas = 0;
+							// Mientras el while este en la lista de omitidos y no se alcance el limite, se busca otro
+							while( (codigosAsignaturasAOmitir.contains(Integer.parseInt(listadoCodigoNombre.get(rand_int1).get(0)))) && (asignaturasOmitidas <= listadoCodigoNombre.size() ) ){
+								rand_int1 = rand.nextInt(listadoCodigoNombre.size());
+								asignaturasOmitidas++;
 							}
-							// Se sale del frame, y se entra al frame de los cursos de laboratorio.
-							driver.switchTo().defaultContent();
-							driver.switchTo().frame("mainFrame");
-							driver.switchTo().frame("frame_clab");
-							// Se selecciona el frame de los cursos (::LISTADO LABORATORIOS es un frame)
-							driver.switchTo().frame("mainFrame");
-							System.out.println("		Se revisan los cursos de ejercicio");
-							try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
-							// Se obtienen todos los cursos
-							List<WebElement> listadoEjercicio = driver.findElements(By.cssSelector("tr"));
-							try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
-							// Se obtiene la primera linea despues de buscar tr
-							String primeraLineaEje = listadoEjercicio.get(0).getText().strip();
-							// Si la primera linea dice que no hay coordinaciones, se avisa
-							if( !primeraLineaEje.equals(RA_Vars.sinCoordinacionSolicitudEjeText) ){
-								// Existen coordinaciones
-								existeEjercicio = true;
-								// Se crea un random para seleccionar una seccion de teoria al azar
-								int rand_int2 = rand.nextInt((listadoEjercicio.size() - 1) + 1) + 1;
-								// Se obtiene la seccion
-								WebElement seccionElement = driver.findElement(By.cssSelector(".row-ejercicio:nth-child("+(rand_int2)+") > td:nth-child(1)"));
-								// Se hace scroll hacia el boton
-								js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
-								// Se selecciona la seccion
-								seccionElement.click();
-								seleccionoEjercicio = true;
-								System.out.println("			Si hay cursos de ejercicios");
+							// Si se revisaron todas las asignaturas en una vuelta, sale de la vuelta
+							if( asignaturasOmitidas > listadoCodigoNombre.size() ){
+								l = 1;
 							} else {
-								// No hay cursos de teoria
-								System.out.println("			No hay cursos de ejercicios");
-							}
-							// Se sale del frame, y se entra al frame de los cursos de ejercicio.
-							driver.switchTo().defaultContent();
-							driver.switchTo().frame("mainFrame");
-							driver.switchTo().frame("frame_ceje");
-							// Se selecciona el frame de los cursos (::LISTADO EJERCICIOS es un frame)
-							driver.switchTo().frame("mainFrame");
-							System.out.println("		Se revisan los cursos de laboratorio");
-							try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
-							// Se obtienen todos los cursos
-							List<WebElement> listadoLab = driver.findElements(By.cssSelector("tr"));
-							try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
-							// Se obtiene la primera linea despues de buscar tr
-							String primeraLineaLab = listadoLab.get(0).getText().strip();
-							// Si la primera linea dice que no hay coordinaciones, se avisa
-							if( !primeraLineaLab.equals(RA_Vars.sinCoordinacionSolicitudLabText) ){
-								// Existen coordinaciones
-								existeLaboratorio = true;
-								// Se crea un random para seleccionar una seccion de teoria al azar
-								int rand_int2 = rand.nextInt((listadoLab.size() - 1) + 1) + 1;
-								// Se obtiene la seccion
-								WebElement seccionElement = driver.findElement(By.cssSelector(".row-laboratorio:nth-child("+(rand_int2)+") > td:nth-child(1)"));
-								// Se hace scroll hacia el boton
-								js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
-								// Se selecciona la seccion
-								seccionElement.click();
-								seleccionoLaboratorio = true;
-								System.out.println("			Si hay cursos de laboratorio");
-							} else {
-								// No hay cursos de teoria
-								System.out.println("			No hay cursos de laboratorio");
-							}
-								if( (existeTeoria && seleccionoTeoria) || (existeLaboratorio && seleccionoLaboratorio) || (existeEjercicio && seleccionoEjercicio) ) {
-								// Se puede postular a la asignatura
-								System.out.println("	Se puede solicitar la asignatura");
-								// Se sale del frame, y se entra al frame deonde esta el boton de postular
+								// Se selecciona una asignatura
 								driver.switchTo().defaultContent();
-								driver.switchTo().frame("mainFrame");
-								driver.switchTo().frame("frame_solicitudes");
-								// Se ingresa el motivo de la postulacion
-								driver.findElement(By.id("motivo")).click();
-								driver.findElement(By.id("motivo")).sendKeys("Motivo Test");
-								// Se postula a la asignatura
-								driver.findElement(By.id("btn_solicitar")).click();
+								driver.findElement(By.cssSelector("li.dropdown:nth-child(3) > a:nth-child(1)")).click();
+								driver.findElement(By.linkText(RA_Vars.solicitudText)).click();
 								try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
-								if (driver.switchTo().alert().getText().compareTo(RA_Vars.alertaSolicitudConfirmText) == 0 ) {
-									driver.switchTo().alert().accept();
-								}
-								contadorAsignaturas++;
-								// Tiempo para guardar la asignatura postulada
-								try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
-								i = 1;
-							} else {
-								// No se puede postular a la asignatura
-								System.out.println("	No se puede postular a la asignatura");
-								
 								driver.switchTo().defaultContent();
 								driver.switchTo().frame("mainFrame");
 								driver.switchTo().frame("derecho");
+								// Se busca la asignatura
+								WebElement asignatura = driver.findElement(By.cssSelector("tr.bold7:nth-child("+(rand_int1+1)+") > td:nth-child(2) > a:nth-child(1)"));
+								// Se crea el JavascriptExecutor para hacer scroll
+								JavascriptExecutor js = (JavascriptExecutor) driver;
+								// Se obtiene la posicion del boton
+								Point location = asignatura.getLocation();
+								// Se hace scroll hacia el boton
+								js.executeScript("window.scrollBy(0,"+location.getY()+")");
+								// Se hace click en la asignatura
+								asignatura.click();
+								System.out.println("\n	Asignatura: " + driver.findElement(By.cssSelector("tr.bold7:nth-child("+(rand_int1+1)+") > td:nth-child(2) > a:nth-child(1)")).getText() );
+								try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+								// Se sale del frame, y se entra al frame de los cursos de teoria.
+								driver.switchTo().defaultContent();
+								driver.switchTo().frame("mainFrame");
+								driver.switchTo().frame("frame_cteo");
+								// Se selecciona el frame de los cursos (::LISTADO CURSOS es un frame)
+								driver.switchTo().frame("mainFrame");
+								System.out.println("		Se revisan los cursos de teoria");
+								try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+								// Se obtienen todos los cursos
+								List<WebElement> listadoTeoria = driver.findElements(By.cssSelector("tr"));
+								try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+								// Se obtiene la primera linea despues de buscar tr
+								String primeraLineaTeoria = listadoTeoria.get(0).getText().strip();
+								// Si la primera linea dice que no hay coordinaciones, se avisa
+								if( !primeraLineaTeoria.equals(RA_Vars.sinCoordinacionSolicitudTeoriaText) ){
+									// Existen coordinaciones
+									existeTeoria = true;
+									// Se crea un random para seleccionar una seccion de teoria al azar
+									int rand_int2 = rand.nextInt((listadoTeoria.size() - 1) + 1) + 1;
+									// Se obtiene la seccion
+									WebElement seccionElement = driver.findElement(By.cssSelector(".row-curso:nth-child("+(rand_int2)+") > td:nth-child(1)"));
+									// Se hace scroll hacia el boton
+									js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
+									// Se selecciona la seccion
+									seccionElement.click();
+									seleccionoTeoria = true;
+									System.out.println("			Si hay cursos de teoria");
+								} else {
+									// No hay cursos de teoria
+									System.out.println("			No hay cursos de teoria");
+								}
+								// Se sale del frame, y se entra al frame de los cursos de laboratorio.
+								driver.switchTo().defaultContent();
+								driver.switchTo().frame("mainFrame");
+								driver.switchTo().frame("frame_clab");
+								// Se selecciona el frame de los cursos (::LISTADO LABORATORIOS es un frame)
+								driver.switchTo().frame("mainFrame");
+								System.out.println("		Se revisan los cursos de ejercicio");
+								try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+								// Se obtienen todos los cursos
+								List<WebElement> listadoEjercicio = driver.findElements(By.cssSelector("tr"));
+								try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+								// Se obtiene la primera linea despues de buscar tr
+								String primeraLineaEje = listadoEjercicio.get(0).getText().strip();
+								// Si la primera linea dice que no hay coordinaciones, se avisa
+								if( !primeraLineaEje.equals(RA_Vars.sinCoordinacionSolicitudEjeText) ){
+									// Existen coordinaciones
+									existeEjercicio = true;
+									// Se crea un random para seleccionar una seccion de teoria al azar
+									int rand_int2 = rand.nextInt((listadoEjercicio.size() - 1) + 1) + 1;
+									// Se obtiene la seccion
+									WebElement seccionElement = driver.findElement(By.cssSelector(".row-ejercicio:nth-child("+(rand_int2)+") > td:nth-child(1)"));
+									// Se hace scroll hacia el boton
+									js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
+									// Se selecciona la seccion
+									seccionElement.click();
+									seleccionoEjercicio = true;
+									System.out.println("			Si hay cursos de ejercicios");
+								} else {
+									// No hay cursos de teoria
+									System.out.println("			No hay cursos de ejercicios");
+								}
+								// Se sale del frame, y se entra al frame de los cursos de ejercicio.
+								driver.switchTo().defaultContent();
+								driver.switchTo().frame("mainFrame");
+								driver.switchTo().frame("frame_ceje");
+								// Se selecciona el frame de los cursos (::LISTADO EJERCICIOS es un frame)
+								driver.switchTo().frame("mainFrame");
+								System.out.println("		Se revisan los cursos de laboratorio");
+								try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+								// Se obtienen todos los cursos
+								List<WebElement> listadoLab = driver.findElements(By.cssSelector("tr"));
+								try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+								// Se obtiene la primera linea despues de buscar tr
+								String primeraLineaLab = listadoLab.get(0).getText().strip();
+								// Si la primera linea dice que no hay coordinaciones, se avisa
+								if( !primeraLineaLab.equals(RA_Vars.sinCoordinacionSolicitudLabText) ){
+									// Existen coordinaciones
+									existeLaboratorio = true;
+									// Se crea un random para seleccionar una seccion de teoria al azar
+									int rand_int2 = rand.nextInt((listadoLab.size() - 1) + 1) + 1;
+									// Se obtiene la seccion
+									WebElement seccionElement = driver.findElement(By.cssSelector(".row-laboratorio:nth-child("+(rand_int2)+") > td:nth-child(1)"));
+									// Se hace scroll hacia el boton
+									js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
+									// Se selecciona la seccion
+									seccionElement.click();
+									seleccionoLaboratorio = true;
+									System.out.println("			Si hay cursos de laboratorio");
+								} else {
+									// No hay cursos de teoria
+									System.out.println("			No hay cursos de laboratorio");
+								}
+									if( (existeTeoria && seleccionoTeoria) || (existeLaboratorio && seleccionoLaboratorio) || (existeEjercicio && seleccionoEjercicio) ) {
+									// Se puede postular a la asignatura
+									System.out.println("	Se puede solicitar la asignatura");
+									// Se sale del frame, y se entra al frame deonde esta el boton de postular
+									driver.switchTo().defaultContent();
+									driver.switchTo().frame("mainFrame");
+									driver.switchTo().frame("frame_solicitudes");
+									// Se ingresa el motivo de la postulacion
+									driver.findElement(By.id("motivo")).click();
+									driver.findElement(By.id("motivo")).sendKeys("Motivo Test");
+									// Se postula a la asignatura
+									driver.findElement(By.id("btn_solicitar")).click();
+									try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+									if (driver.switchTo().alert().getText().compareTo(RA_Vars.alertaSolicitudConfirmText) == 0 ) {
+										driver.switchTo().alert().accept();
+									}
+									contadorAsignaturas++;
+									// Tiempo para guardar la asignatura postulada
+									try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+									i = 1;
+								} else {
+									// No se puede postular a la asignatura
+									System.out.println("	No se puede postular a la asignatura");
+									
+									driver.switchTo().defaultContent();
+									driver.switchTo().frame("mainFrame");
+									driver.switchTo().frame("derecho");
+								}
+								// Se guarda el random para saber que esta asignatura no se debe repetir
+								int codigo = Integer.parseInt(listadoCodigoNombre.get(rand_int1).get(0));
+								codigosAsignaturasAOmitir.add(codigo);
 							}
-							// Se guarda el random para saber que esta asignatura no se debe repetir
-							int codigo = Integer.parseInt(listadoCodigoNombre.get(rand_int1).get(0));
-							codigosAsignaturasAOmitir.add(codigo);
 						}
 					}
 				}
