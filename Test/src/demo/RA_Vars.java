@@ -2,6 +2,7 @@ package demo;
 
 public class RA_Vars {
   public static final String driverPath = "D:\\1. Descargas Internet\\Selenium\\geckodriver-v0.33.0-win64\\geckodriver.exe";
+  public static final String logPath = "C:\\Users\\oscar\\OneDrive\\Escritorio\\LOA_Tests\\Test\\src\\demo\\logs\\geckodriver.log";
   
   public static final String url = "https://rahue.usach.cl/siacusach2/__idxe1e7d0j4a1a9m8i0s__.jsp";
   

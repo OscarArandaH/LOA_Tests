@@ -88,5 +88,6 @@
 	<classpathentry kind="lib" path="D:/1. Descargas Internet/Selenium/selenium-java-4.10.0/selenium-support-4.10.0.jar"/>
 	<classpathentry kind="lib" path="D:/1. Descargas Internet/Selenium/selenium-java-4.10.0/selenium-support-4.10.0-sources.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="C:/Users/oscar/Downloads/slf4j-simple-2.0.7.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

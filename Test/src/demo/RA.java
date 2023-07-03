@@ -312,9 +312,9 @@ public class RA extends RA_Vars {
 				int cantidadBotones = accionesAsignaturasPostuladas.size();
 				// Se crea el random para seleccionar una asignatura al azar
 				Random rand = new Random();
-				int rand_int = rand.nextInt(cantidadBotones);
+				int rand_int = rand.nextInt((cantidadBotones - 1) + 1) + 1;
 				while( (randomOmitidos.contains(rand_int)) && (randomOmitidos.size() < postulacionesNoDesinscribibles ) ){
-					rand_int = rand.nextInt(cantidadBotones);
+					rand_int = rand.nextInt((cantidadBotones - 1) + 1) + 1;
 				}
 				int j = 0;
 				while( j < cantidadBotones ){
@@ -544,7 +544,7 @@ public class RA extends RA_Vars {
 							int asignaturasOmitidas = 0;
 							// Mientras el while este en la lista de omitidos y no se alcance el limite, se busca otro
 							while( (codigosAsignaturasAOmitir2.contains(Integer.parseInt(listadoCodigoNombre2.get(rand_int1).get(0)))) && (asignaturasOmitidas <= listadoCodigoNombre2.size() ) ){
-								rand_int1 = rand.nextInt(listadoCodigoNombre2.size());
+								rand_int1 = rand.nextInt((listadoCodigoNombre2.size() - 1) + 1) + 1;
 								asignaturasOmitidas++;
 							}
 							// Si se revisaron todas las asignaturas en una vuelta, sale de la vuelta
@@ -683,7 +683,7 @@ public class RA extends RA_Vars {
 										listadoEjercicioAux.add(tmp);
 										existeEjercicio = true;
 										// Se crea un random para seleccionar una seccion de ejercicio al azar
-										int rand_int2 = rand.nextInt(listadoEjercicio.size());
+										int rand_int2 = rand.nextInt((listadoEjercicio.size() - 1) + 1) + 1;
 										// Se obtiene la seccion
 										WebElement seccionElement = driver.findElement(By.cssSelector(".row-ejercicio:nth-child("+(rand_int2)+") > td:nth-child(1)"));
 										// Se hace scroll hacia el boton
@@ -1152,7 +1152,7 @@ public class RA extends RA_Vars {
 		} else {
 			// Se crea un random para seleccionar una solicitud revisable al azar
 			Random rand = new Random();
-			int rand_int = listadoSolicitudesRevisables.get(rand.nextInt(listadoSolicitudesRevisables.size()));
+			int rand_int = rand.nextInt((listadoSolicitudesRevisables.get(rand.nextInt(listadoSolicitudesRevisables.size())) - 1) + 1) + 1;
 			// Se crea el JavascriptExecutor para hacer scroll
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			// Se obtiene la posicion del boton
@@ -1451,7 +1451,7 @@ public class RA extends RA_Vars {
 							int asignaturasOmitidas = 0;
 							// Mientras el while este en la lista de omitidos y no se alcance el limite, se busca otro
 							while( (codigosAsignaturasAOmitir.contains(Integer.parseInt(listadoCodigoNombre.get(rand_int1).get(0)))) && (asignaturasOmitidas <= listadoCodigoNombre.size() ) ){
-								rand_int1 = rand.nextInt(listadoCodigoNombre.size());
+								rand_int1 = rand.nextInt((listadoCodigoNombre.size() - 1) + 1) + 1;
 								asignaturasOmitidas++;
 							}
 							// Si se revisaron todas las asignaturas en una vuelta, sale de la vuelta
@@ -1986,7 +1986,7 @@ public class RA extends RA_Vars {
 			} else {
 				// Se crea el random para seleccionar una asignatura al azar
 				Random rand = new Random();
-				int rand_int1 = rand.nextInt(listadoAsignaturasAux.size());
+				int rand_int1 = rand.nextInt((listadoAsignaturasAux.size() - 1) + 1) + 1;
 				// Se busca una asignatura
 				WebElement asignatura = driver.findElement(By.linkText(listadoAsignaturasAux.get(rand_int1)));
 				// Se crea el JavascriptExecutor para hacer scroll
@@ -2227,9 +2227,9 @@ public class RA extends RA_Vars {
 				int cantidadBotones = accionesAsignaturasInscritas.size();
 				// Se crea el random para seleccionar una asignatura al azar
 				Random rand = new Random();
-				int rand_int = rand.nextInt(cantidadBotones);
+				int rand_int = rand.nextInt((cantidadBotones - 1) + 1) + 1;
 				while( (randomOmitidos.contains(rand_int)) && (randomOmitidos.size() < postulacionesNoDesinscribibles ) ){
-					rand_int = rand.nextInt(cantidadBotones);
+					rand_int = rand.nextInt((cantidadBotones - 1) + 1) + 1;
 				}
 				int j = 0;
 				while( j < cantidadBotones ){
@@ -2455,12 +2455,12 @@ public class RA extends RA_Vars {
 						} else {
 							// Se crea el random para seleccionar una asignatura al azar
 							Random rand = new Random();
-							int rand_int1 = rand.nextInt(listadoCodigoNombre2.size());
+							int rand_int1 = rand.nextInt((listadoCodigoNombre2.size() - 1) + 1) + 1;
 							// Se revisa cuantas asignaturas se omitieron
 							int asignaturasOmitidas = 0;
 							// Mientras el while este en la lista de omitidos y no se alcance el limite, se busca otro
 							while( (codigosAsignaturasAOmitir2.contains(Integer.parseInt(listadoCodigoNombre2.get(rand_int1).get(0)))) && (asignaturasOmitidas <= listadoCodigoNombre2.size() ) ){
-								rand_int1 = rand.nextInt(listadoCodigoNombre2.size());
+								rand_int1 = rand.nextInt((listadoCodigoNombre2.size() - 1) + 1) + 1;
 								asignaturasOmitidas++;
 							}
 							// Si se revisaron todas las asignaturas en una vuelta, sale de la vuelta

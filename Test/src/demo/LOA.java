@@ -16,9 +16,9 @@ import java.util.concurrent.TimeUnit;
 public class LOA extends LOA_Vars {
 	@Test
 	public void Postulaciones_Inscribir_Random() {
-		System.out.println("Se inicia el test Postulaciones_Inscribir_Random");
 		// Se configura el driver para firefox
 		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, LOA_Vars.driverPath);
+		System.setProperty(GeckoDriverService.GECKO_DRIVER_LOG_PROPERTY, LOA_Vars.logPath);
 		// Se crea el driver para navegar en la pagina web
 		WebDriver driver = new FirefoxDriver();
 		// Se abre la pagina
@@ -95,7 +95,7 @@ public class LOA extends LOA_Vars {
 			} else {
 				// Se crea el random para seleccionar una asignatura al azar
 				Random rand = new Random();
-				int rand_int1 = rand.nextInt(listadoAsignaturasAux.size());
+				int rand_int1 = rand.nextInt((listadoAsignaturasAux.size() - 1) + 1) + 1;
 				// Se busca una asignatura
 				WebElement asignatura = driver.findElement(By.linkText(listadoAsignaturasAux.get(rand_int1)));
 				// Se crea el JavascriptExecutor para hacer scroll
@@ -250,6 +250,7 @@ public class LOA extends LOA_Vars {
 		System.out.println("Se inicia el test Postulaciones_Desinscribir_Random");
 		// Se configura el driver para firefox
 		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, LOA_Vars.driverPath);
+		System.setProperty(GeckoDriverService.GECKO_DRIVER_LOG_PROPERTY, LOA_Vars.logPath);
 		// Se crea el driver para navegar en la pagina web
 		WebDriver driver = new FirefoxDriver();
 		// Se abre la pagina
@@ -312,9 +313,9 @@ public class LOA extends LOA_Vars {
 				int cantidadBotones = accionesAsignaturasPostuladas.size();
 				// Se crea el random para seleccionar una asignatura al azar
 				Random rand = new Random();
-				int rand_int = rand.nextInt(cantidadBotones);
+				int rand_int = rand.nextInt((cantidadBotones - 1) + 1) + 1;
 				while( (randomOmitidos.contains(rand_int)) && (randomOmitidos.size() < postulacionesNoDesinscribibles ) ){
-					rand_int = rand.nextInt(cantidadBotones);
+					rand_int = rand.nextInt((cantidadBotones - 1) + 1) + 1;
 				}
 				int j = 0;
 				while( j < cantidadBotones ){
@@ -386,6 +387,7 @@ public class LOA extends LOA_Vars {
 		System.out.println("Se inicia el test Postulaciones_Inscribir_Limite");
 		// Se configura el driver para firefox
 		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, LOA_Vars.driverPath);
+		System.setProperty(GeckoDriverService.GECKO_DRIVER_LOG_PROPERTY, LOA_Vars.logPath);
 		// Se crea el driver para navegar en la pagina web
 		WebDriver driver = new FirefoxDriver();
 		// Se abre la pagina
@@ -544,7 +546,7 @@ public class LOA extends LOA_Vars {
 							int asignaturasOmitidas = 0;
 							// Mientras el while este en la lista de omitidos y no se alcance el limite, se busca otro
 							while( (codigosAsignaturasAOmitir2.contains(Integer.parseInt(listadoCodigoNombre2.get(rand_int1).get(0)))) && (asignaturasOmitidas <= listadoCodigoNombre2.size() ) ){
-								rand_int1 = rand.nextInt(listadoCodigoNombre2.size());
+								rand_int1 = rand.nextInt((listadoCodigoNombre2.size() - 1) + 1) + 1;
 								asignaturasOmitidas++;
 							}
 							// Si se revisaron todas las asignaturas en una vuelta, sale de la vuelta
@@ -683,7 +685,7 @@ public class LOA extends LOA_Vars {
 										listadoEjercicioAux.add(tmp);
 										existeEjercicio = true;
 										// Se crea un random para seleccionar una seccion de ejercicio al azar
-										int rand_int2 = rand.nextInt(listadoEjercicio.size());
+										int rand_int2 = rand.nextInt((listadoEjercicio.size() - 1) + 1) + 1;
 										// Se obtiene la seccion
 										WebElement seccionElement = driver.findElement(By.cssSelector(".row-ejercicio:nth-child("+(rand_int2)+") > td:nth-child(1)"));
 										// Se hace scroll hacia el boton
@@ -750,6 +752,7 @@ public class LOA extends LOA_Vars {
 		System.out.println("Se inicia el test Postulaciones_Desinscribir_Todo");
 		// Se configura el driver para firefox
 		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, LOA_Vars.driverPath);
+		System.setProperty(GeckoDriverService.GECKO_DRIVER_LOG_PROPERTY, LOA_Vars.logPath);
 		// Se crea el driver para navegar en la pagina web
 		WebDriver driver = new FirefoxDriver();
 		// Se abre la pagina
@@ -876,6 +879,7 @@ public class LOA extends LOA_Vars {
 		System.out.println("Se inicia el test Solicitudes_Inscribir_Random");
 		// Se configura el driver para firefox
 		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, LOA_Vars.driverPath);
+		System.setProperty(GeckoDriverService.GECKO_DRIVER_LOG_PROPERTY, LOA_Vars.logPath);
 		// Se crea el driver para navegar en la pagina web
 		WebDriver driver = new FirefoxDriver();
 		// Se abre la pagina
@@ -945,7 +949,7 @@ public class LOA extends LOA_Vars {
 			} else {
 				// Se crea el random para seleccionar una asignatura al azar
 				Random rand = new Random();
-				int rand_int1 = rand.nextInt(listadoAsignaturasAux.size());
+				int rand_int1 = rand.nextInt((listadoAsignaturasAux.size() - 1) + 1) + 1;
 				// Se crea el JavascriptExecutor para hacer scroll
 				JavascriptExecutor js = (JavascriptExecutor) driver;
 				// Se selecciona una asignatura
@@ -1096,6 +1100,7 @@ public class LOA extends LOA_Vars {
 		System.out.println("Se inicia el test Solicitudes_Revisar_Random");
 		// Se configura el driver para firefox
 		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, LOA_Vars.driverPath);
+		System.setProperty(GeckoDriverService.GECKO_DRIVER_LOG_PROPERTY, LOA_Vars.logPath);
 		// Se crea el driver para navegar en la pagina web
 		WebDriver driver = new FirefoxDriver();
 		// Se abre la pagina
@@ -1152,7 +1157,7 @@ public class LOA extends LOA_Vars {
 		} else {
 			// Se crea un random para seleccionar una solicitud revisable al azar
 			Random rand = new Random();
-			int rand_int = listadoSolicitudesRevisables.get(rand.nextInt(listadoSolicitudesRevisables.size()));
+			int rand_int = rand.nextInt((listadoSolicitudesRevisables.get(rand.nextInt(listadoSolicitudesRevisables.size())) - 1) + 1) + 1;
 			// Se crea el JavascriptExecutor para hacer scroll
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			// Se obtiene la posicion del boton
@@ -1210,6 +1215,7 @@ public class LOA extends LOA_Vars {
 		System.out.println("Se inicia el test Solicitudes_Eliminar_Random");
 		// Se configura el driver para firefox
 		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, LOA_Vars.driverPath);
+		System.setProperty(GeckoDriverService.GECKO_DRIVER_LOG_PROPERTY, LOA_Vars.logPath);
 		// Se crea el driver para navegar en la pagina web
 		WebDriver driver = new FirefoxDriver();
 		// Se abre la pagina
@@ -1264,7 +1270,7 @@ public class LOA extends LOA_Vars {
 		if( listadoSolicitudesEliminables.size() > 0 ){
 			// Se crea un random para seleccionar una solicitud eliminable al azar
 			Random rand = new Random();
-			int rand_int = listadoSolicitudesEliminables.get(rand.nextInt(listadoSolicitudesEliminables.size()));
+			int rand_int = rand.nextInt((listadoSolicitudesEliminables.get(rand.nextInt(listadoSolicitudesEliminables.size())) - 1) + 1) + 1;
 			// Se crea el JavascriptExecutor para hacer scroll
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			// Se obtiene la posicion del boton
@@ -1286,6 +1292,7 @@ public class LOA extends LOA_Vars {
 		System.out.println("Se inicia el test Postulaciones_Inscribir_Limite");
 		// Se configura el driver para firefox
 		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, LOA_Vars.driverPath);
+		System.setProperty(GeckoDriverService.GECKO_DRIVER_LOG_PROPERTY, LOA_Vars.logPath);
 		// Se crea el driver para navegar en la pagina web
 		WebDriver driver = new FirefoxDriver();
 		// Se abre la pagina
@@ -1446,12 +1453,12 @@ public class LOA extends LOA_Vars {
 						} else {
 							// Se crea el random para seleccionar una asignatura al azar
 							Random rand = new Random();
-							int rand_int1 = rand.nextInt(listadoCodigoNombre.size());
+							int rand_int1 = rand.nextInt((listadoCodigoNombre.size() - 1) + 1) + 1;
 							// Se revisa cuantas asignaturas se omitieron
 							int asignaturasOmitidas = 0;
 							// Mientras el while este en la lista de omitidos y no se alcance el limite, se busca otro
 							while( (codigosAsignaturasAOmitir.contains(Integer.parseInt(listadoCodigoNombre.get(rand_int1).get(0)))) && (asignaturasOmitidas <= listadoCodigoNombre.size() ) ){
-								rand_int1 = rand.nextInt(listadoCodigoNombre.size());
+								rand_int1 = rand.nextInt((listadoCodigoNombre.size() - 1) + 1) + 1;
 								asignaturasOmitidas++;
 							}
 							// Si se revisaron todas las asignaturas en una vuelta, sale de la vuelta
@@ -1635,6 +1642,7 @@ public class LOA extends LOA_Vars {
 		System.out.println("Se inicia el test Solicitudes_Revisar_Random");
 		// Se configura el driver para firefox
 		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, LOA_Vars.driverPath);
+		System.setProperty(GeckoDriverService.GECKO_DRIVER_LOG_PROPERTY, LOA_Vars.logPath);
 		// Se crea el driver para navegar en la pagina web
 		WebDriver driver = new FirefoxDriver();
 		// Se abre la pagina
@@ -1796,6 +1804,7 @@ public class LOA extends LOA_Vars {
 		System.out.println("Se inicia el test Solicitudes_Eliminar_Todo");
 		// Se configura el driver para firefox
 		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, LOA_Vars.driverPath);
+		System.setProperty(GeckoDriverService.GECKO_DRIVER_LOG_PROPERTY, LOA_Vars.logPath);
 		// Se crea el driver para navegar en la pagina web
 		WebDriver driver = new FirefoxDriver();
 		// Se abre la pagina
@@ -1910,6 +1919,7 @@ public class LOA extends LOA_Vars {
 		System.out.println("Se inicia el test Inscripciones_Inscribir_Random");
 		// Se configura el driver para firefox
 		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, LOA_Vars.driverPath);
+		System.setProperty(GeckoDriverService.GECKO_DRIVER_LOG_PROPERTY, LOA_Vars.logPath);
 		// Se crea el driver para navegar en la pagina web
 		WebDriver driver = new FirefoxDriver();
 		// Se abre la pagina
@@ -2165,6 +2175,7 @@ public class LOA extends LOA_Vars {
 		System.out.println("Se inicia el test Inscripciones_Desinscribir_Random");
 		// Se configura el driver para firefox
 		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, LOA_Vars.driverPath);
+		System.setProperty(GeckoDriverService.GECKO_DRIVER_LOG_PROPERTY, LOA_Vars.logPath);
 		// Se crea el driver para navegar en la pagina web
 		WebDriver driver = new FirefoxDriver();
 		// Se abre la pagina
@@ -2227,9 +2238,9 @@ public class LOA extends LOA_Vars {
 				int cantidadBotones = accionesAsignaturasInscritas.size();
 				// Se crea el random para seleccionar una asignatura al azar
 				Random rand = new Random();
-				int rand_int = rand.nextInt(cantidadBotones);
+				int rand_int = rand.nextInt((cantidadBotones - 1) + 1) + 1;
 				while( (randomOmitidos.contains(rand_int)) && (randomOmitidos.size() < postulacionesNoDesinscribibles ) ){
-					rand_int = rand.nextInt(cantidadBotones);
+					rand_int = rand.nextInt((cantidadBotones - 1) + 1) + 1;
 				}
 				int j = 0;
 				while( j < cantidadBotones ){
@@ -2301,6 +2312,7 @@ public class LOA extends LOA_Vars {
 		System.out.println("Se inicia el test Inscripciones_Inscribir_Limite");
 		// Se configura el driver para firefox
 		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, LOA_Vars.driverPath);
+		System.setProperty(GeckoDriverService.GECKO_DRIVER_LOG_PROPERTY, LOA_Vars.logPath);
 		// Se crea el driver para navegar en la pagina web
 		WebDriver driver = new FirefoxDriver();
 		// Se abre la pagina
@@ -2455,12 +2467,12 @@ public class LOA extends LOA_Vars {
 						} else {
 							// Se crea el random para seleccionar una asignatura al azar
 							Random rand = new Random();
-							int rand_int1 = rand.nextInt(listadoCodigoNombre2.size());
+							int rand_int1 = rand.nextInt((listadoCodigoNombre2.size() - 1) + 1) + 1;
 							// Se revisa cuantas asignaturas se omitieron
 							int asignaturasOmitidas = 0;
 							// Mientras el while este en la lista de omitidos y no se alcance el limite, se busca otro
 							while( (codigosAsignaturasAOmitir2.contains(Integer.parseInt(listadoCodigoNombre2.get(rand_int1).get(0)))) && (asignaturasOmitidas <= listadoCodigoNombre2.size() ) ){
-								rand_int1 = rand.nextInt(listadoCodigoNombre2.size());
+								rand_int1 = rand.nextInt((listadoCodigoNombre2.size() - 1) + 1) + 1;
 								asignaturasOmitidas++;
 							}
 							// Si se revisaron todas las asignaturas en una vuelta, sale de la vuelta
@@ -2695,6 +2707,7 @@ public class LOA extends LOA_Vars {
 		System.out.println("Se inicia el test Inscripciones_Desinscribir_Todo");
 		// Se configura el driver para firefox
 		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, LOA_Vars.driverPath);
+		System.setProperty(GeckoDriverService.GECKO_DRIVER_LOG_PROPERTY, LOA_Vars.logPath);
 		// Se crea el driver para navegar en la pagina web
 		WebDriver driver = new FirefoxDriver();
 		// Se abre la pagina
