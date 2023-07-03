@@ -2352,16 +2352,6 @@ public class LOA extends LOA_Vars {
 		} catch (Exception e) {
 			System.out.println("No se encuentra el proceso de solicitudes de inscripción");
 		}
-		try {
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame("mainFrame");
-			driver.switchTo().frame("derecho");
-			driver.switchTo().defaultContent();
-		} catch (Exception e2) {
-			System.out.println("El proceso se encuentra cerrado");
-			System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random\n\n==========================================================\n");
-			return;
-		}
 		// Seleccionar proceso de enviar inscripciones
 		driver.switchTo().defaultContent();
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
@@ -2472,7 +2462,7 @@ public class LOA extends LOA_Vars {
 							// Se revisa cuantas asignaturas se omitieron
 							int asignaturasOmitidas = 0;
 							// Mientras el while este en la lista de omitidos y no se alcance el limite, se busca otro
-							while( (codigosAsignaturasAOmitir2.contains(Integer.parseInt(listadoCodigoNombre2.get(rand_int1).get(0)))) && (asignaturasOmitidas <= listadoCodigoNombre2.size() ) ){
+							while( (codigosAsignaturasAOmitir2.contains(Integer.parseInt(listadoCodigoNombre2.get(rand_int1-1).get(0)))) && (asignaturasOmitidas <= listadoCodigoNombre2.size() ) ){
 								rand_int1 = rand.nextInt((listadoCodigoNombre2.size() - 1) + 1) + 1;
 								asignaturasOmitidas++;
 							}
@@ -2505,7 +2495,7 @@ public class LOA extends LOA_Vars {
 								driver.switchTo().frame("mainFrame");
 								driver.switchTo().frame("derecho");
 								// Se busca una asignatura
-								WebElement asignatura = driver.findElement(By.linkText(listadoCodigoNombre2.get(rand_int1).get(1)));
+								WebElement asignatura = driver.findElement(By.linkText(listadoCodigoNombre2.get(rand_int1-1).get(1)));
 								// Se crea el JavascriptExecutor para hacer scroll
 								JavascriptExecutor js = (JavascriptExecutor) driver;
 								// Se obtiene la posicion del boton
@@ -2514,7 +2504,7 @@ public class LOA extends LOA_Vars {
 								js.executeScript("window.scrollBy(0,"+location.getY()+")");
 								// Se hace click en la asignatura
 								asignatura.click();
-								System.out.println("\n	Asignatura: " + listadoCodigoNombre2.get(rand_int1).get(0) + " - " +  listadoCodigoNombre2.get(rand_int1).get(1) );
+								System.out.println("\n	Asignatura: " + listadoCodigoNombre2.get(rand_int1-1).get(0) + " - " +  listadoCodigoNombre2.get(rand_int1-1).get(1) );
 								try { TimeUnit.MILLISECONDS.sleep(323); } catch (InterruptedException e) { e.printStackTrace(); }
 								// Se sale del frame, y se entra al frame de los cursos de teoria.
 								driver.switchTo().defaultContent();
@@ -2672,7 +2662,7 @@ public class LOA extends LOA_Vars {
 										for (WebElement mensaje : mensajes){
 											try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 											// Se revisa si el mensaje corresponde a asignatura inscrita
-											if( mensaje.getText().compareTo(LOA_Vars.inscripcionStatusInscritaText + Integer.parseInt(listadoCodigoNombre2.get(rand_int1).get(0)) + " (" + LOA_Vars.proceso + ")." ) == 0 ) {
+											if( mensaje.getText().compareTo(LOA_Vars.inscripcionStatusInscritaText + Integer.parseInt(listadoCodigoNombre2.get(rand_int1-1).get(0)) + " (" + LOA_Vars.proceso + ")." ) == 0 ) {
 												System.out.println("		Asignatura inscrita");
 												// Se guarda la asignatura inscrita
 												contadorAsignaturas++;
@@ -2689,7 +2679,7 @@ public class LOA extends LOA_Vars {
 									System.out.println("		No es posible inscribir la asignatura");
 								}
 								// Se guarda el random para saber que esta asignatura no se debe repetir
-								int codigo = Integer.parseInt(listadoCodigoNombre2.get(rand_int1).get(0));
+								int codigo = Integer.parseInt(listadoCodigoNombre2.get(rand_int1-1).get(0));
 								codigosAsignaturasAOmitir2.add(codigo);
 							}
 						}
