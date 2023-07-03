@@ -3,10 +3,11 @@ package demo;
 public class RA_Vars {
   public static final String driverPath = "D:\\1. Descargas Internet\\Selenium\\geckodriver-v0.33.0-win64\\geckodriver.exe";
   
-  public static final String url = "https://loa.usach.cl/intranetfing/index.jsp";
+  public static final String url = "https://rahue.usach.cl/siacusach2/__idxe1e7d0j4a1a9m8i0s__.jsp";
   
   public static final String userRUT = "145010330";
-  public static final String userPass = "Cbh1450";
+  public static final String userRUTAlt = "20496700";
+  public static final String userPass = "1234zxcv";
 
   public static final String proceso = "1/2023";
   

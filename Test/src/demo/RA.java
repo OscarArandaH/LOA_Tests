@@ -75,8 +75,16 @@ public class RA extends RA_Vars {
 			// Se crea el random para seleccionar una asignatura al azar
 			Random rand = new Random();
 			int rand_int1 = rand.nextInt(listadoAsignaturasAux.size());
+			// Se busca una asignatura
+			WebElement asignatura = driver.findElement(By.linkText(listadoAsignaturasAux.get(rand_int1)));
+			// Se crea el JavascriptExecutor para hacer scroll
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			// Se obtiene la posicion del boton
+			Point location = asignatura.getLocation();
+			// Se hace scroll hacia el boton
+			js.executeScript("window.scrollBy(0,"+location.getY()+")");
 			// Se selecciona una asignatura
-			driver.findElement(By.linkText(listadoAsignaturasAux.get(rand_int1))).click();
+			asignatura.click();
 			System.out.println("\n	Asignatura: " + listadoAsignaturasAux.get(rand_int1));
 			try { TimeUnit.MILLISECONDS.sleep(323); } catch (InterruptedException e) { e.printStackTrace(); }
 			// Se sale del frame, y se entra al frame de los cursos de teoria.
@@ -97,27 +105,19 @@ public class RA extends RA_Vars {
 					// No hay cursos de teoria
 					System.out.println("		No hay cursos de teoria");
 				} else {
-					listadoTeoriaAux.add(tmp);
+					// Existen coordinaciones
 					existeTeoria = true;
-				}
-			}
-			// Se prueba seleccionar una seccion de teoria
-			for ( int j = 0; j < listadoTeoriaAux.size(); j++ ) {
-				String seccion = listadoTeoriaAux.get(j).replace("\n", " "	).strip();
-				String[] seccionAux = seccion.split(" ");
-				int cupos = Integer.parseInt(seccionAux[seccionAux.length - 1]);
-				System.out.println("		Seccion " + (j+1) + " | " + seccion);
-				System.out.println("		Seccion " + (j+1) + " | Cupos: " + cupos);
-				// Se revisa si existe cupo
-				if( cupos > 0 ){
-					// Si hay cupos, se selecciona
-					driver.findElement(By.cssSelector(".row-curso:nth-child("+(j+1)+") > td:nth-child(1)")).click();
+					// Se crea un random para seleccionar una seccion de teoria al azar
+					int rand_int2 = rand.nextInt((listadoTeoria.size() - 1) + 1) + 1;
+					// Se obtiene la seccion
+					WebElement seccionElement = driver.findElement(By.cssSelector(".row-curso:nth-child("+(rand_int2)+") > td:nth-child(1)"));
+					// Se hace scroll hacia el boton
+					js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
+					// Se selecciona la seccion
+					seccionElement.click();
 					seleccionoTeoria = true;
-					System.out.println("		Seccion " + (j+1) + " | Seleccionada");
-					break;
-				} else {
-					// Si no hay cupos, se selecciona el siguiente curso
-					System.out.println("		Seccion " + (j+1) + " | Sin cupos");
+					System.out.println("			Si hay cursos de teoria");
+					listadoTeoriaAux.add(tmp);
 				}
 			}
 			// Se sale del frame, y se entra al frame de los cursos de laboratorio.
@@ -151,8 +151,12 @@ public class RA extends RA_Vars {
 				System.out.println("		Seccion " + (j+1) + " | Cupos: " + cupos);
 				// Se revisa si existe cupo
 				if( cupos > 0 ){
-					// Si hay cupos, se selecciona
-					driver.findElement(By.cssSelector(".row-laboratorio:nth-child("+(j+1)+") > td:nth-child(1)")).click();
+					// Si hay cupos, se hace scroll y luego se selecciona
+					WebElement seccionElement = driver.findElement(By.cssSelector(".row-laboratorio:nth-child("+(j+1)+") > td:nth-child(1)"));
+					// Se hace scroll hacia el boton
+					js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
+					// Se selecciona la seccion
+					seccionElement.click();
 					seleccionoLaboratorio = true;
 					System.out.println("		Seccion " + (j+1) + " | Seleccionada");
 					break;
@@ -179,27 +183,19 @@ public class RA extends RA_Vars {
 					// No hay cursos de ejercicios
 					System.out.println("		No hay cursos de ejercicios");
 				} else {
-					listadoEjercicioAux.add(tmp);
+					// Existen coordinaciones
 					existeEjercicio = true;
-				}
-			}
-			// Se prueba seleccionar una seccion de ejercicio
-			for ( int j = 0; j < listadoEjercicioAux.size(); j++ ) {
-				String seccion = listadoEjercicioAux.get(j).replace("\n", " "	).strip();
-				String[] seccionAux = seccion.split(" ");
-				int cupos = Integer.parseInt(seccionAux[seccionAux.length - 1]);
-				System.out.println("		Seccion " + (j+1) + " | " + seccion);
-				System.out.println("		Seccion " + (j+1) + " | Cupos: " + cupos);
-				// Se revisa si existe cupo
-				if( cupos > 0 ){
-					// Si hay cupos, se selecciona
-					driver.findElement(By.cssSelector(".row-ejercicio:nth-child("+(j+1)+") > td:nth-child(1)")).click();
+					// Se crea un random para seleccionar una seccion de teoria al azar
+					int rand_int2 = rand.nextInt((listadoEjercicio.size() - 1) + 1) + 1;
+					// Se obtiene la seccion
+					WebElement seccionElement = driver.findElement(By.cssSelector(".row-ejercicio:nth-child("+(rand_int2)+") > td:nth-child(1)"));
+					// Se hace scroll hacia el boton
+					js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
+					// Se selecciona la seccion
+					seccionElement.click();
 					seleccionoEjercicio = true;
-					System.out.println("		Seccion " + (j+1) + " | Seleccionada");
-					break;
-				} else {
-					// Si no hay cupos, se selecciona el siguiente curso
-					System.out.println("		Seccion " + (j+1) + " | Sin cupos");
+					System.out.println("			Si hay cursos de teoria");
+					listadoEjercicioAux.add(tmp);
 				}
 			}
 			// Se revisa que exista al menos un curso
@@ -250,7 +246,7 @@ public class RA extends RA_Vars {
 		driver.findElement(By.linkText("1368 - INGENIERIA CIVIL OBRAS CIVILES")).click();
 		try { TimeUnit.MILLISECONDS.sleep(123); } catch (InterruptedException e) { e.printStackTrace(); }
 
-		int CANTIDADASIGNATURASLIMITE = 6;
+																	int CANTIDADASIGNATURASLIMITE = 6;
 
 		// Se busca cuantas asignaturas lleva solicitadas y postuladas
 		int contadorAsignaturas = 0;
@@ -342,8 +338,16 @@ public class RA extends RA_Vars {
 						driver.switchTo().defaultContent();
 						driver.switchTo().frame("mainFrame");
 						driver.switchTo().frame("derecho");
+						// Se busca una asignatura
+						WebElement asignatura = driver.findElement(By.linkText(listadoCodigoNombre2.get(rand_int1).get(1)));
+						// Se crea el JavascriptExecutor para hacer scroll
+						JavascriptExecutor js = (JavascriptExecutor) driver;
+						// Se obtiene la posicion del boton
+						Point location = asignatura.getLocation();
+						// Se hace scroll hacia el boton
+						js.executeScript("window.scrollBy(0,"+location.getY()+")");
 						// Se hace click en la asignatura
-						driver.findElement(By.linkText(listadoCodigoNombre2.get(rand_int1).get(1))).click();
+						asignatura.click();
 						System.out.println("\n	Asignatura: " + listadoCodigoNombre2.get(rand_int1).get(0) + " - " +  listadoCodigoNombre2.get(rand_int1).get(1) );
 						try { TimeUnit.MILLISECONDS.sleep(323); } catch (InterruptedException e) { e.printStackTrace(); }
 						// Se sale del frame, y se entra al frame de los cursos de teoria.
@@ -364,8 +368,12 @@ public class RA extends RA_Vars {
 							existeTeoria = true;
 							// Se crea un random para seleccionar una seccion de teoria al azar
 							int rand_int2 = rand.nextInt((listadoTeoria.size() - 1) + 1) + 1;
-							// Se selecciona una seccion
-							driver.findElement(By.cssSelector(".row-curso:nth-child("+(rand_int2)+") > td:nth-child(1)")).click();
+							// Se obtiene la seccion
+							WebElement seccionElement = driver.findElement(By.cssSelector(".row-curso:nth-child("+(rand_int2)+") > td:nth-child(1)"));
+							// Se hace scroll hacia el boton
+							js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
+							// Se selecciona la seccion
+							seccionElement.click();
 							seleccionoTeoria = true;
 							System.out.println("			Si hay cursos de teoria");
 						} else {
@@ -403,9 +411,13 @@ public class RA extends RA_Vars {
 							System.out.println("			Seccion " + (k+1) + " | Cupos: " + cupos);
 							// Se revisa si existe cupo
 							if( cupos > 0 ){
-								// Si hay cupos, se selecciona
-								driver.findElement(By.cssSelector("tr.row-laboratorio:nth-child("+(k+1)+") > td:nth-child(1) > div:nth-child(1) > input:nth-child(1)")).click();
-								seleccionoEjercicio = true;
+								// Si hay cupos, se hace scroll y luego se selecciona
+								WebElement seccionElement = driver.findElement(By.cssSelector("tr.row-laboratorio:nth-child("+(k+1)+") > td:nth-child(1) > div:nth-child(1) > input:nth-child(1)"));
+								// Se hace scroll hacia el boton
+								js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
+								// Se selecciona la seccion
+								seccionElement.click();
+								seleccionoLaboratorio = true;
 								System.out.println("			Seccion " + (k+1) + " | Seleccionada");
 								break;
 							} else {
@@ -435,8 +447,12 @@ public class RA extends RA_Vars {
 								existeEjercicio = true;
 								// Se crea un random para seleccionar una seccion de ejercicio al azar
 								int rand_int2 = rand.nextInt(listadoEjercicio.size());
-								// Se selecciona una seccion
-								driver.findElement(By.cssSelector(".row-curso:nth-child("+(rand_int2)+") > td:nth-child(1)")).click();
+								// Se obtiene la seccion
+								WebElement seccionElement = driver.findElement(By.cssSelector(".row-ejercicio:nth-child("+(rand_int2)+") > td:nth-child(1)"));
+								// Se hace scroll hacia el boton
+								js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
+								// Se selecciona la seccion
+								seccionElement.click();
 								seleccionoEjercicio = true;
 							}
 						}
@@ -746,14 +762,14 @@ public class RA extends RA_Vars {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			// Se selecciona una asignatura
 			WebElement asignatura = driver.findElement(By.linkText(listadoAsignaturasAux.get(rand_int1)));
-			System.out.println("\nAsignatura: " + asignatura.getText());
 			try { TimeUnit.MILLISECONDS.sleep(123); } catch (InterruptedException e) { e.printStackTrace(); }
 			// Se obtiene la posicion de la asignatura seleciconada
 			Point location = asignatura.getLocation();
 			// Se hace scroll hacia la asignatura
 			js.executeScript("window.scrollBy(0,"+location.getY()+")");
 			// Se hace click en la asignatura
-			driver.findElement(By.linkText(listadoAsignaturasAux.get(rand_int1))).click();
+			asignatura.click();
+			System.out.println("\nAsignatura: " + asignatura.getText());
 			try { TimeUnit.MILLISECONDS.sleep(323); } catch (InterruptedException e) { e.printStackTrace(); }
 			System.out.println("	Se revisan los cursos de teoria");
 			// Se sale del frame, y se entra al frame de los cursos de teoria.
@@ -771,11 +787,21 @@ public class RA extends RA_Vars {
 				String tmp = e.getText().replace("\n", " ");
 				if( tmp.equals(RA_Vars.sinCoordinacionSolicitudTeoriaText) ){
 					// No hay cursos de teoria
+					System.out.println("			No hay cursos de teoria");
 				} else {
-					listadoTeoriaAux.add(tmp);
+					// Existen coordinaciones
 					existeTeoria = true;
-					driver.findElement(By.cssSelector(".row-curso:nth-child(1) > td:nth-child(1)")).click();
+					// Se crea un random para seleccionar una seccion de teoria al azar
+					int rand_int2 = rand.nextInt((listadoTeoria.size() - 1) + 1) + 1;
+					// Se obtiene la seccion
+					WebElement seccionElement = driver.findElement(By.cssSelector(".row-curso:nth-child("+(rand_int2)+") > td:nth-child(1)"));
+					// Se hace scroll hacia el boton
+					js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
+					// Se selecciona la seccion
+					seccionElement.click();
 					seleccionoTeoria = true;
+					System.out.println("			Si hay cursos de teoria");
+					listadoTeoriaAux.add(tmp);
 				}
 			}
 			System.out.println("	Se revisan los cursos de laboratorio");
@@ -796,10 +822,19 @@ public class RA extends RA_Vars {
 				if( tmp.equals(RA_Vars.sinCoordinacionSolicitudEjeText) ){
 					// No hay cursos de laboratorio
 				} else {
-					listadoEjercicioAux.add(tmp);
+					// Existen coordinaciones
 					existeEjercicio = true;
-					driver.findElement(By.cssSelector(".row-ejercicio:nth-child(1) > td:nth-child(1)")).click();
-					seleccionoLaboratorio = true;
+					// Se crea un random para seleccionar una seccion de teoria al azar
+					int rand_int2 = rand.nextInt((listadoEjercicio.size() - 1) + 1) + 1;
+					// Se obtiene la seccion
+					WebElement seccionElement = driver.findElement(By.cssSelector(".row-ejercicio:nth-child("+(rand_int2)+") > td:nth-child(1)"));
+					// Se hace scroll hacia el boton
+					js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
+					// Se selecciona la seccion
+					seccionElement.click();
+					seleccionoEjercicio = true;
+					System.out.println("			Si hay cursos de teoria");
+					listadoEjercicioAux.add(tmp);
 				}
 			}
 			System.out.println("	Se revisan los cursos de ejercicio");
@@ -820,10 +855,19 @@ public class RA extends RA_Vars {
 				if( tmp.equals(RA_Vars.sinCoordinacionSolicitudLabText) ){
 					// No hay cursos de ejercicios
 				} else {
-					listadoLaboratorioAux.add(tmp);
+					// Existen coordinaciones
 					existeLaboratorio = true;
-					driver.findElement(By.cssSelector(".row-laboratorio:nth-child(1) > td:nth-child(1)")).click();
-					seleccionoEjercicio = true;
+					// Se crea un random para seleccionar una seccion de teoria al azar
+					int rand_int2 = rand.nextInt((listadoLaboratorio.size() - 1) + 1) + 1;
+					// Se obtiene la seccion
+					WebElement seccionElement = driver.findElement(By.cssSelector(".row-laboratorio:nth-child("+(rand_int2)+") > td:nth-child(1)"));
+					// Se hace scroll hacia el boton
+					js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
+					// Se selecciona la seccion
+					seccionElement.click();
+					seleccionoLaboratorio = true;
+					System.out.println("			Si hay cursos de teoria");
+					listadoLaboratorioAux.add(tmp);
 				}
 			}
 			System.out.println("	Se revisa que se haya seleccionado al menos un curso");
@@ -881,7 +925,7 @@ public class RA extends RA_Vars {
 		driver.findElement(By.linkText("1368 - INGENIERIA CIVIL OBRAS CIVILES")).click();
 		try { TimeUnit.MILLISECONDS.sleep(123); } catch (InterruptedException e) { e.printStackTrace(); }
 
-		int CANTIDADASIGNATURASLIMITE = 8;
+																	int CANTIDADASIGNATURASLIMITE = 8;
 
 		// Se busca cuantas asignaturas lleva solicitadas y postuladas
 		int contadorAsignaturas = 0;
@@ -980,19 +1024,18 @@ public class RA extends RA_Vars {
 						driver.switchTo().defaultContent();
 						driver.switchTo().frame("mainFrame");
 						driver.switchTo().frame("derecho");
-						// Se crea el JavascriptExecutor para hacer scroll
-						JavascriptExecutor js = (JavascriptExecutor) driver;
 						// Se busca la asignatura
 						WebElement asignatura = driver.findElement(By.cssSelector("tr.bold7:nth-child("+(rand_int1+1)+") > td:nth-child(2) > a:nth-child(1)"));
+						// Se crea el JavascriptExecutor para hacer scroll
+						JavascriptExecutor js = (JavascriptExecutor) driver;
 						// Se obtiene la posicion del boton
 						Point location = asignatura.getLocation();
 						// Se hace scroll hacia el boton
 						js.executeScript("window.scrollBy(0,"+location.getY()+")");
-						try { TimeUnit.MILLISECONDS.sleep(123); } catch (InterruptedException e) { e.printStackTrace(); }
 						// Se hace click en la asignatura
+						asignatura.click();
 						System.out.println("\n	Asignatura: " + driver.findElement(By.cssSelector("tr.bold7:nth-child("+(rand_int1+1)+") > td:nth-child(2) > a:nth-child(1)")).getText() );
-						driver.findElement(By.cssSelector("tr.bold7:nth-child("+(rand_int1+1)+") > td:nth-child(2) > a:nth-child(1)")).click();
-						try { TimeUnit.MILLISECONDS.sleep(323); } catch (InterruptedException e) { e.printStackTrace(); }
+						try { TimeUnit.MILLISECONDS.sleep(123); } catch (InterruptedException e) { e.printStackTrace(); }
 						// Se sale del frame, y se entra al frame de los cursos de teoria.
 						driver.switchTo().defaultContent();
 						driver.switchTo().frame("mainFrame");
@@ -1012,8 +1055,12 @@ public class RA extends RA_Vars {
 							existeTeoria = true;
 							// Se crea un random para seleccionar una seccion de teoria al azar
 							int rand_int2 = rand.nextInt((listadoTeoria.size() - 1) + 1) + 1;
-							// Se selecciona una seccion
-							driver.findElement(By.cssSelector(".row-curso:nth-child("+(rand_int2)+") > td:nth-child(1)")).click();
+							// Se obtiene la seccion
+							WebElement seccionElement = driver.findElement(By.cssSelector(".row-curso:nth-child("+(rand_int2)+") > td:nth-child(1)"));
+							// Se hace scroll hacia el boton
+							js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
+							// Se selecciona la seccion
+							seccionElement.click();
 							seleccionoTeoria = true;
 							System.out.println("			Si hay cursos de teoria");
 						} else {
@@ -1039,9 +1086,13 @@ public class RA extends RA_Vars {
 							existeEjercicio = true;
 							// Se crea un random para seleccionar una seccion de teoria al azar
 							int rand_int2 = rand.nextInt((listadoEjercicio.size() - 1) + 1) + 1;
-							// Se selecciona una seccion
-							driver.findElement(By.cssSelector(".row-ejercicio:nth-child("+(rand_int2)+") > td:nth-child(1)")).click();
-							seleccionoTeoria = true;
+							// Se obtiene la seccion
+							WebElement seccionElement = driver.findElement(By.cssSelector(".row-ejercicio:nth-child("+(rand_int2)+") > td:nth-child(1)"));
+							// Se hace scroll hacia el boton
+							js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
+							// Se selecciona la seccion
+							seccionElement.click();
+							seleccionoEjercicio = true;
 							System.out.println("			Si hay cursos de ejercicios");
 						} else {
 							// No hay cursos de teoria
@@ -1066,8 +1117,12 @@ public class RA extends RA_Vars {
 							existeLaboratorio = true;
 							// Se crea un random para seleccionar una seccion de teoria al azar
 							int rand_int2 = rand.nextInt((listadoLab.size() - 1) + 1) + 1;
-							// Se selecciona una seccion
-							driver.findElement(By.cssSelector(".row-laboratorio:nth-child("+(rand_int2)+") > td:nth-child(1)")).click();
+							// Se obtiene la seccion
+							WebElement seccionElement = driver.findElement(By.cssSelector(".row-laboratorio:nth-child("+(rand_int2)+") > td:nth-child(1)"));
+							// Se hace scroll hacia el boton
+							js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
+							// Se selecciona la seccion
+							seccionElement.click();
 							seleccionoLaboratorio = true;
 							System.out.println("			Si hay cursos de laboratorio");
 						} else {
@@ -1394,7 +1449,6 @@ public class RA extends RA_Vars {
 			// Se hace scroll hacia el boton
 			js.executeScript("window.scrollBy(0,"+location.getY()+")");
 			// Se abre la solicitud
-			System.out.println("Solicitud: " + solicitud);
 			try { TimeUnit.MILLISECONDS.sleep(123); } catch (InterruptedException e) { e.printStackTrace(); }
 			listadoSolicitudesEnviadasAux.get(solicitud).click();
 			// Tiempo para que se abra la ventana emergente
