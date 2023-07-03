@@ -23,7 +23,7 @@ public class RA_Vars {
   public static final String sinCoordinacionSolicitudEjeText = "No hay coordinaciones de ejercicio definidas.";
   public static final String sinCoordinacionSolicitudLabText = "No hay coordinaciones definidas.";
 
-  public static final String alertSolicitudConfirmText = "¿Está segur@ que desea solicitar la inscripción de la(s) coordinación(es) seleccionada(s)?";
+  public static final String alertaSolicitudConfirmText = "¿Está segur@ que desea solicitar la inscripción de la(s) coordinación(es) seleccionada(s)?";
 
   public static final String btnPostulacionDESINSCRIBIRText = "DESINSCRIBIR";
   public static final String btnPostulacionELIMINARText = "ELIMINAR";
