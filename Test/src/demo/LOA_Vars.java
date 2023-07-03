@@ -33,4 +33,6 @@ public class LOA_Vars {
   public static final String btnSolicitudELIMINARText = "ELIMINAR";
 
   public static final String postulacionStatusInscritaText = "Ha postulado correctamente la(s) coordinación(es) seleccionada(s) para la asignatura ";
+
+  public static final String inscripcionStatusInscritaText = "Ha inscrito correctamente la(s) coordinación(es) seleccionada(s) para la asignatura ";
 }

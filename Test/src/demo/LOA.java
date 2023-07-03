@@ -38,7 +38,13 @@ public class LOA extends LOA_Vars {
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 		// Seleccionar proceso de Inscripcion
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
-		driver.findElement(By.linkText(LOA_Vars.postulacionText)).click();
+		try {
+			driver.findElement(By.linkText(LOA_Vars.postulacionText)).click();
+		} catch (Exception e) {
+			System.out.println("No se encuentra el proceso de postulacion");
+			System.out.println("\nSe finaliza el test Postulaciones_Inscribir_Random");
+			return;
+		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 		// Seleccionar frame del listado de cursos
 		driver.switchTo().frame("mainFrame");
@@ -253,7 +259,13 @@ public class LOA extends LOA_Vars {
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 		// Seleccionar proceso de Inscripcion
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
-		driver.findElement(By.linkText(LOA_Vars.postulacionText)).click();
+		try {
+			driver.findElement(By.linkText(LOA_Vars.postulacionText)).click();
+		} catch (Exception e) {
+			System.out.println("No se encuentra el proceso de postulacion");
+			System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+			return;
+		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 		// Se entra al frame con las asignaturas postuladas
 		driver.switchTo().defaultContent();
@@ -311,7 +323,13 @@ public class LOA extends LOA_Vars {
 						// Se entra al frame con las asignaturas postuladas
 						driver.switchTo().defaultContent();
 						driver.findElement(By.id("navbar-dropdown-procesos")).click();
-						driver.findElement(By.linkText(LOA_Vars.postulacionText)).click();
+						try {
+							driver.findElement(By.linkText(LOA_Vars.postulacionText)).click();
+						} catch (Exception e) {
+							System.out.println("No se encuentra el proceso de postulacion");
+							System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Random");
+							return;
+						}
 						try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 						driver.switchTo().defaultContent();
 						driver.switchTo().frame("mainFrame");
@@ -362,19 +380,29 @@ public class LOA extends LOA_Vars {
 		int contadorAsignaturas = 0;
 		// Seleccionar proceso de enviar solicitudes
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
-		driver.findElement(By.linkText(LOA_Vars.solicitudText)).click();
-		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
-		// Seleccionar frame del listado de cursos
-		driver.switchTo().frame("mainFrame");
-		driver.switchTo().frame(5);
-		// Se obtienen todas las asignaturas
-		String[] listadoSolicitudesEnviadas = driver.findElements(By.cssSelector(".table > tbody")).get(0).getText().strip().split("\n");
-		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
-		contadorAsignaturas += listadoSolicitudesEnviadas.length;
+		try {
+			driver.findElement(By.linkText(LOA_Vars.solicitudText)).click();
+			try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+			// Seleccionar frame del listado de cursos
+			driver.switchTo().frame("mainFrame");
+			driver.switchTo().frame(5);
+			// Se obtienen todas las asignaturas
+			String[] listadoSolicitudesEnviadas = driver.findElements(By.cssSelector(".table > tbody")).get(0).getText().strip().split("\n");
+			try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+			contadorAsignaturas += listadoSolicitudesEnviadas.length;
+		} catch (Exception e) {
+			System.out.println("No se encuentra el proceso de solicitudes");
+		}
 		// Seleccionar proceso de enviar solicitudes
 		driver.switchTo().defaultContent();
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
-		driver.findElement(By.linkText(LOA_Vars.postulacionText)).click();
+		try {
+			driver.findElement(By.linkText(LOA_Vars.postulacionText)).click();
+		} catch (Exception e) {
+			System.out.println("No se encuentra el proceso de postulacion");
+			System.out.println("\nSe finaliza el test Postulaciones_Inscribir_Limite");
+			return;
+		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 		// Seleccionar el frame con las postulaciones
 		driver.switchTo().defaultContent();
@@ -397,7 +425,13 @@ public class LOA extends LOA_Vars {
 				// Seleccionar frame del listado de cursos
 				driver.switchTo().defaultContent();
 				driver.findElement(By.id("navbar-dropdown-procesos")).click();
-				driver.findElement(By.linkText(LOA_Vars.postulacionText)).click();
+				try {
+					driver.findElement(By.linkText(LOA_Vars.postulacionText)).click();
+				} catch (Exception e) {
+					System.out.println("No se encuentra el proceso de postulacion");
+					System.out.println("\nSe finaliza el test Postulaciones_Inscribir_Limite");
+					return;
+				}
 				try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 				driver.switchTo().defaultContent();
 				driver.switchTo().frame("mainFrame");
@@ -460,7 +494,13 @@ public class LOA extends LOA_Vars {
 								// Se selecciona una asignatura
 								driver.switchTo().defaultContent();
 								driver.findElement(By.id("navbar-dropdown-procesos")).click();
-								driver.findElement(By.linkText(LOA_Vars.postulacionText)).click();
+								try {
+									driver.findElement(By.linkText(LOA_Vars.postulacionText)).click();
+								} catch (Exception e) {
+									System.out.println("No se encuentra el proceso de postulacion");
+									System.out.println("\nSe finaliza el test Postulaciones_Inscribir_Limite");
+									return;
+								}
 								try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 								driver.switchTo().defaultContent();
 								driver.switchTo().frame("mainFrame");
@@ -659,7 +699,13 @@ public class LOA extends LOA_Vars {
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 		// Seleccionar proceso de Inscripcion
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
-		driver.findElement(By.linkText(LOA_Vars.postulacionText)).click();
+		try {
+			driver.findElement(By.linkText(LOA_Vars.postulacionText)).click();
+		} catch (Exception e) {
+			System.out.println("No se encuentra el proceso de postulacion");
+			System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Todo");
+			return;
+		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 		// Se entra al frame con las asignaturas postuladas
 		driver.switchTo().defaultContent();
@@ -706,7 +752,13 @@ public class LOA extends LOA_Vars {
 						// Se entra al frame con las asignaturas postuladas
 						driver.switchTo().defaultContent();
 						driver.findElement(By.id("navbar-dropdown-procesos")).click();
-						driver.findElement(By.linkText(LOA_Vars.postulacionText)).click();
+						try {
+							driver.findElement(By.linkText(LOA_Vars.postulacionText)).click();
+						} catch (Exception e) {
+							System.out.println("No se encuentra el proceso de postulacion");
+							System.out.println("\nSe finaliza el test Postulaciones_Desinscribir_Todo");
+							return;
+						}
 						try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 						driver.switchTo().defaultContent();
 						driver.switchTo().frame("mainFrame");
@@ -753,7 +805,13 @@ public class LOA extends LOA_Vars {
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 		// Seleccionar proceso de enviar solicitudes
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
-		driver.findElement(By.linkText(LOA_Vars.solicitudText)).click();
+		try {
+			driver.findElement(By.linkText(LOA_Vars.solicitudText)).click();
+		} catch (Exception e) {
+			System.out.println("No se encuentra el proceso de solicitudes de inscripción");
+			System.out.println("\nSe finaliza el test Solicitudes_Inscribir_Random");
+			return;
+		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 		// Seleccionar frame del listado de cursos
 		driver.switchTo().defaultContent();
@@ -957,7 +1015,13 @@ public class LOA extends LOA_Vars {
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 		// Seleccionar proceso de enviar solicitudes
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
-		driver.findElement(By.linkText(LOA_Vars.solicitudText)).click();
+		try {
+			driver.findElement(By.linkText(LOA_Vars.solicitudText)).click();
+		} catch (Exception e) {
+			System.out.println("No se encuentra el proceso de solicitudes de inscripción");
+			System.out.println("\nSe finaliza el test Solicitudes_Revisar_Random");
+			return;
+		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 		// Seleccionar frame del listado de cursos
 		driver.switchTo().defaultContent();
@@ -1009,7 +1073,13 @@ public class LOA extends LOA_Vars {
 			System.out.println("	----------------------------------------");
 			driver.switchTo().defaultContent();
 			driver.findElement(By.id("navbar-dropdown-procesos")).click();
-			driver.findElement(By.linkText(LOA_Vars.solicitudText)).click();
+			try {
+				driver.findElement(By.linkText(LOA_Vars.solicitudText)).click();
+			} catch (Exception e) {
+				System.out.println("No se encuentra el proceso de solicitudes de inscripción");
+				System.out.println("\nSe finaliza el test Solicitudes_Revisar_Random");
+				return;
+			}
 			try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 			System.out.println("\nSe finaliza el test Solicitudes_Revisar_Random");
 		}
@@ -1039,7 +1109,13 @@ public class LOA extends LOA_Vars {
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 		// Seleccionar proceso de enviar solicitudes
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
-		driver.findElement(By.linkText(LOA_Vars.solicitudText)).click();
+		try {
+			driver.findElement(By.linkText(LOA_Vars.solicitudText)).click();
+		} catch (Exception e) {
+			System.out.println("No se encuentra el proceso de solicitudes de inscripción");
+			System.out.println("\nSe finaliza el test Solicitudes_Eliminar_Random");
+			return;
+		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 		// Seleccionar frame del listado de cursos
 		driver.switchTo().defaultContent();
@@ -1105,30 +1181,40 @@ public class LOA extends LOA_Vars {
 		// Seleccionar proceso postulaciones
 		driver.switchTo().defaultContent();
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
-		driver.findElement(By.linkText(LOA_Vars.postulacionText)).click();
-		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
-		// Seleccionar el frame con las postulaciones
-		driver.switchTo().defaultContent();
-		driver.switchTo().frame("mainFrame");
-		driver.switchTo().frame(5);
-		// Se obtienen todas las asignaturas
-		List<WebElement> listadoAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(1)"));
-		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
-		// Se cuenta cuantas asignaturas se han postulado
-		ArrayList<String> codigosSolicitudes = new ArrayList<String>();
-		int i = 0;
-		while ( i < listadoAsignaturasPostuladas.size() ){
-			String tmp = listadoAsignaturasPostuladas.get(i).getText().split("-")[0].trim();
-			if( !codigosSolicitudes.contains(tmp) ){
-				codigosSolicitudes.add(tmp);
+		try {
+			driver.findElement(By.linkText(LOA_Vars.postulacionText)).click();
+			try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+			// Seleccionar el frame con las postulaciones
+			driver.switchTo().defaultContent();
+			driver.switchTo().frame("mainFrame");
+			driver.switchTo().frame(5);
+			// Se obtienen todas las asignaturas
+			List<WebElement> listadoAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(1)"));
+			try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+			// Se cuenta cuantas asignaturas se han postulado
+			ArrayList<String> codigosSolicitudes = new ArrayList<String>();
+			int i = 0;
+			while ( i < listadoAsignaturasPostuladas.size() ){
+				String tmp = listadoAsignaturasPostuladas.get(i).getText().split("-")[0].trim();
+				if( !codigosSolicitudes.contains(tmp) ){
+					codigosSolicitudes.add(tmp);
+				}
+				i++;
 			}
-			i++;
+			contadorAsignaturas += codigosSolicitudes.size();
+		} catch (Exception e) {
+			System.out.println("No se encuentra el proceso de postulacion");
 		}
-		contadorAsignaturas += codigosSolicitudes.size();
 		// Seleccionar proceso de enviar solicitudes
 		driver.switchTo().defaultContent();
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
-		driver.findElement(By.linkText(LOA_Vars.solicitudText)).click();
+		try {
+			driver.findElement(By.linkText(LOA_Vars.solicitudText)).click();
+		} catch (Exception e) {
+			System.out.println("No se encuentra el proceso de solicitudes de inscripción");
+			System.out.println("\nSe finaliza el test Solicitudes_Inscribir_Limite");
+			return;
+		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 		// Seleccionar frame del listado de cursos
 		driver.switchTo().defaultContent();
@@ -1146,7 +1232,13 @@ public class LOA extends LOA_Vars {
 				// Seleccionar frame del listado de cursos
 				driver.switchTo().defaultContent();
 				driver.findElement(By.id("navbar-dropdown-procesos")).click();
-				driver.findElement(By.linkText(LOA_Vars.solicitudText)).click();
+				try {
+					driver.findElement(By.linkText(LOA_Vars.solicitudText)).click();
+				} catch (Exception e) {
+					System.out.println("No se encuentra el proceso de solicitudes de inscripción");
+					System.out.println("\nSe finaliza el test Solicitudes_Inscribir_Limite");
+					return;
+				}
 				try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 				driver.switchTo().defaultContent();
 				driver.switchTo().frame("mainFrame");
@@ -1190,7 +1282,7 @@ public class LOA extends LOA_Vars {
 						// Se revisa que existan asignaturas
 						if( listadoCodigoNombre.size() == 0 ) {
 							System.out.println("No hay mas asignaturas");
-							i = 1;
+							l = 1;
 						} else {
 							// Se crea el random para seleccionar una asignatura al azar
 							Random rand = new Random();
@@ -1209,7 +1301,13 @@ public class LOA extends LOA_Vars {
 								// Se selecciona una asignatura
 								driver.switchTo().defaultContent();
 								driver.findElement(By.id("navbar-dropdown-procesos")).click();
-								driver.findElement(By.linkText(LOA_Vars.solicitudText)).click();
+								try {
+									driver.findElement(By.linkText(LOA_Vars.solicitudText)).click();
+								} catch (Exception e) {
+									System.out.println("No se encuentra el proceso de solicitudes de inscripción");
+									System.out.println("\nSe finaliza el test Solicitudes_Inscribir_Limite");
+									return;
+								}
 								try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 								driver.switchTo().defaultContent();
 								driver.switchTo().frame("mainFrame");
@@ -1338,7 +1436,7 @@ public class LOA extends LOA_Vars {
 									contadorAsignaturas++;
 									// Tiempo para guardar la asignatura postulada
 									try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
-									i = 1;
+									l = 1;
 								} else {
 									// No se puede postular a la asignatura
 									System.out.println("	No se puede postular a la asignatura");
@@ -1386,7 +1484,13 @@ public class LOA extends LOA_Vars {
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 		// Seleccionar proceso de enviar solicitudes
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
-		driver.findElement(By.linkText(LOA_Vars.solicitudText)).click();
+		try {
+			driver.findElement(By.linkText(LOA_Vars.solicitudText)).click();
+		} catch (Exception e) {
+			System.out.println("No se encuentra el proceso de solicitudes de inscripción");
+			System.out.println("\nSe finaliza el test Solicitudes_Revisar_Todo");
+			return;
+		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 		// Seleccionar frame del listado de cursos
 		driver.switchTo().defaultContent();
@@ -1410,7 +1514,13 @@ public class LOA extends LOA_Vars {
 			for( int solicitud : listadoSolicitudesRevisables ){
 				driver.switchTo().defaultContent();
 				driver.findElement(By.id("navbar-dropdown-procesos")).click();
-				driver.findElement(By.linkText(LOA_Vars.solicitudText)).click();
+				try {
+					driver.findElement(By.linkText(LOA_Vars.solicitudText)).click();
+				} catch (Exception e) {
+					System.out.println("No se encuentra el proceso de solicitudes de inscripción");
+					System.out.println("\nSe finaliza el test Solicitudes_Revisar_Todo");
+					return;
+				}
 				try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 				driver.switchTo().defaultContent();
 				driver.switchTo().frame("mainFrame");
@@ -1448,13 +1558,25 @@ public class LOA extends LOA_Vars {
 				System.out.println("	----------------------------------------");
 				driver.switchTo().defaultContent();
 				driver.findElement(By.id("navbar-dropdown-procesos")).click();
-				driver.findElement(By.linkText(LOA_Vars.solicitudText)).click();
+				try {
+					driver.findElement(By.linkText(LOA_Vars.solicitudText)).click();
+				} catch (Exception e) {
+					System.out.println("No se encuentra el proceso de solicitudes de inscripción");
+					System.out.println("\nSe finaliza el test Solicitudes_Revisar_Todo");
+					return;
+				}
 				try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 			}
 		}
 		driver.switchTo().defaultContent();
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
-		driver.findElement(By.linkText(LOA_Vars.solicitudText)).click();
+		try {
+			driver.findElement(By.linkText(LOA_Vars.solicitudText)).click();
+		} catch (Exception e) {
+			System.out.println("No se encuentra el proceso de solicitudes de inscripción");
+			System.out.println("\nSe finaliza el test Solicitudes_Revisar_Todo");
+			return;
+		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 		System.out.println("\nSe finaliza el test Solicitudes_Revisar_Todo");
 	}
@@ -1483,7 +1605,13 @@ public class LOA extends LOA_Vars {
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 		// Seleccionar proceso de enviar solicitudes
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
-		driver.findElement(By.linkText(LOA_Vars.solicitudText)).click();
+		try {
+			driver.findElement(By.linkText(LOA_Vars.solicitudText)).click();
+		} catch (Exception e) {
+			System.out.println("No se encuentra el proceso de solicitudes de inscripción");
+			System.out.println("\nSe finaliza el test Solicitudes_Eliminar_Todo");
+			return;
+		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 		// Seleccionar frame del listado de cursos
 		driver.switchTo().defaultContent();
@@ -1520,7 +1648,13 @@ public class LOA extends LOA_Vars {
 						// Se entra al frame con las asignaturas postuladas
 						driver.switchTo().defaultContent();
 						driver.findElement(By.id("navbar-dropdown-procesos")).click();
-						driver.findElement(By.linkText(LOA_Vars.solicitudText)).click();
+						try {
+							driver.findElement(By.linkText(LOA_Vars.solicitudText)).click();
+						} catch (Exception e) {
+							System.out.println("No se encuentra el proceso de solicitudes de inscripción");
+							System.out.println("\nSe finaliza el test Solicitudes_Eliminar_Todo");
+							return;
+						}
 						try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 						driver.switchTo().defaultContent();
 						driver.switchTo().frame("mainFrame");
@@ -1539,5 +1673,829 @@ public class LOA extends LOA_Vars {
 			System.out.println("No hay solicitudes eliminables");
 		}
 		System.out.println("\nSe finaliza el test Solicitudes_Eliminar_Todo");
+	}
+
+	@Test
+	public void Inscripciones_Inscribir_Random() {
+		System.out.println("Se inicia el test Inscripciones_Inscribir_Random");
+		// Se configura el driver para firefox
+		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, LOA_Vars.driverPath);
+		// Se crea el driver para navegar en la pagina web
+		WebDriver driver = new FirefoxDriver();
+		// Se abre la pagina
+		driver.get(LOA_Vars.url);
+		driver.manage().window().maximize();
+		// Login
+		driver.findElement(By.id("rutaux")).click();
+		driver.findElement(By.id("rutaux")).sendKeys(LOA_Vars.userRUT);
+		driver.findElement(By.cssSelector(".cover-container")).click();
+		driver.findElement(By.id("clave")).click();
+		driver.findElement(By.id("clave")).sendKeys(LOA_Vars.userPass);
+		driver.findElement(By.cssSelector(".cover-container")).click();
+		driver.findElement(By.cssSelector(".btn-lg")).click();
+		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+		// Seleccionar carrera
+		driver.findElement(By.linkText("1368 - INGENIERIA CIVIL OBRAS CIVILES")).click();
+		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+		// Seleccionar proceso de Inscripcion
+		driver.findElement(By.id("navbar-dropdown-procesos")).click();
+		try {
+			driver.findElement(By.linkText(LOA_Vars.inscripcionText)).click();
+		} catch (Exception e) {
+			System.out.println("No se encuentra el proceso de postulacion");
+			System.out.println("\nSe finaliza el test Postulaciones_Inscribir_Random");
+			return;
+		}
+		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+		// Seleccionar frame del listado de cursos
+		driver.switchTo().frame("mainFrame");
+		driver.switchTo().frame("derecho");
+		// Se obtienen todas las asignaturas
+		List<WebElement> listadoAsignaturas = driver.findElements(By.cssSelector("tr"));
+		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+		// Se almacenan todas las asignaturas
+		ArrayList<String> listadoAsignaturasAux = new ArrayList<String>();
+		for (WebElement e : listadoAsignaturas) {
+			// Se ignora el encabezado de la lista
+			if( e.getText().split(" ")[2].compareTo("N") != 0  ){
+				String[] asignatura = e.getText().split(" ");
+				String tmp = "";
+				for( int i = 1; i < asignatura.length - 1 ; i++ ) {
+					tmp += " " + asignatura[i];
+				}
+				listadoAsignaturasAux.add(tmp.strip());
+			}
+		}
+		// Se revisan todos los cursos
+		int i = 0;
+		while( i == 0) {
+			// Seleccionar frame del listado de cursos
+			driver.switchTo().defaultContent();
+			driver.switchTo().frame("mainFrame");
+			driver.switchTo().frame("derecho");
+			Boolean existeTeoria = false;
+			Boolean existeLaboratorio = false;
+			Boolean existeEjercicio = false;
+			Boolean seleccionoTeoria = false;
+			Boolean seleccionoLaboratorio = false;
+			Boolean seleccionoEjercicio = false;
+			// Se revisa que existan asignaturas
+			if( listadoAsignaturasAux.size() == 0 ) {
+				System.out.println("No hay mas asignaturas");
+				i = 1;
+			} else {
+				// Se crea el random para seleccionar una asignatura al azar
+				Random rand = new Random();
+				int rand_int1 = rand.nextInt(listadoAsignaturasAux.size());
+				// Se busca una asignatura
+				WebElement asignatura = driver.findElement(By.linkText(listadoAsignaturasAux.get(rand_int1)));
+				// Se crea el JavascriptExecutor para hacer scroll
+				JavascriptExecutor js = (JavascriptExecutor) driver;
+				// Se obtiene la posicion del boton
+				Point location = asignatura.getLocation();
+				// Se hace scroll hacia el boton
+				js.executeScript("window.scrollBy(0,"+location.getY()+")");
+				// Se selecciona una asignatura
+				asignatura.click();
+				System.out.println("\n	Asignatura: " + listadoAsignaturasAux.get(rand_int1));
+				try { TimeUnit.MILLISECONDS.sleep(323); } catch (InterruptedException e) { e.printStackTrace(); }
+				// Se sale del frame, y se entra al frame de los cursos de teoria.
+				driver.switchTo().defaultContent();
+				driver.switchTo().frame("mainFrame");
+				driver.switchTo().frame("frame_cteo");
+				// Se selecciona el frame de los cursos (::LISTADO CURSOS es un frame)
+				driver.switchTo().frame("mainFrame");
+				System.out.println("	Se revisan los cursos de teoria");
+				// Se obtienen todos los cursos
+				List<WebElement> listadoTeoria = driver.findElements(By.cssSelector("tr"));
+				try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+				// Se almacenan todas las secciones
+				ArrayList<String> listadoTeoriaAux = new ArrayList<String>();
+				for (WebElement e : listadoTeoria) {
+					String tmp = e.getText().replace("\n", " ");
+					if( tmp.equals(LOA_Vars.sinCoordinacionInscribirTeoriaText) ){
+						// No hay cursos de laboratorio
+						System.out.println("		No hay cursos de teoria");
+					} else {
+						listadoTeoriaAux.add(tmp);
+						existeTeoria = true;
+					}
+				}
+				// Se prueba seleccionar una seccion de teoria
+				for ( int j = 0; j < listadoTeoriaAux.size(); j++ ) {
+					String seccion = listadoTeoriaAux.get(j).replace("\n", " "	).strip();
+					String[] seccionAux = seccion.split(" ");
+					int cupos = Integer.parseInt(seccionAux[seccionAux.length - 1]);
+					System.out.println("		Seccion " + (j+1) + " | " + seccion);
+					System.out.println("		Seccion " + (j+1) + " | Cupos: " + cupos);
+					// Se revisa si existe cupo
+					if( cupos > 0 ){
+						// Si hay cupos, se hace scroll y luego se selecciona
+						WebElement seccionElement = driver.findElement(By.cssSelector(".row-curso:nth-child("+(j+1)+") > td:nth-child(1)"));
+						// Se hace scroll hacia el boton
+						js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
+						// Se selecciona la seccion
+						seccionElement.click();
+						seleccionoTeoria = true;
+						System.out.println("		Seccion " + (j+1) + " | Seleccionada");
+						break;
+					} else {
+						// Si no hay cupos, se selecciona el siguiente curso
+						System.out.println("		Seccion " + (j+1) + " | Sin cupos");
+					}
+				}
+				// Se sale del frame, y se entra al frame de los cursos de laboratorio.
+				driver.switchTo().defaultContent();
+				driver.switchTo().frame("mainFrame");
+				driver.switchTo().frame("frame_clab");
+				// Se selecciona el frame de los cursos (::LISTADO LABORATORIOS es un frame)
+				driver.switchTo().frame("mainFrame");
+				System.out.println("	Se revisan los cursos de laboratorio");
+				// Se obtienen todos los cursos
+				List<WebElement> listadoLaboratorio = driver.findElements(By.cssSelector("tr"));
+				try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+				// Se almacenan todas las secciones
+				ArrayList<String> listadoLaboratorioAux = new ArrayList<String>();
+				for (WebElement e : listadoLaboratorio) {
+					String tmp = e.getText().replace("\n", " ");
+					if( tmp.equals(LOA_Vars.sinCoordinacionInscribirLabText) ){
+						// No hay cursos de laboratorio
+						System.out.println("		No hay cursos de laboratorio");
+					} else {
+						listadoLaboratorioAux.add(tmp);
+						existeLaboratorio = true;
+					}
+				}
+				// Se prueba seleccionar una seccion de laboratorio
+				for ( int j = 0; j < listadoLaboratorioAux.size(); j++ ) {
+					String seccion = listadoLaboratorioAux.get(j).replace("\n", " "	).strip();
+					String[] seccionAux = seccion.split(" ");
+					int cupos = Integer.parseInt(seccionAux[seccionAux.length - 1]);
+					System.out.println("		Seccion " + (j+1) + " | " + seccion);
+					System.out.println("		Seccion " + (j+1) + " | Cupos: " + cupos);
+					// Se revisa si existe cupo
+					if( cupos > 0 ){
+						// Si hay cupos, se hace scroll y luego se selecciona
+						WebElement seccionElement = driver.findElement(By.cssSelector(".row-laboratorio:nth-child("+(j+1)+") > td:nth-child(1)"));
+						// Se hace scroll hacia el boton
+						js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
+						// Se selecciona la seccion
+						seccionElement.click();
+						seleccionoLaboratorio = true;
+						System.out.println("		Seccion " + (j+1) + " | Seleccionada");
+						break;
+					} else {
+						// Si no hay cupos, se selecciona el siguiente curso
+						System.out.println("		Seccion " + (j+1) + " | Sin cupos");
+					}
+				}
+				// Se sale del frame, y se entra al frame de los cursos de ejercicios.
+				driver.switchTo().defaultContent();
+				driver.switchTo().frame("mainFrame");
+				driver.switchTo().frame("frame_ceje");
+				// Se selecciona el frame de los cursos (::LISTADO CURSOS es un frame)
+				driver.switchTo().frame("mainFrame");
+				System.out.println("	Se revisan los cursos de ejercicio");
+				// Se obtienen todos los cursos
+				List<WebElement> listadoEjercicio = driver.findElements(By.cssSelector("tr"));
+				try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+				// Se almacenan todas las secciones
+				ArrayList<String> listadoEjercicioAux = new ArrayList<String>();
+				for (WebElement e : listadoEjercicio) {
+					String tmp = e.getText().replace("\n", " ");
+					if( tmp.equals(LOA_Vars.sinCoordinacionInscribirEjeText) ){
+						// No hay cursos de laboratorio
+						System.out.println("		No hay cursos de ejercicios");
+					} else {
+						listadoEjercicioAux.add(tmp);
+						existeEjercicio = true;
+					}
+				}
+				// Se prueba seleccionar una seccion de ejercicio
+				for ( int j = 0; j < listadoEjercicioAux.size(); j++ ) {
+					String seccion = listadoEjercicioAux.get(j).replace("\n", " "	).strip();
+					String[] seccionAux = seccion.split(" ");
+					int cupos = Integer.parseInt(seccionAux[seccionAux.length - 1]);
+					System.out.println("		Seccion " + (j+1) + " | " + seccion);
+					System.out.println("		Seccion " + (j+1) + " | Cupos: " + cupos);
+					// Se revisa si existe cupo
+					if( cupos > 0 ){
+						// Si hay cupos, se hace scroll y luego se selecciona
+						WebElement seccionElement = driver.findElement(By.cssSelector(".row-ejercicio:nth-child("+(j+1)+") > td:nth-child(1)"));
+						// Se hace scroll hacia el boton
+						js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
+						// Se selecciona la seccion
+						seccionElement.click();
+						seleccionoEjercicio = true;
+						System.out.println("		Seccion " + (j+1) + " | Seleccionada");
+						break;
+					} else {
+						// Si no hay cupos, se selecciona el siguiente curso
+						System.out.println("		Seccion " + (j+1) + " | Sin cupos");
+					}
+				}
+				// Se revisa que exista al menos un curso
+				if( (existeTeoria && seleccionoTeoria) || (existeLaboratorio && seleccionoLaboratorio) || (existeEjercicio && seleccionoEjercicio) ) {
+					// Se puede inscribir a la asignatura
+					System.out.println("	Se puede inscribir a la asignatura");
+					// Se sale del frame, y se entra al frame deonde esta el boton de inscribir
+					driver.switchTo().defaultContent();
+					driver.switchTo().frame("mainFrame");
+					driver.switchTo().frame(5);
+					// Se postula a la asignatura
+					driver.findElement(By.id("btn_inscribir")).click();
+					try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+					if (driver.switchTo().alert().getText().compareTo(LOA_Vars.alertaInscribirText) == 0 ) {
+						driver.switchTo().alert().accept();
+					}
+					// Tiempo para guardar la asignatura inscrita
+					try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+					i = 1;
+				} else {
+					// No se puede inscribir a la asignatura
+					System.out.println("	No se puede inscribir a la asignatura");
+				}
+			}
+		}
+		System.out.println("\nSe finaliza el test Inscripciones_Inscribir_Random");
+	}
+
+	@Test
+	public void Inscripciones_Desinscribir_Random() {
+		System.out.println("Se inicia el test Inscripciones_Desinscribir_Random");
+		// Se configura el driver para firefox
+		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, LOA_Vars.driverPath);
+		// Se crea el driver para navegar en la pagina web
+		WebDriver driver = new FirefoxDriver();
+		// Se abre la pagina
+		driver.get(LOA_Vars.url);
+		driver.manage().window().maximize();
+		// Login
+		driver.findElement(By.id("rutaux")).click();
+		driver.findElement(By.id("rutaux")).sendKeys(LOA_Vars.userRUT);
+		driver.findElement(By.cssSelector(".cover-container")).click();
+		driver.findElement(By.id("clave")).click();
+		driver.findElement(By.id("clave")).sendKeys(LOA_Vars.userPass);
+		driver.findElement(By.cssSelector(".cover-container")).click();
+		driver.findElement(By.cssSelector(".btn-lg")).click();
+		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+		// Seleccionar carrera
+		driver.findElement(By.linkText("1368 - INGENIERIA CIVIL OBRAS CIVILES")).click();
+		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+		// Seleccionar proceso de Inscripcion
+		driver.findElement(By.id("navbar-dropdown-procesos")).click();
+		try {
+			driver.findElement(By.linkText(LOA_Vars.inscripcionText)).click();
+		} catch (Exception e) {
+			System.out.println("No se encuentra el proceso de postulacion");
+			System.out.println("\nSe finaliza el test Postulaciones_Inscribir_Random");
+			return;
+		}
+		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+		// Se entra al frame con las asignaturas inscritas
+		driver.switchTo().defaultContent();
+		driver.switchTo().frame("mainFrame");
+		driver.switchTo().frame(5);
+		// Se buscan la cantidad de asignaturas inscritas
+		List<WebElement> accionesAsignaturasInscritas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(7)"));
+		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+		List<WebElement> codigosAsignaturasInscritas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(1)"));
+		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+		int postulacionesNoDesinscribibles = 0;
+		for( int i = 0; i < accionesAsignaturasInscritas.size() ; i++ ){
+			if( !accionesAsignaturasInscritas.get(i).getText().equals(LOA_Vars.btnPostulacionDESINSCRIBIRText) ){
+				postulacionesNoDesinscribibles++;
+			}
+		}
+		if( postulacionesNoDesinscribibles == accionesAsignaturasInscritas.size() ){
+			System.out.println("No hay asignaturas para desinscribir");
+		} else {
+			// Se crea un arraylist para guardar los randoms ya utilizados (para no repetirlos)
+			ArrayList<Integer> randomOmitidos = new ArrayList<Integer>();
+			int i = 0;
+			while( i == 0){
+				int cantidadBotones = accionesAsignaturasInscritas.size();
+				// Se crea el random para seleccionar una asignatura al azar
+				Random rand = new Random();
+				int rand_int = rand.nextInt(cantidadBotones);
+				while( (randomOmitidos.contains(rand_int)) && (randomOmitidos.size() < postulacionesNoDesinscribibles ) ){
+					rand_int = rand.nextInt(cantidadBotones);
+				}
+				int j = 0;
+				while( j < cantidadBotones ){
+					if( accionesAsignaturasInscritas.get(j).getText().equals(LOA_Vars.btnPostulacionDESINSCRIBIRText) ){
+						// Se crea el JavascriptExecutor para hacer scroll
+						JavascriptExecutor js = (JavascriptExecutor) driver;
+						// Se obtiene la posicion del boton
+						Point location = accionesAsignaturasInscritas.get(j).getLocation();
+						// Se hace scroll hacia el boton
+						js.executeScript("window.scrollBy(0,"+location.getY()+")");
+						String codigo = codigosAsignaturasInscritas.get(j).getText().split("-")[0].strip();
+						// Se selecciona la solicitud
+						accionesAsignaturasInscritas.get(j).click();
+						// Se acepta el mensaje de desinscripcion
+						driver.switchTo().alert().accept();
+						// Tiempo para esperar que se abra la alerta
+						try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+						// Se ingresa el codigo de desinscripcion
+						driver.switchTo().alert().sendKeys(codigo);
+						// Se acepta el mensaje de desinscripcion
+						driver.switchTo().alert().accept();
+						// Se entra al frame con las asignaturas inscritas
+						driver.switchTo().defaultContent();
+						// Tiempo para esperar que se abra la alerta
+						try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+						// Se entra al frame con las asignaturas inscritas
+						driver.switchTo().defaultContent();
+						driver.findElement(By.id("navbar-dropdown-procesos")).click();
+						try {
+							driver.findElement(By.linkText(LOA_Vars.inscripcionText)).click();
+						} catch (Exception e) {
+							System.out.println("No se encuentra el proceso de postulacion");
+							System.out.println("\nSe finaliza el test Postulaciones_Inscribir_Random");
+							return;
+						}
+						try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame("mainFrame");
+						driver.switchTo().frame(5);
+						// Se buscan la cantidad de asignaturas restantes
+						accionesAsignaturasInscritas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(7)"));
+						try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+						codigosAsignaturasInscritas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(1)"));
+						try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+						cantidadBotones = accionesAsignaturasInscritas.size();
+						j = cantidadBotones;
+						i = 1;
+					} else {
+						j++;
+					}
+				}
+			}
+		}
+		System.out.println("\nSe finaliza el test Inscripciones_Desinscribir_Random");
+	}
+
+	@Test
+	public void Inscripciones_Inscribir_Limite() {
+		System.out.println("Se inicia el test Inscripciones_Inscribir_Limite");
+		// Se configura el driver para firefox
+		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, LOA_Vars.driverPath);
+		// Se crea el driver para navegar en la pagina web
+		WebDriver driver = new FirefoxDriver();
+		// Se abre la pagina
+		driver.get(LOA_Vars.url);
+		driver.manage().window().maximize();
+		// Login
+		driver.findElement(By.id("rutaux")).click();
+		driver.findElement(By.id("rutaux")).sendKeys(LOA_Vars.userRUT);
+		driver.findElement(By.cssSelector(".cover-container")).click();
+		driver.findElement(By.id("clave")).click();
+		driver.findElement(By.id("clave")).sendKeys(LOA_Vars.userPass);
+		driver.findElement(By.cssSelector(".cover-container")).click();
+		driver.findElement(By.cssSelector(".btn-lg")).click();
+		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+		// Seleccionar carrera
+		driver.findElement(By.linkText("1368 - INGENIERIA CIVIL OBRAS CIVILES")).click();
+		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+
+																	int CANTIDADASIGNATURASLIMITE = 6;
+
+		// Se busca cuantas asignaturas lleva solicitadas y inscritas
+		int contadorAsignaturas = 0;
+		System.out.println("Contador Asignaturas inicial: "+contadorAsignaturas);
+		// Seleccionar proceso de enviar inscripciones
+		driver.findElement(By.id("navbar-dropdown-procesos")).click();
+		try {
+			driver.findElement(By.linkText(LOA_Vars.solicitudText)).click();
+			try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+			// Seleccionar frame del listado de cursos
+			driver.switchTo().frame("mainFrame");
+			driver.switchTo().frame(5);
+			// Se obtienen todas las asignaturas
+			String[] listadoSolicitudesEnviadas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(1)")).get(0).getText().strip().split("\n");
+			try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+			contadorAsignaturas += listadoSolicitudesEnviadas.length;
+			System.out.println("Contador Asignaturas con solicitudes: "+contadorAsignaturas);
+		} catch (Exception e) {
+			System.out.println("No se encuentra el proceso de solicitudes de inscripción");
+		}
+		// Seleccionar proceso de enviar inscripciones
+		driver.switchTo().defaultContent();
+		driver.findElement(By.id("navbar-dropdown-procesos")).click();
+		try {
+			driver.findElement(By.linkText(LOA_Vars.inscripcionText)).click();
+		} catch (Exception e) {
+			System.out.println("No se encuentra el proceso de postulacion");
+			System.out.println("\nSe finaliza el test Postulaciones_Inscribir_Random");
+			return;
+		}
+		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+		// Seleccionar el frame con las inscripciones
+		driver.switchTo().defaultContent();
+		driver.switchTo().frame("mainFrame");
+		driver.switchTo().frame(5);
+		// Se obtienen todas las asignaturas inscritas
+		List<WebElement> listadoAsignaturasInscritas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(1)"));
+		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+		// Se almacenan todas las asignaturas inscritas
+		ArrayList<String> listadoAsignaturasInscritasAux = new ArrayList<String>();
+		for (WebElement linea : listadoAsignaturasInscritas) {
+			listadoAsignaturasInscritasAux.add(linea.getText().replace("\n", " ").strip());
+		}
+		contadorAsignaturas += listadoAsignaturasInscritasAux.size();
+		System.out.println("Contador Asignaturas con inscripciones: "+contadorAsignaturas);
+
+		int i = 0;
+		while ( i == 0 ){
+			// Se dan 3 vueltas para probar inscribir las asignaturas
+			for( int j = 1; j <= 3; j++ ){
+				System.out.println("Vuelta " + j );
+				// Seleccionar frame del listado de cursos
+				driver.switchTo().defaultContent();
+				driver.findElement(By.id("navbar-dropdown-procesos")).click();
+				try {
+					driver.findElement(By.linkText(LOA_Vars.inscripcionText)).click();
+				} catch (Exception e) {
+					System.out.println("No se encuentra el proceso de postulacion");
+					System.out.println("\nSe finaliza el test Postulaciones_Inscribir_Random");
+					return;
+				}
+				try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+				driver.switchTo().defaultContent();
+				driver.switchTo().frame("mainFrame");
+				driver.switchTo().frame("derecho");
+				// Se obtienen todas las asignaturas
+				List<WebElement> listadoAsignaturas2 = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr"));
+				try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+				ArrayList<ArrayList<String>> listadoCodigoNombre2 = new ArrayList<ArrayList<String>>();
+				for (WebElement linea : listadoAsignaturas2) {
+					String codigo = linea.getText().split(" ")[0];
+					String nombreAsignatura = linea.getText().substring( codigo.length(), linea.getText().length() - 1 ).strip();
+					listadoCodigoNombre2.add(new ArrayList<String>(Arrays.asList(codigo, nombreAsignatura)));
+				}
+				// Se crea una lista para almacenar las asignaturas que no se pudieron inscribir
+				ArrayList<Integer> codigosAsignaturasAOmitir2 = new ArrayList<Integer>();
+				// Se revisan todos los cursos
+				int l = 0;
+				while( (l == 0) && (contadorAsignaturas < CANTIDADASIGNATURASLIMITE) ) {
+					// Seleccionar frame del listado de cursos
+					driver.switchTo().defaultContent();
+					driver.switchTo().frame("mainFrame");
+					driver.switchTo().frame("derecho");
+					listadoAsignaturas2 = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr"));
+					try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+					listadoCodigoNombre2 = new ArrayList<ArrayList<String>>();
+					for (WebElement linea : listadoAsignaturas2) {
+						String codigo = linea.getText().split(" ")[0];
+						String nombreAsignatura = linea.getText().substring( codigo.length(), linea.getText().length() - 1 ).strip();
+						listadoCodigoNombre2.add(new ArrayList<String>(Arrays.asList(codigo, nombreAsignatura)));
+					}
+					if( listadoCodigoNombre2.size() == 0 ){
+						System.out.println("	No hay asignaturas disponibles para postular");
+						l = 1;
+					} else {
+						Boolean existeTeoria = false;
+						Boolean existeLaboratorio = false;
+						Boolean existeEjercicio = false;
+						Boolean seleccionoTeoria = false;
+						Boolean seleccionoLaboratorio = false;
+						Boolean seleccionoEjercicio = false;
+						// Se revisa que existan asignaturas
+						if( listadoCodigoNombre2.size() == 0 ) {
+							System.out.println("No hay mas asignaturas");
+							i = 1;
+						} else {
+							// Se crea el random para seleccionar una asignatura al azar
+							Random rand = new Random();
+							int rand_int1 = rand.nextInt(listadoCodigoNombre2.size());
+							// Se revisa cuantas asignaturas se omitieron
+							int asignaturasOmitidas = 0;
+							// Mientras el while este en la lista de omitidos y no se alcance el limite, se busca otro
+							while( (codigosAsignaturasAOmitir2.contains(Integer.parseInt(listadoCodigoNombre2.get(rand_int1).get(0)))) && (asignaturasOmitidas <= listadoCodigoNombre2.size() ) ){
+								rand_int1 = rand.nextInt(listadoCodigoNombre2.size());
+								asignaturasOmitidas++;
+							}
+							// Si se revisaron todas las asignaturas en una vuelta, sale de la vuelta
+							if( asignaturasOmitidas > listadoCodigoNombre2.size() ){
+								l = 1;
+							} else {
+								// Se selecciona una asignatura
+								driver.switchTo().defaultContent();
+								driver.findElement(By.id("navbar-dropdown-procesos")).click();
+								try {
+									driver.findElement(By.linkText(LOA_Vars.inscripcionText)).click();
+								} catch (Exception e) {
+									System.out.println("No se encuentra el proceso de postulacion");
+									System.out.println("\nSe finaliza el test Postulaciones_Inscribir_Random");
+									return;
+								}
+								try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+								driver.switchTo().defaultContent();
+								driver.switchTo().frame("mainFrame");
+								driver.switchTo().frame("derecho");
+								// Se busca una asignatura
+								WebElement asignatura = driver.findElement(By.linkText(listadoCodigoNombre2.get(rand_int1).get(1)));
+								// Se crea el JavascriptExecutor para hacer scroll
+								JavascriptExecutor js = (JavascriptExecutor) driver;
+								// Se obtiene la posicion del boton
+								Point location = asignatura.getLocation();
+								// Se hace scroll hacia el boton
+								js.executeScript("window.scrollBy(0,"+location.getY()+")");
+								// Se hace click en la asignatura
+								asignatura.click();
+								System.out.println("\n	Asignatura: " + listadoCodigoNombre2.get(rand_int1).get(0) + " - " +  listadoCodigoNombre2.get(rand_int1).get(1) );
+								try { TimeUnit.MILLISECONDS.sleep(323); } catch (InterruptedException e) { e.printStackTrace(); }
+								// Se sale del frame, y se entra al frame de los cursos de teoria.
+								driver.switchTo().defaultContent();
+								driver.switchTo().frame("mainFrame");
+								driver.switchTo().frame("frame_cteo");
+								// Se selecciona el frame de los cursos (::LISTADO CURSOS es un frame)
+								driver.switchTo().frame("mainFrame");
+								System.out.println("	Se revisan los cursos de teoria");
+								// Se obtienen todos los cursos
+								List<WebElement> listadoTeoria = driver.findElements(By.cssSelector("tr"));
+								try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+								// Se almacenan todas las secciones
+								ArrayList<String> listadoTeoriaAux = new ArrayList<String>();
+								for (WebElement e : listadoTeoria) {
+									String tmp = e.getText().replace("\n", " ");
+									if( tmp.equals(LOA_Vars.sinCoordinacionInscribirTeoriaText) ){
+										// No hay cursos de laboratorio
+										System.out.println("		No hay cursos de teoria");
+									} else {
+										listadoTeoriaAux.add(tmp);
+										existeTeoria = true;
+									}
+								}
+								// Se prueba seleccionar una seccion de teoria
+								for ( int k = 0; k < listadoTeoriaAux.size(); k++ ) {
+									String seccion = listadoTeoriaAux.get(k).replace("\n", " "	).strip();
+									String[] seccionAux = seccion.split(" ");
+									int cupos = Integer.parseInt(seccionAux[seccionAux.length - 1]);
+									System.out.println("		Seccion " + (k+1) + " | " + seccion);
+									System.out.println("		Seccion " + (k+1) + " | Cupos: " + cupos);
+									// Se revisa si existe cupo
+									if( cupos > 0 ){
+										// Si hay cupos, se hace scroll y luego se selecciona
+										WebElement seccionElement = driver.findElement(By.cssSelector(".row-curso:nth-child("+(k+1)+") > td:nth-child(1)"));
+										// Se hace scroll hacia el boton
+										js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
+										// Se selecciona la seccion
+										seccionElement.click();
+										seleccionoTeoria = true;
+										System.out.println("		Seccion " + (k+1) + " | Seleccionada");
+										break;
+									} else {
+										// Si no hay cupos, se selecciona el siguiente curso
+										System.out.println("		Seccion " + (k+1) + " | Sin cupos");
+									}
+								}
+								// Se sale del frame, y se entra al frame de los cursos de laboratorio.
+								driver.switchTo().defaultContent();
+								driver.switchTo().frame("mainFrame");
+								driver.switchTo().frame("frame_clab");
+								// Se selecciona el frame de los cursos (::LISTADO LABORATORIOS es un frame)
+								driver.switchTo().frame("mainFrame");
+								System.out.println("	Se revisan los cursos de laboratorio");
+								// Se obtienen todos los cursos
+								List<WebElement> listadoLaboratorio = driver.findElements(By.cssSelector("tr"));
+								try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+								// Se almacenan todas las secciones
+								ArrayList<String> listadoLaboratorioAux = new ArrayList<String>();
+								for (WebElement e : listadoLaboratorio) {
+									String tmp = e.getText().replace("\n", " ");
+									if( tmp.equals(LOA_Vars.sinCoordinacionInscribirLabText) ){
+										// No hay cursos de laboratorio
+										System.out.println("		No hay cursos de laboratorio");
+									} else {
+										listadoLaboratorioAux.add(tmp);
+										existeLaboratorio = true;
+									}
+								}
+								// Se prueba seleccionar una seccion de laboratorio
+								for ( int k = 0; k < listadoLaboratorioAux.size(); k++ ) {
+									String seccion = listadoLaboratorioAux.get(k).replace("\n", " "	).strip();
+									String[] seccionAux = seccion.split(" ");
+									int cupos = Integer.parseInt(seccionAux[seccionAux.length - 1]);
+									System.out.println("		Seccion " + (k+1) + " | " + seccion);
+									System.out.println("		Seccion " + (k+1) + " | Cupos: " + cupos);
+									// Se revisa si existe cupo
+									if( cupos > 0 ){
+										// Si hay cupos, se hace scroll y luego se selecciona
+										WebElement seccionElement = driver.findElement(By.cssSelector(".row-laboratorio:nth-child("+(k+1)+") > td:nth-child(1)"));
+										// Se hace scroll hacia el boton
+										js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
+										// Se selecciona la seccion
+										seccionElement.click();
+										seleccionoLaboratorio = true;
+										System.out.println("		Seccion " + (k+1) + " | Seleccionada");
+										break;
+									} else {
+										// Si no hay cupos, se selecciona el siguiente curso
+										System.out.println("		Seccion " + (k+1) + " | Sin cupos");
+									}
+								}
+								// Se sale del frame, y se entra al frame de los cursos de ejercicios.
+								driver.switchTo().defaultContent();
+								driver.switchTo().frame("mainFrame");
+								driver.switchTo().frame("frame_ceje");
+								// Se selecciona el frame de los cursos (::LISTADO CURSOS es un frame)
+								driver.switchTo().frame("mainFrame");
+								System.out.println("	Se revisan los cursos de ejercicio");
+								// Se obtienen todos los cursos
+								List<WebElement> listadoEjercicio = driver.findElements(By.cssSelector("tr"));
+								try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+								// Se almacenan todas las secciones
+								ArrayList<String> listadoEjercicioAux = new ArrayList<String>();
+								for (WebElement e : listadoEjercicio) {
+									String tmp = e.getText().replace("\n", " ");
+									if( tmp.equals(LOA_Vars.sinCoordinacionInscribirEjeText) ){
+										// No hay cursos de laboratorio
+										System.out.println("		No hay cursos de ejercicios");
+									} else {
+										listadoEjercicioAux.add(tmp);
+										existeEjercicio = true;
+									}
+								}
+								// Se prueba seleccionar una seccion de ejercicio
+								for ( int k = 0; k < listadoEjercicioAux.size(); k++ ) {
+									String seccion = listadoEjercicioAux.get(k).replace("\n", " "	).strip();
+									String[] seccionAux = seccion.split(" ");
+									int cupos = Integer.parseInt(seccionAux[seccionAux.length - 1]);
+									System.out.println("		Seccion " + (k+1) + " | " + seccion);
+									System.out.println("		Seccion " + (k+1) + " | Cupos: " + cupos);
+									// Se revisa si existe cupo
+									if( cupos > 0 ){
+										// Si hay cupos, se hace scroll y luego se selecciona
+										WebElement seccionElement = driver.findElement(By.cssSelector(".row-ejercicio:nth-child("+(k+1)+") > td:nth-child(1)"));
+										// Se hace scroll hacia el boton
+										js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
+										// Se selecciona la seccion
+										seccionElement.click();
+										seleccionoEjercicio = true;
+										System.out.println("		Seccion " + (k+1) + " | Seleccionada");
+										break;
+									} else {
+										// Si no hay cupos, se selecciona el siguiente curso
+										System.out.println("		Seccion " + (k+1) + " | Sin cupos");
+									}
+								}
+								// Se revisa que exista al menos un curso y se haya podido seleccionar
+								if( (existeTeoria && seleccionoTeoria) || (existeLaboratorio && seleccionoLaboratorio) || (existeEjercicio && seleccionoEjercicio) ) {
+									// Se puede postula a la asignatura
+									driver.switchTo().defaultContent();
+									driver.switchTo().frame("mainFrame");
+									driver.switchTo().frame(5);
+									// Se postula a la asignatura
+									driver.findElement(By.id("btn_inscribir")).click();
+									try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+									if (driver.switchTo().alert().getText().compareTo(LOA_Vars.alertaInscribirText) == 0 ) {
+										driver.switchTo().alert().accept();
+										try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+										driver.switchTo().defaultContent();
+										driver.switchTo().frame("mainFrame");
+										driver.switchTo().frame(5);
+										// Se revisa el mensaje
+										List<WebElement> mensajes = driver.findElements(By.cssSelector(".col-12 > div"));
+										try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+										for (WebElement mensaje : mensajes){
+											try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+											// Se revisa si el mensaje corresponde a asignatura inscrita
+											if( mensaje.getText().compareTo(LOA_Vars.inscripcionStatusInscritaText + Integer.parseInt(listadoCodigoNombre2.get(rand_int1).get(0)) + " (" + LOA_Vars.proceso + ")." ) == 0 ) {
+												System.out.println("		Asignatura inscrita");
+												// Se guarda la asignatura inscrita
+												contadorAsignaturas++;
+											} else {
+												System.out.println("		Asignatura no inscrita");
+											}
+										}
+									} else {
+										System.out.println("No coincide el mensaje al inscribir la asignatura");
+									}
+									// Tiempo para guardar la asignatura postulada
+									try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+								} else {
+									System.out.println("		No es posible inscribir la asignatura");
+								}
+								// Se guarda el random para saber que esta asignatura no se debe repetir
+								int codigo = Integer.parseInt(listadoCodigoNombre2.get(rand_int1).get(0));
+								codigosAsignaturasAOmitir2.add(codigo);
+							}
+						}
+					}
+				}
+			}
+			i = 1;
+			System.out.println("	Se inscribieron " + contadorAsignaturas + " asignaturas");
+			System.out.println("Se llego al limite de asignaturas a inscribir");
+		}
+		System.out.println("\nSe finaliza el test Inscripciones_Inscribir_Limite");
+	}
+
+	@Test
+	public void Inscripciones_Desinscribir_Todo() {
+		System.out.println("Se inicia el test Inscripciones_Desinscribir_Todo");
+		// Se configura el driver para firefox
+		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, LOA_Vars.driverPath);
+		// Se crea el driver para navegar en la pagina web
+		WebDriver driver = new FirefoxDriver();
+		// Se abre la pagina
+		driver.get(LOA_Vars.url);
+		driver.manage().window().maximize();
+		// Login
+		driver.findElement(By.id("rutaux")).click();
+		driver.findElement(By.id("rutaux")).sendKeys(LOA_Vars.userRUT);
+		driver.findElement(By.cssSelector(".cover-container")).click();
+		driver.findElement(By.id("clave")).click();
+		driver.findElement(By.id("clave")).sendKeys(LOA_Vars.userPass);
+		driver.findElement(By.cssSelector(".cover-container")).click();
+		driver.findElement(By.cssSelector(".btn-lg")).click();
+		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+		// Seleccionar carrera
+		driver.findElement(By.linkText("1368 - INGENIERIA CIVIL OBRAS CIVILES")).click();
+		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+		// Seleccionar proceso de Inscripcion
+		driver.findElement(By.id("navbar-dropdown-procesos")).click();
+		try {
+			driver.findElement(By.linkText(LOA_Vars.inscripcionText)).click();
+		} catch (Exception e) {
+			System.out.println("No se encuentra el proceso de postulacion");
+			System.out.println("\nSe finaliza el test Postulaciones_Inscribir_Random");
+			return;
+		}
+		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+		// Se entra al frame con las asignaturas postuladas
+		driver.switchTo().defaultContent();
+		driver.switchTo().frame("mainFrame");
+		driver.switchTo().frame(5);
+		// Se buscan la cantidad de asignaturas postuladas
+		List<WebElement> accionesAsignaturasInscritas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(7)"));
+		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+		List<WebElement> codigosAsignaturasInscritas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(1)"));
+		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+		int cantidadPostulacionesDesinscribibles = 0;
+		for( WebElement accion : accionesAsignaturasInscritas ){
+			if( accion.getText().equals(LOA_Vars.btnPostulacionDESINSCRIBIRText) ){
+				cantidadPostulacionesDesinscribibles++;
+			}
+		}
+		if( cantidadPostulacionesDesinscribibles > 0 ){
+			int i = 0;
+			while( i == 0){
+				int cantidadBotones = accionesAsignaturasInscritas.size();
+				int j = 0;
+				while( j < cantidadBotones ){
+					if( accionesAsignaturasInscritas.get(j).getText().equals(LOA_Vars.btnPostulacionDESINSCRIBIRText) ){
+						// Se crea el JavascriptExecutor para hacer scroll
+						JavascriptExecutor js = (JavascriptExecutor) driver;
+						// Se obtiene la posicion del boton
+						Point location = accionesAsignaturasInscritas.get(j).getLocation();
+						// Se hace scroll hacia el boton
+						js.executeScript("window.scrollBy(0,"+location.getY()+")");
+						String codigo = codigosAsignaturasInscritas.get(j).getText().split("-")[0].strip();
+						// Se selecciona la solicitud
+						accionesAsignaturasInscritas.get(j).click();
+						try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+						// Se acepa el mensaje de desinscripcion
+						driver.switchTo().alert().accept();
+						// Tiempo para esperar que se abra la alerta
+						try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+						// Se escribe el codigo de la asignatura
+						driver.switchTo().alert().sendKeys(codigo);
+						// Se acepta el mensaje de desinscripcion
+						driver.switchTo().alert().accept();
+						//Se ingresa el codigo de la asignatura
+						driver.switchTo().defaultContent();
+						// Se entra al frame con las asignaturas postuladas
+						driver.switchTo().defaultContent();
+						driver.findElement(By.id("navbar-dropdown-procesos")).click();
+						try {
+							driver.findElement(By.linkText(LOA_Vars.inscripcionText)).click();
+						} catch (Exception e) {
+							System.out.println("No se encuentra el proceso de postulacion");
+							System.out.println("\nSe finaliza el test Postulaciones_Inscribir_Random");
+							return;
+						}
+						try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame("mainFrame");
+						driver.switchTo().frame(5);
+						// Se buscan la cantidad de asignaturas restantes
+						accionesAsignaturasInscritas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(7)"));
+						try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+						codigosAsignaturasInscritas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(1)"));
+						try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
+						cantidadBotones = accionesAsignaturasInscritas.size();
+					} else {
+						j++;
+					}
+				}
+				i = 1;
+			}
+		} else {
+			System.out.println("No hay asignaturas para desinscribir");
+		}
+		System.out.println("\nSe finaliza el test Inscripciones_Desinscribir_Todo");
 	}
 }
