@@ -1,17 +1,45 @@
-1688493480638	geckodriver	INFO	Listening on 127.0.0.1:27683
-1688493480839	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "38213" "--remote ... localhost:38213/,http://[::1]:38213/" "-no-remote" "-profile" "C:\\Users\\oscar\\AppData\\Local\\Temp\\rust_mozprofileWp8MdU"
+1688503565140	geckodriver	INFO	Listening on 127.0.0.1:20306
+1688503565187	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "8897" "--remote- ... //localhost:8897/,http://[::1]:8897/" "-no-remote" "-profile" "C:\\Users\\oscar\\AppData\\Local\\Temp\\rust_mozprofilepFWLyg"
 console.warn: services.settings: Ignoring preference override of remote settings server
 console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
-1688493481055	Marionette	INFO	Marionette enabled
+1688503565417	Marionette	INFO	Marionette enabled
 Dynamically enable window occlusion 0
-1688493481059	Marionette	INFO	Listening on port 57269
-Read port: 57269
-WebDriver BiDi listening on ws://127.0.0.1:38213
-1688493481164	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
-DevTools listening on ws://127.0.0.1:38213/devtools/browser/8c4afca5-47ab-4903-92bd-14bac8b7a2ef
+1688503565420	Marionette	INFO	Listening on port 55021
+WebDriver BiDi listening on ws://127.0.0.1:8897
+Read port: 55021
+1688503565639	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:8897/devtools/browser/1747e7fc-34db-421f-a7af-7e32d25013ef
 console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
 console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
-1688493485019	RemoteAgent	INFO	Perform WebSocket upgrade for incoming connection from 127.0.0.1:57308
-1688493485021	CDP	WARN	Invalid browser preferences for CDP. Set "fission.webContentIsolationStrategy"to 0 and "fission.bfcacheInParent" to false before Firefox starts.
-1688493485043	Marionette	INFO	Stopped listening on port 57269
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+console.error: (new TypeError("lazy.AsyncShutdown.profileBeforeChange is undefined", "resource://services-settings/Database.sys.mjs", 599))
+1688503571989	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://remote/content/marionette/sync.sys.mjs:221:24
+TimedPromise@chrome://remote/content/marionette/sync.sys.mjs:205:10
+interaction.flushEventLoop@chrome://remote/content/marionette/interaction.sys.mjs:424:10
+webdriverClickElement@chrome://remote/content/marionette/interaction.sys.mjs:173:31
+1688503575096	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://remote/content/marionette/sync.sys.mjs:221:24
+TimedPromise@chrome://remote/content/marionette/sync.sys.mjs:205:10
+interaction.flushEventLoop@chrome://remote/content/marionette/interaction.sys.mjs:424:10
+webdriverClickElement@chrome://remote/content/marionette/interaction.sys.mjs:173:31
+1688503578176	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://remote/content/marionette/sync.sys.mjs:221:24
+TimedPromise@chrome://remote/content/marionette/sync.sys.mjs:205:10
+interaction.flushEventLoop@chrome://remote/content/marionette/interaction.sys.mjs:424:10
+webdriverClickElement@chrome://remote/content/marionette/interaction.sys.mjs:173:31
+1688503581219	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://remote/content/marionette/sync.sys.mjs:221:24
+TimedPromise@chrome://remote/content/marionette/sync.sys.mjs:205:10
+interaction.flushEventLoop@chrome://remote/content/marionette/interaction.sys.mjs:424:10
+webdriverClickElement@chrome://remote/content/marionette/interaction.sys.mjs:173:31
+1688503584325	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://remote/content/marionette/sync.sys.mjs:221:24
+TimedPromise@chrome://remote/content/marionette/sync.sys.mjs:205:10
+interaction.flushEventLoop@chrome://remote/content/marionette/interaction.sys.mjs:424:10
+webdriverClickElement@chrome://remote/content/marionette/interaction.sys.mjs:173:31
+1688503586884	RemoteAgent	INFO	Perform WebSocket upgrade for incoming connection from 127.0.0.1:55064
+1688503586886	CDP	WARN	Invalid browser preferences for CDP. Set "fission.webContentIsolationStrategy"to 0 and "fission.bfcacheInParent" to false before Firefox starts.
+1688503586889	Marionette	INFO	Stopped listening on port 55021
 Dynamically enable window occlusion 1
