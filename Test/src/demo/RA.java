@@ -96,9 +96,9 @@ public class RA extends RA_Vars {
 			} else {
 				// Se crea el random para seleccionar una asignatura al azar
 				Random rand = new Random();
-				int rand_int1 = rand.nextInt(listadoAsignaturasAux.size());
+				int rand_int1 = rand.nextInt((listadoAsignaturasAux.size() - 1) + 1) + 1;
 				// Se busca una asignatura
-				WebElement asignatura = driver.findElement(By.linkText(listadoAsignaturasAux.get(rand_int1)));
+				WebElement asignatura = driver.findElement(By.linkText(listadoAsignaturasAux.get(rand_int1-1)));
 				// Se crea el JavascriptExecutor para hacer scroll
 				JavascriptExecutor js = (JavascriptExecutor) driver;
 				// Se obtiene la posicion del boton
@@ -542,11 +542,11 @@ public class RA extends RA_Vars {
 						} else {
 							// Se crea el random para seleccionar una asignatura al azar
 							Random rand = new Random();
-							int rand_int1 = rand.nextInt(listadoCodigoNombre2.size());
+							int rand_int1 = rand.nextInt((listadoCodigoNombre2.size() - 1) + 1) + 1;
 							// Se revisa cuantas asignaturas se omitieron
 							int asignaturasOmitidas = 0;
 							// Mientras el while este en la lista de omitidos y no se alcance el limite, se busca otro
-							while( (codigosAsignaturasAOmitir2.contains(Integer.parseInt(listadoCodigoNombre2.get(rand_int1).get(0)))) && (asignaturasOmitidas <= listadoCodigoNombre2.size() ) ){
+							while( (codigosAsignaturasAOmitir2.contains(Integer.parseInt(listadoCodigoNombre2.get(rand_int1-1).get(0)))) && (asignaturasOmitidas <= listadoCodigoNombre2.size() ) ){
 								rand_int1 = rand.nextInt((listadoCodigoNombre2.size() - 1) + 1) + 1;
 								asignaturasOmitidas++;
 							}
@@ -950,11 +950,11 @@ public class RA extends RA_Vars {
 			} else {
 				// Se crea el random para seleccionar una asignatura al azar
 				Random rand = new Random();
-				int rand_int1 = rand.nextInt(listadoAsignaturasAux.size());
+				int rand_int1 = rand.nextInt((listadoAsignaturasAux.size() - 1) + 1) + 1;
 				// Se crea el JavascriptExecutor para hacer scroll
 				JavascriptExecutor js = (JavascriptExecutor) driver;
 				// Se selecciona una asignatura
-				WebElement asignatura = driver.findElement(By.linkText(listadoAsignaturasAux.get(rand_int1)));
+				WebElement asignatura = driver.findElement(By.linkText(listadoAsignaturasAux.get(rand_int1-1)));
 				try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 				// Se obtiene la posicion de la asignatura seleciconada
 				Point location = asignatura.getLocation();
@@ -1454,11 +1454,11 @@ public class RA extends RA_Vars {
 						} else {
 							// Se crea el random para seleccionar una asignatura al azar
 							Random rand = new Random();
-							int rand_int1 = rand.nextInt(listadoCodigoNombre.size());
+							int rand_int1 = rand.nextInt((listadoCodigoNombre.size() - 1) + 1) + 1;
 							// Se revisa cuantas asignaturas se omitieron
 							int asignaturasOmitidas = 0;
 							// Mientras el while este en la lista de omitidos y no se alcance el limite, se busca otro
-							while( (codigosAsignaturasAOmitir.contains(Integer.parseInt(listadoCodigoNombre.get(rand_int1).get(0)))) && (asignaturasOmitidas <= listadoCodigoNombre.size() ) ){
+							while( (codigosAsignaturasAOmitir.contains(Integer.parseInt(listadoCodigoNombre.get(rand_int1-1).get(0)))) && (asignaturasOmitidas <= listadoCodigoNombre.size() ) ){
 								rand_int1 = rand.nextInt((listadoCodigoNombre.size() - 1) + 1) + 1;
 								asignaturasOmitidas++;
 							}
@@ -1491,7 +1491,7 @@ public class RA extends RA_Vars {
 								driver.switchTo().frame("mainFrame");
 								driver.switchTo().frame("derecho");
 								// Se busca la asignatura
-								WebElement asignatura = driver.findElement(By.cssSelector("tr.bold7:nth-child("+(rand_int1+1)+") > td:nth-child(2) > a:nth-child(1)"));
+								WebElement asignatura = driver.findElement(By.cssSelector("tr.bold7:nth-child("+(rand_int1)+") > td:nth-child(2) > a:nth-child(1)"));
 								// Se crea el JavascriptExecutor para hacer scroll
 								JavascriptExecutor js = (JavascriptExecutor) driver;
 								// Se obtiene la posicion del boton
@@ -1500,7 +1500,7 @@ public class RA extends RA_Vars {
 								js.executeScript("window.scrollBy(0,"+location.getY()+")");
 								// Se hace click en la asignatura
 								asignatura.click();
-								System.out.println("\n	Asignatura: " + driver.findElement(By.cssSelector("tr.bold7:nth-child("+(rand_int1+1)+") > td:nth-child(2) > a:nth-child(1)")).getText() );
+								System.out.println("\n	Asignatura: " + driver.findElement(By.cssSelector("tr.bold7:nth-child("+(rand_int1)+") > td:nth-child(2) > a:nth-child(1)")).getText() );
 								try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 								// Se sale del frame, y se entra al frame de los cursos de teoria.
 								driver.switchTo().defaultContent();
@@ -1624,7 +1624,7 @@ public class RA extends RA_Vars {
 									driver.switchTo().frame("derecho");
 								}
 								// Se guarda el random para saber que esta asignatura no se debe repetir
-								int codigo = Integer.parseInt(listadoCodigoNombre.get(rand_int1).get(0));
+								int codigo = Integer.parseInt(listadoCodigoNombre.get(rand_int1-1).get(0));
 								codigosAsignaturasAOmitir.add(codigo);
 							}
 						}
