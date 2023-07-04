@@ -10,7 +10,7 @@ public class RA_Vars {
   public static final String userRUTAlt = "20496700";
   public static final String userPass = "1234zxcv";
 
-  public static final String proceso = "1/2023";
+  public static final String proceso = "2/2023";
   
   public static final String postulacionText = "Postulación " + proceso;
   public static final String inscripcionText = "Inscripción " + proceso;
