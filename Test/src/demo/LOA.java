@@ -1038,7 +1038,7 @@ public class LOA extends LOA_Vars {
 				// Se crea el JavascriptExecutor para hacer scroll
 				JavascriptExecutor js = (JavascriptExecutor) driver;
 				// Se selecciona una asignatura
-				WebElement asignatura = driver.findElement(By.linkText(listadoAsignaturasAux.get(rand_int1)));
+				WebElement asignatura = driver.findElement(By.linkText(listadoAsignaturasAux.get(rand_int1-1)));
 				TimeUnit.MILLISECONDS.sleep(350);
 				// Se obtiene la posicion de la asignatura seleciconada
 				Point location = asignatura.getLocation();
