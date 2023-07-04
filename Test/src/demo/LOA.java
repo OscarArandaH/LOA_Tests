@@ -1,6 +1,8 @@
 package demo;
 
 import org.junit.Test;
+import org.junit.FixMethodOrder;
+import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.firefox.*;
@@ -13,9 +15,25 @@ import java.util.Random;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
+/*
+import org.junit.Rule;
+import org.junit.runner.RunWith;
+import com.google.code.tempusfugit.concurrency.ConcurrentRule;
+import com.google.code.tempusfugit.concurrency.ConcurrentTestRunner;
+import com.google.code.tempusfugit.concurrency.RepeatingRule;
+import com.google.code.tempusfugit.concurrency.annotations.Repeating;
+import com.google.code.tempusfugit.concurrency.annotations.Concurrent;
+*/
+
+//@RunWith(ConcurrentTestRunner.class)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class LOA extends LOA_Vars {
+	//@Rule public ConcurrentRule concurrently = new ConcurrentRule();
+	//@Rule public RepeatingRule repeatedly = new RepeatingRule();
+	
 	@Test
-	public void Postulaciones_Inscribir_Random() {
+	//@Concurrent (count = 2)
+	public void Test_1_1_Postulaciones_Inscribir_Random() {
 		System.out.println("Se inicia el test Postulaciones_Inscribir_Random");
 		// Se configura el driver para firefox
 		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, LOA_Vars.driverPath);
@@ -44,6 +62,7 @@ public class LOA extends LOA_Vars {
 		} catch (Exception e) {
 			System.out.println("No se encuentra el proceso de postulacion");
 			System.out.println("Se finaliza el test Postulaciones_Inscribir_Random\n\n==========================================================\n");
+			driver.quit();
 			return;
 		}
 		try {
@@ -54,6 +73,7 @@ public class LOA extends LOA_Vars {
 		} catch (Exception e2) {
 			System.out.println("El proceso se encuentra cerrado");
 			System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random\n\n==========================================================\n");
+			driver.quit();
 			return;
 		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -244,10 +264,12 @@ public class LOA extends LOA_Vars {
 			}
 		}
 		System.out.println("Se finaliza el test Postulaciones_Inscribir_Random\n\n==========================================================\n");
+		driver.quit();
 	}
 
 	@Test
-	public void Postulaciones_Desinscribir_Random() {
+	//@Concurrent (count = 2)
+	public void Test_1_2_Postulaciones_Desinscribir_Random() {
 		System.out.println("Se inicia el test Postulaciones_Desinscribir_Random");
 		// Se configura el driver para firefox
 		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, LOA_Vars.driverPath);
@@ -276,6 +298,7 @@ public class LOA extends LOA_Vars {
 		} catch (Exception e) {
 			System.out.println("No se encuentra el proceso de postulacion");
 			System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random\n\n==========================================================\n");
+			driver.quit();
 			return;
 		}
 		try {
@@ -286,6 +309,7 @@ public class LOA extends LOA_Vars {
 		} catch (Exception e2) {
 			System.out.println("El proceso se encuentra cerrado");
 			System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random\n\n==========================================================\n");
+			driver.quit();
 			return;
 		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -350,6 +374,7 @@ public class LOA extends LOA_Vars {
 						} catch (Exception e) {
 							System.out.println("No se encuentra el proceso de postulacion");
 							System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random\n\n==========================================================\n");
+							driver.quit();
 							return;
 						}
 						try {
@@ -360,6 +385,7 @@ public class LOA extends LOA_Vars {
 						} catch (Exception e2) {
 							System.out.println("El proceso se encuentra cerrado");
 							System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random\n\n==========================================================\n");
+							driver.quit();
 							return;
 						}
 						try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -381,10 +407,12 @@ public class LOA extends LOA_Vars {
 			}
 		}
 		System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random\n\n==========================================================\n");
+		driver.quit();
 	}
 
 	@Test
-	public void Postulaciones_Inscribir_Limite() {
+	//@Concurrent (count = 2)
+	public void Test_1_3_Postulaciones_Inscribir_Limite() {
 		System.out.println("Se inicia el test Postulaciones_Inscribir_Limite");
 		// Se configura el driver para firefox
 		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, LOA_Vars.driverPath);
@@ -434,6 +462,7 @@ public class LOA extends LOA_Vars {
 		} catch (Exception e2) {
 			System.out.println("El proceso se encuentra cerrado");
 			System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random\n\n==========================================================\n");
+			driver.quit();
 			return;
 		}
 		// Seleccionar proceso de enviar solicitudes
@@ -444,6 +473,7 @@ public class LOA extends LOA_Vars {
 		} catch (Exception e) {
 			System.out.println("No se encuentra el proceso de postulacion");
 			System.out.println("Se finaliza el test Postulaciones_Inscribir_Limite\n\n==========================================================\n");
+			driver.quit();
 			return;
 		}
 		try {
@@ -454,6 +484,7 @@ public class LOA extends LOA_Vars {
 		} catch (Exception e2) {
 			System.out.println("El proceso se encuentra cerrado");
 			System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random\n\n==========================================================\n");
+			driver.quit();
 			return;
 		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -483,6 +514,7 @@ public class LOA extends LOA_Vars {
 				} catch (Exception e) {
 					System.out.println("No se encuentra el proceso de postulacion");
 					System.out.println("Se finaliza el test Postulaciones_Inscribir_Limite\n\n==========================================================\n");
+					driver.quit();
 					return;
 				}
 				try {
@@ -493,6 +525,7 @@ public class LOA extends LOA_Vars {
 				} catch (Exception e2) {
 					System.out.println("El proceso se encuentra cerrado");
 					System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random\n\n==========================================================\n");
+					driver.quit();
 					return;
 				}
 				try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -542,11 +575,11 @@ public class LOA extends LOA_Vars {
 						} else {
 							// Se crea el random para seleccionar una asignatura al azar
 							Random rand = new Random();
-							int rand_int1 = rand.nextInt(listadoCodigoNombre2.size());
+							int rand_int1 = rand.nextInt((listadoCodigoNombre2.size() - 1) + 1) + 1;
 							// Se revisa cuantas asignaturas se omitieron
 							int asignaturasOmitidas = 0;
 							// Mientras el while este en la lista de omitidos y no se alcance el limite, se busca otro
-							while( (codigosAsignaturasAOmitir2.contains(Integer.parseInt(listadoCodigoNombre2.get(rand_int1).get(0)))) && (asignaturasOmitidas <= listadoCodigoNombre2.size() ) ){
+							while( (codigosAsignaturasAOmitir2.contains(Integer.parseInt(listadoCodigoNombre2.get(rand_int1-1).get(0)))) && (asignaturasOmitidas <= listadoCodigoNombre2.size() ) ){
 								rand_int1 = rand.nextInt((listadoCodigoNombre2.size() - 1) + 1) + 1;
 								asignaturasOmitidas++;
 							}
@@ -562,6 +595,7 @@ public class LOA extends LOA_Vars {
 								} catch (Exception e) {
 									System.out.println("No se encuentra el proceso de postulacion");
 									System.out.println("Se finaliza el test Postulaciones_Inscribir_Limite\n\n==========================================================\n");
+									driver.quit();
 									return;
 								}
 								try {
@@ -572,6 +606,7 @@ public class LOA extends LOA_Vars {
 								} catch (Exception e2) {
 									System.out.println("El proceso se encuentra cerrado");
 									System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random\n\n==========================================================\n");
+									driver.quit();
 									return;
 								}
 								try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -746,10 +781,12 @@ public class LOA extends LOA_Vars {
 			System.out.println("Se llego al limite de asignaturas a inscribir");
 		}
 		System.out.println("Se finaliza el test Postulaciones_Inscribir_Limite\n\n==========================================================\n");
+		driver.quit();
 	}
 
 	@Test
-	public void Postulaciones_Desinscribir_Todo() {
+	//@Concurrent (count = 2)
+	public void Test_1_4_Postulaciones_Desinscribir_Todo() {
 		System.out.println("Se inicia el test Postulaciones_Desinscribir_Todo");
 		// Se configura el driver para firefox
 		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, LOA_Vars.driverPath);
@@ -778,6 +815,7 @@ public class LOA extends LOA_Vars {
 		} catch (Exception e) {
 			System.out.println("No se encuentra el proceso de postulacion");
 			System.out.println("Se finaliza el test Postulaciones_Desinscribir_Todo\n\n==========================================================\n");
+			driver.quit();
 			return;
 		}
 		try {
@@ -788,6 +826,7 @@ public class LOA extends LOA_Vars {
 		} catch (Exception e2) {
 			System.out.println("El proceso se encuentra cerrado");
 			System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random\n\n==========================================================\n");
+			driver.quit();
 			return;
 		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -841,6 +880,7 @@ public class LOA extends LOA_Vars {
 						} catch (Exception e) {
 							System.out.println("No se encuentra el proceso de postulacion");
 							System.out.println("Se finaliza el test Postulaciones_Desinscribir_Todo\n\n==========================================================\n");
+							driver.quit();
 							return;
 						}
 						try {
@@ -851,6 +891,7 @@ public class LOA extends LOA_Vars {
 						} catch (Exception e2) {
 							System.out.println("El proceso se encuentra cerrado");
 							System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random\n\n==========================================================\n");
+							driver.quit();
 							return;
 						}
 						try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -873,10 +914,12 @@ public class LOA extends LOA_Vars {
 			System.out.println("No hay asignaturas para desinscribir");
 		}
 		System.out.println("Se finaliza el test Postulaciones_Desinscribir_Todo\n\n==========================================================\n");
+		driver.quit();
 	}
 
 	@Test
-	public void Solicitudes_Inscribir_Random() {
+	//@Concurrent (count = 2)
+	public void Test_2_1_Solicitudes_Inscribir_Random() {
 		System.out.println("Se inicia el test Solicitudes_Inscribir_Random");
 		// Se configura el driver para firefox
 		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, LOA_Vars.driverPath);
@@ -905,6 +948,7 @@ public class LOA extends LOA_Vars {
 		} catch (Exception e) {
 			System.out.println("No se encuentra el proceso de solicitudes de inscripción");
 			System.out.println("Se finaliza el test Solicitudes_Inscribir_Random\n\n==========================================================\n");
+			driver.quit();
 			return;
 		}
 		try {
@@ -915,6 +959,7 @@ public class LOA extends LOA_Vars {
 		} catch (Exception e2) {
 			System.out.println("El proceso se encuentra cerrado");
 			System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random\n\n==========================================================\n");
+			driver.quit();
 			return;
 		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -1094,10 +1139,12 @@ public class LOA extends LOA_Vars {
 			}
 		}
 		System.out.println("Se finaliza el test Solicitudes_Inscribir_Random\n\n==========================================================\n");
+		driver.quit();
 	}
 
 	@Test
-	public void Solicitudes_Revisar_Random() {
+	//@Concurrent (count = 2)
+	public void Test_2_2_Solicitudes_Revisar_Random() {
 		System.out.println("Se inicia el test Solicitudes_Revisar_Random");
 		// Se configura el driver para firefox
 		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, LOA_Vars.driverPath);
@@ -1126,6 +1173,7 @@ public class LOA extends LOA_Vars {
 		} catch (Exception e) {
 			System.out.println("No se encuentra el proceso de solicitudes de inscripción");
 			System.out.println("Se finaliza el test Solicitudes_Revisar_Random\n\n==========================================================\n");
+			driver.quit();
 			return;
 		}
 		try {
@@ -1136,6 +1184,7 @@ public class LOA extends LOA_Vars {
 		} catch (Exception e2) {
 			System.out.println("El proceso se encuentra cerrado");
 			System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random\n\n==========================================================\n");
+			driver.quit();
 			return;
 		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -1194,6 +1243,7 @@ public class LOA extends LOA_Vars {
 			} catch (Exception e) {
 				System.out.println("No se encuentra el proceso de solicitudes de inscripción");
 				System.out.println("Se finaliza el test Solicitudes_Revisar_Random\n\n==========================================================\n");
+				driver.quit();
 				return;
 			}
 			try {
@@ -1204,15 +1254,18 @@ public class LOA extends LOA_Vars {
 			} catch (Exception e2) {
 				System.out.println("El proceso se encuentra cerrado");
 				System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random\n\n==========================================================\n");
+				driver.quit();
 				return;
 			}
 			try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 			System.out.println("Se finaliza el test Solicitudes_Revisar_Random\n\n==========================================================\n");
 		}
+		driver.quit();
 	}
 
 	@Test
-	public void Solicitudes_Eliminar_Random() {
+	//@Concurrent (count = 2)
+	public void Test_2_3_Solicitudes_Eliminar_Random() {
 		System.out.println("Se inicia el test Solicitudes_Eliminar_Random");
 		// Se configura el driver para firefox
 		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, LOA_Vars.driverPath);
@@ -1241,6 +1294,7 @@ public class LOA extends LOA_Vars {
 		} catch (Exception e) {
 			System.out.println("No se encuentra el proceso de solicitudes de inscripción");
 			System.out.println("Se finaliza el test Solicitudes_Eliminar_Random\n\n==========================================================\n");
+			driver.quit();
 			return;
 		}
 		try {
@@ -1251,6 +1305,7 @@ public class LOA extends LOA_Vars {
 		} catch (Exception e2) {
 			System.out.println("El proceso se encuentra cerrado");
 			System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random\n\n==========================================================\n");
+			driver.quit();
 			return;
 		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -1271,25 +1326,27 @@ public class LOA extends LOA_Vars {
 		if( listadoSolicitudesEliminables.size() > 0 ){
 			// Se crea un random para seleccionar una solicitud eliminable al azar
 			Random rand = new Random();
-			int rand_int = rand.nextInt((listadoSolicitudesEliminables.get(rand.nextInt(listadoSolicitudesEliminables.size())) - 1) + 1) + 1;
+			int rand_int = rand.nextInt(       (listadoSolicitudesEliminables.size() - 1) + 1       ) + 1;
 			// Se crea el JavascriptExecutor para hacer scroll
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			// Se obtiene la posicion del boton
-			Point location = listadoSolicitudesEnviadas.get(rand_int).getLocation();
+			Point location = listadoSolicitudesEnviadas.get(rand_int-1).getLocation();
 			// Se hace scroll hacia el boton
 			js.executeScript("window.scrollBy(0,"+location.getY()+")");
 			// Se elimina la solicitud
-			listadoSolicitudesEnviadas.get(rand_int).click();
+			listadoSolicitudesEnviadas.get(rand_int-1).click();
 			try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 			driver.switchTo().alert().accept();
 		} else {
 			System.out.println("No hay solicitudes eliminables");
 		}
 		System.out.println("Se finaliza el test Solicitudes_Eliminar_Random\n\n==========================================================\n");
+		driver.quit();
 	}
 
 	@Test
-	public void Solicitudes_Inscribir_Limite() {
+	//@Concurrent (count = 2)
+	public void Test_2_4_Solicitudes_Inscribir_Limite() {
 		System.out.println("Se inicia el test Postulaciones_Inscribir_Limite");
 		// Se configura el driver para firefox
 		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, LOA_Vars.driverPath);
@@ -1351,6 +1408,7 @@ public class LOA extends LOA_Vars {
 		} catch (Exception e2) {
 			System.out.println("El proceso se encuentra cerrado");
 			System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random\n\n==========================================================\n");
+			driver.quit();
 			return;
 		}
 		// Seleccionar proceso de enviar solicitudes
@@ -1361,6 +1419,7 @@ public class LOA extends LOA_Vars {
 		} catch (Exception e) {
 			System.out.println("No se encuentra el proceso de solicitudes de inscripción");
 			System.out.println("Se finaliza el test Solicitudes_Inscribir_Limite\n\n==========================================================\n");
+			driver.quit();
 			return;
 		}
 		try {
@@ -1371,6 +1430,7 @@ public class LOA extends LOA_Vars {
 		} catch (Exception e2) {
 			System.out.println("El proceso se encuentra cerrado");
 			System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random\n\n==========================================================\n");
+			driver.quit();
 			return;
 		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -1395,6 +1455,7 @@ public class LOA extends LOA_Vars {
 				} catch (Exception e) {
 					System.out.println("No se encuentra el proceso de solicitudes de inscripción");
 					System.out.println("Se finaliza el test Solicitudes_Inscribir_Limite\n\n==========================================================\n");
+					driver.quit();
 					return;
 				}
 				try {
@@ -1405,6 +1466,7 @@ public class LOA extends LOA_Vars {
 				} catch (Exception e2) {
 					System.out.println("El proceso se encuentra cerrado");
 					System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random\n\n==========================================================\n");
+					driver.quit();
 					return;
 				}
 				try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -1474,6 +1536,7 @@ public class LOA extends LOA_Vars {
 								} catch (Exception e) {
 									System.out.println("No se encuentra el proceso de solicitudes de inscripción");
 									System.out.println("Se finaliza el test Solicitudes_Inscribir_Limite\n\n==========================================================\n");
+									driver.quit();
 									return;
 								}
 								try {
@@ -1484,6 +1547,7 @@ public class LOA extends LOA_Vars {
 								} catch (Exception e2) {
 									System.out.println("El proceso se encuentra cerrado");
 									System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random\n\n==========================================================\n");
+									driver.quit();
 									return;
 								}
 								try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -1636,10 +1700,12 @@ public class LOA extends LOA_Vars {
 			System.out.println("Se llego al limite de asignaturas a inscribir");
 		}
 		System.out.println("Se finaliza el test Postulaciones_Inscribir_Limite\n\n==========================================================\n");
+		driver.quit();
 	}
 
 	@Test
-	public void Solicitudes_Revisar_Todo() {
+	//@Concurrent (count = 2)
+	public void Test_2_5_Solicitudes_Revisar_Todo() {
 		System.out.println("Se inicia el test Solicitudes_Revisar_Random");
 		// Se configura el driver para firefox
 		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, LOA_Vars.driverPath);
@@ -1668,6 +1734,7 @@ public class LOA extends LOA_Vars {
 		} catch (Exception e) {
 			System.out.println("No se encuentra el proceso de solicitudes de inscripción");
 			System.out.println("Se finaliza el test Solicitudes_Revisar_Todo\n\n==========================================================\n");
+			driver.quit();
 			return;
 		}
 		try {
@@ -1678,6 +1745,7 @@ public class LOA extends LOA_Vars {
 		} catch (Exception e2) {
 			System.out.println("El proceso se encuentra cerrado");
 			System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random\n\n==========================================================\n");
+			driver.quit();
 			return;
 		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -1708,6 +1776,7 @@ public class LOA extends LOA_Vars {
 				} catch (Exception e) {
 					System.out.println("No se encuentra el proceso de solicitudes de inscripción");
 					System.out.println("Se finaliza el test Solicitudes_Revisar_Todo\n\n==========================================================\n");
+					driver.quit();
 					return;
 				}
 				try {
@@ -1718,6 +1787,7 @@ public class LOA extends LOA_Vars {
 				} catch (Exception e2) {
 					System.out.println("El proceso se encuentra cerrado");
 					System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random\n\n==========================================================\n");
+					driver.quit();
 					return;
 				}
 				try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -1762,6 +1832,7 @@ public class LOA extends LOA_Vars {
 				} catch (Exception e) {
 					System.out.println("No se encuentra el proceso de solicitudes de inscripción");
 					System.out.println("Se finaliza el test Solicitudes_Revisar_Todo\n\n==========================================================\n");
+					driver.quit();
 					return;
 				}
 				try {
@@ -1772,6 +1843,7 @@ public class LOA extends LOA_Vars {
 				} catch (Exception e2) {
 					System.out.println("El proceso se encuentra cerrado");
 					System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random\n\n==========================================================\n");
+					driver.quit();
 					return;
 				}
 				try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -1784,6 +1856,7 @@ public class LOA extends LOA_Vars {
 		} catch (Exception e) {
 			System.out.println("No se encuentra el proceso de solicitudes de inscripción");
 			System.out.println("Se finaliza el test Solicitudes_Revisar_Todo\n\n==========================================================\n");
+			driver.quit();
 			return;
 		}
 		try {
@@ -1794,14 +1867,17 @@ public class LOA extends LOA_Vars {
 		} catch (Exception e2) {
 			System.out.println("El proceso se encuentra cerrado");
 			System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random\n\n==========================================================\n");
+			driver.quit();
 			return;
 		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 		System.out.println("Se finaliza el test Solicitudes_Revisar_Todo\n\n==========================================================\n");
+		driver.quit();
 	}
 
 	@Test
-	public void Solicitudes_Eliminar_Todo() {
+	//@Concurrent (count = 2)
+	public void Test_2_6_Solicitudes_Eliminar_Todo() {
 		System.out.println("Se inicia el test Solicitudes_Eliminar_Todo");
 		// Se configura el driver para firefox
 		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, LOA_Vars.driverPath);
@@ -1830,6 +1906,7 @@ public class LOA extends LOA_Vars {
 		} catch (Exception e) {
 			System.out.println("No se encuentra el proceso de solicitudes de inscripción");
 			System.out.println("Se finaliza el test Solicitudes_Eliminar_Todo\n\n==========================================================\n");
+			driver.quit();
 			return;
 		}
 		try {
@@ -1840,6 +1917,7 @@ public class LOA extends LOA_Vars {
 		} catch (Exception e2) {
 			System.out.println("El proceso se encuentra cerrado");
 			System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random\n\n==========================================================\n");
+			driver.quit();
 			return;
 		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -1883,6 +1961,7 @@ public class LOA extends LOA_Vars {
 						} catch (Exception e) {
 							System.out.println("No se encuentra el proceso de solicitudes de inscripción");
 							System.out.println("Se finaliza el test Solicitudes_Eliminar_Todo\n\n==========================================================\n");
+							driver.quit();
 							return;
 						}
 						try {
@@ -1893,6 +1972,7 @@ public class LOA extends LOA_Vars {
 						} catch (Exception e2) {
 							System.out.println("El proceso se encuentra cerrado");
 							System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random\n\n==========================================================\n");
+							driver.quit();
 							return;
 						}
 						try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -1913,10 +1993,12 @@ public class LOA extends LOA_Vars {
 			System.out.println("No hay solicitudes eliminables");
 		}
 		System.out.println("Se finaliza el test Solicitudes_Eliminar_Todo\n\n==========================================================\n");
+		driver.quit();
 	}
 
 	@Test
-	public void Inscripciones_Inscribir_Random() {
+	//@Concurrent (count = 2)
+	public void Test_3_1_Inscripciones_Inscribir_Random() {
 		System.out.println("Se inicia el test Inscripciones_Inscribir_Random");
 		// Se configura el driver para firefox
 		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, LOA_Vars.driverPath);
@@ -1945,6 +2027,7 @@ public class LOA extends LOA_Vars {
 		} catch (Exception e) {
 			System.out.println("No se encuentra el proceso de postulacion");
 			System.out.println("Se finaliza el test Postulaciones_Inscribir_Random\n\n==========================================================\n");
+			driver.quit();
 			return;
 		}
 		try {
@@ -1955,6 +2038,7 @@ public class LOA extends LOA_Vars {
 		} catch (Exception e2) {
 			System.out.println("El proceso se encuentra cerrado");
 			System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random\n\n==========================================================\n");
+			driver.quit();
 			return;
 		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -1997,9 +2081,9 @@ public class LOA extends LOA_Vars {
 			} else {
 				// Se crea el random para seleccionar una asignatura al azar
 				Random rand = new Random();
-				int rand_int1 = rand.nextInt(listadoAsignaturasAux.size());
+				int rand_int1 = rand.nextInt((listadoAsignaturasAux.size() - 1) + 1) + 1;
 				// Se busca una asignatura
-				WebElement asignatura = driver.findElement(By.linkText(listadoAsignaturasAux.get(rand_int1)));
+				WebElement asignatura = driver.findElement(By.linkText(listadoAsignaturasAux.get(rand_int1-1)));
 				// Se crea el JavascriptExecutor para hacer scroll
 				JavascriptExecutor js = (JavascriptExecutor) driver;
 				// Se obtiene la posicion del boton
@@ -2008,7 +2092,7 @@ public class LOA extends LOA_Vars {
 				js.executeScript("window.scrollBy(0,"+location.getY()+")");
 				// Se selecciona una asignatura
 				asignatura.click();
-				System.out.println("\n	Asignatura: " + listadoAsignaturasAux.get(rand_int1));
+				System.out.println("\n	Asignatura: " + listadoAsignaturasAux.get(rand_int1-1));
 				try { TimeUnit.MILLISECONDS.sleep(323); } catch (InterruptedException e) { e.printStackTrace(); }
 				// Se sale del frame, y se entra al frame de los cursos de teoria.
 				driver.switchTo().defaultContent();
@@ -2169,10 +2253,12 @@ public class LOA extends LOA_Vars {
 			}
 		}
 		System.out.println("Se finaliza el test Inscripciones_Inscribir_Random\n\n==========================================================\n");
+		driver.quit();
 	}
 
 	@Test
-	public void Inscripciones_Desinscribir_Random() {
+	//@Concurrent (count = 2)
+	public void Test_3_2_Inscripciones_Desinscribir_Random() {
 		System.out.println("Se inicia el test Inscripciones_Desinscribir_Random");
 		// Se configura el driver para firefox
 		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, LOA_Vars.driverPath);
@@ -2201,6 +2287,7 @@ public class LOA extends LOA_Vars {
 		} catch (Exception e) {
 			System.out.println("No se encuentra el proceso de postulacion");
 			System.out.println("Se finaliza el test Postulaciones_Inscribir_Random\n\n==========================================================\n");
+			driver.quit();
 			return;
 		}
 		try {
@@ -2211,6 +2298,7 @@ public class LOA extends LOA_Vars {
 		} catch (Exception e2) {
 			System.out.println("El proceso se encuentra cerrado");
 			System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random\n\n==========================================================\n");
+			driver.quit();
 			return;
 		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -2275,6 +2363,7 @@ public class LOA extends LOA_Vars {
 						} catch (Exception e) {
 							System.out.println("No se encuentra el proceso de postulacion");
 							System.out.println("Se finaliza el test Postulaciones_Inscribir_Random\n\n==========================================================\n");
+							driver.quit();
 							return;
 						}
 						try {
@@ -2285,6 +2374,7 @@ public class LOA extends LOA_Vars {
 						} catch (Exception e2) {
 							System.out.println("El proceso se encuentra cerrado");
 							System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random\n\n==========================================================\n");
+							driver.quit();
 							return;
 						}
 						try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -2306,10 +2396,12 @@ public class LOA extends LOA_Vars {
 			}
 		}
 		System.out.println("Se finaliza el test Inscripciones_Desinscribir_Random\n\n==========================================================\n");
+		driver.quit();
 	}
 
 	@Test
-	public void Inscripciones_Inscribir_Limite() {
+	//@Concurrent (count = 2)
+	public void Test_3_3_Inscripciones_Inscribir_Limite() {
 		System.out.println("Se inicia el test Inscripciones_Inscribir_Limite");
 		// Se configura el driver para firefox
 		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, LOA_Vars.driverPath);
@@ -2360,6 +2452,7 @@ public class LOA extends LOA_Vars {
 		} catch (Exception e) {
 			System.out.println("No se encuentra el proceso de postulacion");
 			System.out.println("Se finaliza el test Postulaciones_Inscribir_Random\n\n==========================================================\n");
+			driver.quit();
 			return;
 		}
 		try {
@@ -2370,6 +2463,7 @@ public class LOA extends LOA_Vars {
 		} catch (Exception e2) {
 			System.out.println("El proceso se encuentra cerrado");
 			System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random\n\n==========================================================\n");
+			driver.quit();
 			return;
 		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -2399,6 +2493,7 @@ public class LOA extends LOA_Vars {
 				} catch (Exception e) {
 					System.out.println("No se encuentra el proceso de postulacion");
 					System.out.println("Se finaliza el test Postulaciones_Inscribir_Random\n\n==========================================================\n");
+					driver.quit();
 					return;
 				}
 				try {
@@ -2409,6 +2504,7 @@ public class LOA extends LOA_Vars {
 				} catch (Exception e2) {
 					System.out.println("El proceso se encuentra cerrado");
 					System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random\n\n==========================================================\n");
+					driver.quit();
 					return;
 				}
 				try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -2478,6 +2574,7 @@ public class LOA extends LOA_Vars {
 								} catch (Exception e) {
 									System.out.println("No se encuentra el proceso de postulacion");
 									System.out.println("Se finaliza el test Postulaciones_Inscribir_Random\n\n==========================================================\n");
+									driver.quit();
 									return;
 								}
 								try {
@@ -2488,6 +2585,7 @@ public class LOA extends LOA_Vars {
 								} catch (Exception e2) {
 									System.out.println("El proceso se encuentra cerrado");
 									System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random\n\n==========================================================\n");
+									driver.quit();
 									return;
 								}
 								try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -2691,10 +2789,12 @@ public class LOA extends LOA_Vars {
 			System.out.println("Se llego al limite de asignaturas a inscribir");
 		}
 		System.out.println("Se finaliza el test Inscripciones_Inscribir_Limite\n\n==========================================================\n");
+		driver.quit();
 	}
 
 	@Test
-	public void Inscripciones_Desinscribir_Todo() {
+	//@Concurrent (count = 2)
+	public void Test_3_4_Inscripciones_Desinscribir_Todo() {
 		System.out.println("Se inicia el test Inscripciones_Desinscribir_Todo");
 		// Se configura el driver para firefox
 		System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, LOA_Vars.driverPath);
@@ -2723,6 +2823,7 @@ public class LOA extends LOA_Vars {
 		} catch (Exception e) {
 			System.out.println("No se encuentra el proceso de postulacion");
 			System.out.println("Se finaliza el test Postulaciones_Inscribir_Random\n\n==========================================================\n");
+			driver.quit();
 			return;
 		}
 		try {
@@ -2733,6 +2834,7 @@ public class LOA extends LOA_Vars {
 		} catch (Exception e2) {
 			System.out.println("El proceso se encuentra cerrado");
 			System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random\n\n==========================================================\n");
+			driver.quit();
 			return;
 		}
 		try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -2786,6 +2888,7 @@ public class LOA extends LOA_Vars {
 						} catch (Exception e) {
 							System.out.println("No se encuentra el proceso de postulacion");
 							System.out.println("Se finaliza el test Postulaciones_Inscribir_Random\n\n==========================================================\n");
+							driver.quit();
 							return;
 						}
 						try {
@@ -2796,6 +2899,7 @@ public class LOA extends LOA_Vars {
 						} catch (Exception e2) {
 							System.out.println("El proceso se encuentra cerrado");
 							System.out.println("Se finaliza el test Postulaciones_Desinscribir_Random\n\n==========================================================\n");
+							driver.quit();
 							return;
 						}
 						try { TimeUnit.MILLISECONDS.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -2818,5 +2922,6 @@ public class LOA extends LOA_Vars {
 			System.out.println("No hay asignaturas para desinscribir");
 		}
 		System.out.println("Se finaliza el test Inscripciones_Desinscribir_Todo\n\n==========================================================\n");
+		driver.quit();
 	}
 }
