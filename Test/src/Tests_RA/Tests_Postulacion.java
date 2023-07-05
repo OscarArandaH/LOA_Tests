@@ -149,7 +149,7 @@ public class Tests_Postulacion extends Vars_RA{
 						// Se crea un random para seleccionar una seccion de teoria al azar
 						int rand_int2 = rand.nextInt((listadoTeoria.size() - 1) + 1) + 1;
 						// Se obtiene la seccion
-						WebElement seccionElement = driver.findElement(By.cssSelector(".row-curso:nth-child("+(rand_int2)+") > td:nth-child(1)"));
+						WebElement seccionElement = driver.findElement(By.cssSelector(".row-curso:nth-child("+(rand_int2-1)+") > td:nth-child(1)"));
 						// Se hace scroll hacia el boton
 						js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
 						// Se selecciona la seccion
@@ -227,7 +227,7 @@ public class Tests_Postulacion extends Vars_RA{
 						// Se crea un random para seleccionar una seccion de teoria al azar
 						int rand_int2 = rand.nextInt((listadoEjercicio.size() - 1) + 1) + 1;
 						// Se obtiene la seccion
-						WebElement seccionElement = driver.findElement(By.cssSelector(".row-ejercicio:nth-child("+(rand_int2)+") > td:nth-child(1)"));
+						WebElement seccionElement = driver.findElement(By.cssSelector(".row-ejercicio:nth-child("+(rand_int2-1)+") > td:nth-child(1)"));
 						// Se hace scroll hacia el boton
 						js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
 						// Se selecciona la seccion
@@ -674,7 +674,7 @@ public class Tests_Postulacion extends Vars_RA{
 								// Se crea un random para seleccionar una seccion de teoria al azar
 								int rand_int2 = rand.nextInt((listadoTeoria.size() - 1) + 1) + 1;
 								// Se obtiene la seccion
-								WebElement seccionElement = driver.findElement(By.cssSelector(".row-curso:nth-child("+(rand_int2)+") > td:nth-child(1)"));
+								WebElement seccionElement = driver.findElement(By.cssSelector(".row-curso:nth-child("+(rand_int2-1)+") > td:nth-child(1)"));
 								// Se hace scroll hacia el boton
 								js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
 								// Se selecciona la seccion
@@ -753,7 +753,7 @@ public class Tests_Postulacion extends Vars_RA{
 									// Se crea un random para seleccionar una seccion de ejercicio al azar
 									int rand_int2 = rand.nextInt((listadoEjercicio.size() - 1) + 1) + 1;
 									// Se obtiene la seccion
-									WebElement seccionElement = driver.findElement(By.cssSelector(".row-ejercicio:nth-child("+(rand_int2)+") > td:nth-child(1)"));
+									WebElement seccionElement = driver.findElement(By.cssSelector(".row-ejercicio:nth-child("+(rand_int2-1)+") > td:nth-child(1)"));
 									// Se hace scroll hacia el boton
 									js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
 									// Se selecciona la seccion
