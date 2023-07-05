@@ -1173,7 +1173,7 @@ public class Tests_Combinados {
       // Si no se llego al limite de asignaturas se mandan solicitudes
       if( contadorAsignaturas <= CANTIDADASIGNATURASLIMITE ){
 				// Se intenta mandar solicitud
-        System.out.println("	Se intenta mandar solicitud para las asignaturas omitidas: ");
+        System.out.println("\n	Se intenta mandar solicitud para las asignaturas omitidas: ");
 				for ( int codigoAsignatura : codigosAsignaturasOmitidas ){
 					System.out.println("		" + codigoAsignatura);
 				}

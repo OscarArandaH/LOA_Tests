@@ -1,13 +1,43 @@
-1688585635352	geckodriver	INFO	Listening on 127.0.0.1:25503
-1688585635398	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "36155" "--remote ... localhost:36155/,http://[::1]:36155/" "-no-remote" "-profile" "C:\\Users\\oscar\\AppData\\Local\\Temp\\rust_mozprofileeSf5XZ"
+1688586473182	geckodriver	INFO	Listening on 127.0.0.1:2955
+1688586473376	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "18872" "--remote ... localhost:18872/,http://[::1]:18872/" "-no-remote" "-profile" "C:\\Users\\oscar\\AppData\\Local\\Temp\\rust_mozprofiletJoUgE"
 console.warn: services.settings: Ignoring preference override of remote settings server
 console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
-1688585635608	Marionette	INFO	Marionette enabled
+1688586473587	Marionette	INFO	Marionette enabled
 Dynamically enable window occlusion 0
-1688585635611	Marionette	INFO	Listening on port 61249
-Read port: 61249
-WebDriver BiDi listening on ws://127.0.0.1:36155
-1688585635700	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
-DevTools listening on ws://127.0.0.1:36155/devtools/browser/1844fd00-f090-4454-9e43-f8f250ff8626
+1688586473590	Marionette	INFO	Listening on port 62757
+Read port: 62757
+WebDriver BiDi listening on ws://127.0.0.1:18872
+1688586473673	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:18872/devtools/browser/94ebbfb6-6c32-4806-823a-0664531c00fe
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+console.error: (new TypeError("lazy.AsyncShutdown.profileBeforeChange is undefined", "resource://services-settings/Database.sys.mjs", 599))
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
 console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
 console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
