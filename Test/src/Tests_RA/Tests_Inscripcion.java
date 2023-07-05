@@ -15,9 +15,20 @@ import java.util.Random;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
+// import org.junit.Rule;
+// import org.junit.runner.RunWith;
+// import com.google.code.tempusfugit.concurrency.ConcurrentRule;
+// import com.google.code.tempusfugit.concurrency.ConcurrentTestRunner;
+// import com.google.code.tempusfugit.concurrency.RepeatingRule;
+// import com.google.code.tempusfugit.concurrency.annotations.Repeating;
+// import com.google.code.tempusfugit.concurrency.annotations.Concurrent;
+
+//@RunWith(ConcurrentTestRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class Tests_Inscripcion extends Vars_RA{
   @Test
+	//@Concurrent (count = 2)
+	//@Repeating (repetition = 2)
 	public void Test_1_Inscripciones_Inscribir_Random() throws InterruptedException {
 		System.out.println("Se inicia el test Test_1_Inscripciones_Inscribir_Random");
 		// Se configura el driver para firefox
@@ -279,6 +290,8 @@ public class Tests_Inscripcion extends Vars_RA{
 	}
 
 	@Test
+	//@Concurrent (count = 2)
+	//@Repeating (repetition = 2)
 	public void Test_2_Inscripciones_Desinscribir_Random() throws InterruptedException {
 		System.out.println("Se inicia el test Test_2_Inscripciones_Desinscribir_Random");
 		// Se configura el driver para firefox
@@ -424,6 +437,8 @@ public class Tests_Inscripcion extends Vars_RA{
 	}
 
 	@Test
+	//@Concurrent (count = 2)
+	//@Repeating (repetition = 2)
 	public void Test_3_Inscripciones_Inscribir_Limite() throws InterruptedException {
 		System.out.println("Se inicia el test Test_3_Inscripciones_Inscribir_Limite");
 		// Se configura el driver para firefox
@@ -816,6 +831,8 @@ public class Tests_Inscripcion extends Vars_RA{
 	}
 
 	@Test
+	//@Concurrent (count = 2)
+	//@Repeating (repetition = 2)
 	public void Test_4_Inscripciones_Desinscribir_Todo() throws InterruptedException {
 		System.out.println("Se inicia el test Test_4_Inscripciones_Desinscribir_Todo");
 		// Se configura el driver para firefox

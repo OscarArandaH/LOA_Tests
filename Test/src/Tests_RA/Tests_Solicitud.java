@@ -15,9 +15,20 @@ import java.util.Random;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
+// import org.junit.Rule;
+// import org.junit.runner.RunWith;
+// import com.google.code.tempusfugit.concurrency.ConcurrentRule;
+// import com.google.code.tempusfugit.concurrency.ConcurrentTestRunner;
+// import com.google.code.tempusfugit.concurrency.RepeatingRule;
+// import com.google.code.tempusfugit.concurrency.annotations.Repeating;
+// import com.google.code.tempusfugit.concurrency.annotations.Concurrent;
+
+//@RunWith(ConcurrentTestRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class Tests_Solicitud extends Vars_RA{
   @Test
+	//@Concurrent (count = 2)
+	//@Repeating (repetition = 2)
 	public void Test_1_Solicitudes_Inscribir_Random() throws InterruptedException {
 		System.out.println("Se inicia el test Test_1_Solicitudes_Inscribir_Random");
 		// Se configura el driver para firefox
@@ -244,6 +255,8 @@ public class Tests_Solicitud extends Vars_RA{
 	}
 
 	@Test
+	//@Concurrent (count = 2)
+	//@Repeating (repetition = 2)
 	public void Test_2_Solicitudes_Revisar_Random() throws InterruptedException {
 		System.out.println("Se inicia el test Test_2_Solicitudes_Revisar_Random");
 		// Se configura el driver para firefox
@@ -368,6 +381,8 @@ public class Tests_Solicitud extends Vars_RA{
 	}
 
 	@Test
+	//@Concurrent (count = 2)
+	//@Repeating (repetition = 2)
 	public void Test_3_Solicitudes_Eliminar_Random() throws InterruptedException {
 		System.out.println("Se inicia el test Test_3_Solicitudes_Eliminar_Random");
 		// Se configura el driver para firefox
@@ -450,6 +465,8 @@ public class Tests_Solicitud extends Vars_RA{
 	}
 
 	@Test
+	//@Concurrent (count = 2)
+	//@Repeating (repetition = 2)
 	public void Test_4_Solicitudes_Inscribir_Limite() throws InterruptedException {
 		System.out.println("Se inicia el test Test_4_Solicitudes_Inscribir_Limite");
 		// Se configura el driver para firefox
@@ -873,6 +890,8 @@ public class Tests_Solicitud extends Vars_RA{
 	}
 
 	@Test
+	//@Concurrent (count = 2)
+	//@Repeating (repetition = 2)
 	public void Test_5_Solicitudes_Revisar_Todo() throws InterruptedException {
 		System.out.println("Se inicia el test Test_5_Solicitudes_Revisar_Todo");
 		// Se configura el driver para firefox
@@ -1052,6 +1071,8 @@ public class Tests_Solicitud extends Vars_RA{
 	}
 
 	@Test
+	//@Concurrent (count = 2)
+	//@Repeating (repetition = 2)
 	public void Test_6_Solicitudes_Eliminar_Todo() throws InterruptedException {
 		System.out.println("Se inicia el test Test_6_Solicitudes_Eliminar_Todo");
 		// Se configura el driver para firefox
