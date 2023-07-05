@@ -807,7 +807,11 @@ public class Tests_Postulacion extends Vars_RA{
 			}
 			i = 1;
 			System.out.println("	Se inscribieron " + contadorAsignaturas + " asignaturas");
-			System.out.println("Se llego al limite de asignaturas a inscribir");
+			if( contadorAsignaturas < CANTIDADASIGNATURASLIMITE ){
+				System.out.println("	No fue posible inscribir el limite de asignaturas por los derechos disponibles");
+      } else {
+        System.out.println("	Se llego al limite de asignaturas");
+      }
 		}
 		System.out.println("Se finaliza el test Test_3_Postulaciones_Inscribir_Limite\n\n==========================================================\n");
 		driver.quit();

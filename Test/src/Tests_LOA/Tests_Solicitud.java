@@ -494,7 +494,6 @@ public class Tests_Solicitud extends Vars_LOA {
 
 		// Se busca cuantas asignaturas lleva solicitadas y postuladas
 		int contadorAsignaturas = 0;
-		System.out.println("Contador asignaturas 1: "+contadorAsignaturas);
 		Boolean procesoPostulaciones = true;
 		Boolean procesoInscripcion = true;
 
@@ -625,7 +624,6 @@ public class Tests_Solicitud extends Vars_LOA {
 		List<WebElement> listadoSolicitudesEnviadas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(1)"));
 		TimeUnit.MILLISECONDS.sleep(350);
 		contadorAsignaturas += listadoSolicitudesEnviadas.size();
-		System.out.println("Contador asignaturas 4: "+contadorAsignaturas);
 		int j = 0;
 		while( j == 0){
 			// Se dan 3 vueltas para probar inscribir las asignaturas
@@ -671,7 +669,6 @@ public class Tests_Solicitud extends Vars_LOA {
 				ArrayList<Integer> codigosAsignaturasAOmitir = new ArrayList<Integer>();
 				// Se revisan todos los cursos
 				int l = 0;
-				System.out.println("Contador asignaturas 5: "+contadorAsignaturas);
 				while( (l == 0) && (contadorAsignaturas < CANTIDADASIGNATURASLIMITE) ) {
 					// Seleccionar frame del listado de cursos
 					driver.switchTo().defaultContent();
@@ -883,7 +880,11 @@ public class Tests_Solicitud extends Vars_LOA {
 			}
 			j = 1;
 			System.out.println("	Se inscribieron " + contadorAsignaturas + " asignaturas");
-			System.out.println("Se llego al limite de asignaturas a inscribir");
+			if( contadorAsignaturas < CANTIDADASIGNATURASLIMITE ){
+				System.out.println("	No fue posible inscribir el limite de asignaturas por los derechos disponibles");
+      } else {
+        System.out.println("	Se llego al limite de asignaturas");
+      }
 		}
 		System.out.println("Se finaliza el test Test_4_Solicitudes_Inscribir_Limite\n\n==========================================================\n");
 		driver.quit();

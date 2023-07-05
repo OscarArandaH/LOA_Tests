@@ -466,7 +466,6 @@ public class Tests_Inscripcion extends Vars_RA{
 
 		// Se busca cuantas asignaturas lleva solicitadas y inscritas
 		int contadorAsignaturas = 0;
-		System.out.println("Contador Asignaturas inicial: "+contadorAsignaturas);
 		// Seleccionar proceso de enviar inscripciones
 		driver.findElement(By.cssSelector("li.dropdown:nth-child(3) > a:nth-child(1)")).click();
 		try {
@@ -824,7 +823,11 @@ public class Tests_Inscripcion extends Vars_RA{
 			}
 			i = 1;
 			System.out.println("	Se inscribieron " + contadorAsignaturas + " asignaturas");
-			System.out.println("Se llego al limite de asignaturas a inscribir");
+			if( contadorAsignaturas < CANTIDADASIGNATURASLIMITE ){
+				System.out.println("	No fue posible inscribir el limite de asignaturas por los derechos disponibles");
+      } else {
+        System.out.println("	Se llego al limite de asignaturas");
+      }
 		}
 		System.out.println("Se finaliza el test Inscripciones_Inscribir_Limite\n\n==========================================================\n");
 		driver.quit();
