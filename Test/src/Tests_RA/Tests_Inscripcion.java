@@ -521,7 +521,7 @@ public class Tests_Inscripcion extends Vars_RA{
 		while ( i == 0 ){
 			// Se dan 3 vueltas para probar inscribir las asignaturas
 			for( int j = 1; j <= 3; j++ ){
-				System.out.println("Vuelta " + j );
+				System.out.println("\nVuelta " + j );
 				// Seleccionar frame del listado de cursos
 				driver.switchTo().defaultContent();
 				driver.findElement(By.cssSelector("li.dropdown:nth-child(3) > a:nth-child(1)")).click();

@@ -144,7 +144,7 @@ public class Tests_Solicitud extends Vars_RA{
 						// Se crea un random para seleccionar una seccion de teoria al azar
 						int rand_int2 = rand.nextInt((listadoTeoria.size() - 1) + 1) + 1;
 						// Se obtiene la seccion
-						WebElement seccionElement = driver.findElement(By.cssSelector(".row-curso:nth-child("+(rand_int2-1)+") > td:nth-child(1)"));
+						WebElement seccionElement = driver.findElement(By.cssSelector(".row-curso:nth-child("+(rand_int2)+") > td:nth-child(1)"));
 						// Se hace scroll hacia el boton
 						js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
 						// Se selecciona la seccion
@@ -177,7 +177,7 @@ public class Tests_Solicitud extends Vars_RA{
 						// Se crea un random para seleccionar una seccion de teoria al azar
 						int rand_int2 = rand.nextInt((listadoEjercicio.size() - 1) + 1) + 1;
 						// Se obtiene la seccion
-						WebElement seccionElement = driver.findElement(By.cssSelector(".row-ejercicio:nth-child("+(rand_int2-1)+") > td:nth-child(1)"));
+						WebElement seccionElement = driver.findElement(By.cssSelector(".row-ejercicio:nth-child("+(rand_int2)+") > td:nth-child(1)"));
 						// Se hace scroll hacia el boton
 						js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
 						// Se selecciona la seccion
@@ -210,7 +210,7 @@ public class Tests_Solicitud extends Vars_RA{
 						// Se crea un random para seleccionar una seccion de teoria al azar
 						int rand_int2 = rand.nextInt((listadoLaboratorio.size() - 1) + 1) + 1;
 						// Se obtiene la seccion
-						WebElement seccionElement = driver.findElement(By.cssSelector(".row-laboratorio:nth-child("+(rand_int2-1)+") > td:nth-child(1)"));
+						WebElement seccionElement = driver.findElement(By.cssSelector(".row-laboratorio:nth-child("+(rand_int2)+") > td:nth-child(1)"));
 						// Se hace scroll hacia el boton
 						js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
 						// Se selecciona la seccion
@@ -628,7 +628,7 @@ public class Tests_Solicitud extends Vars_RA{
 		while( j == 0){
 			// Se dan 3 vueltas para probar inscribir las asignaturas
 			for( int k = 1; k <= 3; k++ ){
-				System.out.println("Vuelta " + k );
+				System.out.println("\nVuelta " + k );
 				// Se revisa si se puede seleccionar el proceso de postulaciones
 				driver.switchTo().defaultContent();
 				driver.findElement(By.cssSelector("li.dropdown:nth-child(3) > a:nth-child(1)")).click();
@@ -770,7 +770,7 @@ public class Tests_Solicitud extends Vars_RA{
 									// Se crea un random para seleccionar una seccion de teoria al azar
 									int rand_int2 = rand.nextInt((listadoTeoria.size() - 1) + 1) + 1;
 									// Se obtiene la seccion
-									WebElement seccionElement = driver.findElement(By.cssSelector(".row-curso:nth-child("+(rand_int2-1)+") > td:nth-child(1)"));
+									WebElement seccionElement = driver.findElement(By.cssSelector(".row-curso:nth-child("+(rand_int2)+") > td:nth-child(1)"));
 									// Se hace scroll hacia el boton
 									js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
 									// Se selecciona la seccion
@@ -801,7 +801,7 @@ public class Tests_Solicitud extends Vars_RA{
 									// Se crea un random para seleccionar una seccion de teoria al azar
 									int rand_int2 = rand.nextInt((listadoEjercicio.size() - 1) + 1) + 1;
 									// Se obtiene la seccion
-									WebElement seccionElement = driver.findElement(By.cssSelector(".row-ejercicio:nth-child("+(rand_int2-1)+") > td:nth-child(1)"));
+									WebElement seccionElement = driver.findElement(By.cssSelector(".row-ejercicio:nth-child("+(rand_int2)+") > td:nth-child(1)"));
 									// Se hace scroll hacia el boton
 									js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
 									// Se selecciona la seccion
@@ -832,7 +832,7 @@ public class Tests_Solicitud extends Vars_RA{
 									// Se crea un random para seleccionar una seccion de teoria al azar
 									int rand_int2 = rand.nextInt((listadoLab.size() - 1) + 1) + 1;
 									// Se obtiene la seccion
-									WebElement seccionElement = driver.findElement(By.cssSelector(".row-laboratorio:nth-child("+(rand_int2-1)+") > td:nth-child(1)"));
+									WebElement seccionElement = driver.findElement(By.cssSelector(".row-laboratorio:nth-child("+(rand_int2)+") > td:nth-child(1)"));
 									// Se hace scroll hacia el boton
 									js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
 									// Se selecciona la seccion

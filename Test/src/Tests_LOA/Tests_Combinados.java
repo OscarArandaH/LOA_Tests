@@ -168,7 +168,7 @@ public class Tests_Combinados {
 		while ( i == 0 ){
 			// Se dan 3 vueltas para probar inscribir las asignaturas
 			int j = 0;
-			while( j < 1 ){
+			while( j < 3 ){
 				System.out.println("\nVuelta " + (j+1) );
 				// Se revisa si se puede seleccionar el proceso de postulaciones
 				driver.switchTo().defaultContent();
@@ -305,7 +305,7 @@ public class Tests_Combinados {
 								// Se crea un random para seleccionar una seccion de teoria al azar
 								int rand_int2 = rand.nextInt((listadoTeoria.size() - 1) + 1) + 1;
 								// Se obtiene la seccion
-								WebElement seccionElement = driver.findElement(By.cssSelector(".row-curso:nth-child("+(rand_int2-1)+") > td:nth-child(1)"));
+								WebElement seccionElement = driver.findElement(By.cssSelector(".row-curso:nth-child("+(rand_int2)+") > td:nth-child(1)"));
 								// Se hace scroll hacia el boton
 								js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
 								// Se selecciona la seccion
@@ -384,7 +384,7 @@ public class Tests_Combinados {
 									// Se crea un random para seleccionar una seccion de ejercicio al azar
 									int rand_int2 = rand.nextInt((listadoEjercicio.size() - 1) + 1) + 1;
 									// Se obtiene la seccion
-									WebElement seccionElement = driver.findElement(By.cssSelector(".row-ejercicio:nth-child("+(rand_int2-1)+") > td:nth-child(1)"));
+									WebElement seccionElement = driver.findElement(By.cssSelector(".row-ejercicio:nth-child("+(rand_int2)+") > td:nth-child(1)"));
 									// Se hace scroll hacia el boton
 									js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
 									// Se selecciona la seccion
@@ -592,7 +592,7 @@ public class Tests_Combinados {
 										// Se crea un random para seleccionar una seccion de teoria al azar
 										int rand_int2 = rand.nextInt((listadoTeoria.size() - 1) + 1) + 1;
 										// Se obtiene la seccion
-										WebElement seccionElement = driver.findElement(By.cssSelector(".row-curso:nth-child("+(rand_int2-1)+") > td:nth-child(1)"));
+										WebElement seccionElement = driver.findElement(By.cssSelector(".row-curso:nth-child("+(rand_int2)+") > td:nth-child(1)"));
 										// Se hace scroll hacia el boton
 										js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
 										// Se selecciona la seccion
@@ -623,7 +623,7 @@ public class Tests_Combinados {
 										// Se crea un random para seleccionar una seccion de teoria al azar
 										int rand_int2 = rand.nextInt((listadoEjercicio.size() - 1) + 1) + 1;
 										// Se obtiene la seccion
-										WebElement seccionElement = driver.findElement(By.cssSelector(".row-ejercicio:nth-child("+(rand_int2-1)+") > td:nth-child(1)"));
+										WebElement seccionElement = driver.findElement(By.cssSelector(".row-ejercicio:nth-child("+(rand_int2)+") > td:nth-child(1)"));
 										// Se hace scroll hacia el boton
 										js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
 										// Se selecciona la seccion
@@ -654,7 +654,7 @@ public class Tests_Combinados {
 										// Se crea un random para seleccionar una seccion de teoria al azar
 										int rand_int2 = rand.nextInt((listadoLab.size() - 1) + 1) + 1;
 										// Se obtiene la seccion
-										WebElement seccionElement = driver.findElement(By.cssSelector(".row-laboratorio:nth-child("+(rand_int2-1)+") > td:nth-child(1)"));
+										WebElement seccionElement = driver.findElement(By.cssSelector(".row-laboratorio:nth-child("+(rand_int2)+") > td:nth-child(1)"));
 										// Se hace scroll hacia el boton
 										js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
 										// Se selecciona la seccion
@@ -850,7 +850,7 @@ public class Tests_Combinados {
 		while ( i == 0 ){
 			// Se dan 3 vueltas para probar inscribir las asignaturas
 			int j = 0;
-			while( j < 1 ){
+			while( j < 3 ){
 				System.out.println("\nVuelta " + (j+1) );
 				// Se revisa si se puede seleccionar el proceso de inscripciones
 				driver.switchTo().defaultContent();
@@ -1110,7 +1110,7 @@ public class Tests_Combinados {
 								driver.switchTo().frame("mainFrame");
 								driver.switchTo().frame(5);
 								// Se postula a la asignatura
-								driver.findElement(By.id("btn_postular")).click();
+								driver.findElement(By.id("btn_inscribir")).click();
 								TimeUnit.MILLISECONDS.sleep(250);
 								if (driver.switchTo().alert().getText().compareTo(Vars_LOA.alertaInscribirText) == 0 ) {
 									driver.switchTo().alert().accept();
@@ -1124,7 +1124,7 @@ public class Tests_Combinados {
 									for (WebElement mensaje : mensajes){
 										TimeUnit.MILLISECONDS.sleep(250);
 										// Se revisa si el mensaje corresponde a asignatura inscrita
-										if( mensaje.getText().compareTo(Vars_LOA.postulacionStatusInscritaText + Integer.parseInt(listadoCodigoNombre2.get(rand_int1-1).get(0)) + " (" + Vars_LOA.proceso + ")." ) == 0 ) {
+										if( mensaje.getText().compareTo(Vars_LOA.inscripcionStatusInscritaText + Integer.parseInt(listadoCodigoNombre2.get(rand_int1-1).get(0)) + " (" + Vars_LOA.proceso + ")." ) == 0 ) {
 											System.out.println("	Asignatura: " + listadoCodigoNombre2.get(rand_int1-1).get(0) + " - " +  listadoCodigoNombre2.get(rand_int1-1).get(1) + " inscrita." );
 											// Se guarda la asignatura inscrita
 											int codigo = Integer.parseInt(listadoCodigoNombre2.get(rand_int1-1).get(0));
@@ -1303,7 +1303,7 @@ public class Tests_Combinados {
 										// Se crea un random para seleccionar una seccion de teoria al azar
 										int rand_int2 = rand.nextInt((listadoTeoria.size() - 1) + 1) + 1;
 										// Se obtiene la seccion
-										WebElement seccionElement = driver.findElement(By.cssSelector(".row-curso:nth-child("+(rand_int2-1)+") > td:nth-child(1)"));
+										WebElement seccionElement = driver.findElement(By.cssSelector(".row-curso:nth-child("+(rand_int2)+") > td:nth-child(1)"));
 										// Se hace scroll hacia el boton
 										js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
 										// Se selecciona la seccion
@@ -1334,7 +1334,7 @@ public class Tests_Combinados {
 										// Se crea un random para seleccionar una seccion de teoria al azar
 										int rand_int2 = rand.nextInt((listadoEjercicio.size() - 1) + 1) + 1;
 										// Se obtiene la seccion
-										WebElement seccionElement = driver.findElement(By.cssSelector(".row-ejercicio:nth-child("+(rand_int2-1)+") > td:nth-child(1)"));
+										WebElement seccionElement = driver.findElement(By.cssSelector(".row-ejercicio:nth-child("+(rand_int2)+") > td:nth-child(1)"));
 										// Se hace scroll hacia el boton
 										js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
 										// Se selecciona la seccion
@@ -1365,7 +1365,7 @@ public class Tests_Combinados {
 										// Se crea un random para seleccionar una seccion de teoria al azar
 										int rand_int2 = rand.nextInt((listadoLab.size() - 1) + 1) + 1;
 										// Se obtiene la seccion
-										WebElement seccionElement = driver.findElement(By.cssSelector(".row-laboratorio:nth-child("+(rand_int2-1)+") > td:nth-child(1)"));
+										WebElement seccionElement = driver.findElement(By.cssSelector(".row-laboratorio:nth-child("+(rand_int2)+") > td:nth-child(1)"));
 										// Se hace scroll hacia el boton
 										js.executeScript("window.scrollBy(0,"+seccionElement.getLocation().getY()+")");
 										// Se selecciona la seccion

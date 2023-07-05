@@ -1,33 +1,10 @@
-1688583323848	geckodriver	INFO	Listening on 127.0.0.1:15504
-1688583324049	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "9246" "--remote- ... //localhost:9246/,http://[::1]:9246/" "-no-remote" "-profile" "C:\\Users\\oscar\\AppData\\Local\\Temp\\rust_mozprofileEitQSe"
+1688585635352	geckodriver	INFO	Listening on 127.0.0.1:25503
+1688585635398	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "36155" "--remote ... localhost:36155/,http://[::1]:36155/" "-no-remote" "-profile" "C:\\Users\\oscar\\AppData\\Local\\Temp\\rust_mozprofileeSf5XZ"
 console.warn: services.settings: Ignoring preference override of remote settings server
 console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
-1688583324268	Marionette	INFO	Marionette enabled
+1688585635608	Marionette	INFO	Marionette enabled
 Dynamically enable window occlusion 0
-1688583324271	Marionette	INFO	Listening on port 59657
-Read port: 59657
-WebDriver BiDi listening on ws://127.0.0.1:9246
-1688583324352	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
-DevTools listening on ws://127.0.0.1:9246/devtools/browser/b45016b4-de94-40ca-aceb-1c91d08fff1a
-console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
-console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
-console.warn: services.settings: Ignoring preference override of remote settings server
-console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
-console.error: (new TypeError("lazy.AsyncShutdown.profileBeforeChange is undefined", "resource://services-settings/Database.sys.mjs", 599))
-console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
-console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
-console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
-console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
-console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
-console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
-console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
-console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
-console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
-console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
-console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
-console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
-console.warn: LoginRecipes: "Falling back to a synchronous message for: https://loa.usach.cl."
-1688583396834	RemoteAgent	INFO	Perform WebSocket upgrade for incoming connection from 127.0.0.1:59740
-1688583396836	CDP	WARN	Invalid browser preferences for CDP. Set "fission.webContentIsolationStrategy"to 0 and "fission.bfcacheInParent" to false before Firefox starts.
-1688583396856	Marionette	INFO	Stopped listening on port 59657
-Dynamically enable window occlusion 1
+1688585635611	Marionette	INFO	Listening on port 61249
+Read port: 61249
+WebDriver BiDi listening on ws://127.0.0.1:36155
+1688585635700	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
