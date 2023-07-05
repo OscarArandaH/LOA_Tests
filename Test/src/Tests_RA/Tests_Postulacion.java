@@ -644,7 +644,7 @@ public class Tests_Postulacion extends Vars_RA{
 							driver.switchTo().frame("mainFrame");
 							driver.switchTo().frame("derecho");
 							// Se busca una asignatura
-							WebElement asignatura = driver.findElement(By.linkText(listadoCodigoNombre2.get(rand_int1).get(1)));
+							WebElement asignatura = driver.findElement(By.linkText(listadoCodigoNombre2.get(rand_int1-1).get(1)));
 							// Se crea el JavascriptExecutor para hacer scroll
 							JavascriptExecutor js = (JavascriptExecutor) driver;
 							// Se obtiene la posicion del boton

@@ -1,11 +1,20 @@
-1688524947578	geckodriver	INFO	Listening on 127.0.0.1:22472
-1688524947615	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "23551" "--remote ... localhost:23551/,http://[::1]:23551/" "-no-remote" "-profile" "C:\\Users\\oscar\\AppData\\Local\\Temp\\rust_mozprofilepgkXqm"
+1688565527161	geckodriver	INFO	Listening on 127.0.0.1:20855
+1688565527358	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "3313" "--remote- ... //localhost:3313/,http://[::1]:3313/" "-no-remote" "-profile" "C:\\Users\\oscar\\AppData\\Local\\Temp\\rust_mozprofilexwvag3"
 console.warn: services.settings: Ignoring preference override of remote settings server
 console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
-1688524948051	Marionette	INFO	Marionette enabled
+1688565527559	Marionette	INFO	Marionette enabled
 Dynamically enable window occlusion 0
-1688524948064	Marionette	INFO	Listening on port 62144
-Read port: 62144
-WebDriver BiDi listening on ws://127.0.0.1:23551
-1688524948377	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
-DevTools listening on ws://127.0.0.1:23551/devtools/browser/f7749ed4-2162-40a2-af87-c5c2002dccab
+1688565527562	Marionette	INFO	Listening on port 64172
+Read port: 64172
+WebDriver BiDi listening on ws://127.0.0.1:3313
+1688565527645	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:3313/devtools/browser/8cac91ac-de58-4ad9-a80d-7d912c16050f
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://rahue.usach.cl."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://rahue.usach.cl."
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+console.error: (new TypeError("lazy.AsyncShutdown.profileBeforeChange is undefined", "resource://services-settings/Database.sys.mjs", 599))
+1688565535727	RemoteAgent	INFO	Perform WebSocket upgrade for incoming connection from 127.0.0.1:64215
+1688565535729	CDP	WARN	Invalid browser preferences for CDP. Set "fission.webContentIsolationStrategy"to 0 and "fission.bfcacheInParent" to false before Firefox starts.
+1688565535749	Marionette	INFO	Stopped listening on port 64172
+Dynamically enable window occlusion 1

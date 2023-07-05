@@ -47,10 +47,10 @@ public class Tests_Postulacion extends Vars_LOA {
 		driver.findElement(By.id("clave")).sendKeys(Vars_LOA.userPass);
 		driver.findElement(By.cssSelector(".cover-container")).click();
 		driver.findElement(By.cssSelector(".btn-lg")).click();
-		TimeUnit.MILLISECONDS.sleep(350);
+		TimeUnit.MILLISECONDS.sleep(175);
 		// Seleccionar carrera
 		driver.findElement(By.linkText("1368 - INGENIERIA CIVIL OBRAS CIVILES")).click();
-		TimeUnit.MILLISECONDS.sleep(350);
+		TimeUnit.MILLISECONDS.sleep(175);
 		// Se revisa si se puede seleccionar el proceso de postulaciones
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
 		try {
@@ -73,13 +73,13 @@ public class Tests_Postulacion extends Vars_LOA {
 			return;
 		}
 		driver.switchTo().defaultContent();
-		TimeUnit.MILLISECONDS.sleep(350);
+		TimeUnit.MILLISECONDS.sleep(175);
 		// Seleccionar frame del listado de cursos
 		driver.switchTo().frame("mainFrame");
 		driver.switchTo().frame("derecho");
 		// Se obtienen todas las asignaturas
 		List<WebElement> listadoAsignaturas = driver.findElements(By.cssSelector("tr"));
-		TimeUnit.MILLISECONDS.sleep(350);
+		TimeUnit.MILLISECONDS.sleep(175);
 		// Se almacenan todas las asignaturas
 		ArrayList<String> listadoAsignaturasAux = new ArrayList<String>();
 		for (WebElement e : listadoAsignaturas) {
@@ -125,7 +125,7 @@ public class Tests_Postulacion extends Vars_LOA {
 				// Se selecciona una asignatura
 				asignatura.click();
 				System.out.println("\n	Asignatura: " + listadoAsignaturasAux.get(rand_int1-1));
-				TimeUnit.MILLISECONDS.sleep(350);
+				TimeUnit.MILLISECONDS.sleep(175);
 				// Se sale del frame, y se entra al frame de los cursos de teoria.
 				driver.switchTo().defaultContent();
 				driver.switchTo().frame("mainFrame");
@@ -135,7 +135,7 @@ public class Tests_Postulacion extends Vars_LOA {
 				System.out.println("	Se revisan los cursos de teoria");
 				// Se obtienen todos los cursos
 				List<WebElement> listadoTeoria = driver.findElements(By.cssSelector("tr"));
-				TimeUnit.MILLISECONDS.sleep(350);
+				TimeUnit.MILLISECONDS.sleep(175);
 				// Se almacenan todas las secciones
 				ArrayList<String> listadoTeoriaAux = new ArrayList<String>();
 				for (WebElement e : listadoTeoria) {
@@ -168,7 +168,7 @@ public class Tests_Postulacion extends Vars_LOA {
 				System.out.println("	Se revisan los cursos de laboratorio");
 				// Se obtienen todos los cursos
 				List<WebElement> listadoLaboratorio = driver.findElements(By.cssSelector("tr"));
-				TimeUnit.MILLISECONDS.sleep(350);
+				TimeUnit.MILLISECONDS.sleep(175);
 				// Se almacenan todas las secciones
 				ArrayList<String> listadoLaboratorioAux = new ArrayList<String>();
 				for (WebElement e : listadoLaboratorio) {
@@ -213,7 +213,7 @@ public class Tests_Postulacion extends Vars_LOA {
 				System.out.println("	Se revisan los cursos de ejercicio");
 				// Se obtienen todos los cursos
 				List<WebElement> listadoEjercicio = driver.findElements(By.cssSelector("tr"));
-				TimeUnit.MILLISECONDS.sleep(350);
+				TimeUnit.MILLISECONDS.sleep(175);
 				// Se almacenan todas las secciones
 				ArrayList<String> listadoEjercicioAux = new ArrayList<String>();
 				for (WebElement e : listadoEjercicio) {
@@ -247,12 +247,12 @@ public class Tests_Postulacion extends Vars_LOA {
 					driver.switchTo().frame(5);
 					// Se postula a la asignatura
 					driver.findElement(By.id("btn_postular")).click();
-					TimeUnit.MILLISECONDS.sleep(350);
+					TimeUnit.MILLISECONDS.sleep(175);
 					if (driver.switchTo().alert().getText().compareTo(Vars_LOA.alertaInscribirText) == 0 ) {
 						driver.switchTo().alert().accept();
 					}
 					// Tiempo para guardar la asignatura postulada
-					TimeUnit.MILLISECONDS.sleep(350);
+					TimeUnit.MILLISECONDS.sleep(175);
 					i = 1;
 				} else {
 					// No se puede postular a la asignatura
@@ -285,10 +285,10 @@ public class Tests_Postulacion extends Vars_LOA {
 		driver.findElement(By.id("clave")).sendKeys(Vars_LOA.userPass);
 		driver.findElement(By.cssSelector(".cover-container")).click();
 		driver.findElement(By.cssSelector(".btn-lg")).click();
-		TimeUnit.MILLISECONDS.sleep(350);
+		TimeUnit.MILLISECONDS.sleep(175);
 		// Seleccionar carrera
 		driver.findElement(By.linkText("1368 - INGENIERIA CIVIL OBRAS CIVILES")).click();
-		TimeUnit.MILLISECONDS.sleep(350);
+		TimeUnit.MILLISECONDS.sleep(175);
 		// Se revisa si se puede seleccionar el proceso de postulaciones
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
 		try {
@@ -311,15 +311,15 @@ public class Tests_Postulacion extends Vars_LOA {
 			return;
 		}
 		driver.switchTo().defaultContent();
-		TimeUnit.MILLISECONDS.sleep(350);
+		TimeUnit.MILLISECONDS.sleep(175);
 		// Se entra al frame con las asignaturas postuladas
 		driver.switchTo().frame("mainFrame");
 		driver.switchTo().frame(5);
 		// Se buscan la cantidad de asignaturas postuladas
 		List<WebElement> accionesAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(7)"));
-		TimeUnit.MILLISECONDS.sleep(350);
+		TimeUnit.MILLISECONDS.sleep(175);
 		List<WebElement> codigosAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(1)"));
-		TimeUnit.MILLISECONDS.sleep(350);
+		TimeUnit.MILLISECONDS.sleep(175);
 		int postulacionesNoDesinscribibles = 0;
 		for( int i = 0; i < accionesAsignaturasPostuladas.size() ; i++ ){
 			if( !accionesAsignaturasPostuladas.get(i).getText().equals(Vars_LOA.btnPostulacionDESINSCRIBIRText) ){
@@ -355,7 +355,7 @@ public class Tests_Postulacion extends Vars_LOA {
 						// Se acepta el mensaje de desinscripcion
 						driver.switchTo().alert().accept();
 						// Tiempo para esperar que se abra la alerta
-						TimeUnit.MILLISECONDS.sleep(350);
+						TimeUnit.MILLISECONDS.sleep(175);
 						// Se ingresa el codigo de desinscripcion
 						driver.switchTo().alert().sendKeys(codigo);
 						// Se acepta el mensaje de desinscripcion
@@ -363,7 +363,7 @@ public class Tests_Postulacion extends Vars_LOA {
 						// Se entra al frame con las asignaturas postuladas
 						driver.switchTo().defaultContent();
 						// Tiempo para esperar que se abra la alerta
-						TimeUnit.MILLISECONDS.sleep(350);
+						TimeUnit.MILLISECONDS.sleep(175);
 						// Se entra al frame con las asignaturas postuladas
 						driver.switchTo().defaultContent();
 						driver.findElement(By.id("navbar-dropdown-procesos")).click();
@@ -386,15 +386,15 @@ public class Tests_Postulacion extends Vars_LOA {
 							driver.quit();
 							return;
 						}
-						TimeUnit.MILLISECONDS.sleep(350);
+						TimeUnit.MILLISECONDS.sleep(175);
 						driver.switchTo().defaultContent();
 						driver.switchTo().frame("mainFrame");
 						driver.switchTo().frame(5);
 						// Se buscan la cantidad de asignaturas restantes
 						accionesAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(7)"));
-						TimeUnit.MILLISECONDS.sleep(350);
+						TimeUnit.MILLISECONDS.sleep(175);
 						codigosAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(1)"));
-						TimeUnit.MILLISECONDS.sleep(350);
+						TimeUnit.MILLISECONDS.sleep(175);
 						cantidadBotones = accionesAsignaturasPostuladas.size();
 						j = cantidadBotones;
 						i = 1;
@@ -429,10 +429,10 @@ public class Tests_Postulacion extends Vars_LOA {
 		driver.findElement(By.id("clave")).sendKeys(Vars_LOA.userPass);
 		driver.findElement(By.cssSelector(".cover-container")).click();
 		driver.findElement(By.cssSelector(".btn-lg")).click();
-		TimeUnit.MILLISECONDS.sleep(350);
+		TimeUnit.MILLISECONDS.sleep(175);
 		// Seleccionar carrera
 		driver.findElement(By.linkText("1368 - INGENIERIA CIVIL OBRAS CIVILES")).click();
-		TimeUnit.MILLISECONDS.sleep(350);
+		TimeUnit.MILLISECONDS.sleep(175);
 
 		int CANTIDADASIGNATURASLIMITE = 6;
 
@@ -463,7 +463,7 @@ public class Tests_Postulacion extends Vars_LOA {
 			return;
 		}
 		driver.switchTo().defaultContent();
-		TimeUnit.MILLISECONDS.sleep(350);
+		TimeUnit.MILLISECONDS.sleep(175);
 		// Seleccionar proceso solicitudes
 		driver.switchTo().defaultContent();
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
@@ -474,7 +474,7 @@ public class Tests_Postulacion extends Vars_LOA {
 			procesoSolicitudes = false;
 			driver.navigate().refresh();
 		}
-		TimeUnit.MILLISECONDS.sleep(350);
+		TimeUnit.MILLISECONDS.sleep(175);
 		// Seleccionar proceso inscripciones
 		driver.switchTo().defaultContent();
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
@@ -485,20 +485,20 @@ public class Tests_Postulacion extends Vars_LOA {
 			procesoInscripciones = false;
 			driver.navigate().refresh();
 		}
-		TimeUnit.MILLISECONDS.sleep(350);
+		TimeUnit.MILLISECONDS.sleep(175);
 		// Si esta abierto el proceso de postulaciones, se cuentan cuantas postulaciones hay
 		if ( procesoSolicitudes ) {
 			driver.switchTo().defaultContent();
 			driver.findElement(By.id("navbar-dropdown-procesos")).click();
 			driver.findElement(By.linkText(Vars_LOA.solicitudText)).click();
-			TimeUnit.MILLISECONDS.sleep(350);
+			TimeUnit.MILLISECONDS.sleep(175);
 			// Seleccionar el frame con las postulaciones
 			driver.switchTo().defaultContent();
 			driver.switchTo().frame("mainFrame");
 			driver.switchTo().frame(5);
 			// Se obtienen todas las asignaturas
 			List<WebElement> listadoAsignaturasPostuladas = driver.findElements(By.className("nivel"));
-			TimeUnit.MILLISECONDS.sleep(350);
+			TimeUnit.MILLISECONDS.sleep(175);
 			// Se almacenan todas las asignaturas postuladas
 			ArrayList<String> listadoAsignaturasPostuladasAux = new ArrayList<String>();
 			for (WebElement linea : listadoAsignaturasPostuladas) {
@@ -506,18 +506,18 @@ public class Tests_Postulacion extends Vars_LOA {
 			}
 			contadorAsignaturas += listadoAsignaturasPostuladasAux.size();
 		}
-		TimeUnit.MILLISECONDS.sleep(350);
+		TimeUnit.MILLISECONDS.sleep(175);
 		// Si esta abierto el proceso de inscripciones, se cuentan cuantas inscripciones hay
 		if ( procesoInscripciones ) {
 			driver.switchTo().defaultContent();
 			driver.findElement(By.id("navbar-dropdown-procesos")).click();
 			driver.findElement(By.linkText(Vars_LOA.inscripcionText)).click();
-			TimeUnit.MILLISECONDS.sleep(350);
+			TimeUnit.MILLISECONDS.sleep(175);
 			// Seleccionar el frame con las inscripciones
 			driver.switchTo().defaultContent();
 			driver.switchTo().frame("mainFrame");
 			driver.switchTo().frame("frame_inscripcion");
-			TimeUnit.MILLISECONDS.sleep(350);
+			TimeUnit.MILLISECONDS.sleep(175);
 			// Se obtienen todas las asignaturas
 			List<WebElement> listadoAsignaturasInscritas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(1)"));
 			// Se cuenta cuantas asignaturas se han inscrito
@@ -532,7 +532,7 @@ public class Tests_Postulacion extends Vars_LOA {
 			}
 			contadorAsignaturas += codigosInscripciones.size();
 		}
-		TimeUnit.MILLISECONDS.sleep(350);
+		TimeUnit.MILLISECONDS.sleep(175);
 		int i = 0;
 		while ( i == 0 ){
 			// Se dan 3 vueltas para probar inscribir las asignaturas
@@ -561,12 +561,12 @@ public class Tests_Postulacion extends Vars_LOA {
 					return;
 				}
 				driver.switchTo().defaultContent();
-				TimeUnit.MILLISECONDS.sleep(350);
+				TimeUnit.MILLISECONDS.sleep(175);
 				driver.switchTo().frame("mainFrame");
 				driver.switchTo().frame("derecho");
 				// Se obtienen todas las asignaturas
 				List<WebElement> listadoAsignaturas2 = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr"));
-				TimeUnit.MILLISECONDS.sleep(350);
+				TimeUnit.MILLISECONDS.sleep(175);
 				contadorAsignaturas += listadoAsignaturas2.size();
 				ArrayList<ArrayList<String>> listadoCodigoNombre2 = new ArrayList<ArrayList<String>>();
 				for (WebElement linea : listadoAsignaturas2) {
@@ -584,7 +584,7 @@ public class Tests_Postulacion extends Vars_LOA {
 					driver.switchTo().frame("mainFrame");
 					driver.switchTo().frame("derecho");
 					listadoAsignaturas2 = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr"));
-					TimeUnit.MILLISECONDS.sleep(350);
+					TimeUnit.MILLISECONDS.sleep(175);
 					listadoCodigoNombre2 = new ArrayList<ArrayList<String>>();
 					for (WebElement linea : listadoAsignaturas2) {
 						String codigo = linea.getText().split(" ")[0];
@@ -638,13 +638,13 @@ public class Tests_Postulacion extends Vars_LOA {
 								return;
 							}
 							driver.switchTo().defaultContent();
-							TimeUnit.MILLISECONDS.sleep(350);
+							TimeUnit.MILLISECONDS.sleep(175);
 							// Se entra al frame de los derechos
 							driver.switchTo().defaultContent();
 							driver.switchTo().frame("mainFrame");
 							driver.switchTo().frame("derecho");
 							// Se busca una asignatura
-							WebElement asignatura = driver.findElement(By.linkText(listadoCodigoNombre2.get(rand_int1).get(1)));
+							WebElement asignatura = driver.findElement(By.linkText(listadoCodigoNombre2.get(rand_int1-1).get(1)));
 							// Se crea el JavascriptExecutor para hacer scroll
 							JavascriptExecutor js = (JavascriptExecutor) driver;
 							// Se obtiene la posicion del boton
@@ -653,8 +653,8 @@ public class Tests_Postulacion extends Vars_LOA {
 							js.executeScript("window.scrollBy(0,"+location.getY()+")");
 							// Se hace click en la asignatura
 							asignatura.click();
-							System.out.println("\n	Asignatura: " + listadoCodigoNombre2.get(rand_int1).get(0) + " - " +  listadoCodigoNombre2.get(rand_int1).get(1) );
-							TimeUnit.MILLISECONDS.sleep(350);
+							System.out.println("\n	Asignatura: " + listadoCodigoNombre2.get(rand_int1-1).get(0) + " - " +  listadoCodigoNombre2.get(rand_int1-1).get(1) );
+							TimeUnit.MILLISECONDS.sleep(175);
 							// Se sale del frame, y se entra al frame de los cursos de teoria.
 							driver.switchTo().defaultContent();
 							driver.switchTo().frame("mainFrame");
@@ -664,7 +664,7 @@ public class Tests_Postulacion extends Vars_LOA {
 							System.out.println("		Se revisan los cursos de teoria");
 							// Se obtienen todos los cursos
 							List<WebElement> listadoTeoria = driver.findElements(By.cssSelector("tr"));
-							TimeUnit.MILLISECONDS.sleep(350);
+							TimeUnit.MILLISECONDS.sleep(175);
 							// Se obtiene la primera linea despues de buscar tr
 							String primeraLinea = listadoTeoria.get(0).getText().strip();
 							// Si la primera linea dice que no hay coordinaciones, se avisa
@@ -694,7 +694,7 @@ public class Tests_Postulacion extends Vars_LOA {
 							System.out.println("		Se revisan los cursos de laboratorio");
 							// Se obtienen todos los cursos
 							List<WebElement> listadoLaboratorio = driver.findElements(By.cssSelector("tr"));
-							TimeUnit.MILLISECONDS.sleep(350);
+							TimeUnit.MILLISECONDS.sleep(175);
 							// Se almacenan todas las secciones
 							ArrayList<String> listadoLaboratorioAux = new ArrayList<String>();
 							for (WebElement e : listadoLaboratorio) {
@@ -739,7 +739,7 @@ public class Tests_Postulacion extends Vars_LOA {
 							System.out.println("		Se revisan los cursos de ejercicio");
 							// Se obtienen todos los cursos
 							List<WebElement> listadoEjercicio = driver.findElements(By.cssSelector("tr"));
-							TimeUnit.MILLISECONDS.sleep(350);
+							TimeUnit.MILLISECONDS.sleep(175);
 							// Se almacenan todas las secciones
 							ArrayList<String> listadoEjercicioAux = new ArrayList<String>();
 							for (WebElement e : listadoEjercicio) {
@@ -769,18 +769,18 @@ public class Tests_Postulacion extends Vars_LOA {
 								driver.switchTo().frame(5);
 								// Se postula a la asignatura
 								driver.findElement(By.id("btn_postular")).click();
-								TimeUnit.MILLISECONDS.sleep(350);
+								TimeUnit.MILLISECONDS.sleep(175);
 								if (driver.switchTo().alert().getText().compareTo(Vars_LOA.alertaInscribirText) == 0 ) {
 									driver.switchTo().alert().accept();
-									TimeUnit.MILLISECONDS.sleep(350);
+									TimeUnit.MILLISECONDS.sleep(175);
 									driver.switchTo().defaultContent();
 									driver.switchTo().frame("mainFrame");
 									driver.switchTo().frame(5);
 									// Se revisa el mensaje
 									List<WebElement> mensajes = driver.findElements(By.cssSelector(".col-12 > div"));
-									TimeUnit.MILLISECONDS.sleep(350);
+									TimeUnit.MILLISECONDS.sleep(175);
 									for (WebElement mensaje : mensajes){
-										TimeUnit.MILLISECONDS.sleep(350);
+										TimeUnit.MILLISECONDS.sleep(175);
 										// Se revisa si el mensaje corresponde a asignatura inscrita
 										if( mensaje.getText().compareTo(Vars_LOA.postulacionStatusInscritaText + Integer.parseInt(listadoCodigoNombre2.get(rand_int1).get(0)) + " (" + Vars_LOA.proceso + ")." ) == 0 ) {
 											System.out.println("		Asignatura inscrita");
@@ -794,7 +794,7 @@ public class Tests_Postulacion extends Vars_LOA {
 									System.out.println("No coincide el mensaje al inscribir la asignatura");
 								}
 								// Tiempo para guardar la asignatura postulada
-								TimeUnit.MILLISECONDS.sleep(350);
+								TimeUnit.MILLISECONDS.sleep(175);
 							} else {
 								System.out.println("		No es posible inscribir la asignatura");
 							}
@@ -838,10 +838,10 @@ public class Tests_Postulacion extends Vars_LOA {
 		driver.findElement(By.id("clave")).sendKeys(Vars_LOA.userPass);
 		driver.findElement(By.cssSelector(".cover-container")).click();
 		driver.findElement(By.cssSelector(".btn-lg")).click();
-		TimeUnit.MILLISECONDS.sleep(350);
+		TimeUnit.MILLISECONDS.sleep(175);
 		// Seleccionar carrera
 		driver.findElement(By.linkText("1368 - INGENIERIA CIVIL OBRAS CIVILES")).click();
-		TimeUnit.MILLISECONDS.sleep(350);
+		TimeUnit.MILLISECONDS.sleep(175);
 		// Se revisa si se puede seleccionar el proceso de postulaciones
 		driver.switchTo().defaultContent();
 		driver.findElement(By.id("navbar-dropdown-procesos")).click();
@@ -865,16 +865,16 @@ public class Tests_Postulacion extends Vars_LOA {
 			return;
 		}
 		driver.switchTo().defaultContent();
-		TimeUnit.MILLISECONDS.sleep(350);
+		TimeUnit.MILLISECONDS.sleep(175);
 		// Se entra al frame con las asignaturas postuladas
 		driver.switchTo().defaultContent();
 		driver.switchTo().frame("mainFrame");
 		driver.switchTo().frame(5);
 		// Se buscan la cantidad de asignaturas postuladas
 		List<WebElement> accionesAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(7)"));
-		TimeUnit.MILLISECONDS.sleep(350);
+		TimeUnit.MILLISECONDS.sleep(175);
 		List<WebElement> codigosAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(1)"));
-		TimeUnit.MILLISECONDS.sleep(350);
+		TimeUnit.MILLISECONDS.sleep(175);
 		int cantidadPostulacionesDesinscribibles = 0;
 		for( WebElement accion : accionesAsignaturasPostuladas ){
 			if( accion.getText().equals(Vars_LOA.btnPostulacionDESINSCRIBIRText) ){
@@ -897,11 +897,11 @@ public class Tests_Postulacion extends Vars_LOA {
 						String codigo = codigosAsignaturasPostuladas.get(j).getText().split("-")[0].strip();
 						// Se selecciona la solicitud
 						accionesAsignaturasPostuladas.get(j).click();
-						TimeUnit.MILLISECONDS.sleep(350);
+						TimeUnit.MILLISECONDS.sleep(175);
 						// Se acepa el mensaje de desinscripcion
 						driver.switchTo().alert().accept();
 						// Tiempo para esperar que se abra la alerta
-						TimeUnit.MILLISECONDS.sleep(350);
+						TimeUnit.MILLISECONDS.sleep(175);
 						// Se escribe el codigo de la asignatura
 						driver.switchTo().alert().sendKeys(codigo);
 						// Se acepta el mensaje de desinscripcion
@@ -931,15 +931,15 @@ public class Tests_Postulacion extends Vars_LOA {
 							return;
 						}
 						driver.switchTo().defaultContent();
-						TimeUnit.MILLISECONDS.sleep(350);
+						TimeUnit.MILLISECONDS.sleep(175);
 						driver.switchTo().defaultContent();
 						driver.switchTo().frame("mainFrame");
 						driver.switchTo().frame(5);
 						// Se buscan la cantidad de asignaturas restantes
 						accionesAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(7)"));
-						TimeUnit.MILLISECONDS.sleep(350);
+						TimeUnit.MILLISECONDS.sleep(175);
 						codigosAsignaturasPostuladas = driver.findElements(By.cssSelector(".table > tbody:nth-child(2) > tr > td:nth-child(1)"));
-						TimeUnit.MILLISECONDS.sleep(350);
+						TimeUnit.MILLISECONDS.sleep(175);
 						cantidadBotones = accionesAsignaturasPostuladas.size();
 					} else {
 						j++;
